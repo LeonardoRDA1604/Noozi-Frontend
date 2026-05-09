@@ -198,6 +198,19 @@ Essa abordagem garante que o sistema seja de fácil manutenção, permitindo evo
 ```
 </details>
 
+<br>
+ou
+<br>
+<br>
+
+<details>
+<summary style="background-color: white; color: blue"><b>ℹ️ Clique para expandir a explicação da arquitetura do projeto </b></summary>
+  <br />
+```
+<!-- TO DO: add explicação específica de cada pasta do projeto -->
+```
+</details>
+
 ---
 
 ## ✨ Funcionalidades Principais
