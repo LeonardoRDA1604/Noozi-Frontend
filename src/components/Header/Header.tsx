@@ -1,5 +1,5 @@
 import { Menu, Bell } from 'lucide-react'
-import nooziLogo from '../../assets/logos/Logo + Texto.svg'
+import nooziLogo from '../../assets/logos/logoNoozi.svg'
 // import barsMenu from './assets/images/bars-solid.png'
 // import logoNoozi from './assets/images/noozi-logo.png'
 // import notiBell from './assets/images/bell-regular.png'
