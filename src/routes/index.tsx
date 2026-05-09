@@ -7,7 +7,7 @@ export default function AppRoutes() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Home />} />
-
+        
         {/* Exemplos para novas rotas */}
         {/*         
         <Route path="/products" element={<Products />} />

@@ -12,8 +12,11 @@
     box-sizing: border-box;
 }
 
-@media (max-width: 768px){
+@media (max-width: 1080px){
   :root{
     font-size: 68%;
   }
+  #rodape{
+    visibility: visible;
+  } 
 }
