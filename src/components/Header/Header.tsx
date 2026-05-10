@@ -1,14 +1,10 @@
 import { Menu, Bell } from 'lucide-react'
 import nooziLogo from '../../assets/logos/logoNoozi.svg'
-// import barsMenu from './assets/images/bars-solid.png'
-// import logoNoozi from './assets/images/noozi-logo.png'
-// import notiBell from './assets/images/bell-regular.png'
 
-export default function Header(){
+export default function Header() {
 
-
-    return(
-     
+    return (
+    <>
         <header className="cadastro">
             <div id="header" className="p-2.5 px-[5%] justify-between flex fixed w-full left-0 h-14 mb-2.5 top-0 items-center z-50 bg-white">
                 <div id="h_menu" className="flex justify-center items-center cursor-pointer hover:scale-[1.3]">
@@ -22,7 +18,7 @@ export default function Header(){
                 </div>
             </div>
         </header>
-    
+    </>
     );
 
 }

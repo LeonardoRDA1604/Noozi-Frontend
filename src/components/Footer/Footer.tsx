@@ -6,7 +6,7 @@ export default function Footer() {
     const navigate = useNavigate();
 
     return (
-
+    <>
         <footer id="rodape" className="invisible">
             <ul className='flex flex-row justify-around p-2.5 w-full left-0 right-0 bottom-0 fixed items-center bg-white'>
                 <li>
@@ -17,7 +17,7 @@ export default function Footer() {
                 </li>
                 <li>
                     <div className="flex flex-col justify-center items-center gap-1.25 hover:scale-[1.3] cursor-pointer">
-                        <div id="r_lista" className='flex justify-center items-center text-center gap-1.25 max-w-17.5 text-xs' onClick={() => navigate('/lista')}><List width="30" aria-label="lista" /></div>
+                        <div id="r_lista" className='flex justify-center items-center text-center gap-1.25 max-w-17.5 text-xs' onClick={() => navigate('/listaProdutos')}><List width="30" aria-label="lista" /></div>
                         <p>Lista</p>
                     </div>
                 </li>
@@ -41,5 +41,6 @@ export default function Footer() {
                 </li>
             </ul>
         </footer>
+    </>
     );
 }
