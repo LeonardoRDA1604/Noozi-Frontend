@@ -58,8 +58,8 @@
 <!-- TypeScript 6.0 -->
 - <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/typescript/typescript-original.svg" alt="TypeScript" width="20" height="20"/> **[*TypeScript*](https://www.typescriptlang.org/)**
 
-<!-- SWC (Rust-based Fast Compiler) -->
-- <img src="./src/assets/icons/readme-icons/swc-icon.png" alt="SWC" width="20" height="20"/> **[*SWC*](https://swc.rs/)** (Compilador em Rust para builds rápidos)
+<!-- SWC (Rust-based Fast Compiler)
+- <img src="./src/assets/icons/readme-icons/swc-icon.png" alt="SWC" width="20" height="20"/> **[*SWC*](https://swc.rs/)** (Compilador em Rust para builds rápidos) -->
 
 <!-- Node.js -->
 - <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/nodejs/nodejs-original.svg" alt="Node.js" width="20" height="20"/> **[*Node.js*](https://nodejs.org/)**
