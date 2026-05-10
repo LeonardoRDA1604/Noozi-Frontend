@@ -7,7 +7,7 @@ export default function Footer() {
 
     return (
     <>
-        <footer id="rodape" className="invisible">
+        <footer id="rodape" className="invisible mt-5">
             <ul className='flex flex-row justify-around p-2.5 w-full left-0 right-0 bottom-0 fixed items-center bg-white'>
                 <li>
                     <div className="flex flex-col justify-center items-center gap-1.25 hover:scale-[1.3] cursor-pointer">
