@@ -1,13 +1,13 @@
 import Header from "@/components/Header/Header"
 import Footer from "@/components/Footer/Footer"
 
-export default function Home() {
+export default function Products() {
   return (
     <>
     <Header/>
       <div className="flex items-center justify-center h-screen">
         <h1 className="text-4xl font-bold text-blue-500">
-          Noozi/home-page
+          Noozi/products-page
         </h1>
       </div>
     <Footer/>
