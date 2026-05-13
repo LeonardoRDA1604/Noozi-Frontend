@@ -1,16 +1,13 @@
-import Header from "@/components/Header/Header"
-import Footer from "@/components/Footer/Footer"
+import Header from "@/components/Header/Header";
+import Footer from "@/components/Footer/Footer";
+import CreateCardItem from "@/components/Cards/ProductCard/ProductCard";
 
 export default function Products() {
   return (
     <>
-    <Header/>
-      <div className="flex items-center justify-center h-screen">
-        <h1 className="text-4xl font-bold text-blue-500">
-          Noozi/products-page
-        </h1>
-      </div>
-    <Footer/>
+      <Header />
+      <CreateCardItem />
+      <Footer />
     </>
-  )
+  );
 }
