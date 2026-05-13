@@ -1,22 +1,19 @@
+@import "@fontsource-variable/geist";
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer base {
   body {
-    font-family: 'Poppins', sans-serif;
+    @apply bg-noozi-background text-noozi-text font-sans;
   }
-}
 
-*{
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-display;
+  }
+
+  *, *::before, *::after {
     box-sizing: border-box;
-}
-
-@media (max-width: 1080px){
-  :root{
-    font-size: 68%;
   }
-  #rodape{
-    visibility: visible;
-  } 
 }
