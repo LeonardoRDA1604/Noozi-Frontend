@@ -178,6 +178,8 @@ Formato:
 tipo(escopo opcional): descrição curta em inglês
 ```
 
+> ℹ️ Na descrição, evite passar de **72 caracteres**, é o limite ideal do Conventional Commits.
+
 ### Exemplos de mensagens de commit
 ```text
 feat: add product registration form
