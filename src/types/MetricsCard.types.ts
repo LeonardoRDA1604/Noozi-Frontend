@@ -4,4 +4,5 @@ export interface MetricsCardProps {
     value: number | string;
     icon: LucideIcon;
     title: string;
+    onTitleClick?: () => void;
 }
