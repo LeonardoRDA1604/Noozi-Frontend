@@ -9,10 +9,11 @@ import {
 // import Footer from "@/components/Footer/Footer";
 import { MetricsCard } from "@/components/Cards/Metrics/MetricsCard/MetricsCard";
 
+// Restringe os valores possíveis do modal — evita strings arbitrárias
 type ModalType = "estoque-baixo" | "vencimento-proximo" | "expirados" | null;
 
 export default function Home() {
-  const [activeModal, setActiveModal] = useState<ModalType>(null);
+  const [activeModal, setActiveModal] = useState<ModalType>(null); // null = nenhum modal aberto
 
   return (
     <>
@@ -23,12 +24,14 @@ export default function Home() {
       {/* Div para Test Components */}
       <div className="items-center justify-center">
         <div className="flex flex-wrap gap-4 ">
+          {/* Navega para listagem completa de produtos */}
           <MetricsCard
             icon={Package}
             title="Produtos cadastrados"
             value={129}
             href="/products"
           />
+          {/*Abre Modal com produtos em estoque baixo */}
           <MetricsCard
             icon={TriangleAlert}
             title="Produtos em estoque baixo"
@@ -36,6 +39,7 @@ export default function Home() {
             iconColor="yellow"
             onTitleClick={() => setActiveModal("estoque-baixo")}
           />
+          {/*Abre Modal com produtos próximos do vencimento */}
           <MetricsCard
             icon={CalendarClock}
             title="Produtos próximos do vencimento"
@@ -43,6 +47,7 @@ export default function Home() {
             iconColor="yellow"
             onTitleClick={() => setActiveModal("vencimento-proximo")}
           />
+          {/*Abre Modal com produtos vencidos */}
           <MetricsCard
             icon={Ban}
             title="Produtos vencidos"
@@ -51,6 +56,8 @@ export default function Home() {
             onTitleClick={() => setActiveModal("expirados")}
           />
         </div>
+        {/* Renderiza o modal apenas quando activeModal não é null.
+            O componente receberá o tipo para buscar os produtos corretos. */}
         {activeModal && (
           <div>
             {/* <ProductModal type={activeModal} onClose={() => setActiveModal(null)} /> */}
