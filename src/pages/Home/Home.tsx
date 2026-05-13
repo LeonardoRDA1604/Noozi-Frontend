@@ -1,5 +1,10 @@
 import { useState } from "react";
-import { Package } from "lucide-react";
+import {
+  Ban,
+  CalendarClock,
+  Package,
+  TriangleAlert,
+} from "lucide-react";
 // import Header from "@/components/Header/Header";
 // import Footer from "@/components/Footer/Footer";
 import { MetricsCard } from "@/components/Cards/Metrics/MetricsCard/MetricsCard";
@@ -22,18 +27,29 @@ export default function Home() {
             icon={Package}
             title="Produtos cadastrados"
             value={129}
+            href="/products"
           />
           <MetricsCard
-            icon={Package}
+            icon={TriangleAlert}
             title="Produtos em estoque baixo"
             value={17}
+            iconColor="yellow"
+            onTitleClick={() => setActiveModal("estoque-baixo")}
           />
           <MetricsCard
-            icon={Package}
+            icon={CalendarClock}
             title="Produtos próximos do vencimento"
             value={14}
+            iconColor="yellow"
+            onTitleClick={() => setActiveModal("vencimento-proximo")}
           />
-          <MetricsCard icon={Package} title="Produtos vencidos" value={2} />
+          <MetricsCard
+            icon={Ban}
+            title="Produtos vencidos"
+            value={2}
+            iconColor="red"
+            onTitleClick={() => setActiveModal("expirados")}
+          />
         </div>
         {activeModal && (
           <div>
