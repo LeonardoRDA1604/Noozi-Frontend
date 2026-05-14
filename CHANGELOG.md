@@ -18,6 +18,7 @@ Formato baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.0.0/), 
 - [2. Unreleased](#-unreleased)
 - [3. Versões](#️-versões)
     - [[1.0.0] - 2026-05-13](#100---2026-05-13)
+    - [[1.1.0] - 2026-05-13](#110---2026-05-13)
 
 ---
 
@@ -102,8 +103,62 @@ Formato baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.0.0/), 
 </details>
 
 ---
+
+### [1.1.0] - 2026-05-13
+
+<details>
+  <summary style="background-color: white; color: black"><b>ℹ️ Clique para expandir o log de alterações da versão [1.1.0]</b></summary>
+  <br />
+
+#### ✨ Adicionado
+- Design System completo no `tailwind.config.js`:
+  - Paleta de cores da marca (`noozi-*`, `status-*`) com escala de cinza
+  - Hierarquia tipográfica com Geist, DM Sans e Poppins (`font-sans`, `font-display`, `font-mono`)
+  - Tokens de borda, sombra e espaçamento
+  - Breakpoints mobile-first (`xs`, `sm`, `md`, `lg`, `xl`, `2xl`)
+- Estilos globais de base no `src/index.css` com import da fonte Geist via `@fontsource-variable/geist`
+- `AppLayout` em `src/layouts/AppLayout/` como wrapper global de todas as rotas via `Outlet`
+- `Header` fixo com hamburguer (abre sidebar) e sino de notificações
+- `Footer` de navegação exclusivo para mobile e tablet (`lg:hidden`) com highlight da rota ativa
+- `Sidebar` drawer com overlay, animação de slide e navegação completa
+- Itens de navegação centralizados em `src/constants/navigation.ts`
+- Tipo `NavItem` em `src/types/Navigation.types.ts`
+- Páginas de Dashboard (`/dashboard`) e Perfil (`/profile`)
+- Documentação inline no componente `MetricsCard`
+- Seções de Design System, UX/UI e Acessibilidade no `CONTRIBUTING.md`
+- `CHANGELOG.md` seguindo os padrões SemVer e Keep a Changelog
+
+---
+
+#### 🎨 Melhorado
+- `MetricsCard` atualizado para usar tokens do Design System (`noozi-*`, `status-*`)
+- Footer reescrito com `Link` e `useLocation` substituindo `useNavigate` e `onClick` em `div`
+- Header padronizado como named export (`export function`)
+- Rotas atualizadas para usar `AppLayout` como rota pai, eliminando duplicação de Header e Footer nas páginas
+
+---
+
+#### 🔧 Alterado
+- Import do `index.css` movido para `main.tsx`, removido de `routes/index.tsx`
+- `Header` e `Footer` padronizados para named exports (alinhado com convenção do projeto)
+- Itens de navegação extraídos das páginas para `constants/navigation.ts`
+
+---
+
+#### 🐛 Corrigido
+- Corrigidas páginas de Products e rotas relacionadas
+- Removido `className="cadastro"` incorreto do Header (nome de página em componente global)
+- Removido `invisible` do Footer que escondia o elemento mas mantinha espaço no layout
+- Substituídos `div` com `onClick` por `Link` e `button` nos itens de navegação (semântica e acessibilidade)
+
+---
+
+</details>
+
+---
+
 <!-- 
-### [1.1.0] - 2026-05-01
+### [1.2.0] - 2026-05-01
 
 
 
@@ -128,3 +183,9 @@ Formato baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.0.0/), 
 ---
 
 </details> --> 
+
+
+
+
+
+
