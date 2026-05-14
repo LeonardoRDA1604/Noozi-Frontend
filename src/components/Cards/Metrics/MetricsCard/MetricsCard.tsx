@@ -18,7 +18,7 @@ export function MetricsCard({
   href,
 }: MetricsCardProps) {
 
-  // Estilização do texto do hyperlink
+  // Estilização do texto do hyperlink. Aplicado em Link e button (extraído para evitar duplicação)
   const clickableTitleStyle =
     "text-xs font-medium text-zinc-500 leading-tight text-left hover:text-blue-500 hover:underline transition-colors cursor-pointer";
 

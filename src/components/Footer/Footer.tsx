@@ -1,76 +1,39 @@
-import {
-  House,
-  List,
-  CirclePlus,
-  LayoutDashboard,
-  CircleUserRound,
-} from "lucide-react";
-import { useNavigate } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
+import { navItems } from "@/constants/navigation";
 
-export default function Footer() {
-  const navigate = useNavigate();
+export function Footer() {
+  const { pathname } = useLocation();
 
   return (
-    <footer id="rodape" className="invisible">
-      <ul className="flex flex-row justify-around p-2.5 w-full left-0 right-0 bottom-0 fixed items-center bg-white">
-        <li>
-          <div className="flex flex-col justify-center items-center gap-1.25 hover:scale-[1.3] cursor-pointer">
-            <div
-              id="r_home"
-              className="flex justify-center items-center text-center gap-1.25 max-w-17.5 text-xs"
-            >
-              <House aria-label="Inicio" width="30" />
-            </div>
-            <p>Início</p>
-          </div>
-        </li>
-        <li>
-          <div className="flex flex-col justify-center items-center gap-1.25 hover:scale-[1.3] cursor-pointer">
-            <div
-              id="r_lista"
-              className="flex justify-center items-center text-center gap-1.25 max-w-17.5 text-xs"
-              onClick={() => navigate("/lista")}
-            >
-              <List width="30" aria-label="lista" />
-            </div>
-            <p>Lista</p>
-          </div>
-        </li>
-        <li>
-          <div className="flex flex-col justify-center items-center gap-1.25 hover:scale-[1.3] cursor-pointer">
-            <div
-              id="r_cadastro"
-              className="flex justify-center items-center text-center gap-1.25 max-w-17.5 text-xs"
-              onClick={() => navigate("/")}
-            >
-              <CirclePlus width="30" aria-label="cadastrar produto" />
-            </div>
-            <p>Cadastrar</p>
-          </div>
-        </li>
-        <li>
-          <div className="flex flex-col justify-center items-center gap-1.25 hover:scale-[1.3] cursor-pointer">
-            <div
-              id="r_dashboard"
-              className="flex justify-center items-center text-center gap-1.25 max-w-17.5 text-xs"
-            >
-              <LayoutDashboard width="30" aria-label="dasboard" />
-            </div>
-            <p>Dashboard</p>
-          </div>
-        </li>
-        <li>
-          <div className="flex flex-col justify-center items-center gap-1.25 hover:scale-[1.3] cursor-pointer">
-            <div
-              id="r_user"
-              className="flex justify-center items-center text-center gap-1.25 max-w-17.5 text-xs"
-            >
-              <CircleUserRound width="30" aria-label="perfil" />
-            </div>
-            <p>Perfil</p>
-          </div>
-        </li>
-      </ul>
+    // lg:hidden — some no desktop, só mobile e tablet
+    <footer className="fixed bottom-0 left-0 right-0 z-50 bg-white border-t border-noozi-border lg:hidden">
+      <nav aria-label="Navegação principal">
+        <ul className="flex items-center justify-around h-16 px-2">
+          {navItems.map(({ label, href, icon: Icon }) => {
+            const isActive = pathname === href;
+
+            return (
+              <li key={href}>
+                <Link
+                  to={href}
+                  aria-label={label}
+                  aria-current={isActive ? "page" : undefined}
+                  className="flex flex-col items-center gap-1 min-w-[44px] min-h-[44px] justify-center"
+                >
+                  <Icon
+                    size={22}
+                    className={isActive ? "text-noozi-bright_blue" : "text-noozi-muted"}
+                    strokeWidth={isActive ? 2.5 : 1.8}
+                  />
+                  <span className={`text-[10px] font-medium ${isActive ? "text-noozi-bright_blue" : "text-noozi-muted"}`}>
+                    {label}
+                  </span>
+                </Link>
+              </li>
+            );
+          })}
+        </ul>
+      </nav>
     </footer>
   );
 }

@@ -1,9 +1,9 @@
-export default function NewProduct() {
+export default function Dashboard() {
   return (
     <>
       <div className="flex items-center justify-center h-screen">
         <h1 className="text-4xl font-bold text-blue-500">
-          Noozi/new-product-page
+          Noozi/dashboard-page
         </h1>
       </div>
     </>
