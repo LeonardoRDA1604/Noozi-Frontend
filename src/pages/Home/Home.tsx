@@ -1,15 +1,7 @@
 import { useState } from "react";
-import {
-  Ban,
-  CalendarClock,
-  Package,
-  TriangleAlert,
-} from "lucide-react";
-// import Header from "@/components/Header/Header";
-// import Footer from "@/components/Footer/Footer";
+import { Ban, CalendarClock, Package, TriangleAlert } from "lucide-react";
 import { MetricsCard } from "@/components/Cards/Metrics/MetricsCard/MetricsCard";
 
-// Restringe os valores possíveis do modal — evita strings arbitrárias
 type ModalType = "estoque-baixo" | "vencimento-proximo" | "expirados" | null;
 
 export default function Home() {
@@ -17,12 +9,11 @@ export default function Home() {
 
   return (
     <>
-      {/* <Header /> */}
-      <h1 className="flex items-center justify-center text-4xl font-bold text-blue-500">
-        Noozi/home-page
-      </h1>
-      {/* Div para Test Components */}
-      <div className="items-center justify-center">
+      <div className="p-4">
+        {/* <h1 className="text-2xl font-bold text-noozi-text mb-6"></h1> */}
+        <h1 className="flex items-center justify-center text-4xl font-bold text-blue-500">
+          Noozi/home-page
+        </h1>
         <div className="flex flex-wrap gap-4 ">
           {/* Navega para listagem completa de produtos */}
           <MetricsCard
@@ -64,7 +55,6 @@ export default function Home() {
           </div>
         )}
       </div>
-      {/* <Footer /> */}
     </>
   );
 }
