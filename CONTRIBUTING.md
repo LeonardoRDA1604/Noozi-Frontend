@@ -13,40 +13,44 @@ Obrigado pelo interesse em contribuir com o **Noozi**! Este é um sistema de ges
 
 - [1. Git Flow](#-git-flow)
   - [1.1. Fluxo de trabalho da equipe](#fluxo-de-trabalho-da-equipe)
-- [2. Regras do Projeto](#-regras-do-projeto)
-- [3. Estratégia de Branches](#-estratégia-de-branches)
-  - [3.1. Exemplos de criação de branches ](#exemplos-de-criação-de-branches)
-  - [3.2. Preparando o ambiente antes de criar sua branch](#preparando-o-ambiente-antes-de-criar-sua-branch)
-- [4. Padrão de Mensagens de Commit](#-padrão-de-mensagens-de-commit)
-  - [4.1. Exemplos de mensagens de commit ](#exemplos-de-mensagens-de-commit)
-- [5. Regras de Pull Request](#-regras-de-pull-request)
-  - [5.1. Checklist antes de abrir o PR](#-checklist-antes-de-abrir-o-pr)
-- [6. Critérios de Revisão](#-critérios-de-revisão)
-- [7. Quem Pode Aprovar](#-quem-pode-aprovar)
-- [8. Padrão de Código e Interface](#-padrão-de-código-e-interface)
-  - [8.1. ESLint e Formatação](#eslint-e-formatação)
-  - [8.2. Componentes Reutilizáveis](#componentes-reutilizáveis)
-  - [8.3. Ícones](#ícones)
-  - [8.4. Design System](#design-system)
-    - [8.4.1. Usando cores sem token (valores arbitrários)](#usando-cores-sem-token-valores-arbitrários)
-    - [8.4.2. Identidade Visual](#identidade-visual)
-    - [8.4.3. Tipografia](#tipografia)
-    - [8.4.4. Bordas](#bordas)
-    - [8.4.5. Sombras](#sombras)
-    - [8.4.6. Breakpoints e Responsividade](#breakpoints-e-responsividade)
-- [9. UX/UI e Acessibilidade](#-uxui-e-acessibilidade)
-  - [9.1. Elementos Interativos](#elementos-interativos)
-  - [9.2. HTML Semântico](#html-semântico)
-  - [9.3. Acessibilidade (a11y)](#acessibilidade-a11y)
-  - [9.4. Hierarquia Visual](#hierarquia-visual)
-  - [9.5. Feedback ao Usuário](#feedback-ao-usuário)
-  - [9.6. Consistência](#consistência)
-- [10. Nomenclatura de Arquivos e Pastas](#️-nomenclatura-de-arquivos-e-pastas)
-- [11. Acessibilidade](#-acessibilidade)
-- [12. Versionamento](#️-versionamento)
-- [13. Reportando Bugs](#-reportando-bugs)
-- [14. Comunicação](#-comunicação)
-- [15. Precisa de Ajuda?](#-precisa-de-ajuda)
+- [2. Proteção de Branches](#-proteção-de-branches)
+  - [2.1. Regras aplicadas nas branches protegidas](#regras-aplicadas-nas-branches-protegidas)
+  - [2.2. Conversas de revisão (Resolve conversation)](#-conversas-de-revisão-resolve-conversation)
+
+- [3. Regras do Projeto](#-regras-do-projeto)
+- [4. Estratégia de Branches](#-estratégia-de-branches)
+  - [4.1. Exemplos de criação de branches ](#exemplos-de-criação-de-branches)
+  - [4.2. Preparando o ambiente antes de criar sua branch](#preparando-o-ambiente-antes-de-criar-sua-branch)
+- [5. Padrão de Mensagens de Commit](#-padrão-de-mensagens-de-commit)
+  - [5.1. Exemplos de mensagens de commit ](#exemplos-de-mensagens-de-commit)
+- [6. Regras de Pull Request](#-regras-de-pull-request)
+  - [6.1. Checklist antes de abrir o PR](#-checklist-antes-de-abrir-o-pr)
+- [7. Critérios de Revisão](#-critérios-de-revisão)
+- [8. Quem Pode Aprovar](#-quem-pode-aprovar)
+- [9. Padrão de Código e Interface](#-padrão-de-código-e-interface)
+  - [9.1. ESLint e Formatação](#eslint-e-formatação)
+  - [9.2. Componentes Reutilizáveis](#componentes-reutilizáveis)
+  - [9.3. Ícones](#ícones)
+  - [9.4. Design System](#design-system)
+    - [9.4.1. Usando cores sem token (valores arbitrários)](#usando-cores-sem-token-valores-arbitrários)
+    - [9.4.2. Identidade Visual](#identidade-visual)
+    - [9.4.3. Tipografia](#tipografia)
+    - [9.4.4. Bordas](#bordas)
+    - [9.4.5. Sombras](#sombras)
+    - [9.4.6. Breakpoints e Responsividade](#breakpoints-e-responsividade)
+- [10. UX/UI e Acessibilidade](#-uxui-e-acessibilidade)
+  - [10.1. Elementos Interativos](#elementos-interativos)
+  - [10.2. HTML Semântico](#html-semântico)
+  - [10.3. Acessibilidade (a11y)](#acessibilidade-a11y)
+  - [10.4. Hierarquia Visual](#hierarquia-visual)
+  - [10.5. Feedback ao Usuário](#feedback-ao-usuário)
+  - [10.6. Consistência](#consistência)
+- [11. Nomenclatura de Arquivos e Pastas](#️-nomenclatura-de-arquivos-e-pastas)
+- [12. Acessibilidade](#-acessibilidade)
+- [13. Versionamento](#️-versionamento)
+- [14. Reportando Bugs](#-reportando-bugs)
+- [15. Comunicação](#-comunicação)
+- [16. Precisa de Ajuda?](#-precisa-de-ajuda)
 
 ---
 
@@ -77,6 +81,37 @@ feature/* (sua branch)
 | Deletar branches | ⚠️ Somente o Tech Leader |
 | Abrir Pull Request | ✅ Todos os contribuidores |
 | Aprovar Pull Request | ✅ Tech Leader e revisores designados |
+
+---
+
+## 🔒 Proteção de Branches
+
+As branches `main` e `dev` possuem regras de proteção configuradas no GitHub para garantir a estabilidade, qualidade e segurança do projeto.
+
+### Regras aplicadas nas branches protegidas
+
+- Pull Request obrigatório para merge
+- Aprovação obrigatória antes do merge
+- Comentários de revisão devem ser resolvidos antes da aprovação final
+- Force push bloqueado
+- Deleção das branches protegidas bloqueada
+
+### 💬 Conversas de revisão (`Resolve conversation`)
+
+Durante a revisão do Pull Request, o Tech Leader ou revisores podem abrir comentários solicitando ajustes no código.
+
+Enquanto existir alguma conversa pendente:
+- o Pull Request não poderá ser mergeado
+- todas as solicitações devem ser resolvidas antes da aprovação final
+
+Após corrigir o problema:
+- marque a conversa como resolvida (`Resolve conversation`)
+
+Isso ajuda a manter:
+- revisões organizadas
+- histórico limpo
+- feedback aplicado corretamente
+- maior controle de qualidade do projeto
 
 ---
 
