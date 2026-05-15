@@ -17,8 +17,6 @@ Contexto e motivação da mudança. Referência à Issue, se houver (Closes #123
 - [ ] Manutenção / configuração (chore)
 
 ## Checklist
-## Checklist
-
 - [ ] O código compila e roda sem erros (`npm run dev`)
 - [ ] O lint passa sem erros (`npm run lint`)
 - [ ] O projeto builda sem erros (`npm run build`)
