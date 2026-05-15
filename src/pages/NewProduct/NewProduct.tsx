@@ -1,13 +1,12 @@
 export default function Form() {
   return (
-    
     <div
       id="cadastro"
       className="bg-[#EFEFEF] w-full min-h-dvh p-6 overflow-y-auto"
     >
-      <form className="grid grid-cols-2 gap-4 mx-auto md:grid-cols-2 lg:grid-cols-4 max-w-7xl">
+      <form className="product-form-grid">
         {/* Nome - ocupa toda a largura */}
-        <div className="col-span-2 md:col-span-2 lg:col-span-4">
+        <div className="form-field-full">
           <label className="block mb-2 font-medium">Nome:</label>
           <input
             className="w-full bg-[#f5f5f5] border border-solid border-gray-300 rounded-lg px-3 py-2"
@@ -16,7 +15,7 @@ export default function Form() {
         </div>
 
         {/* Marca - ocupa toda a largura */}
-        <div className="col-span-2 md:col-span-2 lg:col-span-4">
+        <div className="form-field-full">
           <label className="block mb-2 font-medium">Marca:</label>
           <input
             className="w-full bg-[#f5f5f5] border border-solid border-gray-300 rounded-lg px-3 py-2"
@@ -25,7 +24,7 @@ export default function Form() {
         </div>
 
         {/* Descrição - ocupa toda a largura */}
-        <div className="col-span-2 md:col-span-2 lg:col-span-4">
+        <div className="form-field-full">
           <label className="block mb-2 font-medium">Descrição:</label>
           <textarea
             className="w-full bg-[#f5f5f5] border border-solid border-gray-300 rounded-lg px-3 py-2 h-24 resize-none"
@@ -33,8 +32,8 @@ export default function Form() {
           />
         </div>
 
-        {/* Linha com 4 campos: Categoria | Quantidade | Unidade de Medida | Preço Unitário */}
-        <div className="col-span-1">
+        {/* Categoria */}
+        <div className="form-field-single">
           <label className="block mb-2 font-medium">Categoria:</label>
           <input
             className="w-full bg-[#f5f5f5] border border-solid border-gray-300 rounded-lg px-3 py-2"
@@ -42,7 +41,8 @@ export default function Form() {
           />
         </div>
 
-        <div className="col-span-1">
+        {/* Quantidade */}
+        <div className="form-field-single">
           <label className="block mb-2 font-medium">Quantidade:</label>
           <input
             className="w-full bg-[#f5f5f5] border border-solid border-gray-300 rounded-lg px-3 py-2"
@@ -50,7 +50,8 @@ export default function Form() {
           />
         </div>
 
-        <div className="col-span-1">
+        {/* Unidade de Medida */}
+        <div className="form-field-single">
           <label className="block mb-2 font-medium">Unidade de Medida:</label>
           <input
             className="w-full bg-[#f5f5f5] border border-solid border-gray-300 rounded-lg px-3 py-2"
@@ -59,7 +60,8 @@ export default function Form() {
           />
         </div>
 
-        <div className="col-span-1">
+        {/* Preço Unitário */}
+        <div className="form-field-single">
           <label className="block mb-2 font-medium">Preço Unitário:</label>
           <input
             className="w-full bg-[#f5f5f5] border border-solid border-gray-300 rounded-lg px-3 py-2"
@@ -69,12 +71,11 @@ export default function Form() {
         </div>
 
         {/* Grid 2 colunas: Lado esquerdo (Validade, Lote, SKU) | Lado direito (Upload de Imagem) */}
-        <div className="grid grid-cols-2 gap-4 col-span-full">
+        <div className="form-nested-grid">
           {/* Coluna esquerda - Validade, Lote, SKU */}
-          <div className="grid grid-cols-1 gap-4">
+          <div className="form-inventory-fields">
             <div>
               <label className="block font-medium">Validade:</label>
-              {/* //TODO: Rever: placeholder, icon, formatação e validação. */}
               <input
                 className="w-full bg-[#f5f5f5] border border-solid border-gray-300 rounded-lg px-3 py-2 mt-2"
                 id="data"
@@ -104,7 +105,6 @@ export default function Form() {
             <label className="block mb-2 font-medium">Imagem do Produto:</label>
             <div className="flex-1 border-2 border-dashed border-gray-300 rounded-lg bg-[#f5f5f5] hover:bg-gray-50">
               <label className="flex flex-col items-center justify-center h-full min-h-[300px] cursor-pointer p-6">
-              
                 <span className="text-center text-gray-600">
                   Clique para fazer upload
                   <br />
@@ -119,7 +119,7 @@ export default function Form() {
         </div>
 
         {/* Botão - ocupa toda a largura */}
-        <div className="mt-4 col-span-full">
+        <div className="form-field-full mt-4">
           <button
             id="btn_cadastrar"
             className="w-full px-6 py-3 font-semibold text-white transition-colors duration-200 bg-indigo-600 rounded-lg hover:bg-indigo-700 active:bg-indigo-800"

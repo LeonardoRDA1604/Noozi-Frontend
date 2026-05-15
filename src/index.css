@@ -16,4 +16,66 @@
   *, *::before, *::after {
     box-sizing: border-box;
   }
+
+  
+ /* RESPONSIVIDADE DO FORMULÁRIO(NEWPRODUCT.TSX) */
+
+
+@layer components {
+  
+  /* Grid principal do formulário */
+  .product-form-grid {
+    @apply grid gap-4 mx-auto max-w-7xl;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  /* Tablet: 768px+ */
+  @media (min-width: 768px) {
+    .product-form-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  /* Desktop: 1024px+ */
+  @media (min-width: 1024px) {
+    .product-form-grid {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+  }
+
+  /* Campos que ocupam toda a largura (Nome, Marca, Descrição) */
+  .form-field-full {
+    grid-column: span 2 / span 2;
+  }
+
+  @media (min-width: 768px) {
+    .form-field-full {
+      grid-column: span 2 / span 2;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .form-field-full {
+      grid-column: span 4 / span 4;
+    }
+  }
+
+  /* Campos de 1 coluna (Categoria, Quantidade, Unidade, Preço) */
+  .form-field-single {
+    grid-column: span 1 / span 1;
+  }
+
+  /* Grid aninhado (Validade/Lote/SKU + Upload) */
+  .form-nested-grid {
+    @apply grid gap-4;
+    grid-column: 1 / -1; /* col-span-full */
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  /* Coluna esquerda - Validade, Lote, SKU */
+  .form-inventory-fields {
+    @apply grid gap-4;
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+  }
+}
 }
