@@ -74,29 +74,31 @@ export default function Form() {
         <div className="form-nested-grid">
           {/* Coluna esquerda - Validade, Lote, SKU */}
           <div className="form-inventory-fields">
-            <div>
-              <label className="block font-medium">Validade:</label>
-              <input
-                className="w-full bg-noozi-surface border border-solid border-noozi-gray-300 rounded-lg px-3 py-2 mt-2"
-                id="data"
-                type="date"
-              />
-            </div>
+            <div className="flex justify-between flex-col">
+              <div>
+                <label className="block font-medium">Validade:</label>
+                <input
+                  className="w-full bg-noozi-surface border border-solid border-noozi-gray-300 rounded-lg px-3 py-2 mt-2"
+                  id="data"
+                  type="date"
+                />
+              </div>
 
-            <div>
-              <label className="block font-medium">Lote:</label>
-              <input
-                className="w-full bg-noozi-surface border border-solid border-noozi-gray-300 rounded-lg px-3 py-2 mt-2"
-                type="text"
-              />
-            </div>
+              <div>
+                <label className="block font-medium">Lote:</label>
+                <input
+                  className="w-full bg-noozi-surface border border-solid border-noozi-gray-300 rounded-lg px-3 py-2 mt-2"
+                  type="text"
+                />
+              </div>
 
-            <div>
-              <label className="block font-medium">SKU:</label>
-              <input
-                className="w-full bg-noozi-surface border border-solid border-noozi-gray-300 rounded-lg px-3 py-2 mt-2"
-                type="text"
-              />
+              <div>
+                <label className="block font-medium">SKU:</label>
+                <input
+                  className="w-full bg-noozi-surface border border-solid border-noozi-gray-300 rounded-lg px-3 py-2 mt-2"
+                  type="text"
+                />
+              </div>
             </div>
           </div>
 
