@@ -17,7 +17,9 @@ Contexto e motivação da mudança. Referência à Issue, se houver (Closes #123
 - [ ] Manutenção / configuração (chore)
 
 ## Checklist
-- [ ] Rodei o lint sem erros (`npm run lint`)
+- [ ] O código compila e roda sem erros (`npm run dev`)
+- [ ] O lint passa sem erros (`npm run lint`)
+- [ ] O projeto builda sem erros (`npm run build`)
 - [ ] Testei o fluxo que alterei
 - [ ] Não há `console.log` no código
 - [ ] Segui os padrões de nomenclatura do projeto

@@ -266,6 +266,7 @@ Antes de submeter seu Pull Request, confirme que:
 
 - [ ] O código compila e roda sem erros (`npm run dev`)
 - [ ] O lint passa sem erros (`npm run lint`)
+- [ ] O projeto builda sem erros (`npm run build`)
 - [ ] Você testou manualmente o fluxo que alterou
 - [ ] Não há `console.log`, `debugger` ou código comentado desnecessário
 - [ ] Commits seguem o padrão **Conventional Commits**
