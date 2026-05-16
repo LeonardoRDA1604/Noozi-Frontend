@@ -1,6 +1,9 @@
 import { Pencil, Trash2 } from "lucide-react";
 import { ActionButton } from "@/components/Buttons/ActionButton/ActionButton";
 
+import CreateCardItem from "@/components/Cards/ProductCard/ProductsCard";
+
+
 export default function Products() {
   return (
     <>
@@ -9,6 +12,8 @@ export default function Products() {
           Noozi/products-page
         </h1>
       </div>
+      
+      <CreateCardItem />
 
       {/* Div dos botões de edição e delete */}
       <div className="gap-2 my-6 max-w-xs ">
