@@ -1,3 +1,6 @@
+import { Pencil, Trash2 } from "lucide-react";
+import { ActionButton } from "@/components/Buttons/ActionButton/ActionButton";
+
 export default function Products() {
   return (
     <>
@@ -6,6 +9,30 @@ export default function Products() {
           Noozi/products-page
         </h1>
       </div>
+
+      {/* Div dos botões de edição e delete */}
+      <div className="gap-2 my-6 max-w-xs ">
+        <ActionButton
+          variant="edit"
+          label="Editar"
+          icon={Pencil}
+          onSuccess={() => {
+            // abre formulário de edição
+            // setEditMode(true)
+          }}
+        />
+        <ActionButton
+          variant="delete"
+          label="Apagar"
+          icon={Trash2}
+          // productId={product.id_product}
+          onSuccess={() => {
+            // onClose()      // fecha o modal
+            // refetch()      // atualiza a lista de produtos
+          }}
+          // onError={() => toast("Erro ao apagar produto")}
+        />
+      </div>
     </>
-  )
+  );
 }

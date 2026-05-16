@@ -6,8 +6,6 @@ import {
   TriangleAlert,
   CirclePlus,
   Layers,
-  Pencil,
-  Trash2,
 } from "lucide-react";
 import { MetricsCard } from "@/components/Cards/Metrics/MetricsCard/MetricsCard";
 import { ActionButton } from "@/components/Buttons/ActionButton/ActionButton";
@@ -68,7 +66,7 @@ export default function Home() {
         </div>
 
         {/* Ações rápidas */}
-        <div className="flex flex-col gap-2 mt-6 max-w-xs">
+        <div className="flex flex-col gap-2 my-6 max-w-xs">
           <ActionButton
             variant="primary"
             label="Cadastro de Produto"
@@ -82,34 +80,6 @@ export default function Home() {
             href="/products"
           />
         </div>
-
-        <ActionButton
-          variant="edit"
-          label="Editar"
-          icon={Pencil}
-          onSuccess={() => {
-            // abre formulário de edição
-            // setEditMode(true)
-          }}
-        />
-
-        <ActionButton
-          variant="delete"
-          label="Apagar"
-          icon={Trash2}
-          // productId={product.id_product}
-          onSuccess={() => {
-            // onClose()      // fecha o modal
-            // refetch()      // atualiza a lista de produtos
-          }}
-          // onError={() => toast("Erro ao apagar produto")}
-        />
-
-        <ActionButton
-          variant="submit"
-          label="Cadastrar produto"
-          isLoading={isLoading}
-        />
 
         {/* Renderiza o modal apenas quando activeModal não é null.
             O componente receberá o tipo para buscar os produtos corretos. */}
