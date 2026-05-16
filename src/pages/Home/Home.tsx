@@ -1,8 +1,19 @@
 import { useState } from "react";
-import { Ban, CalendarClock, Package, TriangleAlert } from "lucide-react";
+import {
+  Ban,
+  CalendarClock,
+  Package,
+  TriangleAlert,
+  CirclePlus,
+  Layers,
+  Pencil,
+  Trash2,
+} from "lucide-react";
 import { MetricsCard } from "@/components/Cards/Metrics/MetricsCard/MetricsCard";
+import { ActionButton } from "@/components/Buttons/ActionButton/ActionButton";
 import { useProductMetrics } from "@/hooks/useProductMetrics";
 
+// Restringe os valores possíveis do modal — evita strings arbitrárias
 type ModalType = "estoque-baixo" | "vencimento-proximo" | "expirados" | null;
 
 export default function Home() {
@@ -20,7 +31,9 @@ export default function Home() {
         <h1 className="flex items-center justify-center text-4xl font-bold text-noozi-bright_blue">
           Noozi/home-page
         </h1>
-        <div className="flex flex-wrap gap-4 ">
+
+        {/* Cards de métricas — valores vindos da API via useProductMetrics */}
+        <div className="flex flex-wrap gap-4 mt-6">
           {/* Navega para listagem completa de produtos */}
           <MetricsCard
             icon={Package}
@@ -53,6 +66,51 @@ export default function Home() {
             onTitleClick={() => setActiveModal("expirados")}
           />
         </div>
+
+        {/* Ações rápidas */}
+        <div className="flex flex-col gap-2 mt-6 max-w-xs">
+          <ActionButton
+            variant="primary"
+            label="Cadastro de Produto"
+            icon={CirclePlus}
+            href="/products/new"
+          />
+          <ActionButton
+            variant="primary"
+            label="Visualizar Estoque"
+            icon={Layers}
+            href="/products"
+          />
+        </div>
+
+        <ActionButton
+          variant="edit"
+          label="Editar"
+          icon={Pencil}
+          onSuccess={() => {
+            // abre formulário de edição
+            // setEditMode(true)
+          }}
+        />
+
+        <ActionButton
+          variant="delete"
+          label="Apagar"
+          icon={Trash2}
+          // productId={product.id_product}
+          onSuccess={() => {
+            // onClose()      // fecha o modal
+            // refetch()      // atualiza a lista de produtos
+          }}
+          // onError={() => toast("Erro ao apagar produto")}
+        />
+
+        <ActionButton
+          variant="submit"
+          label="Cadastrar produto"
+          isLoading={isLoading}
+        />
+
         {/* Renderiza o modal apenas quando activeModal não é null.
             O componente receberá o tipo para buscar os produtos corretos. */}
         {activeModal && (
