@@ -1,5 +1,5 @@
 import arrozRice from "@/assets/images/arrozRice.png";
-import type { CardItems } from "@/types/CardItems.ts";
+import type { CardItems } from "@/types/CardItems";
 
 const mockItems: CardItems[] = [
   {

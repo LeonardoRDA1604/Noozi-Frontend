@@ -1,9 +1,9 @@
-export default function NewProduct() {
+export default function Profile() {
   return (
     <>
       <div className="p-4">
         <h1 className="flex items-center justify-center text-4xl font-bold text-noozi-bright_blue">
-          Noozi/new-product-page
+          Noozi/profile-page
         </h1>
       </div>
     </>

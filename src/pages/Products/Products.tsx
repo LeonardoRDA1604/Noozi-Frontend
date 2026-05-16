@@ -1,4 +1,4 @@
-import CreateCardItem from "@/components/Cards/ProductCard/ProductCard";
+import CreateCardItem from "@/components/Cards/ProductCard/ProductsCard";
 
 export default function Products() {
   return (
