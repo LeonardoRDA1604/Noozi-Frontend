@@ -1,4 +1,9 @@
+import { useState } from "react";
+
 export default function Form() {
+  const [date, setDate] = useState("")
+  const [type, setType] = useState("text")
+
   return (
     <div
       id="cadastro"
@@ -80,7 +85,14 @@ export default function Form() {
                 <input
                   className="w-full bg-noozi-surface border border-solid border-noozi-gray-300 rounded-lg px-3 py-2 mt-2"
                   id="data"
-                  type="date"
+                  type={type}
+                  placeholder="DD/MM/AAAA"
+                  value={date}
+                  // Quando clica ou interage, vira um input de data
+                  onFocus={() => setType('date')}
+                  // Quando perde o foco e está vazio, volta a ser texto para mostrar o placeholder
+                  onBlur={() => !date && setType('text')}
+                  onChange={(e) => setDate(e.target.value)}
                 />
               </div>
 
