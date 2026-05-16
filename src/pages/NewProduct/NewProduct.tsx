@@ -44,43 +44,75 @@ export default function Form() {
       className="bg-[#EFEFEF] w-full min-h-dvh p-6 overflow-y-auto"
     >
       <form className="product-form-grid">
-        {/* Nome - ocupa toda a largura */}
+        {/* Nome */}
         <div className="form-field-full">
           <label className="block mb-2 font-medium">Nome:</label>
-          <input
-            className="w-full bg-[#f5f5f5] border border-solid border-noozi-gray-300 rounded-lg px-3 py-2"
-            type="text"
-            id="inputName"
-          />
+          <div className="relative">
+            <input
+              className="w-full bg-[#f5f5f5] border border-solid border-noozi-gray-300 rounded-lg px-3 py-2 pr-16"
+              type="text"
+              id="inputName"
+              value={name}
+              onChange={(e) => setName(e.target.value.slice(0, CHAR_LIMITS.NAME))}
+              maxLength={CHAR_LIMITS.NAME}
+            />
+            {name.length > 0 &&(<span className="absolute right-3 top-1/2 -translate-y-1/2 text-noozi-gray-400 text-sm pointer-events-none select-none">
+              {CHAR_LIMITS.NAME - name.length}
+            </span>)}
+          </div>
         </div>
 
-        {/* Marca - ocupa toda a largura */}
+        {/* Marca */}
         <div className="form-field-full">
           <label className="block mb-2 font-medium">Marca:</label>
-          <input
-            className="w-full bg-[#f5f5f5] border border-solid border-noozi-gray-300 rounded-lg px-3 py-2"
-            type="text"
-            id="inputBrand"
-          />
+          <div className="relative">
+            <input
+              className="w-full bg-[#f5f5f5] border border-solid border-noozi-gray-300 rounded-lg px-3 py-2 pr-16"
+              type="text"
+              id="inputBrand"
+              value={brand}
+              onChange={(e) => setBrand(e.target.value.slice(0, CHAR_LIMITS.BRAND))}
+              maxLength={CHAR_LIMITS.BRAND}
+            />
+            {brand.length > 0 && (<span className="absolute right-3 top-1/2 -translate-y-1/2 text-noozi-gray-400 text-sm pointer-events-none select-none">
+              {CHAR_LIMITS.BRAND - brand.length}
+            </span>)}
+          </div>
         </div>
 
-        {/* Descrição - ocupa toda a largura */}
+        {/* Descrição */}
         <div className="form-field-full">
           <label className="block mb-2 font-medium">Descrição:</label>
-          <textarea
-            className="w-full bg-noozi-surface border border-solid border-noozi-gray-300 rounded-lg px-3 py-2 h-24 resize-none"
-            id="inputDescription"
-          />
+          <div className="relative">
+            <textarea
+              className="w-full bg-noozi-surface border border-solid border-noozi-gray-300 rounded-lg px-3 py-2 pr-16 h-24 resize-none"
+              id="inputDescription"
+              value={description}
+              onChange={(e) => setDescription(e.target.value.slice(0, CHAR_LIMITS.DESCRIPTION))}
+              maxLength={CHAR_LIMITS.DESCRIPTION}
+            />
+            {description.length > 0 &&(<span className="absolute right-3 top-2 text-noozi-gray-400 text-sm pointer-events-none select-none">
+              {CHAR_LIMITS.DESCRIPTION - description.length}
+            </span>)}
+          </div>
         </div>
 
         {/* Categoria */}
         <div className="form-field-single">
           <label className="block mb-2 font-medium">Categoria:</label>
-          <input
-            className="w-full bg-noozi-surface border border-solid border-noozi-gray-300 rounded-lg px-3 py-2"
-            type="text"
-            id="inputCategory"
-          />
+          <div className="relative">
+            <input
+              className="w-full bg-noozi-surface border border-solid border-noozi-gray-300 rounded-lg px-3 py-2 pr-12"
+              type="text"
+              id="inputCategory"
+              value={category}
+              onChange={(e) => setCategory(e.target.value.slice(0, CHAR_LIMITS.CATEGORY))}
+              maxLength={CHAR_LIMITS.CATEGORY}
+            />
+            {category.length > 0 &&(<span className="absolute right-3 top-1/2 -translate-y-1/2 text-noozi-gray-400 text-sm pointer-events-none select-none">
+              {CHAR_LIMITS.CATEGORY - category.length}
+            </span>)}
+          </div>
         </div>
 
         {/* Quantidade */}
@@ -90,18 +122,29 @@ export default function Form() {
             className="w-full bg-noozi-surface border border-solid border-noozi-gray-300 rounded-lg px-3 py-2"
             type="number"
             id="inputQuantity"
+            value={quantity}
+            onChange={(e) => setQuantity(e.target.value)}
+            min="0"
           />
         </div>
 
         {/* Unidade de Medida */}
         <div className="form-field-single">
           <label className="block mb-2 font-medium">Unidade de Medida:</label>
-          <input
-            className="w-full bg-noozi-surface border border-solid border-noozi-gray-300 rounded-lg px-3 py-2"
-            type="text"
-            placeholder="Ex: kg, un, L"
-            id="inputUnity"
-          />
+          <div className="relative">
+            <input
+              className="w-full bg-noozi-surface border border-solid border-noozi-gray-300 rounded-lg px-3 py-2 pr-12"
+              type="text"
+              placeholder="Ex: kg, un, L"
+              id="inputUnity"
+              value={unit}
+              onChange={(e) => setUnit(e.target.value.slice(0, CHAR_LIMITS.UNIT))}
+              maxLength={CHAR_LIMITS.UNIT}
+            />
+            {unit.length > 0 &&(<span className="absolute right-3 top-1/2 -translate-y-1/2 text-noozi-gray-400 text-sm pointer-events-none select-none">
+              {CHAR_LIMITS.UNIT - unit.length}
+            </span>)}
+          </div>
         </div>
 
         {/* Preço Unitário */}
@@ -117,11 +160,12 @@ export default function Form() {
           />
         </div>
 
-        {/* Grid 2 colunas: Lado esquerdo (Validade, Lote, SKU) | Lado direito (Upload de Imagem) */}
+        {/* Grid 2 colunas: Lado esquerdo (Validade, Lote, SKU, Status) | Lado direito (Upload de Imagem) */}
         <div className="form-nested-grid">
-          {/* Coluna esquerda - Validade, Lote, SKU */}
+          {/* Coluna esquerda - Validade, Lote, SKU, Status */}
           <div className="form-inventory-fields">
             <div className="flex justify-between flex-col">
+              {/* Validade */}
               <div>
                 <label className="block font-medium">Validade:</label>
                 <input
@@ -138,28 +182,52 @@ export default function Form() {
                 />
               </div>
 
+              {/* Lote */}
               <div>
                 <label className="block font-medium">Lote:</label>
-                <input
-                  className="w-full bg-noozi-surface border border-solid border-noozi-gray-300 rounded-lg px-3 py-2 mt-2"
-                  type="text"
-                  id="inputBatch"
-                />
+                <div className="relative mt-2">
+                  <input
+                    className="w-full bg-noozi-surface border border-solid border-noozi-gray-300 rounded-lg px-3 py-2 pr-12"
+                    type="text"
+                    id="inputBatch"
+                    value={batch}
+                    onChange={(e) => setBatch(e.target.value.slice(0, CHAR_LIMITS.BATCH))}
+                    maxLength={CHAR_LIMITS.BATCH}
+                  />
+                  {batch.length > 0 &&(<span className="absolute right-3 top-1/2 -translate-y-1/2 text-noozi-gray-400 text-sm pointer-events-none select-none">
+                    {CHAR_LIMITS.BATCH - batch.length}
+                  </span>)}
+                </div>
               </div>
 
+              {/* SKU */}
               <div>
                 <label className="block font-medium">SKU:</label>
-                <input
-                  className="w-full bg-noozi-surface border border-solid border-noozi-gray-300 rounded-lg px-3 py-2 mt-2"
-                  type="text"
-                  id="inputSKU"
-                />
+                <div className="relative mt-2">
+                  <input
+                    className="w-full bg-noozi-surface border border-solid border-noozi-gray-300 rounded-lg px-3 py-2 pr-12"
+                    type="text"
+                    id="inputSKU"
+                    value={sku}
+                    onChange={(e) => setSku(e.target.value.slice(0, CHAR_LIMITS.SKU))}
+                    maxLength={CHAR_LIMITS.SKU}
+                  />
+                  {sku.length > 0 &&(<span className="absolute right-3 top-1/2 -translate-y-1/2 text-noozi-gray-400 text-sm pointer-events-none select-none">
+                    {CHAR_LIMITS.SKU - sku.length}
+                  </span>)}
+                </div>
               </div>
 
+              {/* Status do Produto */}
               <div>
                 <label className="block font-medium mb-2">Status do Produto:</label>
                 <label className="toggle-switch">
-                  <input type="checkbox" defaultChecked />
+                  <input 
+                    type="checkbox" 
+                    checked={status}
+                    onChange={(e) => setStatus(e.target.checked)}
+                    defaultChecked 
+                  />
                   <span className="toggle-slider"></span>
                   <span className="toggle-label">Ativo</span>
                 </label>
@@ -170,7 +238,7 @@ export default function Form() {
           {/* Coluna direita - Upload de Imagem */}
           <div className="flex flex-col">
             <label className="block mb-2 font-medium">Imagem do Produto:</label>
-            <div className="flex-1 border-2 border-dashed border-noozi-gray-300 rounded-lg bg-noozi-surface hover:bg-gray-50">
+            <div className="flex-1 border-2 border-dashed border-noozi-gray-300 rounded-lg bg-noozi-surface hover:bg-gray-50 transition-colors">
               <label className="flex flex-col items-center justify-center h-full min-h-[300px] cursor-pointer p-6">
                 <span className="text-center text-noozi-gray-600">
                   Clique para fazer upload
@@ -179,8 +247,12 @@ export default function Form() {
                     PNG, JPG até 10MB
                   </span>
                 </span>
-                <input type="file" className="hidden" accept="image/*"
-                id="inputImage"/>
+                <input 
+                  type="file" 
+                  className="hidden" 
+                  accept="image/*"
+                  id="inputImage"
+                />
               </label>
             </div>
           </div>
