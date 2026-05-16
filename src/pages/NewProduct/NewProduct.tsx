@@ -14,6 +14,16 @@ export default function Form() {
   const [sku, setSku] = useState("");
   const [status, setStatus] = useState(true);
 
+  const CHAR_LIMITS = {
+    NAME: 120,
+    BRAND: 30,
+    DESCRIPTION: 500,
+    CATEGORY: 30,
+    UNIT: 10,
+    BATCH: 50,
+    SKU: 50,
+  };
+
   return (
     <div
       id="register"
