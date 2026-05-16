@@ -1,8 +1,8 @@
 export default function NewProduct() {
   return (
     <>
-      <div className="flex items-center justify-center h-screen">
-        <h1 className="text-4xl font-bold text-blue-500">
+      <div className="p-4">
+        <h1 className="flex items-center justify-center text-4xl font-bold text-noozi-bright_blue">
           Noozi/new-product-page
         </h1>
       </div>
