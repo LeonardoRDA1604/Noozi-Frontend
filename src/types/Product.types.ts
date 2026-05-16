@@ -2,8 +2,7 @@ export interface Product {
     id_produto: string;
     sku: string;
     name: string;
-    short_description: string;
-    long_description?: string;
+    description?: string;
     category?: string;
     brand?: string;
     item_price: number;
