@@ -1,8 +1,6 @@
 import { useState } from "react";
 
 export default function Form() {
-  const [date, setDate] = useState("")
-  const [typeData, setTypeData] = useState("text")
   const [name, setName] = useState("");
   const [brand, setBrand] = useState("");
   const [description, setDescription] = useState("");
@@ -10,6 +8,8 @@ export default function Form() {
   const [quantity, setQuantity] = useState("");
   const [unit, setUnit] = useState("");
   const [price, setPrice] = useState("R$ ");
+  const [date, setDate] = useState("")
+  const [typeData, setTypeData] = useState("text")
   const [batch, setBatch] = useState("");
   const [sku, setSku] = useState("");
   const [status, setStatus] = useState(true);
