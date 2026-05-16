@@ -1,3 +1,9 @@
+import CreateCardItem from "@/components/Cards/ProductCard/ProductsCard";
+
+export default function Products() {
+  return (
+    <>
+      <CreateCardItem />
 export default function Products() {
   return (
     <>
@@ -7,5 +13,5 @@ export default function Products() {
         </h1>
       </div>
     </>
-  )
+  );
 }
