@@ -24,6 +24,20 @@ export default function Form() {
     SKU: 50,
   };
 
+  // Handler para preço com R$ fixo
+  const handlePriceChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    let value = e.target.value;
+    
+    // Se tentar apagar o R$, restaura
+    if (!value.startsWith("R$ ")) {
+      value = "R$ ";
+    }
+    
+    // Remove tudo exceto números, vírgula e ponto
+    const numericPart = value.substring(3).replace(/[^\d.,]/g, "");
+    setPrice("R$ " + numericPart);
+  };
+
   return (
     <div
       id="register"
@@ -98,6 +112,8 @@ export default function Form() {
             type="text"
             placeholder="R$ 0,00"
             id="inputValue"
+            value={price}
+            onChange={handlePriceChange}
           />
         </div>
 
