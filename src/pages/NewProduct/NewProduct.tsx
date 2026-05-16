@@ -6,7 +6,7 @@ export default function Form() {
 
   return (
     <div
-      id="cadastro"
+      id="register"
       className="bg-[#EFEFEF] w-full min-h-dvh p-6 overflow-y-auto"
     >
       <form className="product-form-grid">
@@ -16,6 +16,7 @@ export default function Form() {
           <input
             className="w-full bg-[#f5f5f5] border border-solid border-noozi-gray-300 rounded-lg px-3 py-2"
             type="text"
+            id="inputName"
           />
         </div>
 
@@ -25,6 +26,7 @@ export default function Form() {
           <input
             className="w-full bg-[#f5f5f5] border border-solid border-noozi-gray-300 rounded-lg px-3 py-2"
             type="text"
+            id="inputBrand"
           />
         </div>
 
@@ -33,7 +35,7 @@ export default function Form() {
           <label className="block mb-2 font-medium">Descrição:</label>
           <textarea
             className="w-full bg-noozi-surface border border-solid border-noozi-gray-300 rounded-lg px-3 py-2 h-24 resize-none"
-            id="c_descricao"
+            id="inputDescription"
           />
         </div>
 
@@ -43,6 +45,7 @@ export default function Form() {
           <input
             className="w-full bg-noozi-surface border border-solid border-noozi-gray-300 rounded-lg px-3 py-2"
             type="text"
+            id="inputCategory"
           />
         </div>
 
@@ -52,6 +55,7 @@ export default function Form() {
           <input
             className="w-full bg-noozi-surface border border-solid border-noozi-gray-300 rounded-lg px-3 py-2"
             type="number"
+            id="inputQuantity"
           />
         </div>
 
@@ -62,6 +66,7 @@ export default function Form() {
             className="w-full bg-noozi-surface border border-solid border-noozi-gray-300 rounded-lg px-3 py-2"
             type="text"
             placeholder="Ex: kg, un, L"
+            id="inputUnity"
           />
         </div>
 
@@ -72,6 +77,7 @@ export default function Form() {
             className="w-full bg-noozi-surface border border-solid border-noozi-gray-300 rounded-lg px-3 py-2"
             type="text"
             placeholder="R$ 0,00"
+            id="inputValue"
           />
         </div>
 
@@ -84,7 +90,7 @@ export default function Form() {
                 <label className="block font-medium">Validade:</label>
                 <input
                   className="w-full bg-noozi-surface border border-solid border-noozi-gray-300 rounded-lg px-3 py-2 mt-2"
-                  id="data"
+                  id="inputDate"
                   type={type}
                   placeholder="DD/MM/AAAA"
                   value={date}
@@ -101,6 +107,7 @@ export default function Form() {
                 <input
                   className="w-full bg-noozi-surface border border-solid border-noozi-gray-300 rounded-lg px-3 py-2 mt-2"
                   type="text"
+                  id="inputBatch"
                 />
               </div>
 
@@ -109,6 +116,7 @@ export default function Form() {
                 <input
                   className="w-full bg-noozi-surface border border-solid border-noozi-gray-300 rounded-lg px-3 py-2 mt-2"
                   type="text"
+                  id="inputSKU"
                 />
               </div>
             </div>
@@ -126,7 +134,8 @@ export default function Form() {
                     PNG, JPG até 10MB
                   </span>
                 </span>
-                <input type="file" className="hidden" accept="image/*" />
+                <input type="file" className="hidden" accept="image/*"
+                id="inputImage"/>
               </label>
             </div>
           </div>
@@ -135,7 +144,7 @@ export default function Form() {
         {/* Botão - ocupa toda a largura */}
         <div className="form-field-full mt-4">
           <button
-            id="btn_cadastrar"
+            id="btn_register"
             className="w-full px-6 py-3 font-semibold text-white transition-colors duration-200 bg-noozi-bright_blue rounded-lg hover:bg-[#063CD4] active:bg-[#052EB0]"
             type="button"
           >
