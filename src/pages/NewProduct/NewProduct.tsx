@@ -119,6 +119,15 @@ export default function Form() {
                   id="inputSKU"
                 />
               </div>
+
+              <div>
+                <label className="block font-medium mb-2">Status do Produto:</label>
+                <label className="toggle-switch">
+                  <input type="checkbox" defaultChecked />
+                  <span className="toggle-slider"></span>
+                  <span className="toggle-label">Ativo</span>
+                </label>
+              </div>
             </div>
           </div>
 
