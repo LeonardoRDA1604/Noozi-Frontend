@@ -5,8 +5,6 @@ import NewProduct from "@/pages/NewProduct/NewProduct"
 import Products from "@/pages/Products/Products"
 import Dashboard from "@/pages/Dashboard/Dashboard";
 import Profile from "@/pages/Profile/Profile";
-// import Products from "@/pages/Products/Products";
-// import NewProduct from "@/pages/NewProduct/NewProduct";
 
 export default function AppRoutes() {
   return (
