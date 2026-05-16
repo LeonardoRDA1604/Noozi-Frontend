@@ -2,7 +2,17 @@ import { useState } from "react";
 
 export default function Form() {
   const [date, setDate] = useState("")
-  const [type, setType] = useState("text")
+  const [typeData, setTypeData] = useState("text")
+  const [name, setName] = useState("");
+  const [brand, setBrand] = useState("");
+  const [description, setDescription] = useState("");
+  const [category, setCategory] = useState("");
+  const [quantity, setQuantity] = useState("");
+  const [unit, setUnit] = useState("");
+  const [price, setPrice] = useState("R$ ");
+  const [batch, setBatch] = useState("");
+  const [sku, setSku] = useState("");
+  const [status, setStatus] = useState(true);
 
   return (
     <div
@@ -91,13 +101,13 @@ export default function Form() {
                 <input
                   className="w-full bg-noozi-surface border border-solid border-noozi-gray-300 rounded-lg px-3 py-2 mt-2"
                   id="inputDate"
-                  type={type}
+                  type={typeData}
                   placeholder="DD/MM/AAAA"
                   value={date}
                   // Quando clica ou interage, vira um input de data
-                  onFocus={() => setType('date')}
+                  onFocus={() => setTypeData('date')}
                   // Quando perde o foco e está vazio, volta a ser texto para mostrar o placeholder
-                  onBlur={() => !date && setType('text')}
+                  onBlur={() => !date && setTypeData('text')}
                   onChange={(e) => setDate(e.target.value)}
                 />
               </div>
