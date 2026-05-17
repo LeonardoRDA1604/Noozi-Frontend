@@ -1,5 +1,5 @@
 import { Search } from 'lucide-react';
-import type { Searchbar } from '@/types/Searchbar.types';
+import type { Searchbar } from '@/types/Searchbar.type';
 
 export default function Searchbar({ currentText, setCurrentText}: Searchbar){
 

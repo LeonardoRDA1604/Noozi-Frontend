@@ -1,5 +1,5 @@
 import MiniSearch from "minisearch";
-import { mockItems } from "./MockItems";
+import { mockItems } from "./MackItems";
 
 export const structureSearch = new MiniSearch({
       fields: [

@@ -1,34 +1,38 @@
 import { Menu, Bell } from "lucide-react";
-import nooziLogo from "../../assets/logos/logoNoozi.svg";
-// import barsMenu from './assets/images/bars-solid.png'
-// import logoNoozi from './assets/images/noozi-logo.png'
-// import notiBell from './assets/images/bell-regular.png'
+import { Link } from "react-router-dom";
+import nooziLogo from "@/assets/logos/logoNoozi.svg";
 
-export default function Header() {
+interface HeaderProps {
+  onMenuOpen: () => void;
+}
+
+export function Header({ onMenuOpen }: HeaderProps) {
   return (
-    <header className="cadastro">
-      <div
-        id="header"
-        className="p-2.5 px-[5%] justify-between flex fixed w-full left-0 h-14 mb-2.5 top-0 items-center z-50 bg-white"
-      >
-        <div
-          id="h_menu"
-          className="flex justify-center items-center cursor-pointer hover:scale-[1.3]"
+    <header className="fixed top-0 left-0 right-0 z-50 bg-white border-b border-noozi-border h-14">
+      <div className="flex items-center justify-between h-full px-4">
+
+        {/* Hamburguer — só mobile e tablet */}
+        <button
+          onClick={onMenuOpen}
+          aria-label="Abrir menu"
+          className="flex items-center justify-center h-9 w-9 rounded-md hover:bg-noozi-surface transition-colors lg:hidden"
         >
-          <Menu width="30" aria-label="menu" />
-        </div>
-        <div
-          id="h_logo_noozi"
-          className="pr-12.5 flex justify-center items-center"
+          <Menu size={22} className="text-noozi-text" />
+        </button>
+
+        {/* Logo — centralizado */}
+        <Link to="/" aria-label="Ir para início">
+          <img src={nooziLogo} alt="Noozi" width={200} />
+        </Link>
+
+        {/* Notificações */}
+        <button
+          aria-label="Notificações"
+          className="flex items-center justify-center h-9 w-9 rounded-md hover:bg-noozi-surface transition-colors"
         >
-          <img src={nooziLogo} width="80" alt="logo-noozi" />
-        </div>
-        <div
-          id="h_notificacoes"
-          className="flex justify-center items-center cursor-pointer hover:scale-[1.3]"
-        >
-          <Bell width="30" aria-label="notificacoes" />
-        </div>
+          <Bell size={22} className="text-noozi-text" />
+        </button>
+
       </div>
     </header>
   );

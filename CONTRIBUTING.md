@@ -13,27 +13,48 @@ Obrigado pelo interesse em contribuir com o **Noozi**! Este é um sistema de ges
 
 - [1. Git Flow](#-git-flow)
   - [1.1. Fluxo de trabalho da equipe](#fluxo-de-trabalho-da-equipe)
-- [2. Regras do Projeto](#-regras-do-projeto)
-- [3. Estratégia de Branches](#-estratégia-de-branches)
-  - [3.1. Exemplos de criação de branches ](#exemplos-de-criação-de-branches)
-  - [3.2. Preparando o ambiente antes de criar sua branch](#preparando-o-ambiente-antes-de-criar-sua-branch)
-- [4. Padrão de Mensagens de Commit](#-padrão-de-mensagens-de-commit)
-  - [4.1. Exemplos de mensagens de commit ](#exemplos-de-mensagens-de-commit)
-- [5. Regras de Pull Request](#-regras-de-pull-request)
-  - [5.1. Checklist antes de abrir o PR](#-checklist-antes-de-abrir-o-pr)
-- [6. Critérios de Revisão](#-critérios-de-revisão)
-- [7. Quem Pode Aprovar](#-quem-pode-aprovar)
-- [8. Padrão de Código e Interface](#-padrão-de-código-e-interface)
-  - [8.1. ESLint e Formatação](#eslint-e-formatação)
-  - [8.2. Componentes Reutilizáveis](#componentes-reutilizáveis)
-  - [8.3. Ícones](#ícones)
-  - [8.4. Paleta de Cores (Identidade Visual)](#paleta-de-cores-identidade-visual)
-- [9. Nomenclatura de Arquivos e Pastas](#️-nomenclatura-de-arquivos-e-pastas)
-- [10. Acessibilidade](#-acessibilidade)
-- [11. Versionamento](#️-versionamento)
-- [12. Reportando Bugs](#-reportando-bugs)
-- [13. Comunicação](#-comunicação)
-- [14. Precisa de Ajuda?](#-precisa-de-ajuda)
+- [2. Proteção de Branches](#-proteção-de-branches)
+  - [2.1. Regras aplicadas nas branches protegidas](#regras-aplicadas-nas-branches-protegidas)
+  - [2.2. Conversas de revisão (Resolve conversation)](#-conversas-de-revisão-resolve-conversation)
+- [3. Regras do Projeto](#-regras-do-projeto)
+- [4. Estratégia de Branches](#-estratégia-de-branches)
+  - [4.1. Exemplos de criação de branches ](#exemplos-de-criação-de-branches)
+  - [4.2. Preparando o ambiente antes de criar sua branch](#preparando-o-ambiente-antes-de-criar-sua-branch)
+- [5. Padrão de Mensagens de Commit](#-padrão-de-mensagens-de-commit)
+  - [5.1. Exemplos de mensagens de commit ](#exemplos-de-mensagens-de-commit)
+- [6. Regras de Pull Request](#-regras-de-pull-request)
+  - [6.1. Checklist antes de abrir o PR](#-checklist-antes-de-abrir-o-pr)
+- [7. Critérios de Revisão](#-critérios-de-revisão)
+- [8. Quem Pode Aprovar](#-quem-pode-aprovar)
+- [9. Padrão de Código e Interface](#-padrão-de-código-e-interface)
+  - [9.1. ESLint e Formatação](#eslint-e-formatação)
+  - [9.2. Componentes Reutilizáveis](#componentes-reutilizáveis)
+  - [9.3. Ícones](#ícones)
+  - [9.4. shadcn/ui](#shadcnui)
+    - [9.4.1. Instalando componentes](#instalando-componentes)
+    - [9.4.2. Estrutura dos componentes](#estrutura-dos-componentes)
+    - [9.4.3. Estilização e customização](#estilização-e-customização)
+    - [9.4.4. Boas práticas](#boas-práticas)
+  - [9.5. Design System](#design-system)
+    - [9.5.1. Usando cores sem token (valores arbitrários)](#usando-cores-sem-token-valores-arbitrários)
+    - [9.5.2. Identidade Visual](#identidade-visual)
+    - [9.5.3. Tipografia](#tipografia)
+    - [9.5.4. Bordas](#bordas)
+    - [9.5.5. Sombras](#sombras)
+    - [9.5.6. Breakpoints e Responsividade](#breakpoints-e-responsividade)
+- [10. UX/UI e Acessibilidade](#-uxui-e-acessibilidade)
+  - [10.1. Elementos Interativos](#elementos-interativos)
+  - [10.2. HTML Semântico](#html-semântico)
+  - [10.3. Acessibilidade (a11y)](#acessibilidade-a11y)
+  - [10.4. Hierarquia Visual](#hierarquia-visual)
+  - [10.5. Feedback ao Usuário](#feedback-ao-usuário)
+  - [10.6. Consistência](#consistência)
+- [11. Nomenclatura de Arquivos e Pastas](#️-nomenclatura-de-arquivos-e-pastas)
+- [12. Acessibilidade](#-acessibilidade)
+- [13. Versionamento](#️-versionamento)
+- [14. Reportando Bugs](#-reportando-bugs)
+- [15. Comunicação](#-comunicação)
+- [16. Precisa de Ajuda?](#-precisa-de-ajuda)
 
 ---
 
@@ -64,6 +85,37 @@ feature/* (sua branch)
 | Deletar branches | ⚠️ Somente o Tech Leader |
 | Abrir Pull Request | ✅ Todos os contribuidores |
 | Aprovar Pull Request | ✅ Tech Leader e revisores designados |
+
+---
+
+## 🔒 Proteção de Branches
+
+As branches `main` e `dev` possuem regras de proteção configuradas no GitHub para garantir a estabilidade, qualidade e segurança do projeto.
+
+### Regras aplicadas nas branches protegidas
+
+- Pull Request obrigatório para merge
+- Aprovação obrigatória antes do merge
+- Comentários de revisão devem ser resolvidos antes da aprovação final
+- Force push bloqueado
+- Deleção das branches protegidas bloqueada
+
+### 💬 Conversas de revisão (`Resolve conversation`)
+
+Durante a revisão do Pull Request, o Tech Leader ou revisores podem abrir comentários solicitando ajustes no código.
+
+Enquanto existir alguma conversa pendente:
+- o Pull Request não poderá ser mergeado
+- todas as solicitações devem ser resolvidas antes da aprovação final
+
+Após corrigir o problema:
+- marque a conversa como resolvida (`Resolve conversation`)
+
+Isso ajuda a manter:
+- revisões organizadas
+- histórico limpo
+- feedback aplicado corretamente
+- maior controle de qualidade do projeto
 
 ---
 
@@ -178,6 +230,8 @@ Formato:
 tipo(escopo opcional): descrição curta em inglês
 ```
 
+> ℹ️ Na descrição, evite passar de **72 caracteres**, é o limite ideal do Conventional Commits.
+
 ### Exemplos de mensagens de commit
 ```text
 feat: add product registration form
@@ -216,6 +270,7 @@ Antes de submeter seu Pull Request, confirme que:
 
 - [ ] O código compila e roda sem erros (`npm run dev`)
 - [ ] O lint passa sem erros (`npm run lint`)
+- [ ] O projeto builda sem erros (`npm run build`)
 - [ ] Você testou manualmente o fluxo que alterou
 - [ ] Não há `console.log`, `debugger` ou código comentado desnecessário
 - [ ] Commits seguem o padrão **Conventional Commits**
@@ -272,19 +327,20 @@ O Tech Leader avalia os Pull Requests com base nos seguintes critérios:
 ## 🎨 Padrão de Código e Interface
 
 ### ESLint e Formatação
+
 - Siga rigorosamente as regras do **ESLint** configuradas no projeto
 - Mantenha o código limpo, legível e bem organizado
 - Evite complexidade desnecessária e código duplicado
 
 ### Componentes Reutilizáveis
-- **Crie componentes reutilizáveis** seguindo os padrões do projeto (consulte a pasta `components/`)
+
+- **Crie componentes reutilizáveis** seguindo os padrões do projeto (consulte a pasta `src/components/`)
 - Componentes devem ser genéricos o suficiente para serem reaproveitados em diferentes partes do sistema
-- Documente props e comportamentos esperados via comentários ou TypeScript types/interfaces
+- Documente props e comportamentos esperados via TypeScript `type` ou `interface`
 
 ### Ícones
-- Utilize exclusivamente a biblioteca **[Lucide React](https://lucide.dev/)** para ícones
-- Não adicione outras bibliotecas de ícones ao projeto
-- Importe apenas os ícones necessários (tree-shaking)
+
+Utilize exclusivamente a biblioteca **[Lucide React](https://lucide.dev/)** para ícones. Não adicione outras bibliotecas de ícones ao projeto. Importe apenas os ícones necessários (tree-shaking).
 
 ✅ Correto — import específico
 ```tsx
@@ -296,20 +352,493 @@ import { Package, AlertCircle, Search } from 'lucide-react'
 import * as Icons from 'lucide-react'
 ```
 
-### Paleta de Cores (Identidade Visual)
-Respeite a paleta de cores oficial do projeto em todos os componentes e estilos:
+---
 
-| Cor | Hex | RGBA | HSL | Tailwind CSS |
-|------|-----|------|-----|--------------|
-| <svg width="20" height="20"><circle cx="10" cy="12" r="8" fill="#30B7F0"/></svg> Azul-céu (Sky blue) | `#30B7F0` | `rgba(48, 183, 240, 1)` | `hsl(199, 85%, 56%)` | `bg-[#30B7F0]` |
-| <svg width="20" height="20"><circle cx="10" cy="12" r="8" fill="#1752FD"/></svg> Azul intenso (Bright blue) | `#1752FD` | `rgba(23, 82, 253, 1)` | `hsl(227, 98%, 54%)` | `bg-[#1752FD]` |
-| <svg width="20" height="20"><circle cx="10" cy="12" r="8" fill="#9F9F9F"/></svg> Cinza médio (Medium gray) | `#9F9F9F` | `rgba(159, 159, 159, 1)` | `hsl(0, 0%, 62%)` | `bg-[#9F9F9F]` |
-| <svg width="20" height="20"><circle cx="10" cy="12" r="8" fill="#FFFFFF" stroke="#ccc"/></svg> Branco (White) | `#FFFFFF` | `rgba(255, 255, 255, 1)` | `hsl(0, 0%, 100%)` | `bg-[#FFFFFF]` |
+### shadcn/ui
+
+O Noozi utiliza o **shadcn/ui** como base para componentes reutilizáveis da interface.
+
+Diferente de bibliotecas tradicionais, o shadcn/ui não instala componentes prontos via pacote fechado.  
+Os componentes são adicionados diretamente ao projeto como código-fonte, permitindo total controle sobre:
+- estilização
+- comportamento
+- acessibilidade
+- responsividade
+- integração com o Design System
+
+> ℹ️ Todos os componentes adicionados ficam dentro de `src/components/ui/`.
+
+---
+
+#### Instalando componentes
+
+Para adicionar um componente do shadcn/ui ao projeto:
+
+```bash
+npx shadcn@latest add button
+```
+
+Exemplo:
+```bash
+npx shadcn@latest add dialog
+npx shadcn@latest add sheet
+npx shadcn@latest add dropdown-menu
+npx shadcn@latest add table
+npx shadcn@latest add form
+```
+
+O comando:
+- baixa o componente
+- adiciona os arquivos necessários
+- instala dependências automaticamente
+- integra o componente ao Tailwind do projeto
+
+---
+
+#### Estrutura dos componentes
+
+Os componentes instalados normalmente ficam em:
+
+```text
+src/
+  components/
+    ui/
+      button.tsx
+      dialog.tsx
+      table.tsx
+```
+
+Esses componentes podem ser:
+- modificados livremente
+- estilizados conforme o Design System
+- reutilizados em qualquer tela do projeto
+
+---
+
+#### Utilizando componentes
+
+Exemplo com `Button`:
+
+```tsx
+import { Button } from "@/components/ui/button"
+
+export function Example() {
+  return (
+    <Button>
+      Salvar produto
+    </Button>
+  )
+}
+```
+
+Exemplo com variantes:
+
+```tsx
+<Button variant="outline">
+  Cancelar
+</Button>
+
+<Button variant="destructive">
+  Excluir
+</Button>
+```
+
+---
+
+#### Estilização e customização
+
+Os componentes do shadcn/ui utilizam:
+- Tailwind CSS
+- `className`
+- `cva` (class-variance-authority)
+- variantes reutilizáveis
+
+Exemplo:
+
+```tsx
+<Button className="bg-noozi-bright_blue hover:bg-noozi-sky_blue">
+  Continuar
+</Button>
+```
+
+> ⚠️ Sempre utilize os tokens do Design System (`noozi-*` e `status-*`) ao customizar componentes.
+
+---
+
+#### Melhorando componentes
+
+Como os componentes fazem parte do código do projeto, é permitido:
+- adicionar variantes
+- criar novos tamanhos
+- melhorar acessibilidade
+- adaptar responsividade
+- extrair lógica reutilizável
+
+Exemplo de nova variante:
+
+```tsx
+variant: {
+  noozi: "bg-noozi-bright_blue text-white hover:bg-noozi-sky_blue"
+}
+```
+
+Uso:
+```tsx
+<Button variant="noozi">
+  Entrar
+</Button>
+```
+
+---
+
+#### Componentes recomendados para o projeto
+
+Os componentes abaixo são altamente recomendados para o Noozi:
+
+| Componente | Uso |
+|------------|-----|
+| `button` | Botões |
+| `input` | Inputs |
+| `form` | Formulários |
+| `dialog` | Modais |
+| `sheet` | Sidebar mobile |
+| `dropdown-menu` | Menus |
+| `table` | Tabelas |
+| `card` | Cards |
+| `tabs` | Navegação interna |
+| `toast` | Feedback ao usuário |
+| `tooltip` | Dicas rápidas |
+| `skeleton` | Loading states |
+
+---
+
+#### Boas práticas
+
+- Prefira reutilizar componentes existentes antes de criar novos
+- Não duplique componentes similares
+- Centralize variantes reutilizáveis
+- Mantenha consistência visual com o Design System
+- Evite estilizações inline excessivas
+- Sempre utilize acessibilidade (`aria-*`, labels, foco via teclado)
+- Componentes devem ser responsivos
+- Componentes complexos devem possuir tipagem explícita via TypeScript
+
+---
+
+#### Adicionando componentes da comunidade
+
+Além dos componentes oficiais, é possível utilizar:
+- blocos prontos da comunidade
+- templates
+- dashboards
+- tabelas avançadas
+- sidebars
+- command menus
+
+Recomendado:
+- https://ui.shadcn.com/
+- https://www.shadcn.io/
+- https://www.shadcnblocks.com/
+
+> ⚠️ Antes de adicionar qualquer componente externo:
+> - valide acessibilidade
+> - valide responsividade
+> - adapte ao Design System do Noozi
+> - remova cores padrão que não pertençam à identidade visual do projeto
+
+---
+
+#### Importante
+
+O fato do componente vir do shadcn/ui NÃO significa que ele está aprovado automaticamente para produção.
+
+Todo componente:
+- deve seguir os padrões do projeto
+- deve respeitar o [Design System](#design-system)
+- deve ser revisado em Pull Request
+- deve manter consistência visual e arquitetural
+
+---
+
+### Design System
+
+O Noozi possui um Design System próprio configurado em `tailwind.config.js` e aplicado globalmente via `src/index.css`. **Sempre utilize as classes e tokens do Design System** — nunca use cores, fontes ou tamanhos arbitrários ou padrões do Tailwind que não estejam mapeados aqui.
+
+> ⚠️ Se precisar de um token (cor, tamanho, sombra, etc.) que não existe atualmente, **não adicione por conta própria**. Comunique ao(s) responsáveis pelo Design System (**Tech Leader** e **Designer**) para avaliação e inclusão oficial.
+
+---
+
+#### Usando cores sem token (valores arbitrários)
+
+Em situações pontuais — protótipos, testes visuais ou ajustes rápidos — é possível usar cores diretamente via sintaxe de valor arbitrário do Tailwind:
+
+```tsx
+<div className="bg-[#1752FD] text-[#FFFFFF] border-[#E8E8E8]">
+  Exemplo com valor arbitrário
+</div>
+```
+
+> ℹ️ Essa sintaxe funciona para qualquer propriedade: `bg-[#hex]`, `text-[#hex]`, `border-[#hex]`, `shadow-[valor]`, etc.
+
+> ⚠️ No entanto, **valores arbitrários NÃO devem ser mantidos em código de produção**.
+
+Se durante o desenvolvimento você identificar necessidade real de um novo token, siga o fluxo:
+1. Use o valor arbitrário temporariamente para não bloquear o desenvolvimento
+2. Comunique ao **Tech Leader** e ao **Designer** com justificativa
+3. Aguarde a aprovação e inclusão oficial no `tailwind.config.js`
+4. Substitua o valor arbitrário pelo token oficial antes do merge
+
+```tsx
+// ❌ nunca — valor arbitrário em produção sem aprovação
+<div className="bg-[#1A2B4C]">...</div> // sem token, sem aprovação = não vai pra main
+
+// ✅ temporário — durante desenvolvimento
+<div className="bg-[#1A2B4C]">...</div>
+
+// ✅ definitivo — após aprovação e inclusão no Design System
+<div className="bg-noozi-navy">...</div>
+```
+
+---
+
+#### Identidade Visual
+
+- **Paleta de Cores**
+
+| Cor | Token Tailwind | Hex | RGBA | HSL |
+|-----|---------------|-----|------|-----|
+| <svg width="20" height="20"><circle cx="10" cy="12" r="8" fill="#1752FD"/></svg> Azul intenso (Bright blue) — ação principal | `noozi-bright_blue` | `#1752FD` | `rgba(23, 82, 253, 1)` | `hsl(227, 98%, 54%)` |
+| <svg width="20" height="20"><circle cx="10" cy="12" r="8" fill="#30B7F0"/></svg> Azul-céu (Sky blue) | `noozi-sky_blue` | `#30B7F0` | `rgba(48, 183, 240, 1)` | `hsl(199, 85%, 56%)` |
+| <svg width="20" height="20"><circle cx="10" cy="12" r="8" fill="#9F9F9F"/></svg> Cinza médio (Medium gray) | `noozi-gray-500` | `#9F9F9F` | `rgba(159, 159, 159, 1)` | `hsl(0, 0%, 62%)` |
+| <svg width="20" height="20"><circle cx="10" cy="12" r="8" fill="#FFFFFF" stroke="#ccc"/></svg> Branco (White) — background padrão | `noozi-background` | `#FFFFFF` | `rgba(255, 255, 255, 1)` | `hsl(0, 0%, 100%)` |
+| <svg width="20" height="20"><circle cx="10" cy="12" r="8" fill="#F5F5F5" stroke="#ccc"/></svg> Surface — fundo de cards e painéis | `noozi-surface` | `#F5F5F5` | `rgba(245, 245, 245, 1)` | `hsl(0, 0%, 96%)` |
+| <svg width="20" height="20"><circle cx="10" cy="12" r="8" fill="#E8E8E8" stroke="#ccc"/></svg> Borda padrão | `noozi-border` | `#E8E8E8` | `rgba(232, 232, 232, 1)` | `hsl(0, 0%, 91%)` |
+| <svg width="20" height="20"><circle cx="10" cy="12" r="8" fill="#111111"/></svg> Texto principal | `noozi-text` | `#111111` | `rgba(17, 17, 17, 1)` | `hsl(0, 0%, 7%)` |
+| <svg width="20" height="20"><circle cx="10" cy="12" r="8" fill="#9F9F9F"/></svg> Texto secundário / muted | `noozi-muted` | `#9F9F9F` | `rgba(159, 159, 159, 1)` | `hsl(0, 0%, 62%)` |
+
+- **Escala de cinza da marca (`noozi-gray`):**
+
+| Cor | Token | Hex | RGBA | HSL |
+|-----|-------|-----|------|-----|
+| <svg width="20" height="20"><circle cx="10" cy="12" r="8" fill="#111111"/></svg> | `noozi-gray-900` | `#111111` | `rgba(17, 17, 17, 1)` | `hsl(0, 0%, 7%)` |
+| <svg width="20" height="20"><circle cx="10" cy="12" r="8" fill="#1F1F1F"/></svg> | `noozi-gray-800` | `#1F1F1F` | `rgba(31, 31, 31, 1)` | `hsl(0, 0%, 12%)` |
+| <svg width="20" height="20"><circle cx="10" cy="12" r="8" fill="#2E2E2E"/></svg> | `noozi-gray-700` | `#2E2E2E` | `rgba(46, 46, 46, 1)` | `hsl(0, 0%, 18%)` |
+| <svg width="20" height="20"><circle cx="10" cy="12" r="8" fill="#4B4B4B"/></svg> | `noozi-gray-600` | `#4B4B4B` | `rgba(75, 75, 75, 1)` | `hsl(0, 0%, 29%)` |
+| <svg width="20" height="20"><circle cx="10" cy="12" r="8" fill="#9F9F9F"/></svg> | `noozi-gray-500` | `#9F9F9F` | `rgba(159, 159, 159, 1)` | `hsl(0, 0%, 62%)` |
+| <svg width="20" height="20"><circle cx="10" cy="12" r="8" fill="#BDBDBD"/></svg> | `noozi-gray-400` | `#BDBDBD` | `rgba(189, 189, 189, 1)` | `hsl(0, 0%, 74%)` |
+| <svg width="20" height="20"><circle cx="10" cy="12" r="8" fill="#D4D4D4"/></svg> | `noozi-gray-300` | `#D4D4D4` | `rgba(212, 212, 212, 1)` | `hsl(0, 0%, 83%)` |
+| <svg width="20" height="20"><circle cx="10" cy="12" r="8" fill="#E8E8E8"/></svg> | `noozi-gray-200` | `#E8E8E8` | `rgba(232, 232, 232, 1)` | `hsl(0, 0%, 91%)` |
+| <svg width="20" height="20"><circle cx="10" cy="12" r="8" fill="#F5F5F5" stroke="#ccc"/></svg> | `noozi-gray-100` | `#F5F5F5` | `rgba(245, 245, 245, 1)` | `hsl(0, 0%, 96%)` |
+| <svg width="20" height="20"><circle cx="10" cy="12" r="8" fill="#FAFAFA" stroke="#ccc"/></svg> | `noozi-gray-50` | `#FAFAFA` | `rgba(250, 250, 250, 1)` | `hsl(0, 0%, 98%)` |
+
+- **Cores de status (`status`) — para ícones, badges e alertas:**
+
+| Cor | Semântica | Token Tailwind | Hex | RGBA | HSL |
+|-----|-----------|---------------|-----|------|-----|
+| <svg width="20" height="20"><circle cx="10" cy="12" r="8" fill="#34D399"/></svg> | Sucesso | `status-success` | `#34D399` | `rgba(52, 211, 153, 1)` | `hsl(158, 64%, 52%)` |
+| <svg width="20" height="20"><circle cx="10" cy="12" r="8" fill="#FBBF24"/></svg> | Alerta | `status-warning` | `#FBBF24` | `rgba(251, 191, 36, 1)` | `hsl(43, 96%, 56%)` |
+| <svg width="20" height="20"><circle cx="10" cy="12" r="8" fill="#F87171"/></svg> | Erro / Perigo | `status-danger` | `#F87171` | `rgba(248, 113, 113, 1)` | `hsl(0, 91%, 71%)` |
+| <svg width="20" height="20"><circle cx="10" cy="12" r="8" fill="#30B7F0"/></svg> | Informação | `status-info` | `#30B7F0` | `rgba(48, 183, 240, 1)` | `hsl(199, 85%, 56%)` |
 
 
-> ℹ️ **Tailwind CSS** — como são cores customizadas fora da paleta padrão do Tailwind, utilize a sintaxe de valor arbitrário `bg-[#hex]`, `text-[#hex]`, `border-[#hex]` conforme o contexto.
+- **Exemplos de uso:**
 
-> ⚠️ Não utilize cores fora dessa paleta sem aprovação do Tech Leader ou do Designer.
+```tsx
+// texto
+<p className="text-noozi-text">Texto principal</p>
+<p className="text-noozi-muted">Texto secundário</p>
+
+// background
+<div className="bg-noozi-surface">Card</div>
+<div className="bg-noozi-bright_blue">Botão primário</div>
+
+// borda
+<div className="border border-noozi-border">Elemento com borda</div>
+
+// status
+<span className="text-status-success">Salvo com sucesso</span>
+<span className="text-status-danger">Erro ao salvar</span>
+```
+
+> ❌ Não utilize classes de cor padrão do Tailwind como `text-zinc-500`, `bg-gray-100`, `border-slate-200`, etc. Use sempre os tokens `noozi-*` e `status-*`. Caso o token necessário não exista, siga os passos descritos na sessão: [Usando cores sem token (valores arbitrários)](#usando-cores-sem-token-valores-arbitrários).
+
+---
+
+#### Tipografia
+
+As fontes estão configuradas em `tailwind.config.js` e importadas em `src/index.css` via `@fontsource-variable/geist`.
+
+| Token | Fonte | Uso |
+|-------|-------|-----|
+| `font-sans` | Geist → DM Sans → Poppins | Texto padrão do sistema (aplicado globalmente no `body`) |
+| `font-display` | Geist → Poppins | Títulos e headings (aplicado globalmente em `h1`–`h6`) |
+| `font-mono` | Geist Mono | Código, valores técnicos |
+
+```tsx
+<h1 className="font-display text-2xl font-bold">Título</h1>
+<p className="font-sans text-sm text-noozi-muted">Descrição</p>
+<code className="font-mono text-xs">valor_tecnico</code>
+```
+
+> Na maioria dos casos você **não precisará declarar `font-sans` ou `font-display` manualmente** — eles já são aplicados globalmente pelo `index.css`.
+
+---
+
+#### Bordas
+
+| Token | Valor | Uso sugerido |
+|-------|-------|--------------|
+| `rounded-sm` | 4px | Badges, tags |
+| `rounded-md` | 8px | Inputs, botões |
+| `rounded-lg` | 12px | Cards |
+| `rounded-xl` | 16px | Modais, painéis |
+| `rounded-2xl` | 24px | Elementos de destaque |
+| `rounded-full` | 9999px | Avatares, pills |
+
+---
+
+#### Sombras
+
+| Token | Uso sugerido |
+|-------|--------------|
+| `shadow-sm` | Elementos sutis |
+| `shadow-md` | Dropdowns, tooltips |
+| `shadow-lg` | Modais |
+| `shadow-card` | Cards padrão do sistema |
+
+---
+
+#### Breakpoints e Responsividade
+
+O Noozi é **mobile-first** — a interface base é desenvolvida para mobile e expandida progressivamente para telas maiores com os prefixos de breakpoint.
+
+| Prefixo | Largura mínima | Dispositivo alvo |
+|---------|---------------|-----------------|
+| *(sem prefixo)* | < 375px | Mobile pequeno — base de todos os estilos |
+| `xs:` | ≥ 375px | Mobile pequeno (iPhone SE, androids compactos) |
+| `sm:` | ≥ 390px | Mobile padrão (iPhone 14, maioria dos androids) |
+| `md:` | ≥ 768px | Tablet retrato (iPad, iPad Mini) |
+| `lg:` | ≥ 1024px | Tablet paisagem (iPad deitado) + desktops pequenos |
+| `xl:` | ≥ 1280px | Desktop padrão |
+| `2xl:` | ≥ 1536px | Desktop grande / telas wide |
+| `landscape:` | — | Qualquer dispositivo em modo paisagem (orientação) |
+| `portrait:` | — | Qualquer dispositivo em modo retrato (orientação) |
+
+**Exemplos de uso:**
+
+```tsx
+// layout em coluna no mobile, linha no tablet
+<div className="flex-col md:flex-row">
+
+// elemento visível só em mobile e tablet
+<nav className="block lg:hidden">
+
+// grid adaptável
+<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+
+// elemento só em modo paisagem
+<div className="hidden landscape:block">
+```
+
+> 💡 Escreva sempre o estilo base pensando no menor dispositivo (mobile < 375px), e use os prefixos para adaptar progressivamente.
+
+---
+
+## ♿ UX/UI e Acessibilidade
+
+O Noozi é um sistema de gestão com foco principal em **mobile e tablet** (PWA). As diretrizes abaixo devem ser seguidas em todos os componentes e telas.
+
+---
+
+### Elementos Interativos
+
+- Elementos clicáveis (botões, links, ícones) devem ter altura mínima de **44px** (`h-11`) para garantir área de toque adequada em touchscreens
+- Todo elemento interativo deve ter estado `hover`, `focus` e `disabled` visualmente distintos
+- Use `transition-colors` e `transition-opacity` para transições suaves
+- Elementos interativos devem ser **acessíveis via teclado** (Tab, Enter, Esc)
+
+---
+
+### HTML Semântico
+
+Use sempre o elemento HTML correto para cada finalidade. Além de melhorar a acessibilidade, isso garante comportamento nativo correto (foco, teclado, leitores de tela).
+
+| Situação | ✅ Correto | ❌ Evite |
+|----------|-----------|---------|
+| Ação (ex: salvar, excluir) | `<button>` | `<div onClick>` |
+| Navegação interna | `<Link>` | `<div onClick>` |
+| Navegação externa | `<a>` | `<span onClick>` |
+| Menu de navegação | `<nav>` | `<div id="menu">` |
+| Área principal | `<main>` | `<div id="content">` |
+| Cabeçalho | `<header>` | `<div id="header">` |
+
+```tsx
+// ✅ Correto — botão de ícone com aria-label
+<button aria-label="Excluir produto">
+  <Trash2 size={16} />
+</button>
+
+// ❌ Evite — sem semântica e sem contexto para leitores de tela
+<div onClick={handleDelete}>
+  <Trash2 size={16} />
+</div>
+```
+
+---
+
+### Acessibilidade (a11y)
+
+- Garanta que o **contraste de cores** atenda ao mínimo WCAG AA — 4.5:1 para texto normal, 3:1 para texto grande
+- Adicione **`aria-label`** em elementos interativos sem texto visível (ex: botões de ícone)
+- Campos de formulário devem ter **`<label>`** associado ou `aria-label`
+- Imagens devem ter **`alt`** descritivo — ou `alt=""` se forem puramente decorativas
+
+```tsx
+// ✅ Correto — imagem descritiva
+<img src="/produto.jpg" alt="Embalagem do produto Arroz Integral 1kg" />
+
+// ✅ Correto — imagem decorativa
+<img src="/divider.svg" alt="" />
+
+// ✅ Correto — campo com label associado
+<label htmlFor="nome">Nome do produto</label>
+<input id="nome" type="text" />
+
+// ✅ Correto — campo com aria-label
+<input type="search" aria-label="Buscar produto" />
+```
+
+---
+
+### Hierarquia Visual
+
+- Mantenha clara a hierarquia entre informação primária e secundária — o olho do usuário deve ser guiado naturalmente ao dado mais importante primeiro
+- Use `text-noozi-text` para informação principal e `text-noozi-muted` para informação secundária
+- Tamanho, peso (`font-bold`, `font-medium`) e cor devem reforçar a hierarquia — nunca contradizê-la
+
+---
+
+### Feedback ao Usuário
+
+- Toda ação do usuário deve ter retorno visual imediato (loading, sucesso, erro)
+- Use os tokens de `status-*` para comunicar estados de forma consistente:
+
+| Estado | Token | Uso |
+|--------|-------|-----|
+| Sucesso | `status-success` | Confirmações, salvamentos |
+| Alerta | `status-warning` | Avisos, atenção necessária |
+| Erro | `status-danger` | Falhas, ações destrutivas |
+| Informação | `status-info` | Mensagens neutras, dicas |
+
+- Nunca deixe o usuário sem feedback após interações assíncronas (chamadas de API, submissões de formulário)
+
+---
+
+### Consistência
+
+- Reutilize componentes existentes antes de criar novos
+- Não crie variações visuais de um componente sem alinhar com o **Tech Leader** e o **Designer**
+- Espaçamentos, tamanhos e cores devem sempre vir do Design System — nunca valores arbitrários
 
 ---
 
@@ -335,31 +864,6 @@ components/
     ProductCard/
       ProductCard.tsx
       index.ts
-```
-
----
-
-## ♿ Acessibilidade
-
-Como projeto front-end, seguimos boas práticas de acessibilidade. Ao criar ou alterar componentes:
-
-- Use **HTML semântico** — prefira `<button>` a `<div onClick>`, `<nav>` a `<div id="menu">`, etc.
-- Adicione **`aria-label`** em elementos interativos sem texto visível (ex: botões de ícone)
-- Garanta que o **contraste de cores** atenda ao mínimo WCAG AA (4.5:1 para texto normal, 3:1 para texto grande)
-- Campos de formulário devem ter **`<label>`** associado ou `aria-label`
-- Imagens devem ter **`alt`** descritivo (ou `alt=""` se for puramente decorativa)
-- Elementos interativos devem ser **acessíveis via teclado** (Tab, Enter, Esc)
-
-```tsx
-// ✅ Correto — botão de ícone com aria-label
-<button aria-label="Excluir produto">
-  <Trash2 size={16} />
-</button>
-
-// ❌ Evite — sem contexto para leitores de tela
-<div onClick={handleDelete}>
-  <Trash2 size={16} />
-</div>
 ```
 
 ---
