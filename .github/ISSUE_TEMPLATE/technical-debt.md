@@ -1,52 +1,57 @@
 ---
-name: Tech Debt
-about: Registrar débito técnico ou problema conhecido para correção futura
+name: Technical Debt
+about: Register known technical debt, warnings, architectural issues or pending improvements for future resolution
 title: "[TECH DEBT] "
 labels: tech-debt
 assignees: ''
 ---
 
-## 📌 Descrição
+## 📌 Description
 
-Descreva o problema técnico identificado.
+Describe the technical debt, warning, limitation, architectural issue or known problem identified during development or code review.
+
+Include:
+- what the issue is
+- why it exists
+- possible impacts
+- why it is not being resolved immediately
 
 ---
 
-## 📂 Arquivo(s) afetado(s)
+## 📂 Affected File(s)
 
 - `src/...`
 
 ---
 
-## ⚠️ Tipo do problema
+## ⚠️ Problem Type
 
 - [ ] ESLint
 - [ ] Build
 - [ ] TypeScript
-- [ ] Refactor necessário
+- [ ] Refactor required
 - [ ] Performance
-- [ ] Responsividade
+- [ ] Responsiveness
 - [ ] UI/UX
-- [ ] Acessibilidade (a11y)
-- [ ] Arquitetura
-- [ ] Dependência / configuração
-- [ ] Outro
+- [ ] Accessibility (a11y)
+- [ ] Architecture
+- [ ] Dependency / configuration
+- [ ] Technical limitation
+- [ ] Code quality
+- [ ] Other
 
 ---
 
-## 🚨 Severidade
+## 🚨 Severity
 
-- [ ] Baixa
-- [ ] Média
-- [ ] Alta
-- [ ] Crítica
+- [ ] Low
+- [ ] Medium
+- [ ] High
+- [ ] Critical
 
 ---
 
-## 🧾 Mensagem do erro
+## 🧾 Error / Warning Message
 
 ```txt
-
-<!-- Cole aqui a mensagem do erro -->
-
-```
+<!-- Paste the warning, stack trace or error message here -->
