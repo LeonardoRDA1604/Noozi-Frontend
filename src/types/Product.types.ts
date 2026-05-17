@@ -1,5 +1,5 @@
 export interface Product {
-    id_produto: string;
+    id_product: string;
     sku: string;
     name: string;
     description?: string;
@@ -14,7 +14,7 @@ export interface Product {
     expiration_date?: string;
     is_active: boolean;
     created_at: string;
-    update_at: string;
+    updated_at: string;
 }
 
 // Usado no POST - Sem id, created_at, updated_at (gerados pelo servidor)
