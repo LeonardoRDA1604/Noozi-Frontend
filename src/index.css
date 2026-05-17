@@ -79,7 +79,9 @@
   }
 
 
-  /* TODO TOGGLE BUTTON - COLOCAR PRA COMPONENTS DEPOIS*/
+  /* TOGGLE BUTTON */
+  
+  /* TODO COLOCAR PRA COMPONENTS DEPOIS*/
 
 
     .toggle-switch {
@@ -96,8 +98,8 @@
   .toggle-slider {
     position: relative;
     display: inline-block;
-    width: 52px;
-    height: 28px;
+    width: 80px;
+    height: 38px;
     background-color: #cbd5e1; /* Cinza quando inativo */
     border-radius: 34px;
     transition: background-color 0.3s ease;
@@ -107,8 +109,8 @@
   .toggle-slider::before {
     content: "";
     position: absolute;
-    height: 22px;
-    width: 22px;
+    height: 32px;
+    width: 32px;
     left: 3px;
     bottom: 3px;
     background-color: white;
@@ -124,7 +126,7 @@
 
   /* Estado ATIVO (checked) - Bolinha desliza para direita */
   .toggle-switch input:checked + .toggle-slider::before {
-    transform: translateX(24px);
+    transform: translateX(42px);
   }
 
   /* Efeito hover no fundo */
