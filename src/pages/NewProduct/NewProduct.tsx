@@ -24,6 +24,14 @@ export default function Form() {
     SKU: 50,
   };
 
+  // Função para mudar a cor do contador de caracteres
+  const getCounterColor = (value: string, limit: number) => {
+    const used = value.length / limit;
+    if (used >= 0.9) return "text-status-danger";  // ≥ 90% → vermelho
+    if (used >= 0.8) return "text-status-warning";  // ≥ 80% → amarelo
+    return "text-gray-400";                          // normal → cinza
+};
+
   // Handler para preço com R$ fixo
   const handlePriceChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     let value = e.target.value;
@@ -56,7 +64,7 @@ export default function Form() {
               onChange={(e) => setName(e.target.value.slice(0, CHAR_LIMITS.NAME))}
               maxLength={CHAR_LIMITS.NAME}
             />
-            {name.length > 0 &&(<span className="absolute right-3 top-1/2 -translate-y-1/2 text-noozi-gray-400 text-sm pointer-events-none select-none">
+            {name.length > 0 &&(<span className={`absolute right-3 top-1/2 -translate-y-1/2 text-noozi-gray-400 text-sm pointer-events-none select-none ${getCounterColor(name, CHAR_LIMITS.NAME)}`}>
               {CHAR_LIMITS.NAME - name.length}
             </span>)}
           </div>
@@ -74,7 +82,7 @@ export default function Form() {
               onChange={(e) => setBrand(e.target.value.slice(0, CHAR_LIMITS.BRAND))}
               maxLength={CHAR_LIMITS.BRAND}
             />
-            {brand.length > 0 && (<span className="absolute right-3 top-1/2 -translate-y-1/2 text-noozi-gray-400 text-sm pointer-events-none select-none">
+            {brand.length > 0 && (<span className={`absolute right-3 top-1/2 -translate-y-1/2 text-noozi-gray-400 text-sm pointer-events-none select-none ${getCounterColor(brand, CHAR_LIMITS.BRAND)}`}>
               {CHAR_LIMITS.BRAND - brand.length}
             </span>)}
           </div>
@@ -91,7 +99,7 @@ export default function Form() {
               onChange={(e) => setDescription(e.target.value.slice(0, CHAR_LIMITS.DESCRIPTION))}
               maxLength={CHAR_LIMITS.DESCRIPTION}
             />
-            {description.length > 0 &&(<span className="absolute right-3 top-2 text-noozi-gray-400 text-sm pointer-events-none select-none">
+            {description.length > 0 &&(<span className={`absolute right-3 top-2 text-noozi-gray-400 text-sm pointer-events-none select-none ${getCounterColor(description, CHAR_LIMITS.DESCRIPTION)}`}>
               {CHAR_LIMITS.DESCRIPTION - description.length}
             </span>)}
           </div>
@@ -109,7 +117,7 @@ export default function Form() {
               onChange={(e) => setCategory(e.target.value.slice(0, CHAR_LIMITS.CATEGORY))}
               maxLength={CHAR_LIMITS.CATEGORY}
             />
-            {category.length > 0 &&(<span className="absolute right-3 top-1/2 -translate-y-1/2 text-noozi-gray-400 text-sm pointer-events-none select-none">
+            {category.length > 0 &&(<span className={`absolute right-3 top-1/2 -translate-y-1/2 text-noozi-gray-400 text-sm pointer-events-none select-none ${getCounterColor(category, CHAR_LIMITS.CATEGORY)}`}>
               {CHAR_LIMITS.CATEGORY - category.length}
             </span>)}
           </div>
@@ -141,7 +149,7 @@ export default function Form() {
               onChange={(e) => setUnit(e.target.value.slice(0, CHAR_LIMITS.UNIT))}
               maxLength={CHAR_LIMITS.UNIT}
             />
-            {unit.length > 0 &&(<span className="absolute right-3 top-1/2 -translate-y-1/2 text-noozi-gray-400 text-sm pointer-events-none select-none">
+            {unit.length > 0 &&(<span className={`absolute right-3 top-1/2 -translate-y-1/2 text-noozi-gray-400 text-sm pointer-events-none select-none ${getCounterColor(unit, CHAR_LIMITS.UNIT)}`}>
               {CHAR_LIMITS.UNIT - unit.length}
             </span>)}
           </div>
@@ -194,7 +202,7 @@ export default function Form() {
                     onChange={(e) => setBatch(e.target.value.slice(0, CHAR_LIMITS.BATCH))}
                     maxLength={CHAR_LIMITS.BATCH}
                   />
-                  {batch.length > 0 &&(<span className="absolute right-3 top-1/2 -translate-y-1/2 text-noozi-gray-400 text-sm pointer-events-none select-none">
+                  {batch.length > 0 &&(<span className={`absolute right-3 top-1/2 -translate-y-1/2 text-noozi-gray-400 text-sm pointer-events-none select-none ${getCounterColor(batch, CHAR_LIMITS.BATCH)}`}>
                     {CHAR_LIMITS.BATCH - batch.length}
                   </span>)}
                 </div>
@@ -212,7 +220,7 @@ export default function Form() {
                     onChange={(e) => setSku(e.target.value.slice(0, CHAR_LIMITS.SKU))}
                     maxLength={CHAR_LIMITS.SKU}
                   />
-                  {sku.length > 0 &&(<span className="absolute right-3 top-1/2 -translate-y-1/2 text-noozi-gray-400 text-sm pointer-events-none select-none">
+                  {sku.length > 0 &&(<span className={`absolute right-3 top-1/2 -translate-y-1/2 text-noozi-gray-400 text-sm pointer-events-none select-none ${getCounterColor(sku, CHAR_LIMITS.SKU)}`}>
                     {CHAR_LIMITS.SKU - sku.length}
                   </span>)}
                 </div>
