@@ -2,6 +2,7 @@ import { Pencil, Trash2 } from "lucide-react";
 import { ActionButton } from "@/components/Buttons/ActionButton/ActionButton";
 
 import CreateCardItem from "@/components/Cards/ProductCard/ProductsCard";
+import FilterProductButton from "@/components/Buttons/FilterProductButton/FilterProductButton";
 
 
 export default function Products() {
@@ -12,7 +13,11 @@ export default function Products() {
           Noozi/products-page
         </h1>
       </div>
-      
+
+      <div className="searchRow">
+        <FilterProductButton/>
+      </div>
+
       <CreateCardItem />
 
       {/* Div dos botões de edição e delete */}
