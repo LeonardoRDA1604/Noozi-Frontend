@@ -7,7 +7,8 @@ export default function Form() {
   const [category, setCategory] = useState("");
   const [quantity, setQuantity] = useState("");
   const [unit, setUnit] = useState("");
-  const [price, setPrice] = useState("R$ ");
+  const [price, setPrice] = useState("R$ 0,00");
+  const [priceValue, setPriceValue] = useState(0)
   const [date, setDate] = useState("")
   const [typeData, setTypeData] = useState("text")
   const [batch, setBatch] = useState("");
@@ -29,23 +30,73 @@ export default function Form() {
     const used = value.length / limit;
     if (used >= 0.9) return "text-status-danger";  // ≥ 90% → vermelho
     if (used >= 0.8) return "text-status-warning";  // ≥ 80% → amarelo
-    return "text-gray-400";                          // normal → cinza
-};
+    return "text-noozi-gray-400";                          // normal → cinza
+  };
+  
 
-  // Handler para preço com R$ fixo
-  const handlePriceChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    let value = e.target.value;
+  // * MÁSCARA/FUNÇÕES DO INPUT PREÇO
+
+  
+  const formatPrice = (valueInCents: number): string => {
+    // Converte centavos para reais (divide por 100)
+    const valueInReais = valueInCents / 100;
     
-    // Se tentar apagar o R$, restaura
-    if (!value.startsWith("R$ ")) {
-      value = "R$ ";
-    }
+    // Formata com 2 casas decimais
+    const formatted = valueInReais.toLocaleString('pt-BR', {
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2,
+    });
     
-    // Remove tudo exceto números, vírgula e ponto
-    const numericPart = value.substring(3).replace(/[^\d.,]/g, "");
-    setPrice("R$ " + numericPart);
+    return `R$ ${formatted}`;
   };
 
+  const handlePriceChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const input = e.target.value;
+    
+    // Remove tudo que não é dígito
+    const digitsOnly = input.replace(/\D/g, '');
+    
+    // Se vazio, reseta para R$ 0,00
+    if (digitsOnly === '') {
+      setPriceValue(0);
+      setPrice('R$ 0,00');
+      return;
+    }
+    
+    // Converte para número (em centavos)
+    const numericValue = parseInt(digitsOnly, 10);
+    
+    // Limita a 9999999999 centavos (R$ 99.999.999,99)
+    const limitedValue = Math.min(numericValue, 9999999999);
+    
+    // Atualiza estado numérico e formatado
+    setPriceValue(limitedValue);
+    setPrice(formatPrice(limitedValue));
+  };
+
+  const handlePriceKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    // Permite: Backspace, Delete, Tab, Escape, Enter, setas
+    const allowedKeys = ['Backspace', 'Delete', 'Tab', 'Escape', 'Enter', 'ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown'];
+    
+    // Se é uma tecla permitida OU é um número (0-9), permite
+    if (allowedKeys.includes(e.key) || /^\d$/.test(e.key)) {
+      return;
+    }
+    
+    // Bloqueia qualquer outra tecla (letras, símbolos, etc)
+    e.preventDefault();
+  };
+
+  const handlePriceBackspace = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Backspace' || e.key === 'Delete') {
+      e.preventDefault();
+      
+      // Remove o último dígito (divide por 10)
+      const newValue = Math.floor(priceValue / 10);
+      setPriceValue(newValue);
+      setPrice(formatPrice(newValue));
+    }
+  };
   return (
     <div
       id="register"
@@ -165,6 +216,10 @@ export default function Form() {
             id="inputValue"
             value={price}
             onChange={handlePriceChange}
+            onKeyDown={(e) => {
+              handlePriceKeyDown(e);
+              handlePriceBackspace(e);
+            }}
           />
         </div>
 
