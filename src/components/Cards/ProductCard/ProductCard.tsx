@@ -1,8 +1,8 @@
 import { useMemo, useState, useEffect } from 'react';
-import type { CardItems } from "@/types/CardItems.ts";
+import type { CardItems } from "@/types/CardItems.types";
 import type { filter } from '@/types/FilterSearchbar.types';
-import { structureSearch } from '@/constants/MiniSearch';
-import { mockItems } from '@/constants/MackItems';
+import { structureSearch } from '@/constants/miniSearch';
+import { MOCK_ITEMS } from '@/constants/mockItems';
 
 
 export default function CreateCardItem({ filter }: filter) {
@@ -20,13 +20,13 @@ export default function CreateCardItem({ filter }: filter) {
   }, [filter]);
 
   const itemsFilter = useMemo(() => {
-    if (!filterDebouncado) return mockItems;
+    if (!filterDebouncado) return MOCK_ITEMS;
 
     const searchResults = miniSearch.search(filterDebouncado);
 
-    if (searchResults.length === 0) return mockItems;
+    if (searchResults.length === 0) return MOCK_ITEMS;
 
-    return searchResults.map(r => mockItems.find(item => item.id === r.id)!);
+    return searchResults.map(r => MOCK_ITEMS.find(item => item.id === r.id)!);
   }, [filterDebouncado, miniSearch]);
 
   return (

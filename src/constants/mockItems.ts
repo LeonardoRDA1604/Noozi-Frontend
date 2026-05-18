@@ -1,7 +1,7 @@
 import arrozRice from "@/assets/images/arrozRice.png";
-import type { CardItems } from "@/types/CardItems.ts";
+import type { CardItems } from "@/types/CardItems.types";
 
-export const mockItems: CardItems[] = [
+export const MOCK_ITEMS: CardItems[] = [
   {
     id: 1,
     nameItem: "Arroz Integral 5kg",

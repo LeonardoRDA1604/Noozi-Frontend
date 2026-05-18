@@ -3,7 +3,7 @@ import { ActionButton } from "@/components/Buttons/ActionButton/ActionButton";
 import { useState } from "react";
 import Searchbar from "@/components/Searchbar/Searchbar";
 
-import CreateCardItem from "@/components/Cards/ProductCard/ProductsCard";
+import CreateCardItem from "@/components/Cards/ProductCard/ProductCard";
 
 
 export default function Products() {
@@ -18,7 +18,6 @@ export default function Products() {
       
       <Searchbar currentText={currentText} setCurrentText={setCurrentText}/>
       <CreateCardItem filter={currentText}/>
-      <CreateCardItem />
 
       {/* Div dos botões de edição e delete */}
       <div className="gap-2 my-6 max-w-xs ">

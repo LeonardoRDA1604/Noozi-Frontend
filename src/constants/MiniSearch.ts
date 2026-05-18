@@ -1,5 +1,5 @@
 import MiniSearch from "minisearch";
-import { mockItems } from "./MackItems";
+import { MOCK_ITEMS } from "./mockItems";
 
 export const structureSearch = new MiniSearch({
       fields: [
@@ -23,4 +23,4 @@ export const structureSearch = new MiniSearch({
       }
     });
 
-structureSearch.addAll(mockItems);
+structureSearch.addAll(MOCK_ITEMS);

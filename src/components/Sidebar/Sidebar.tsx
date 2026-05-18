@@ -1,6 +1,6 @@
 import { X } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
-import { navItems } from "@/constants/navigation";
+import { NAV_ITEMS } from "@/constants/navigation";
 
 interface SidebarProps {
   isOpen: boolean;
@@ -47,7 +47,7 @@ export function Sidebar({ isOpen, onClose }: SidebarProps) {
         {/* Itens de navegação */}
         <nav className="p-3">
           <ul className="flex flex-col gap-1">
-            {navItems.map(({ label, href, icon: Icon }) => {
+            {NAV_ITEMS.map(({ label, href, icon: Icon }) => {
               const isActive = pathname === href;
 
               return (
