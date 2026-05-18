@@ -1,10 +1,13 @@
 import { Pencil, Trash2 } from "lucide-react";
 import { ActionButton } from "@/components/Buttons/ActionButton/ActionButton";
+import { useState } from "react";
+import Searchbar from "@/components/Searchbar/Searchbar";
 
 import CreateCardItem from "@/components/Cards/ProductCard/ProductsCard";
 
 
 export default function Products() {
+    const [ currentText, setCurrentText] = useState("");
   return (
     <>
       <div className="p-4">
@@ -13,6 +16,8 @@ export default function Products() {
         </h1>
       </div>
       
+      <Searchbar currentText={currentText} setCurrentText={setCurrentText}/>
+      <CreateCardItem filter={currentText}/>
       <CreateCardItem />
 
       {/* Div dos botões de edição e delete */}
