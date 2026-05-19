@@ -13,40 +13,48 @@ Obrigado pelo interesse em contribuir com o **Noozi**! Este é um sistema de ges
 
 - [1. Git Flow](#-git-flow)
   - [1.1. Fluxo de trabalho da equipe](#fluxo-de-trabalho-da-equipe)
-- [2. Regras do Projeto](#-regras-do-projeto)
-- [3. Estratégia de Branches](#-estratégia-de-branches)
-  - [3.1. Exemplos de criação de branches ](#exemplos-de-criação-de-branches)
-  - [3.2. Preparando o ambiente antes de criar sua branch](#preparando-o-ambiente-antes-de-criar-sua-branch)
-- [4. Padrão de Mensagens de Commit](#-padrão-de-mensagens-de-commit)
-  - [4.1. Exemplos de mensagens de commit ](#exemplos-de-mensagens-de-commit)
-- [5. Regras de Pull Request](#-regras-de-pull-request)
-  - [5.1. Checklist antes de abrir o PR](#-checklist-antes-de-abrir-o-pr)
-- [6. Critérios de Revisão](#-critérios-de-revisão)
-- [7. Quem Pode Aprovar](#-quem-pode-aprovar)
-- [8. Padrão de Código e Interface](#-padrão-de-código-e-interface)
-  - [8.1. ESLint e Formatação](#eslint-e-formatação)
-  - [8.2. Componentes Reutilizáveis](#componentes-reutilizáveis)
-  - [8.3. Ícones](#ícones)
-  - [8.4. Design System](#design-system)
-    - [8.4.1. Usando cores sem token (valores arbitrários)](#usando-cores-sem-token-valores-arbitrários)
-    - [8.4.2. Identidade Visual](#identidade-visual)
-    - [8.4.3. Tipografia](#tipografia)
-    - [8.4.4. Bordas](#bordas)
-    - [8.4.5. Sombras](#sombras)
-    - [8.4.6. Breakpoints e Responsividade](#breakpoints-e-responsividade)
-- [9. UX/UI e Acessibilidade](#-uxui-e-acessibilidade)
-  - [9.1. Elementos Interativos](#elementos-interativos)
-  - [9.2. HTML Semântico](#html-semântico)
-  - [9.3. Acessibilidade (a11y)](#acessibilidade-a11y)
-  - [9.4. Hierarquia Visual](#hierarquia-visual)
-  - [9.5. Feedback ao Usuário](#feedback-ao-usuário)
-  - [9.6. Consistência](#consistência)
-- [10. Nomenclatura de Arquivos e Pastas](#️-nomenclatura-de-arquivos-e-pastas)
-- [11. Acessibilidade](#-acessibilidade)
-- [12. Versionamento](#️-versionamento)
-- [13. Reportando Bugs](#-reportando-bugs)
-- [14. Comunicação](#-comunicação)
-- [15. Precisa de Ajuda?](#-precisa-de-ajuda)
+- [2. Proteção de Branches](#-proteção-de-branches)
+  - [2.1. Regras aplicadas nas branches protegidas](#regras-aplicadas-nas-branches-protegidas)
+  - [2.2. Conversas de revisão (Resolve conversation)](#-conversas-de-revisão-resolve-conversation)
+- [3. Regras do Projeto](#-regras-do-projeto)
+- [4. Estratégia de Branches](#-estratégia-de-branches)
+  - [4.1. Exemplos de criação de branches ](#exemplos-de-criação-de-branches)
+  - [4.2. Preparando o ambiente antes de criar sua branch](#preparando-o-ambiente-antes-de-criar-sua-branch)
+- [5. Padrão de Mensagens de Commit](#-padrão-de-mensagens-de-commit)
+  - [5.1. Exemplos de mensagens de commit ](#exemplos-de-mensagens-de-commit)
+- [6. Regras de Pull Request](#-regras-de-pull-request)
+  - [6.1. Checklist antes de abrir o PR](#-checklist-antes-de-abrir-o-pr)
+- [7. Critérios de Revisão](#-critérios-de-revisão)
+- [8. Quem Pode Aprovar](#-quem-pode-aprovar)
+- [9. Padrão de Código e Interface](#-padrão-de-código-e-interface)
+  - [9.1. ESLint e Formatação](#eslint-e-formatação)
+  - [9.2. Componentes Reutilizáveis](#componentes-reutilizáveis)
+  - [9.3. Ícones](#ícones)
+  - [9.4. shadcn/ui](#shadcnui)
+    - [9.4.1. Instalando componentes](#instalando-componentes)
+    - [9.4.2. Estrutura dos componentes](#estrutura-dos-componentes)
+    - [9.4.3. Estilização e customização](#estilização-e-customização)
+    - [9.4.4. Boas práticas](#boas-práticas)
+  - [9.5. Design System](#design-system)
+    - [9.5.1. Usando cores sem token (valores arbitrários)](#usando-cores-sem-token-valores-arbitrários)
+    - [9.5.2. Identidade Visual](#identidade-visual)
+    - [9.5.3. Tipografia](#tipografia)
+    - [9.5.4. Bordas](#bordas)
+    - [9.5.5. Sombras](#sombras)
+    - [9.5.6. Breakpoints e Responsividade](#breakpoints-e-responsividade)
+- [10. UX/UI e Acessibilidade](#-uxui-e-acessibilidade)
+  - [10.1. Elementos Interativos](#elementos-interativos)
+  - [10.2. HTML Semântico](#html-semântico)
+  - [10.3. Acessibilidade (a11y)](#acessibilidade-a11y)
+  - [10.4. Hierarquia Visual](#hierarquia-visual)
+  - [10.5. Feedback ao Usuário](#feedback-ao-usuário)
+  - [10.6. Consistência](#consistência)
+- [11. Nomenclatura de Arquivos e Pastas](#️-nomenclatura-de-arquivos-e-pastas)
+- [12. Acessibilidade](#-acessibilidade)
+- [13. Versionamento](#️-versionamento)
+- [14. Reportando Bugs](#-reportando-bugs)
+- [15. Comunicação](#-comunicação)
+- [16. Precisa de Ajuda?](#-precisa-de-ajuda)
 
 ---
 
@@ -77,6 +85,37 @@ feature/* (sua branch)
 | Deletar branches | ⚠️ Somente o Tech Leader |
 | Abrir Pull Request | ✅ Todos os contribuidores |
 | Aprovar Pull Request | ✅ Tech Leader e revisores designados |
+
+---
+
+## 🔒 Proteção de Branches
+
+As branches `main` e `dev` possuem regras de proteção configuradas no GitHub para garantir a estabilidade, qualidade e segurança do projeto.
+
+### Regras aplicadas nas branches protegidas
+
+- Pull Request obrigatório para merge
+- Aprovação obrigatória antes do merge
+- Comentários de revisão devem ser resolvidos antes da aprovação final
+- Force push bloqueado
+- Deleção das branches protegidas bloqueada
+
+### 💬 Conversas de revisão (`Resolve conversation`)
+
+Durante a revisão do Pull Request, o Tech Leader ou revisores podem abrir comentários solicitando ajustes no código.
+
+Enquanto existir alguma conversa pendente:
+- o Pull Request não poderá ser mergeado
+- todas as solicitações devem ser resolvidas antes da aprovação final
+
+Após corrigir o problema:
+- marque a conversa como resolvida (`Resolve conversation`)
+
+Isso ajuda a manter:
+- revisões organizadas
+- histórico limpo
+- feedback aplicado corretamente
+- maior controle de qualidade do projeto
 
 ---
 
@@ -231,6 +270,7 @@ Antes de submeter seu Pull Request, confirme que:
 
 - [ ] O código compila e roda sem erros (`npm run dev`)
 - [ ] O lint passa sem erros (`npm run lint`)
+- [ ] O projeto builda sem erros (`npm run build`)
 - [ ] Você testou manualmente o fluxo que alterou
 - [ ] Não há `console.log`, `debugger` ou código comentado desnecessário
 - [ ] Commits seguem o padrão **Conventional Commits**
@@ -311,6 +351,212 @@ import { Package, AlertCircle, Search } from 'lucide-react'
 ```tsx
 import * as Icons from 'lucide-react'
 ```
+
+---
+
+### shadcn/ui
+
+O Noozi utiliza o **shadcn/ui** como base para componentes reutilizáveis da interface.
+
+Diferente de bibliotecas tradicionais, o shadcn/ui não instala componentes prontos via pacote fechado.  
+Os componentes são adicionados diretamente ao projeto como código-fonte, permitindo total controle sobre:
+- estilização
+- comportamento
+- acessibilidade
+- responsividade
+- integração com o Design System
+
+> ℹ️ Todos os componentes adicionados ficam dentro de `src/components/ui/`.
+
+---
+
+#### Instalando componentes
+
+Para adicionar um componente do shadcn/ui ao projeto:
+
+```bash
+npx shadcn@latest add button
+```
+
+Exemplo:
+```bash
+npx shadcn@latest add dialog
+npx shadcn@latest add sheet
+npx shadcn@latest add dropdown-menu
+npx shadcn@latest add table
+npx shadcn@latest add form
+```
+
+O comando:
+- baixa o componente
+- adiciona os arquivos necessários
+- instala dependências automaticamente
+- integra o componente ao Tailwind do projeto
+
+---
+
+#### Estrutura dos componentes
+
+Os componentes instalados normalmente ficam em:
+
+```text
+src/
+  components/
+    ui/
+      button.tsx
+      dialog.tsx
+      table.tsx
+```
+
+Esses componentes podem ser:
+- modificados livremente
+- estilizados conforme o Design System
+- reutilizados em qualquer tela do projeto
+
+---
+
+#### Utilizando componentes
+
+Exemplo com `Button`:
+
+```tsx
+import { Button } from "@/components/ui/button"
+
+export function Example() {
+  return (
+    <Button>
+      Salvar produto
+    </Button>
+  )
+}
+```
+
+Exemplo com variantes:
+
+```tsx
+<Button variant="outline">
+  Cancelar
+</Button>
+
+<Button variant="destructive">
+  Excluir
+</Button>
+```
+
+---
+
+#### Estilização e customização
+
+Os componentes do shadcn/ui utilizam:
+- Tailwind CSS
+- `className`
+- `cva` (class-variance-authority)
+- variantes reutilizáveis
+
+Exemplo:
+
+```tsx
+<Button className="bg-noozi-bright_blue hover:bg-noozi-sky_blue">
+  Continuar
+</Button>
+```
+
+> ⚠️ Sempre utilize os tokens do Design System (`noozi-*` e `status-*`) ao customizar componentes.
+
+---
+
+#### Melhorando componentes
+
+Como os componentes fazem parte do código do projeto, é permitido:
+- adicionar variantes
+- criar novos tamanhos
+- melhorar acessibilidade
+- adaptar responsividade
+- extrair lógica reutilizável
+
+Exemplo de nova variante:
+
+```tsx
+variant: {
+  noozi: "bg-noozi-bright_blue text-white hover:bg-noozi-sky_blue"
+}
+```
+
+Uso:
+```tsx
+<Button variant="noozi">
+  Entrar
+</Button>
+```
+
+---
+
+#### Componentes recomendados para o projeto
+
+Os componentes abaixo são altamente recomendados para o Noozi:
+
+| Componente | Uso |
+|------------|-----|
+| `button` | Botões |
+| `input` | Inputs |
+| `form` | Formulários |
+| `dialog` | Modais |
+| `sheet` | Sidebar mobile |
+| `dropdown-menu` | Menus |
+| `table` | Tabelas |
+| `card` | Cards |
+| `tabs` | Navegação interna |
+| `toast` | Feedback ao usuário |
+| `tooltip` | Dicas rápidas |
+| `skeleton` | Loading states |
+
+---
+
+#### Boas práticas
+
+- Prefira reutilizar componentes existentes antes de criar novos
+- Não duplique componentes similares
+- Centralize variantes reutilizáveis
+- Mantenha consistência visual com o Design System
+- Evite estilizações inline excessivas
+- Sempre utilize acessibilidade (`aria-*`, labels, foco via teclado)
+- Componentes devem ser responsivos
+- Componentes complexos devem possuir tipagem explícita via TypeScript
+
+---
+
+#### Adicionando componentes da comunidade
+
+Além dos componentes oficiais, é possível utilizar:
+- blocos prontos da comunidade
+- templates
+- dashboards
+- tabelas avançadas
+- sidebars
+- command menus
+
+Recomendado:
+- https://ui.shadcn.com/
+- https://www.shadcn.io/
+- https://www.shadcnblocks.com/
+
+> ⚠️ Antes de adicionar qualquer componente externo:
+> - valide acessibilidade
+> - valide responsividade
+> - adapte ao Design System do Noozi
+> - remova cores padrão que não pertençam à identidade visual do projeto
+
+---
+
+#### Importante
+
+O fato do componente vir do shadcn/ui NÃO significa que ele está aprovado automaticamente para produção.
+
+Todo componente:
+- deve seguir os padrões do projeto
+- deve respeitar o [Design System](#design-system)
+- deve ser revisado em Pull Request
+- deve manter consistência visual e arquitetural
 
 ---
 
