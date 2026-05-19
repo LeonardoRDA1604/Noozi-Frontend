@@ -19,6 +19,7 @@ Formato baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.0.0/), 
 - [3. Versões](#️-versões)
     - [[1.0.0] - 2026-05-13](#100---2026-05-13)
     - [[1.1.0] - 2026-05-13](#110---2026-05-13)
+    - [[1.2.0] - 2026-05-18](#120---2026-05-18)
 
 ---
 
@@ -157,8 +158,106 @@ Formato baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.0.0/), 
 
 ---
 
+### [1.2.0] - 2026-05-18
+
+<details>
+  <summary style="background-color: white; color: black"><b>ℹ️ Clique para expandir o log de alterações da versão [1.2.0]</b></summary>
+  <br />
+
+#### ✨ Adicionado
+- Estrutura inicial completa do módulo de produtos
+- Página de listagem de produtos (`/products`)
+- Componente reutilizável `ProductCard`
+- Componente `Searchbar` com integração ao fluxo de busca
+- Estrutura de filtros de produtos
+- Componente reutilizável `ActionButton` com variantes:
+  - `primary`
+  - `submit`
+  - `edit`
+  - `delete`
+- Integração da Home com métricas dinâmicas de produtos
+- Hooks customizados:
+  - `useProducts`
+  - `useProductMetrics`
+- Camada de serviços para produtos e transações:
+  - `productService`
+  - `transactionRecordService`
+- Configuração centralizada do Axios em `lib/api.ts`
+- Estrutura de interceptors preparada para autenticação futura
+- Integração com `json-server`
+- Mock data completa para:
+  - produtos
+  - estoque baixo
+  - vencimento próximo
+  - produtos expirados
+  - campos opcionais
+- Configuração de `VITE_API_URL`
+- Estrutura inicial de busca utilizando `MiniSearch`
+- Guidelines de uso do `shadcn/ui` no `CONTRIBUTING.md`
+- Seção de proteção de branches na documentação
+- Melhorias no template de Pull Request
+- Atualização do template de Technical Debt
+
+---
+
+#### 🎨 Melhorado
+- Layout e hierarquia visual do `ProductCard`
+- Estrutura visual e responsividade da `Searchbar`
+- Organização das responsabilidades entre páginas
+- Consistência visual entre componentes
+- Fluxo de navegação entre telas de produtos
+- Estrutura geral de componentes reutilizáveis
+- Organização do projeto e padronização arquitetural
+- Conteúdo do `README.md`
+- Índice e status do projeto no README
+- Checklist do Pull Request
+- Estrutura do template de Pull Request
+
+---
+
+#### 🔧 Alterado
+- Refatorada a estrutura de nomenclaturas do projeto
+- Padronização de nomes de arquivos, imports e tipos
+- Padronização de nomenclaturas do banco/mock para inglês:
+  - `id_produto` → `id_product`
+  - `update_at` → `updated_at`
+- Simplificação das propriedades de descrição de produtos
+- Separação de responsabilidades entre Home e Products
+- Reorganização de botões de ação do módulo de produtos
+- Refatoração da estrutura de filtros e busca
+- Atualização da aplicação para `pt-BR`
+
+---
+
+#### 🧹 Removido
+- Arquivos obsoletos e imports não utilizados
+- Arquivo `api.ts` residual não utilizado
+- Estruturas duplicadas na documentação
+
+---
+
+#### 🐛 Corrigido
+- Correções de compatibilidade entre branches
+- Ajustes de layout e estilos da página de produtos
+- Ajustes de estrutura e tipagem dos componentes
+- Correções de imports e organização interna do projeto
+
+---
+
+#### ⚠️ Débito Técnico
+- Warning conhecido em `useProducts` relacionado à regra:
+  - `react-hooks/set-state-in`
+
+O problema não impacta o funcionamento atual da aplicação e será tratado em uma correção futura.
+
+---
+
+</details>
+
+---
+
 <!-- 
-### [1.2.0] - 2026-05-01
+### [1.3.0] - 2026-05-01
 
 
 
@@ -182,10 +281,8 @@ Formato baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.0.0/), 
 
 ---
 
-</details> --> 
+</details>
 
+---
 
-
-
-
-
+--> 
