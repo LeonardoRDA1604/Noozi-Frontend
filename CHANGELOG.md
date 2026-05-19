@@ -197,6 +197,21 @@ Formato baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.0.0/), 
 - Seção de proteção de branches na documentação
 - Melhorias no template de Pull Request
 - Atualização do template de Technical Debt
+- Estrutura inicial do formulário de cadastro de produtos (`/products/new`)
+- Upload de imagem com interface drag & drop
+- Campos de inventário:
+  - validade
+  - lote
+  - SKU
+- Toggle de status ativo/inativo com animação
+- Sistema de contador de caracteres para inputs do formulário
+- Feedback visual de limite de caracteres:
+  - amarelo em 80%
+  - vermelho em 90%
+- Estrutura de validação e máscara para data (`DD/MM/YYYY`)
+- Máscara monetária BRL com digitação invertida
+- Interface `NewProductForm` para tipagem do formulário
+- Constante `CHAR_LIMITS` para centralização dos limites de campos
 
 ---
 
@@ -212,6 +227,12 @@ Formato baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.0.0/), 
 - Índice e status do projeto no README
 - Checklist do Pull Request
 - Estrutura do template de Pull Request
+- Responsividade do formulário de cadastro de produtos
+- Espaçamento vertical dos campos de inventário
+- UX dos campos de data e preço
+- Usabilidade do toggle de status
+- Organização semântica do grid do formulário
+- Consistência visual utilizando tokens oficiais do Design System Noozi
 
 ---
 
@@ -226,6 +247,10 @@ Formato baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.0.0/), 
 - Reorganização de botões de ação do módulo de produtos
 - Refatoração da estrutura de filtros e busca
 - Atualização da aplicação para `pt-BR`
+- Extração de estilos responsivos para `index.css`
+- Substituição parcial de cores arbitrárias por tokens oficiais do Tailwind Design System
+- Reorganização de estados do formulário de cadastro
+- Padronização de IDs dos inputs e botões
 
 ---
 
@@ -241,6 +266,9 @@ Formato baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.0.0/), 
 - Ajustes de layout e estilos da página de produtos
 - Ajustes de estrutura e tipagem dos componentes
 - Correções de imports e organização interna do projeto
+- Correções de alinhamento entre campos do formulário
+- Correções de comportamento do toggle de status
+- Correções de validação e formatação de inputs de data
 
 ---
 
@@ -248,13 +276,16 @@ Formato baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.0.0/), 
 - Warning conhecido em `useProducts` relacionado à regra:
   - `react-hooks/set-state-in`
 
+- Máscara monetária do campo de preço ainda possui melhorias futuras planejadas:
+  - locale formatting adicional
+  - refinamento de edge cases
+  - melhorias de UX do input monetário
+
 O problema não impacta o funcionamento atual da aplicação e será tratado em uma correção futura.
 
 ---
 
 </details>
-
----
 
 <!-- 
 ### [1.3.0] - 2026-05-01
