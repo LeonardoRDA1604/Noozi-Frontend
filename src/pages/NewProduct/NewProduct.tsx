@@ -8,9 +8,8 @@ export default function Form() {
   const [quantity, setQuantity] = useState("");
   const [unit, setUnit] = useState("");
   const [price, setPrice] = useState("R$ 0,00");
-  const [priceValue, setPriceValue] = useState(0)
-  const [date, setDate] = useState("")
-  const [typeData, setTypeData] = useState("text")
+  const [priceValue, setPriceValue] = useState(0);
+  const [date, setDate] = useState("");
   const [batch, setBatch] = useState("");
   const [sku, setSku] = useState("");
   const [status, setStatus] = useState(true);
@@ -103,22 +102,23 @@ const handleDateChange = (e: React.ChangeEvent<HTMLInputElement>) => {
   let value = e.target.value.replace(/\D/g, ""); // remove non-digits
   if (value.length > 8) value = value.slice(0, 8);
 
-  // Insert slashes
+  // Insere barras
   if (value.length >= 3 && value.length < 5) {
     value = value.slice(0, 2) + "/" + value.slice(2);
   } else if (value.length >= 5) {
     value = value.slice(0, 2) + "/" + value.slice(2, 4) + "/" + value.slice(4, 8);
   }
 
-  // Basic day/month validation while typing
-  let parts = value.split("/");
+  // Validação básica de dia e mês quando está digitando
+  const parts = value.split("/");
   if (parts[0] && (parseInt(parts[0]) < 1 || parseInt(parts[0]) > 31)) {
-    // allow partial, but warn? we'll just cap day at 31
+    // Capando o dia para 31
     if (parts[0].length === 2 && parseInt(parts[0]) > 31) {
       parts[0] = "31";
       value = parts.join("/");
     }
   }
+  // Capando o mês para 12
   if (parts[1] && parts[1].length === 2 && parseInt(parts[1]) > 12) {
     parts[1] = "12";
     value = parts.join("/");
@@ -271,10 +271,6 @@ const handleDateChange = (e: React.ChangeEvent<HTMLInputElement>) => {
                   type="text"
                   placeholder="DD/MM/AAAA"
                   value={date}
-                  // Quando clica ou interage, vira um input de data
-                  onFocus={() => setTypeData('date')}
-                  // Quando perde o foco e está vazio, volta a ser texto para mostrar o placeholder
-                  onBlur={() => !date && setTypeData('text')}
                   onChange={handleDateChange}
                 />
               </div>
