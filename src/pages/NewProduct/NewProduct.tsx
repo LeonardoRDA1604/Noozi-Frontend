@@ -97,6 +97,40 @@ export default function Form() {
       setPrice(formatPrice(newValue));
     }
   };
+
+  // * MÁSCARA - INPUT DATA DE VALIDADE
+const handleDateChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  let value = e.target.value.replace(/\D/g, ""); // remove non-digits
+  if (value.length > 8) value = value.slice(0, 8);
+
+  // Insert slashes
+  if (value.length >= 3 && value.length < 5) {
+    value = value.slice(0, 2) + "/" + value.slice(2);
+  } else if (value.length >= 5) {
+    value = value.slice(0, 2) + "/" + value.slice(2, 4) + "/" + value.slice(4, 8);
+  }
+
+  // Basic day/month validation while typing
+  let parts = value.split("/");
+  if (parts[0] && (parseInt(parts[0]) < 1 || parseInt(parts[0]) > 31)) {
+    // allow partial, but warn? we'll just cap day at 31
+    if (parts[0].length === 2 && parseInt(parts[0]) > 31) {
+      parts[0] = "31";
+      value = parts.join("/");
+    }
+  }
+  if (parts[1] && parts[1].length === 2 && parseInt(parts[1]) > 12) {
+    parts[1] = "12";
+    value = parts.join("/");
+  }
+
+  setDate(value);
+}
+  
+
+// * ESTRUTURA DA PÁGINA
+
+
   return (
     <div
       id="register"
@@ -234,14 +268,14 @@ export default function Form() {
                 <input
                   className="w-full bg-noozi-surface border border-solid border-noozi-gray-300 rounded-lg px-3 py-2 mt-2"
                   id="inputDate"
-                  type={typeData}
+                  type="text"
                   placeholder="DD/MM/AAAA"
                   value={date}
                   // Quando clica ou interage, vira um input de data
                   onFocus={() => setTypeData('date')}
                   // Quando perde o foco e está vazio, volta a ser texto para mostrar o placeholder
                   onBlur={() => !date && setTypeData('text')}
-                  onChange={(e) => setDate(e.target.value)}
+                  onChange={handleDateChange}
                 />
               </div>
 
