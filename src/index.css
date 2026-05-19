@@ -16,4 +16,151 @@
   *, *::before, *::after {
     box-sizing: border-box;
   }
+
+  
+ /* RESPONSIVIDADE DO FORMULÁRIO(NEWPRODUCT.TSX) */
+
+
+@layer components {
+  
+  /* Grid principal do formulário */
+  .product-form-grid {
+    @apply grid gap-4 mx-auto max-w-7xl;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  /* Tablet: 768px+ */
+  @media (min-width: 768px) {
+    .product-form-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  /* Desktop: 1024px+ */
+  @media (min-width: 1024px) {
+    .product-form-grid {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+  }
+
+  /* Campos que ocupam toda a largura (Nome, Marca, Descrição) */
+  .form-field-full {
+    grid-column: span 2 / span 2;
+  }
+
+  @media (min-width: 768px) {
+    .form-field-full {
+      grid-column: span 2 / span 2;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .form-field-full {
+      grid-column: span 4 / span 4;
+    }
+  }
+
+  /* Campos de 1 coluna (Categoria, Quantidade, Unidade, Preço) */
+  .form-field-single {
+    grid-column: span 1 / span 1;
+  }
+
+  /* Grid aninhado (Validade/Lote/SKU + Upload) */
+  .form-nested-grid {
+    @apply grid gap-4;
+    grid-column: 1 / -1; /* col-span-full */
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  /* Coluna esquerda - Validade, Lote, SKU */
+  .form-inventory-fields {
+    @apply grid gap-4;
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+  }
+
+
+  /* TOGGLE BUTTON */
+  
+  /* TODO COLOCAR PRA COMPONENTS DEPOIS*/
+
+
+    .toggle-switch {
+    @apply flex items-center gap-3 cursor-pointer;
+    user-select: none;
+  }
+
+  /* Esconde o checkbox real */
+  .toggle-switch input[type="checkbox"] {
+    @apply hidden;
+  }
+
+  /* Container do slider (fundo do toggle) */
+  .toggle-slider {
+    position: relative;
+    display: inline-block;
+    width: 80px;
+    height: 38px;
+    background-color: #cbd5e1; /* Cinza quando inativo */
+    border-radius: 34px;
+    transition: background-color 0.3s ease;
+  }
+
+  /* Bolinha que desliza */
+  .toggle-slider::before {
+    content: "";
+    position: absolute;
+    height: 32px;
+    width: 32px;
+    left: 3px;
+    bottom: 3px;
+    background-color: white;
+    border-radius: 50%;
+    transition: transform 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  }
+
+  /* Estado ATIVO (checked) - Fundo azul */
+  .toggle-switch input:checked + .toggle-slider {
+    @apply bg-noozi-bright_blue; 
+  }
+
+  /* Estado ATIVO (checked) - Bolinha desliza para direita */
+  .toggle-switch input:checked + .toggle-slider::before {
+    transform: translateX(42px);
+  }
+
+  /* Efeito hover no fundo */
+  .toggle-switch:hover .toggle-slider {
+    opacity: 0.9;
+  }
+
+  /* Label do texto "Ativo"/"Inativo" */
+  .toggle-label {
+    @apply font-medium text-noozi-gray-700;
+    transition: color 0.2s ease;
+  }
+
+  /* Quando ativo, texto fica azul */
+  .toggle-switch input:checked ~ .toggle-label {
+    @apply text-noozi-bright_blue;
+  }
+
+  /* Texto muda dinamicamente */
+  .toggle-switch input:checked ~ .toggle-label::before {
+    content: "Ativo";
+  }
+
+  .toggle-switch input:not(:checked) ~ .toggle-label::before {
+    content: "Inativo";
+  }
+
+  /* Remove o texto padrão do span */
+  .toggle-label {
+    font-size: 0; /* Esconde texto original */
+  }
+
+  .toggle-label::before {
+    font-size: 1rem; /* Mostra apenas o ::before */
+  }
+}
 }
