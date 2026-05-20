@@ -2,12 +2,17 @@ import { Pencil, Trash2 } from "lucide-react";
 import { ActionButton } from "@/components/Buttons/ActionButton/ActionButton";
 import { useState } from "react";
 import Searchbar from "@/components/Searchbar/Searchbar";
-
+import { useProducts } from "@/hooks/useProducts";
 import CreateCardItem from "@/components/Cards/ProductCard/ProductCard";
 
 
 export default function Products() {
+    const { products, isLoading, error, refetch } = useProducts();
     const [ currentText, setCurrentText] = useState("");
+
+    if (isLoading) return <p>Carregando...</p>;
+    if (error) return <p>{error} <button onClick={refetch}>Tentar novamente</button></p>
+
   return (
     <>
       <div className="p-4">
@@ -17,7 +22,7 @@ export default function Products() {
       </div>
       
       <Searchbar currentText={currentText} setCurrentText={setCurrentText}/>
-      <CreateCardItem filter={currentText}/>
+      <CreateCardItem products={products} filter={currentText}/>
 
       {/* Div dos botões de edição e delete */}
       <div className="gap-2 my-6 max-w-xs ">
