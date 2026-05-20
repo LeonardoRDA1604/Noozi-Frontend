@@ -1,10 +1,8 @@
 import { useMemo, useState, useEffect } from 'react';
-//import type { CardItems } from "@/types/CardItems.types";
 import type { filter } from '@/types/FilterSearchbar.types';
 import { structureSearch } from '@/constants/MiniSearch';
 import type { Product } from '@/types/Product.types';
 import arrozRice from '../../../assets/images/arrozRice.png'
-//import { MOCK_ITEMS } from '@/constants/mockItems';
 
 
 export default function CreateCardItem({ filter, products }: filter) {
@@ -28,7 +26,7 @@ export default function CreateCardItem({ filter, products }: filter) {
     if (searchResults.length === 0) return products;
 
     return searchResults
-      .map(r => products.find(item => item.id_product === r.id))
+      .map(r => products.find(item => item.id_product === r.id_product))
       .filter(Boolean) as Product[];
   }, [filterDebouncado, miniSearch, products]);
 
