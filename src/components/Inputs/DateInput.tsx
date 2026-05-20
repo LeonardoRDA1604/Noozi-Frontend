@@ -1,9 +1,4 @@
-interface DateInputProps {
-  label: string;
-  id: string;
-  value: string;
-  onChange: (value: string) => void;
-}
+import type { DateInputProps } from "@/types/InputTypes/DateInput.types";
 
 export function DateInput({ label, id, value, onChange }: DateInputProps) {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {

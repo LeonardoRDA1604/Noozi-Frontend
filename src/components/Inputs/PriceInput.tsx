@@ -1,11 +1,6 @@
 import { useState } from 'react';
 
-interface PriceInputProps {
-  label: string;
-  id: string;
-  value: number; // Valor em centavos
-  onChange: (valueInCents: number) => void;
-}
+import type { PriceInputProps } from '@/types/InputTypes/PriceInput.types'; 
 
 export function PriceInput({ label, id, value, onChange }: PriceInputProps) {
   const formatPrice = (valueInCents: number): string => {

@@ -1,9 +1,4 @@
-interface ToggleSwitchProps {
-  label: string;
-  checked: boolean;
-  onChange: (checked: boolean) => void;
-  activeLabel?: string;
-}
+import type { ToggleSwitchProps } from "@/types/InputTypes/ToggleSwitch.types"; 
 
 export function ToggleSwitch({
   label,

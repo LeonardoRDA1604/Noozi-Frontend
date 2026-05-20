@@ -1,11 +1,4 @@
-interface NumberInputProps {
-  label: string;
-  id: string;
-  value: string;
-  onChange: (value: string) => void;
-  min?: string;
-  placeholder?: string;
-}
+import type { NumberInputProps } from "@/types/InputTypes/NumberInput.types"; 
 
 export function NumberInput({
   label,
