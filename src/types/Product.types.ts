@@ -8,8 +8,8 @@ export interface Product {
     item_price: number;
     stock_quantity: number;
     unit_measure?: string;
-    low_stock_level?: number;
-    over_stock_level?: number;
+    min_level?: number;
+    max_level?: number;
     batch_code?: string;
     expiration_date?: string;
     is_active: boolean;
