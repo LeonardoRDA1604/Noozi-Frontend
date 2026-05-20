@@ -31,13 +31,19 @@ export const productService = {
   remove: async (id: string): Promise<void> => {
     await api.delete(`/products/${id}`);
   },
-
-  // Retorna produtos com estoque abaixo ou igual ao nível mínimo
-  // ?? 0 — se min_level não estiver definido, considera 0 como limite
-  getLowStock: async (): Promise<Product[]> => {
-    const { data } = await api.get("/products");
-    return data.filter((p: Product) => p.stock_quantity <= (p.min_level ?? 0));
-  },
+  
+    // Retorna produtos com estoque abaixo ou igual ao nível mínimo
+    // ?? 0 — se low_stock_level não estiver definido, considera 0 como limite
+    getLowStock: async (): Promise<Product[]> => {
+      const { data } = await api.get("/products");
+      return data.filter((p: Product) => p.stock_quantity <= (p.low_stock_level ?? 0));
+    },
+  
+    // Retorna produtos com estoque em excesso ou igual ao nível máximo
+    getOverStock: async (): Promise<Product[]> => {
+      const { data } = await api.get("/products");
+      return data.filter((p: Product) => p.stock_quantity >= (p.over_stock_level));
+    },
   
   // Retorna produtos que vencem dentro do número de dias informado (padrão: 30)
   getExpiringSoon: async (days = 30): Promise<Product[]> => {

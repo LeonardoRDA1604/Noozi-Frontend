@@ -6,13 +6,14 @@ import {
   TriangleAlert,
   CirclePlus,
   Layers,
+  Siren
 } from "lucide-react";
 import { MetricsCard } from "@/components/Cards/Metrics/MetricsCard/MetricsCard";
 import { ActionButton } from "@/components/Buttons/ActionButton/ActionButton";
 import { useProductMetrics } from "@/hooks/useProductMetrics";
 
 // Restringe os valores possíveis do modal — evita strings arbitrárias
-type ModalType = "estoque-baixo" | "vencimento-proximo" | "expirados" | null;
+type ModalType = "estoque-baixo" | "estoque-excessivo" | "vencimento-proximo" | "expirados" | null;
 
 export default function Home() {
   const [activeModal, setActiveModal] = useState<ModalType>(null); // null = nenhum modal aberto
@@ -35,22 +36,14 @@ export default function Home() {
           {/* Navega para listagem completa de produtos */}
           <MetricsCard
             icon={Package}
-            title="Produtos cadastrados"
+            title="Total de cadastros"
             value={isLoading ? "..." : metrics.total}
             href="/products"
-          />
-          {/*Abre Modal com produtos em estoque baixo */}
-          <MetricsCard
-            icon={TriangleAlert}
-            title="Produtos em estoque baixo"
-            value={isLoading ? "..." : metrics.lowStock}
-            iconColor="yellow"
-            onTitleClick={() => setActiveModal("estoque-baixo")}
           />
           {/*Abre Modal com produtos próximos do vencimento */}
           <MetricsCard
             icon={CalendarClock}
-            title="Produtos próximos do vencimento"
+            title="Próximos do vencimento"
             value={isLoading ? "..." : metrics.expiringSoon}
             iconColor="yellow"
             onTitleClick={() => setActiveModal("vencimento-proximo")}
@@ -58,10 +51,26 @@ export default function Home() {
           {/*Abre Modal com produtos vencidos */}
           <MetricsCard
             icon={Ban}
-            title="Produtos vencidos"
+            title="Vencidos"
             value={isLoading ? "..." : metrics.expired}
             iconColor="red"
             onTitleClick={() => setActiveModal("expirados")}
+          />
+          {/*Abre Modal com produtos em estoque baixo */}
+          <MetricsCard
+            icon={Siren}
+            title="Estoque baixo"
+            value={isLoading ? "..." : metrics.lowStock}
+            iconColor="yellow"
+            onTitleClick={() => setActiveModal("estoque-baixo")}
+          />
+          {/*Abre Modal com produtos em estoque excessivo */}
+          <MetricsCard
+            icon={TriangleAlert}
+            title="Estoque em excesso"
+            value={isLoading ? "..." : metrics.overStock}
+            iconColor="yellow"
+            onTitleClick={() => setActiveModal("estoque-excessivo")}
           />
         </div>
 
@@ -92,3 +101,7 @@ export default function Home() {
     </>
   );
 }
+
+
+// indicador de produtos ativos
+// indicador de produtos inativos

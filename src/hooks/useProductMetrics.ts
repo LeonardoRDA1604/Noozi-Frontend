@@ -5,13 +5,14 @@ import type { Product } from "@/types/Product.types";
 interface ProductMetrics {
   total: number;
   lowStock: number;
+  overStock: number;
   expiringSoon: number;
   expired: number;
 }
 
 export function useProductMetrics() {
   const [metrics, setMetrics] = useState<ProductMetrics>({
-    total: 0, lowStock: 0, expiringSoon: 0, expired: 0,
+    total: 0, lowStock: 0, overStock: 0, expiringSoon: 0, expired: 0,
   });
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -21,9 +22,10 @@ export function useProductMetrics() {
       try {
         setIsLoading(true);
         // Dispara as 4 requisições em paralelo — mais rápido que sequencial
-        const [all, lowStock, expiringSoon, expired] = await Promise.all([
+        const [all, lowStock, overStock, expiringSoon, expired] = await Promise.all([
           productService.getAll(),
           productService.getLowStock(),
+          productService.getOverStock(),
           productService.getExpiringSoon(),
           productService.getExpired(),
         ]);
@@ -31,6 +33,7 @@ export function useProductMetrics() {
         setMetrics({
           total: all.length,
           lowStock: lowStock.length,
+          overStock: overStock.length,
           expiringSoon: expiringSoon.length,
           expired: expired.length,
         });
