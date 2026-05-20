@@ -1,26 +1,26 @@
 import MiniSearch from "minisearch";
+import { MOCK_ITEMS } from "./mockItems";
 
 export const structureSearch = new MiniSearch({
-      idField: 'id_product',
       fields: [
-        'id_product',
-        'sku',
-        'name',
-        'category',
-        'brand',
+        'id',
+        'nameItem',
+        'expirationDate',
+        'itemValue',
+        'itemQuantity'
     ],
       storeFields: [
-        'id_product',
-        'sku',
-        'name',
-        'category',
-        'brand',
-        'item_price',
-        'stock_quantity',
-        'expiration_date'
+        'id',
+        'nameItem',
+        'imageItem',
+        'expirationDate',
+        'itemValue',
+        'itemQuantity'
     ],
       searchOptions: {
         prefix: true,
         fuzzy: 0.3,
       }
     });
+
+structureSearch.addAll(MOCK_ITEMS);
