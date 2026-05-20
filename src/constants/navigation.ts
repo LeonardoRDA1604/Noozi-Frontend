@@ -1,7 +1,7 @@
 import { House, List, CirclePlus, LayoutDashboard, CircleUserRound } from "lucide-react";
 import type { NavItem } from "@/types/Navigation.types";
 
-export const navItems: NavItem[] = [
+export const NAV_ITEMS: NavItem[] = [
   { label: "Início",      href: "/",                icon: House            },
   { label: "Produtos",    href: "/products",        icon: List             },
   { label: "Cadastrar",   href: "/products/new",    icon: CirclePlus       },

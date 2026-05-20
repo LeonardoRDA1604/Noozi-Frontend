@@ -1,5 +1,5 @@
 import { Link, useLocation } from "react-router-dom";
-import { navItems } from "@/constants/navigation";
+import { NAV_ITEMS } from "@/constants/navigation";
 
 export function Footer() {
   const { pathname } = useLocation();
@@ -9,7 +9,7 @@ export function Footer() {
     <footer className="fixed bottom-0 left-0 right-0 z-50 bg-white border-t border-noozi-border lg:hidden">
       <nav aria-label="Navegação principal">
         <ul className="flex items-center justify-around h-16 px-2">
-          {navItems.map(({ label, href, icon: Icon }) => {
+          {NAV_ITEMS.map(({ label, href, icon: Icon }) => {
             const isActive = pathname === href;
 
             return (

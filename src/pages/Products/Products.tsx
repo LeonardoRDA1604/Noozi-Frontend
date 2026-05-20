@@ -1,11 +1,12 @@
 import { Pencil, Trash2 } from "lucide-react";
 import { ActionButton } from "@/components/Buttons/ActionButton/ActionButton";
-
-import CreateCardItem from "@/components/Cards/ProductCard/ProductsCard";
-import FilterProductButton from "@/components/Buttons/FilterProductButton/FilterProductButton";
+import { useState } from "react";
+import Searchbar from "@/components/Searchbar/Searchbar";
+import CreateCardItem from "@/components/Cards/ProductCard/ProductCard";
 
 
 export default function Products() {
+    const [ currentText, setCurrentText] = useState("");
   return (
     <>
       <div className="p-4">
@@ -13,12 +14,9 @@ export default function Products() {
           Noozi/products-page
         </h1>
       </div>
-
-      <div className="searchRow">
-        <FilterProductButton/>
-      </div>
-
-      <CreateCardItem />
+      
+      <Searchbar currentText={currentText} setCurrentText={setCurrentText}/>
+      <CreateCardItem filter={currentText}/>
 
       {/* Div dos botões de edição e delete */}
       <div className="gap-2 my-6 max-w-xs ">
