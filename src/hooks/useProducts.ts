@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { productService } from "@/services/product.service";
 import type { Product } from "@/types/Product.types";
+import { structureSearch } from "@/constants/MiniSearch";
 
 // Define o contrato de retorno do hook — deixa explícito para quem usar
 interface UseProductsReturn {
@@ -22,6 +23,10 @@ export function useProducts(): UseProductsReturn {
       setError(null);
       const data = await productService.getAll();
       setProducts(data);
+
+      structureSearch.removeAll();
+      structureSearch.addAll(data);
+
     } catch {
       setError("Erro ao carregar produtos.");
     } finally {
