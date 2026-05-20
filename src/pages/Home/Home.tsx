@@ -6,14 +6,16 @@ import {
   TriangleAlert,
   CirclePlus,
   Layers,
-  Siren
+  Siren,
+  CirclePause,
+  CirclePlay
 } from "lucide-react";
 import { MetricsCard } from "@/components/Cards/Metrics/MetricsCard/MetricsCard";
 import { ActionButton } from "@/components/Buttons/ActionButton/ActionButton";
 import { useProductMetrics } from "@/hooks/useProductMetrics";
 
 // Restringe os valores possíveis do modal — evita strings arbitrárias
-type ModalType = "estoque-baixo" | "estoque-excessivo" | "vencimento-proximo" | "expirados" | null;
+type ModalType = "estoque-baixo" | "estoque-excessivo" | "vencimento-proximo" | "expirados" | "ativo" | "inativo" | null;
 
 export default function Home() {
   const [activeModal, setActiveModal] = useState<ModalType>(null); // null = nenhum modal aberto
@@ -72,6 +74,22 @@ export default function Home() {
             iconColor="yellow"
             onTitleClick={() => setActiveModal("estoque-excessivo")}
           />
+          {/*Abre Modal com produtos ativos */}
+          <MetricsCard
+            icon={CirclePlay}
+            title="Total ativos"
+            value={isLoading ? "..." : metrics.active}
+            iconColor="green"
+            onTitleClick={() => setActiveModal("ativo")}
+          />
+          {/*Abre Modal com produtos inativos */}
+          <MetricsCard
+            icon={CirclePause}
+            title="Total inativos"
+            value={isLoading ? "..." : metrics.inactive}
+            iconColor="default"
+            onTitleClick={() => setActiveModal("ativo")}
+          />
         </div>
 
         {/* Ações rápidas */}
@@ -101,7 +119,3 @@ export default function Home() {
     </>
   );
 }
-
-
-// indicador de produtos ativos
-// indicador de produtos inativos
