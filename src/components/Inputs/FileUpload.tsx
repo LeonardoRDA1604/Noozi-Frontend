@@ -1,10 +1,4 @@
-interface FileUploadProps {
-  label: string;
-  id: string;
-  onChange: (file: File | null) => void;
-  accept?: string;
-  maxSize?: string;
-}
+import type { FileUploadProps } from "@/types/InputTypes/FileUpload.types"; 
 
 export function FileUpload({
   label,
