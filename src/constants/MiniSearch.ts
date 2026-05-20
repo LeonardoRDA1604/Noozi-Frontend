@@ -1,5 +1,4 @@
 import MiniSearch from "minisearch";
-//import { MOCK_ITEMS } from "./mockItems";
 
 export const structureSearch = new MiniSearch({
       idField: 'id_product',
