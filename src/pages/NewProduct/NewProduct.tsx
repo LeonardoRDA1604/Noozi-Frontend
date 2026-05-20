@@ -6,6 +6,9 @@ import { PriceInput } from "@/components/Inputs/PriceInput";
 import { DateInput } from "@/components/Inputs/DateInput";
 import { FileUpload } from "@/components/Inputs/FileUpload";
 import { ToggleSwitch } from "@/components/Inputs/ToggleSwitch";
+// import { Send } from "lucide-react";
+// import { ActionButton } from "@/components/Buttons/ActionButton/ActionButton";
+// import { useProductMetrics } from "@/hooks/useProductMetrics";
 
 const CHAR_LIMITS = {
   NAME: 120,
@@ -18,6 +21,7 @@ const CHAR_LIMITS = {
 } as const;
 
 export default function NewProductForm() {
+  // const { isLoading } = useProductMetrics();
   const [name, setName] = useState("");
   const [brand, setBrand] = useState("");
   const [description, setDescription] = useState("");
@@ -191,3 +195,16 @@ export default function NewProductForm() {
     </div>
   );
 }
+
+
+
+
+      // {/* Div do botão de submit */}
+      // <div className="flex flex-col gap-2 my-6 max-w-xs">
+      //   <ActionButton
+      //     variant="submit"
+      //     icon={Send}
+      //     label="Cadastrar produto"
+      //     isLoading={isLoading}
+      //   />
+      // </div>
