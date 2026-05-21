@@ -1,14 +1,6 @@
 import { useCharCounter } from '@/hooks/useCharCounter';
 
-interface TextInputProps {
-  label: string;
-  id: string;
-  value: string;
-  onChange: (value: string) => void;
-  maxLength: number;
-  placeholder?: string;
-  className?: string;
-}
+import type { TextInputProps } from '@/types/InputTypes/TextInput.types'; 
 
 export function TextInput({
   label,
