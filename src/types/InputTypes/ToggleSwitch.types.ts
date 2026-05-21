@@ -3,4 +3,5 @@ export interface ToggleSwitchProps {
   checked: boolean;
   onChange: (checked: boolean) => void;
   activeLabel?: string;
+  tooltip?: string
 }
