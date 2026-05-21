@@ -1,14 +1,14 @@
 import { useState } from "react";
-import { TextInput } from "@/components/Inputs/TextInput"
+import { TextInput } from "@/components/Inputs/TextInput";
 import { TextArea } from "@/components/Inputs/TextArea";
 import { NumberInput } from "@/components/Inputs/NumberInput";
 import { PriceInput } from "@/components/Inputs/PriceInput";
 import { DateInput } from "@/components/Inputs/DateInput";
-import { FileUpload } from "@/components/Inputs/FileUpload";
+// import { FileUpload } from "@/components/Inputs/FileUpload";
 import { ToggleSwitch } from "@/components/Inputs/ToggleSwitch";
-// import { Send } from "lucide-react";
-// import { ActionButton } from "@/components/Buttons/ActionButton/ActionButton";
-// import { useProductMetrics } from "@/hooks/useProductMetrics";
+import { Send } from "lucide-react";
+import { ActionButton } from "@/components/Buttons/ActionButton/ActionButton";
+import { useProductMetrics } from "@/hooks/useProductMetrics";
 
 const CHAR_LIMITS = {
   NAME: 120,
@@ -18,10 +18,12 @@ const CHAR_LIMITS = {
   UNIT: 10,
   BATCH: 50,
   SKU: 50,
+  LOW_LEVEL: 10,
+  HIGH_LEVEL: 10
 } as const;
 
 export default function NewProductForm() {
-  // const { isLoading } = useProductMetrics();
+  const { isLoading } = useProductMetrics();
   const [name, setName] = useState("");
   const [brand, setBrand] = useState("");
   const [description, setDescription] = useState("");
@@ -33,25 +35,9 @@ export default function NewProductForm() {
   const [batch, setBatch] = useState("");
   const [sku, setSku] = useState("");
   const [status, setStatus] = useState(true);
-  const [image, setImage] = useState<File | null>(null);
-
-  const handleSubmit = () => {
-    // Lógica de submit aqui para testes
-    console.log({
-      name,
-      brand,
-      description,
-      category,
-      quantity: Number(quantity),
-      unit,
-      price: priceValue / 100, // converte centavos para reais
-      date,
-      batch,
-      sku,
-      status,
-      image
-    });
-  };
+  const [lowLevel, setLowLevel] = useState("");
+  const [highLevel, setHighLevel] = useState("")
+  // const [image, setImage] = useState<File | null>(null);
 
   return (
     <div
@@ -61,7 +47,7 @@ export default function NewProductForm() {
       <form className="product-form-grid">
         {/* Nome */}
         <TextInput
-          label="Nome:"
+          label="Nome"
           id="inputName"
           value={name}
           onChange={setName}
@@ -70,7 +56,7 @@ export default function NewProductForm() {
 
         {/* Marca */}
         <TextInput
-          label="Marca:"
+          label="Marca"
           id="inputBrand"
           value={brand}
           onChange={setBrand}
@@ -79,7 +65,7 @@ export default function NewProductForm() {
 
         {/* Descrição */}
         <TextArea
-          label="Descrição:"
+          label="Descrição"
           id="inputDescription"
           value={description}
           onChange={setDescription}
@@ -88,7 +74,7 @@ export default function NewProductForm() {
 
         {/* Categoria */}
         <TextInput
-          label="Categoria:"
+          label="Categoria"
           id="inputCategory"
           value={category}
           onChange={setCategory}
@@ -98,7 +84,7 @@ export default function NewProductForm() {
 
         {/* Quantidade */}
         <NumberInput
-          label="Quantidade:"
+          label="Quantidade"
           id="inputQuantity"
           value={quantity}
           onChange={setQuantity}
@@ -107,7 +93,7 @@ export default function NewProductForm() {
 
         {/* Unidade de Medida */}
         <TextInput
-          label="Unidade de Medida:"
+          label="Unidade de Medida"
           id="inputUnity"
           value={unit}
           onChange={setUnit}
@@ -118,93 +104,71 @@ export default function NewProductForm() {
 
         {/* Preço Unitário */}
         <PriceInput
-          label="Preço Unitário:"
+          label="Preço Unitário"
           id="inputValue"
           value={priceValue}
           onChange={setPriceValue}
         />
 
-        {/* Grid 2 colunas */}
-        <div className="form-nested-grid">
-          {/* Coluna esquerda */}
-          <div className="form-inventory-fields">
-            <div className="flex justify-between flex-col">
-              <DateInput
-                label="Validade:"
-                id="inputDate"
-                value={date}
-                onChange={setDate}
-              />
+        <DateInput
+          label="Validade"
+          id="inputDate"
+          value={date}
+          onChange={setDate}
+        />
 
-              <div>
-                <label className="block font-medium">Lote:</label>
-                <div className="relative mt-2">
-                  <TextInput
-                    label=""
-                    id="inputBatch"
-                    value={batch}
-                    onChange={setBatch}
-                    maxLength={CHAR_LIMITS.BATCH}
-                    className=""
-                  />
-                </div>
-              </div>
+        <TextInput
+          label="Lote"
+          id="inputBatch"
+          value={batch}
+          onChange={setBatch}
+          maxLength={CHAR_LIMITS.BATCH}
+          className=""
+        />
 
-              <div>
-                <label className="block font-medium">SKU:</label>
-                <div className="relative mt-2">
-                  <TextInput
-                    label=""
-                    id="inputSKU"
-                    value={sku}
-                    onChange={setSku}
-                    maxLength={CHAR_LIMITS.SKU}
-                    className=""
-                  />
-                </div>
-              </div>
+        <TextInput
+          label="Alerta de estoque baixo"
+          id="inputLStock"
+          value={lowLevel}
+          onChange={setLowLevel}
+          maxLength={CHAR_LIMITS.LOW_LEVEL}
+          className=""
+        />
 
-              <ToggleSwitch
-                label="Status do Produto:"
-                checked={status}
-                onChange={setStatus}
-              />
-            </div>
-          </div>
+        <TextInput
+          label="SKU"
+          id="inputSKU"
+          value={sku}
+          onChange={setSku}
+          maxLength={CHAR_LIMITS.SKU}
+          className=""
+        />
 
-          {/* Coluna direita */}
-          <FileUpload
-            label="Imagem do Produto:"
-            id="inputImage"
-            onChange={setImage}
+        <TextInput
+          label="Alerta de estoque alto"
+          id="inputHStock"
+          value={highLevel}
+          onChange={setHighLevel}
+          maxLength={CHAR_LIMITS.HIGH_LEVEL}
+          className=""
+        />
+
+        <ToggleSwitch
+          label="Status do Produto"
+          checked={status}
+          onChange={setStatus}
+        />
+
+        <div className="form-field-full mt-4">
+          <ActionButton
+            variant="submit"
+            icon={Send}
+            label="CADASTRAR PRODUTO"
+            isLoading={isLoading}
           />
         </div>
-
-        {/* Botão */}
-        <div className="form-field-full mt-4">
-          <button
-            id="btn_register"
-            className="w-full px-6 py-3 font-semibold text-white transition-colors duration-200 bg-noozi-bright_blue rounded-lg hover:bg-[#063CD4] active:bg-[#052EB0]"
-            type="button"
-            onClick={handleSubmit}
-          >
-            CADASTRAR PRODUTO
-          </button>
-        </div>
+        
       </form>
     </div>
   );
 }
-
-
-
-
-      // {/* Div do botão de submit */}
-      // <div className="flex flex-col gap-2 my-6 max-w-xs">
-      //   <ActionButton
-      //     variant="submit"
-      //     icon={Send}
-      //     label="Cadastrar produto"
-      //     isLoading={isLoading}
-      //   />
-      // </div>
