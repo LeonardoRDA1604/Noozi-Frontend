@@ -110,6 +110,7 @@ export default function NewProductForm() {
           onChange={setPriceValue}
         />
 
+        {/* Data de Validade */}
         <DateInput
           label="Validade"
           id="inputDate"
@@ -117,6 +118,7 @@ export default function NewProductForm() {
           onChange={setDate}
         />
 
+        {/* Lote */}
         <TextInput
           label="Lote"
           id="inputBatch"
@@ -125,7 +127,8 @@ export default function NewProductForm() {
           maxLength={CHAR_LIMITS.BATCH}
           className=""
         />
-
+        
+        {/* Estoque baixo */}
         <TextInput
           label="Alerta de estoque baixo"
           id="inputLStock"
@@ -135,6 +138,7 @@ export default function NewProductForm() {
           className=""
         />
 
+        {/* SKU */}
         <TextInput
           label="SKU"
           id="inputSKU"
@@ -144,6 +148,7 @@ export default function NewProductForm() {
           className=""
         />
 
+        {/* Estoque alto */}
         <TextInput
           label="Alerta de estoque alto"
           id="inputHStock"
@@ -153,12 +158,14 @@ export default function NewProductForm() {
           className=""
         />
 
+        {/* Status */}
         <ToggleSwitch
           label="Status do Produto"
           checked={status}
           onChange={setStatus}
         />
-
+        
+        {/* Botão de cadastrar produto */}
         <div className="form-field-full mt-4">
           <ActionButton
             variant="submit"
@@ -167,7 +174,6 @@ export default function NewProductForm() {
             isLoading={isLoading}
           />
         </div>
-        
       </form>
     </div>
   );
