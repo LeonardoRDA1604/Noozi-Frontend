@@ -10,9 +10,11 @@ export function ToggleSwitch({
 }: ToggleSwitchProps) {
   return (
     <div>
-      <div>
-        <label className="block font-medium mb-2">{label}</label>
-        {tooltip && <Tooltip text={tooltip} />}
+      <div className='flex items-center gap-2 mb-2"'>
+      <label className="mb-[1.5px] font-medium">
+        {label}
+      </label>
+      {tooltip && <Tooltip text={tooltip} />}
       </div>
       <label className="toggle-switch">
         <input
