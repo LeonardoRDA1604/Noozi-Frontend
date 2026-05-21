@@ -20,6 +20,7 @@ Formato baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.0.0/), 
     - [[1.0.0] - 2026-05-13](#100---2026-05-13)
     - [[1.1.0] - 2026-05-13](#110---2026-05-13)
     - [[1.2.0] - 2026-05-18](#120---2026-05-18)
+    - [[1.2.1] - 2026-05-21](#121---2026-05-21)
 
 ---
 
@@ -286,6 +287,88 @@ O problema não impacta o funcionamento atual da aplicação e será tratado em 
 ---
 
 </details>
+
+---
+
+### [1.2.1] - 2026-05-21
+
+<details>
+  <summary style="background-color: white; color: black"><b>ℹ️ Clique para expandir o log de alterações da versão [1.2.1]</b></summary>
+  <br />
+
+#### ✨ Adicionado
+- Sistema reutilizável de inputs para formulários:
+  - `TextInput`
+  - `TextArea`
+  - `NumberInput`
+  - `DateInput`
+  - `PriceInput`
+  - `FileUpload`
+  - `ToggleSwitch`
+- Hook reutilizável `useCharCounter`
+- Integração da página de produtos com a camada centralizada de mock data
+- Integração da `Searchbar` com busca dinâmica baseada em `useProducts`
+- Estrutura reutilizável para upload de arquivos com suporte a imagens
+- Arquitetura reutilizável para máscaras e validações de inputs
+
+---
+
+#### 🎨 Melhorado
+- Organização arquitetural do formulário de cadastro de produtos
+- Reutilização de componentes de formulário no Design System
+- Consistência visual e estrutural entre inputs
+- UX de digitação em campos monetários e de data
+- Estrutura de busca inteligente da listagem de produtos
+- Escalabilidade da arquitetura de formulários reutilizáveis
+
+---
+
+#### 🔧 Alterado
+- Refatoração completa da página `NewProduct` para utilização de componentes reutilizáveis
+- Extração da lógica inline de:
+  - validação
+  - máscaras
+  - contadores
+  - upload
+  - estados de inputs
+- Centralização dos limites de caracteres em `CHAR_LIMITS`
+- Refatoração da estrutura de mock data para integração centralizada via hooks e services
+- Ajuste temporário da estrutura de thresholds de estoque:
+  - `min_level`
+  - `max_level`
+- Reversão da padronização anterior de thresholds de estoque para manter compatibilidade com a arquitetura atual
+
+---
+
+#### 🧹 Removido
+- Arquivos mock locais obsoletos:
+  - `mockItems.ts`
+  - `CardItems.types.ts`
+- Estruturas de dados duplicadas utilizadas antes da integração com `useProducts`
+
+---
+
+#### 🐛 Corrigido
+- Problema de reset do input nativo `type="date"`
+- Problemas de inconsistência visual entre inputs reutilizáveis
+- Ajustes de controle de estado em componentes de formulário
+- Correções de integração entre cards de produto e dados centralizados
+
+---
+
+#### ⚠️ Débito Técnico
+- O componente `FileUpload` ainda não possui validação real de:
+  - tamanho máximo de arquivo
+  - compressão
+  - preview otimizado
+
+- Alguns tokens de cor arbitrários (`bg-[#f5f5f5]`) ainda precisam ser migrados totalmente para os tokens oficiais do Design System.
+
+---
+
+</details>
+
+---
 
 <!-- 
 ### [1.3.0] - 2026-05-01
