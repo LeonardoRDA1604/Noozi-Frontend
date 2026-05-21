@@ -3,4 +3,5 @@ export interface DateInputProps {
   id: string;
   value: string;
   onChange: (value: string) => void;
+  tooltip?: string
 }

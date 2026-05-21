@@ -1,4 +1,5 @@
 import { useCharCounter } from '@/hooks/useCharCounter';
+import { Tooltip } from '@/components/ToolTip/ToolTip';
 
 import type { TextInputProps } from '@/types/InputTypes/TextInput.types'; 
 
@@ -9,7 +10,8 @@ export function TextInput({
   onChange,
   maxLength,
   placeholder,
-  className = "form-field-full"
+  className = "form-field-full",
+  tooltip
 }: TextInputProps) {
   const { remaining, color, showCounter } = useCharCounter(value, maxLength);
 
@@ -18,6 +20,7 @@ export function TextInput({
       <label htmlFor={id} className="block mb-2 font-medium">
         {label}
       </label>
+      {tooltip && <Tooltip text={tooltip} />}
       <div className="relative">
         <input
           className="w-full bg-[#f5f5f5] border border-solid border-noozi-gray-300 rounded-lg px-3 py-2 pr-16"

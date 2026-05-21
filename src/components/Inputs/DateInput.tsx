@@ -1,6 +1,7 @@
 import type { DateInputProps } from "@/types/InputTypes/DateInput.types";
+import { Tooltip } from "@/components/ToolTip/ToolTip";
 
-export function DateInput({ label, id, value, onChange }: DateInputProps) {
+export function DateInput({ label, id, value, tooltip, onChange }: DateInputProps) {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     let newValue = e.target.value.replace(/\D/g, "");
     if (newValue.length > 8) newValue = newValue.slice(0, 8);
@@ -9,7 +10,12 @@ export function DateInput({ label, id, value, onChange }: DateInputProps) {
     if (newValue.length >= 3 && newValue.length < 5) {
       newValue = newValue.slice(0, 2) + "/" + newValue.slice(2);
     } else if (newValue.length >= 5) {
-      newValue = newValue.slice(0, 2) + "/" + newValue.slice(2, 4) + "/" + newValue.slice(4, 8);
+      newValue =
+        newValue.slice(0, 2) +
+        "/" +
+        newValue.slice(2, 4) +
+        "/" +
+        newValue.slice(4, 8);
     }
 
     // Validação de dia e mês
@@ -31,6 +37,7 @@ export function DateInput({ label, id, value, onChange }: DateInputProps) {
       <label htmlFor={id} className="block font-medium">
         {label}
       </label>
+      {tooltip && <Tooltip text={tooltip} />}
       <input
         className="w-full bg-noozi-surface border border-solid border-noozi-gray-300 rounded-lg px-3 py-2 mt-2"
         id={id}
