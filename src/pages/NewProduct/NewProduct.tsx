@@ -52,6 +52,7 @@ export default function NewProductForm() {
           value={name}
           onChange={setName}
           maxLength={CHAR_LIMITS.NAME}
+          tooltip="Informe o nome completo do produto."
         />
 
         {/* Marca */}
@@ -61,6 +62,7 @@ export default function NewProductForm() {
           value={brand}
           onChange={setBrand}
           maxLength={CHAR_LIMITS.BRAND}
+          tooltip="Marca ou fabricante do produto."
         />
 
         {/* Descrição */}
@@ -70,6 +72,7 @@ export default function NewProductForm() {
           value={description}
           onChange={setDescription}
           maxLength={CHAR_LIMITS.DESCRIPTION}
+          tooltip="Detalhes adicionais sobre o produto (características, composição, etc.)"
         />
 
         {/* Categoria */}
@@ -80,6 +83,7 @@ export default function NewProductForm() {
           onChange={setCategory}
           maxLength={CHAR_LIMITS.CATEGORY}
           className="form-field-single"
+          tooltip="Grupo ao qual o produto pertence. "
         />
 
         {/* Quantidade */}
@@ -89,6 +93,7 @@ export default function NewProductForm() {
           value={quantity}
           onChange={setQuantity}
           min="0"
+          tooltip="Número de unidades disponíveis em estoque. Use apenas números inteiros."
         />
 
         {/* Unidade de Medida */}
@@ -100,6 +105,7 @@ export default function NewProductForm() {
           maxLength={CHAR_LIMITS.UNIT}
           placeholder="Ex: kg, un, L"
           className="form-field-single"
+          tooltip="Unidade de venda ou armazenamento. Ex: kg, un, L, pacote, caixa"
         />
 
         {/* Preço Unitário */}
@@ -108,6 +114,7 @@ export default function NewProductForm() {
           id="inputValue"
           value={priceValue}
           onChange={setPriceValue}
+          tooltip="Valor de venda por unidade. Digite apenas os números – a formatação é automática."
         />
 
         {/* Data de Validade */}
@@ -116,6 +123,7 @@ export default function NewProductForm() {
           id="inputDate"
           value={date}
           onChange={setDate}
+          tooltip="Data de vencimento do produto no formato DD/MM/AAAA. Digite dia, mês e ano."
         />
 
         {/* Lote */}
@@ -126,6 +134,7 @@ export default function NewProductForm() {
           onChange={setBatch}
           maxLength={CHAR_LIMITS.BATCH}
           className=""
+          tooltip="Código de identificação do lote de fabricação (se aplicável)."
         />
         
         {/* Estoque baixo */}
@@ -135,7 +144,7 @@ export default function NewProductForm() {
           value={lowLevel}
           onChange={setLowLevel}
           maxLength={CHAR_LIMITS.LOW_LEVEL}
-          className=""
+          className="Quantidade mínima que, ao ser atingida, dispara um aviso de reposição."
         />
 
         {/* SKU */}
@@ -146,6 +155,7 @@ export default function NewProductForm() {
           onChange={setSku}
           maxLength={CHAR_LIMITS.SKU}
           className=""
+          tooltip="Código único de identificação do produto (Stock Keeping Unit)."
         />
 
         {/* Estoque alto */}
@@ -156,6 +166,7 @@ export default function NewProductForm() {
           onChange={setHighLevel}
           maxLength={CHAR_LIMITS.HIGH_LEVEL}
           className=""
+          tooltip="Quantidade máxima que, ao ser ultrapassada, dispara um aviso de excesso."
         />
 
         {/* Status */}
@@ -163,6 +174,7 @@ export default function NewProductForm() {
           label="Status do Produto"
           checked={status}
           onChange={setStatus}
+          tooltip="Produto ativo: disponível para venda. Inativo: oculto ou indisponível."
         />
         
         {/* Botão de cadastrar produto */}
