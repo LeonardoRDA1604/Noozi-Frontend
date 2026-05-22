@@ -16,7 +16,10 @@ export default {
           // Cores principais da marca
           bright_blue: "#1752FD", // azul intenso
           sky_blue: "#30B7F0", // azul-céu
-          default_screen: "#EFEFEF", // default screen background
+
+          // Cores padrão para Layout e Surface
+          default_screen: "#F9FAFF", // default screen background
+          input_field: "#F1F2F7",
 
           // Escala de cinza da marca
           gray: {
