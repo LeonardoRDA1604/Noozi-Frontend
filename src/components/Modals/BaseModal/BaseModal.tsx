@@ -28,17 +28,12 @@ export function BaseModal({
     >
       {/* Conteúdo — stopPropagation evita fechar ao clicar dentro */}
       <div
-        className={`
-          w-full ${sizeMap[size]}
-          bg-white rounded-xl shadow-lg
-          flex flex-col gap-4 p-5
-          max-h-[90vh] overflow-y-auto
-        `}
+        className={`w-full ${sizeMap[size]} bg-white rounded-xl shadow-lg flex flex-col max-h-[90vh]`}
         onClick={(e) => e.stopPropagation()}
       >
 
-        {/* Cabeçalho */}
-        <div className="flex items-center justify-between">
+        {/* Cabeçalho fixo */}
+        <div className="flex items-center justify-between p-5 pb-0 shrink-0">
           <h2 className="text-base font-bold text-noozi-text">{title}</h2>
           <button
             type="button"
@@ -51,7 +46,7 @@ export function BaseModal({
         </div>
 
         {/* Conteúdo injetado via children */}
-        <div className="flex flex-col gap-3">
+        <div className="flex flex-col gap-3 p-5 overflow-y-auto">
           {children}
         </div>
 
