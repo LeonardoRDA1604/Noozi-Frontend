@@ -17,7 +17,7 @@ export function TextArea({
 
   return (
     <div className="form-field-full">
-      <div className='flex items-center gap-2 mb-2"'>
+      <div className='flex items-center gap-2 mb-2'>
       <label htmlFor={id} className="mb-[1.5px] font-medium">
         {label}
       </label>

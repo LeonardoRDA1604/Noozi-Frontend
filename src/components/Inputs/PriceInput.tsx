@@ -53,7 +53,7 @@ export function PriceInput({ label, id, value, tooltip, onChange }: PriceInputPr
 
   return (
     <div className="form-field-single">
-      <div className='flex items-center gap-2 mb-2"'>
+      <div className='flex items-center gap-2 mb-2'>
       <label htmlFor={id} className="mb-[1.5px] font-medium">
         {label}
       </label>

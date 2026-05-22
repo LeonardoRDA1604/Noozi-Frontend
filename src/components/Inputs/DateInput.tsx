@@ -34,14 +34,16 @@ export function DateInput({ label, id, value, tooltip, onChange }: DateInputProp
 
   return (
     <div>
-      <div className='flex items-center gap-2 mb-2"'>
+      <div className='form-field-single'>
+      <div className="flex gap-2 items-center mb-2">
       <label htmlFor={id} className="mb-[1.5px] font-medium">
         {label}
       </label>
       {tooltip && <Tooltip text={tooltip} />}
       </div>
+      </div>
       <input
-        className="w-full bg-noozi-surface border border-solid border-noozi-gray-300 rounded-lg px-3 py-2 mt-2"
+        className="w-full bg-noozi-surface border border-solid border-noozi-gray-300 rounded-lg px-3 py-2"
         id={id}
         type="text"
         placeholder="DD/MM/AAAA"
