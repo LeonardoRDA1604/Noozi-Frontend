@@ -16,10 +16,6 @@ export default function Home() {
 
   return (
     <div className="flex flex-col gap-6 p-4">
-      <h1 className="flex items-center justify-center text-4xl font-bold text-noozi-bright_blue">
-        Noozi/home-page
-      </h1>
-
       {/* Cards de métricas — valores vindos da API via useProductMetrics */}
       <div className="flex flex-wrap gap-4">
         <MetricsCard icon={Package}       title="Total de cadastros"      value={isLoading ? "..." : metrics.total}         href="/products" />

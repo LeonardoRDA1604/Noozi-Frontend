@@ -14,13 +14,7 @@ export default function Products() {
     if (error) return <p>{error} <button onClick={refetch}>Tentar novamente</button></p>
 
   return (
-    <>
-      <div className="p-4">
-        <h1 className="flex items-center justify-center text-4xl font-bold text-noozi-bright_blue">
-          Noozi/products-page
-        </h1>
-      </div>
-      
+    <>      
       <Searchbar currentText={currentText} setCurrentText={setCurrentText}/>
       <CreateCardItem products={products} filter={currentText}/>
 
