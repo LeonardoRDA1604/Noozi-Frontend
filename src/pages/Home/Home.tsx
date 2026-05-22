@@ -8,14 +8,16 @@ import {
   Layers,
   Siren,
   CirclePause,
-  CirclePlay
+  CirclePlay,
+  CircleDollarSign,
+  
 } from "lucide-react";
 import { MetricsCard } from "@/components/Cards/Metrics/MetricsCard/MetricsCard";
 import { ActionButton } from "@/components/Buttons/ActionButton/ActionButton";
 import { useProductMetrics } from "@/hooks/useProductMetrics";
 
 // Restringe os valores possíveis do modal — evita strings arbitrárias
-type ModalType = "estoque-baixo" | "estoque-excessivo" | "vencimento-proximo" | "expirados" | "ativo" | "inativo" | null;
+type ModalType = "estoque-baixo" | "estoque-excessivo" | "vencimento-proximo" | "expirados" | "ativo" | "inativo" | "custo-produtos-expirados" | null;
 
 export default function Home() {
   const [activeModal, setActiveModal] = useState<ModalType>(null); // null = nenhum modal aberto
@@ -65,6 +67,13 @@ export default function Home() {
             value={isLoading ? "..." : metrics.lowStock}
             iconColor="yellow"
             onTitleClick={() => setActiveModal("estoque-baixo")}
+          />
+          {/*Exibe valor do custo de produtos expirados */}
+          <MetricsCard
+            icon={CircleDollarSign}
+            title="Custo de produtos vencidos"
+            value={isLoading ? "..." : metrics.expiredProductCost}
+            iconColor="red"
           />
           {/*Abre Modal com produtos em estoque excessivo */}
           <MetricsCard

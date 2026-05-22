@@ -9,6 +9,15 @@ const iconColorMap = {
   red: "text-red-400",
 };
 
+// Ajusta o tamanho da fonte dinamicamente, com base na quantidade de caracteres para evitar quebra de layout em valores muito longos
+function getValueFontSize(value: string | number): string {
+  const length = String(value).length;
+  if (length <= 6) return "text-4xl";
+  if (length <= 9) return "text-3xl";
+  if (length <= 12) return "text-2xl";
+  return "text-lg";
+}
+
 export function MetricsCard({
   value,
   icon: Icon,
@@ -39,7 +48,7 @@ export function MetricsCard({
 
   return (
     <div className="flex w-40 h-24 flex-col justify-between rounded-lg border border-zinc-100 border-l-4 border-l-blue-500 p-3 shadow-sm">
-      <strong className="text-4xl font-bold text-zinc-900">{value}</strong>
+      <strong className={`${getValueFontSize(value)} font-bold text-zinc-900 leading-tight`}>{value}</strong>
       <div className="flex items-center gap-1.5">
         <Icon className={`h-5 w-5 ${iconColorMap[iconColor]} shrink-0`} />
         {titleElement}

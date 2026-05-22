@@ -5,7 +5,7 @@ import type { Product } from "@/types/Product.types";
 
 export function useProductMetrics() {
   const [metrics, setMetrics] = useState<ProductMetrics>({
-    total: 0, lowStock: 0, overStock: 0, expiringSoon: 0, expired: 0, active: 0, inactive: 0,
+    total: 0, lowStock: 0, overStock: 0, expiringSoon: 0, expired: 0, active: 0, inactive: 0, expiredProductCost: "R$ 0,00"
   });
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -15,14 +15,15 @@ export function useProductMetrics() {
       try {
         setIsLoading(true);
         // Dispara todas as requisições em paralelo — mais rápido que sequencial
-        const [all, lowStock, overStock, expiringSoon, expired, active, inactive] = await Promise.all([
+        const [all, lowStock, overStock, expiringSoon, expired, active, inactive, expiredProductCost] = await Promise.all([
           productService.getAll(),
           productService.getLowStock(),
           productService.getOverStock(),
           productService.getExpiringSoon(),
           productService.getExpired(),
           productService.getActive(),
-          productService.getInactive()
+          productService.getInactive(),
+          productService.getExpiredProductCost()
         ]);
         // Armazena apenas as contagens — os produtos em si não são necessários aqui
         setMetrics({
@@ -33,6 +34,7 @@ export function useProductMetrics() {
           expired: expired.length,
           active: active.length,
           inactive: inactive.length,
+          expiredProductCost:expiredProductCost 
         });
       } catch {
         setError("Erro ao carregar métricas.");
