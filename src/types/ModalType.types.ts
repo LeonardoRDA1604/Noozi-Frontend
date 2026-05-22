@@ -5,4 +5,5 @@ export type ModalType =
   | "expirados"
   | "ativo"
   | "inativo"
+  | "custo-produtos-expirados" 
   | null;
