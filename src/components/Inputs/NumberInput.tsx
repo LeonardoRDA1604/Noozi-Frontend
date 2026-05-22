@@ -19,7 +19,7 @@ export function NumberInput({
       {tooltip && <Tooltip text={tooltip} />}
       </div>
       <input
-        className="w-full bg-noozi-surface border border-solid border-noozi-gray-300 rounded-lg px-3 py-2"
+        className="w-full bg-noozi-input_field border border-solid border-noozi-gray-300 rounded-lg px-3 py-2"
         type="number"
         id={id}
         value={value}

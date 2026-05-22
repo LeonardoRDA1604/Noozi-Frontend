@@ -60,7 +60,7 @@ export function PriceInput({ label, id, value, tooltip, onChange }: PriceInputPr
       {tooltip && <Tooltip text={tooltip} />}
       </div>
       <input
-        className="w-full bg-noozi-surface border border-solid border-noozi-gray-300 rounded-lg px-3 py-2"
+        className="w-full bg-noozi-input_field border border-solid border-noozi-gray-300 rounded-lg px-3 py-2"
         type="text"
         id={id}
         placeholder="R$ 0,00"

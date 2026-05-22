@@ -47,7 +47,7 @@ export function MetricsCard({
   );
 
   return (
-    <div className="flex w-40 h-24 flex-col justify-between rounded-lg border border-zinc-100 border-l-4 border-l-blue-500 p-3 shadow-sm">
+    <div className="bg-noozi-background flex w-40 h-24 flex-col justify-between rounded-lg border border-zinc-100 border-l-4 border-l-blue-500 p-3 shadow-sm">
       <strong className={`${getValueFontSize(value)} font-bold text-zinc-900 leading-tight`}>{value}</strong>
       <div className="flex items-center gap-1.5">
         <Icon className={`h-5 w-5 ${iconColorMap[iconColor]} shrink-0`} />

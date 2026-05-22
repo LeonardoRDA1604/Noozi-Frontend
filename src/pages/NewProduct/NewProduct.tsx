@@ -42,7 +42,7 @@ export default function NewProductForm() {
   return (
     <div
       id="register"
-      className="bg-noozi-default_screen w-full min-h-dvh p-4 md:p-6 lg:p-8 overflow-y-auto overflow-x-hidden"
+      className="w-full min-h-dvh p-4 md:p-6 lg:p-8 overflow-y-auto overflow-x-hidden"
     >
       <div className="max-w-7xl mx-auto">
         {/* Título Principal */}

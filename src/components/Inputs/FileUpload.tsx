@@ -15,7 +15,7 @@ export function FileUpload({
   return (
     <div className="flex flex-col">
       <label className="block mb-2 font-medium">{label}</label>
-      <div className="flex-1 border-2 border-dashed border-noozi-gray-300 rounded-lg bg-noozi-surface hover:bg-gray-50 transition-colors">
+      <div className="flex-1 border-2 border-dashed border-noozi-gray-300 rounded-lg bg-noozi-input_field hover:bg-gray-50 transition-colors">
         <label htmlFor={id} className="flex flex-col items-center justify-center h-full min-h-[300px] cursor-pointer p-6">
           <span className="text-center text-noozi-gray-600">
             Clique para fazer upload
