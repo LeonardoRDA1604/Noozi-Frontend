@@ -6,4 +6,5 @@ export interface ProductMetrics {
   expired: number;
   active: number;
   inactive: number;
+  expiredProductCost: string
 }
