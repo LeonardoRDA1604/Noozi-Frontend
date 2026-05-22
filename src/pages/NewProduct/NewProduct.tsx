@@ -47,8 +47,8 @@ export default function NewProductForm() {
       <div className="max-w-7xl mx-auto">
         {/* Título Principal */}
         <div className="mb-6">
-          <h1 className="text-2xl md:text-3xl font-bold text-gray-800">Novo Produto</h1>
-          <p className="text-sm text-gray-600 mt-1">Preencha os dados abaixo para cadastrar um novo produto</p>
+          <h1 className="text-2xl md:text-3xl font-bold text-noozi-gray-800">Novo Produto</h1>
+          <p className="text-sm text-noozi-gray-600 mt-1">Preencha os dados abaixo para cadastrar um novo produto</p>
         </div>
 
         <form className="space-y-6">
