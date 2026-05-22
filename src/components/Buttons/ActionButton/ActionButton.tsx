@@ -12,6 +12,8 @@ const variantStyles: Record<ActionButtonVariant, string> = {
   submit:  "w-full h-11 rounded-md bg-noozi-bright_blue text-white text-sm hover:opacity-90",
   edit:    "h-8 px-3 rounded-md bg-noozi-surface text-noozi-text text-xs border border-noozi-border hover:bg-noozi-gray-200",
   delete:  "h-8 px-3 rounded-md bg-status-danger/10 text-status-danger text-xs border border-status-danger/20 hover:bg-status-danger/20",
+  cancel:  "h-8 px-3 rounded-md bg-noozi-surface text-noozi-muted text-xs border border-noozi-border hover:bg-noozi-gray-200",
+  save:    "h-8 px-3 rounded-md bg-noozi-bright_blue text-white text-xs hover:opacity-90",
 };
 
 export function ActionButton({
@@ -22,6 +24,7 @@ export function ActionButton({
   productId,
   onSuccess,
   onError,
+  onClick,
   disabled = false,
   isLoading = false,
 }: ActionButtonProps) {
@@ -45,24 +48,6 @@ export function ActionButton({
       <Link to={href} className={className}>
         {content}
       </Link>
-    );
-  }
-
-  // ─── Variante edit — chama productService.update via modal ────────────────
-  if (variant === "edit") {
-    return (
-      <button
-        type="button"
-        disabled={disabled || isLoading}
-        className={className}
-        onClick={() => {
-          // A lógica de edição completa virá do modal pai via onSuccess.
-          // O botão sinaliza a intenção — o modal controla o payload.
-          onSuccess?.();
-        }}
-      >
-        {content}
-      </button>
     );
   }
 
@@ -90,13 +75,14 @@ export function ActionButton({
     );
   }
 
-  // ─── Variante submit — envia formulário (type="submit") ───────────────────
-  // O react-hook-form intercepta o submit — não precisa de onClick aqui
+  // ─── Variantes edit, cancel, save e submit caem aqui
+  // onClick tem prioridade — onSuccess é fallback
   return (
     <button
-      type="submit"
+      type={variant === "submit" ? "submit" : "button"}
       disabled={disabled || isLoading}
       className={className}
+      onClick={onClick ?? onSuccess}
     >
       {content}
     </button>
