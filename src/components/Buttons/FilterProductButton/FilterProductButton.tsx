@@ -7,8 +7,8 @@ export default function FilterProductButton() {
 
     return (
         <>
-            <div>
-                <button className="bg-[#DDDfE3] rounded-[3.5px]" onClick={() => setFilterModalOpen(true)}>
+            <div className=" h-12 w-[5%] mr-4">
+                <button className="flex bg-noozi-input_field rounded-md h-[90%] w-full justify-center items-center" onClick={() => setFilterModalOpen(true)} >
                     <Funnel />
                 </button>
                 

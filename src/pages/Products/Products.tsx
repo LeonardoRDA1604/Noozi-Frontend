@@ -4,6 +4,7 @@ import { useState } from "react";
 import Searchbar from "@/components/Searchbar/Searchbar";
 import { useProducts } from "@/hooks/useProducts";
 import CreateCardItem from "@/components/Cards/ProductCard/ProductCard";
+import FilterProductButton from "@/components/Buttons/FilterProductButton/FilterProductButton";
 
 export default function Products() {
   const { products, isLoading, error, refetch } = useProducts();
@@ -20,7 +21,10 @@ export default function Products() {
   return (
     <>
       <div>
-        <Searchbar currentText={currentText} setCurrentText={setCurrentText} />
+        <div className="flex w-[100%] justify-between mt-12">
+          <Searchbar currentText={currentText} setCurrentText={setCurrentText} />
+          <FilterProductButton/>
+        </div>
         <CreateCardItem products={products} filter={currentText} />
 
         {/* Div dos botões de edição e delete */}
