@@ -4,6 +4,7 @@ import type {
   CreateProductDTO,
   UpdateProductDTO,
 } from "@/types/Product.types";
+import { formatCurrency } from "@/utils/Currency";
 
 export const productService = {
   // Retorna todos os produtos
@@ -69,6 +70,24 @@ export const productService = {
       if (!p.expiration_date) return false;
       return new Date(p.expiration_date) < today; // venceu antes de hoje
     });
+  },
+
+  // Retorna o custo total de todos os produtos expirados (preço do item * quantidade em estoque)
+  getExpiredProductCost: async(): Promise<string> => {
+    const { data } = await api.get("/products");
+    const today = new Date();
+    const totalCost = data
+    .filter((p: Product) => {
+      if (!p.expiration_date) return false;
+      return new Date(p.expiration_date) < today;
+    })
+    .reduce((total: number, p: Product) => {
+        const price = p.item_price || 0;
+        const quantity = p.stock_quantity || 0;
+        return total + (price * quantity);
+      }, 0); // 0 é o valor inicial da soma
+    
+    return  formatCurrency(totalCost);
   },
 
   // Retorna produtos ativos

@@ -8,7 +8,7 @@ export function Layout() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   return (
-    <div className="min-h-screen bg-noozi-background">
+    <div className="min-h-screen bg-noozi-default_screen">
       <Header onMenuOpen={() => setSidebarOpen(true)} />
 
       <Sidebar

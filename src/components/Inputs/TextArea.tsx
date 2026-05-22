@@ -1,6 +1,7 @@
-import { useCharCounter } from '@/hooks/useCharCounter';
+import { useCharCounter } from "@/hooks/useCharCounter";
+import { Tooltip } from "@/components/ToolTip/ToolTip";
 
-import type { TextAreaProps } from '@/types/InputTypes/TextArea.types'; 
+import type { TextAreaProps } from "@/types/InputTypes/TextArea.types";
 
 export function TextArea({
   label,
@@ -9,18 +10,22 @@ export function TextArea({
   onChange,
   maxLength,
   placeholder,
-  rows = 3
+  rows = 3,
+  tooltip
 }: TextAreaProps) {
   const { remaining, color, showCounter } = useCharCounter(value, maxLength);
 
   return (
     <div className="form-field-full">
-      <label htmlFor={id} className="block mb-2 font-medium">
+      <div className='flex items-center gap-2 mb-2'>
+      <label htmlFor={id} className="mb-[1.5px] font-medium">
         {label}
       </label>
+      {tooltip && <Tooltip text={tooltip} />}
+      </div>
       <div className="relative">
         <textarea
-          className="w-full bg-noozi-surface border border-solid border-noozi-gray-300 rounded-lg px-3 py-2 pr-16 h-24 resize-none"
+          className="w-full bg-noozi-input_field border border-solid border-noozi-gray-300 rounded-lg px-3 py-2 pr-16 h-24 resize-none"
           id={id}
           value={value}
           onChange={(e) => onChange(e.target.value.slice(0, maxLength))}
@@ -29,7 +34,9 @@ export function TextArea({
           rows={rows}
         />
         {showCounter && (
-          <span className={`absolute right-3 top-2 text-sm pointer-events-none select-none ${color}`}>
+          <span
+            className={`absolute right-3 top-2 text-sm pointer-events-none select-none ${color}`}
+          >
             {remaining}
           </span>
         )}
