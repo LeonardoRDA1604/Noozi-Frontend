@@ -5,6 +5,7 @@ import { ActionButton } from "@/components/Buttons/ActionButton/ActionButton";
 import { MetricsModal } from "@/components/Modals/MetricsModal/MetricsModal";
 import { useProductMetrics } from "@/hooks/useProductMetrics";
 import type { ModalType } from "@/types/ModalType.types";
+import { SectionTitle } from "@/components/SectionTitle/SectionTitle";
 
 export default function Home() {
   const [activeModal, setActiveModal] = useState<ModalType>(null); // null = nenhum modal aberto
@@ -16,29 +17,34 @@ export default function Home() {
 
   return (
     <div className="flex flex-col gap-6 p-4">
-      {/* Cards de métricas — valores vindos da API via useProductMetrics */}
-      <div className="flex flex-wrap gap-4">
-        <MetricsCard icon={Package}           title="Total de cadastros"          value={isLoading ? "..." : metrics.total}               href="/products" />
-        <MetricsCard icon={CalendarClock}     title="Próximos do vencimento"      value={isLoading ? "..." : metrics.expiringSoon}        iconColor="yellow" onTitleClick={() => setActiveModal("vencimento-proximo")} />
-        <MetricsCard icon={Ban}               title="Vencidos"                    value={isLoading ? "..." : metrics.expired}             iconColor="red"    onTitleClick={() => setActiveModal("expirados")} />
-        <MetricsCard icon={Siren}             title="Estoque baixo"               value={isLoading ? "..." : metrics.lowStock}            iconColor="yellow" onTitleClick={() => setActiveModal("estoque-baixo")} />
-        <MetricsCard icon={TriangleAlert}     title="Estoque em excesso"          value={isLoading ? "..." : metrics.overStock}           iconColor="yellow" onTitleClick={() => setActiveModal("estoque-excessivo")} />
-        <MetricsCard icon={CirclePlay}        title="Total ativos"                value={isLoading ? "..." : metrics.active}              iconColor="green"  onTitleClick={() => setActiveModal("ativo")} />
-        <MetricsCard icon={CirclePause}       title="Total inativos"              value={isLoading ? "..." : metrics.inactive}            iconColor="default" onTitleClick={() => setActiveModal("inativo")} />
-        <MetricsCard icon={CircleDollarSign}  title="Custo de produtos vencidos"  value={isLoading ? "..." : metrics.expiredProductCost}  iconColor="red" />
-      </div>
+      <SectionTitle title="Resumo Geral:" className="my-4 mx-2">
+        {/* Cards de métricas — valores vindos da API via useProductMetrics */}
+        <div className="flex flex-wrap gap-4">
+          <MetricsCard icon={Package}           title="Total de cadastros"          value={isLoading ? "..." : metrics.total}               href="/products" />
+          <MetricsCard icon={CalendarClock}     title="Próximos do vencimento"      value={isLoading ? "..." : metrics.expiringSoon}        iconColor="yellow" onTitleClick={() => setActiveModal("vencimento-proximo")} />
+          <MetricsCard icon={Ban}               title="Vencidos"                    value={isLoading ? "..." : metrics.expired}             iconColor="red"    onTitleClick={() => setActiveModal("expirados")} />
+          <MetricsCard icon={Siren}             title="Estoque baixo"               value={isLoading ? "..." : metrics.lowStock}            iconColor="yellow" onTitleClick={() => setActiveModal("estoque-baixo")} />
+          <MetricsCard icon={TriangleAlert}     title="Estoque em excesso"          value={isLoading ? "..." : metrics.overStock}           iconColor="yellow" onTitleClick={() => setActiveModal("estoque-excessivo")} />
+          <MetricsCard icon={CirclePlay}        title="Total ativos"                value={isLoading ? "..." : metrics.active}              iconColor="green"  onTitleClick={() => setActiveModal("ativo")} />
+          <MetricsCard icon={CirclePause}       title="Total inativos"              value={isLoading ? "..." : metrics.inactive}            iconColor="default" onTitleClick={() => setActiveModal("inativo")} />
+          <MetricsCard icon={CircleDollarSign}  title="Custo de produtos vencidos"  value={isLoading ? "..." : metrics.expiredProductCost}  iconColor="red" />
+        </div>
+      </SectionTitle>
 
-      {/* Botões de Ações rápidas */}
-      <div className="flex flex-col gap-2 max-w-xs">
-        <ActionButton variant="primary" label="Cadastro de Produto" icon={CirclePlus} href="/products/new" />
-        <ActionButton variant="primary" label="Visualizar Estoque"  icon={Layers}     href="/products" />
-      </div>
+      <SectionTitle title="Ações Rápidas:" className="my-4 mx-2">
+        {/* Botões de Ações rápidas */}
+        <div className="flex flex-col gap-2 max-w-xs">
+          <ActionButton variant="primary"       label="Cadastro de Produto"   icon={CirclePlus}   href="/products/new" />
+          <ActionButton variant="primary"       label="Visualizar Estoque"    icon={Layers}       href="/products" />
+        </div>
+      </SectionTitle>
+
+      <SectionTitle title="Atividades Recentes:">
+        {/* Componente de Atividades Recentes */}
+      </SectionTitle>
 
       {/* Modal de métricas — abre ao clicar no título do MetricsCard (Renderiza o modal apenas quando activeModal não é null. O componente receberá o tipo para buscar os produtos corretos.) */}
-      <MetricsModal
-        type={activeModal}
-        onClose={() => setActiveModal(null)}
-      />
+      <MetricsModal type={activeModal}        onClose={() => setActiveModal(null)} />
     </div>
   );
 }
