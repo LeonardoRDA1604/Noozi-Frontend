@@ -1,9 +1,12 @@
 import { useState } from "react";
-import { Ban, CalendarClock, Package, TriangleAlert, CirclePlus, Layers, Siren, CirclePause, CirclePlay } from "lucide-react";
+import { Ban, CalendarClock, Package, TriangleAlert, CirclePlus, Layers, Siren, CirclePause, CirclePlay, CircleDollarSign } from "lucide-react";
 import { MetricsCard } from "@/components/Cards/Metrics/MetricsCard/MetricsCard";
 import { ActionButton } from "@/components/Buttons/ActionButton/ActionButton";
 import { MetricsModal } from "@/components/Modals/MetricsModal/MetricsModal";
 import { useProductMetrics } from "@/hooks/useProductMetrics";
+
+// Restringe os valores possíveis do modal — evita strings arbitrárias
+type ModalType = "estoque-baixo" | "estoque-excessivo" | "vencimento-proximo" | "expirados" | "ativo" | "inativo" | "custo-produtos-expirados" | null;
 import type { ModalType } from "@/types/ModalType.types";
 
 export default function Home() {
