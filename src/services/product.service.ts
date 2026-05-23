@@ -19,11 +19,29 @@ export const productService = {
     return data;
   },
 
-  // Cria um novo produto — id_product, created_at e updated_at são gerados pelo servidor
-  create: async (payload: CreateProductDTO): Promise<Product> => {
-    const { data } = await api.post("/products", payload);
-    return data;
-  },
+  // Cria um novo produto com id_product auto-incrementado
+create: async (payload: CreateProductDTO): Promise<Product> => {
+  const { data: allProducts } = await api.get("/products");
+
+  const nextId =
+    allProducts.length > 0
+      ? String(
+          Math.max(
+            ...allProducts
+              .map((p: Product) => Number(p.id_product))
+              .filter((n: number) => !isNaN(n)) // ignora produtos sem id_product válido
+          ) + 1
+        )
+      : "1";
+
+  const { data } = await api.post("/products", {
+    ...payload,
+    id_product: nextId,
+    item_price: parseFloat(payload.item_price.toFixed(2)),
+  });
+
+  return data;
+},
 
   // Atualiza um produto — apenas os campos enviados no payload são alterados
   update: async (id: string, payload: UpdateProductDTO): Promise<Product> => {
