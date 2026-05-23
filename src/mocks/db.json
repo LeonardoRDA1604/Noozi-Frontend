@@ -8,7 +8,7 @@
       "category": "Alimentos",
       "brand": "Tio João",
       "item_price": 8.90,
-      "stock_quantity": 50,
+      "stock_quantity": 0,
       "unit_measure": "kg",
       "low_stock_level": 10,
       "over_stock_level": 100,
