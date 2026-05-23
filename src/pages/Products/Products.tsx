@@ -18,13 +18,7 @@ export default function Products() {
     );
 
   return (
-    <>
-      <div className="p-4 bg-[#f9faff]">
-        <h1 className="flex items-center justify-center text-4xl font-bold text-noozi-bright_blue">
-          Noozi/products-page
-        </h1>
-      </div>
-      
+    <>      
       <Searchbar currentText={currentText} setCurrentText={setCurrentText}/>
       <CreateCardItem products={products} filter={currentText}/>
 
@@ -51,7 +45,6 @@ export default function Products() {
             // onError={() => toast("Erro ao apagar produto")}
           />
         </div>
-      </div>
     </>
   );
 }
