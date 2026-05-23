@@ -6,7 +6,7 @@ export default function FilterProductButton(){
    return (
     <>
     <div>
-        <button className="bg-[#DDDfE3] rounded-[3.5px]" onClick={() => navigate("/")}>
+        <button className="bg-noozi-input_field rounded-[3.5px]" onClick={() => navigate("/")}>
             <Funnel/>
         </button>
     </div>

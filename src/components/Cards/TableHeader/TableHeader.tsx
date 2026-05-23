@@ -3,7 +3,7 @@ import { GetBreakpoints } from "@/utils/GetBreakpoints";
 
 export default function TableHearder() {
   return (
-    <div className={`grid ${GRID_COLS} w-full rounded-xl text-white font-semibold bg-[#1752FD]`}>
+    <div className={`grid ${GRID_COLS} w-full rounded-xl text-white font-semibold bg-noozi-bright_blue`}>
       {COLUMNS.map((col, index, arr) => (
         <div
           key={col.label}

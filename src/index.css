@@ -6,7 +6,7 @@
 
 @layer base {
   body {
-    @apply bg-[#f9faff] text-noozi-text font-sans;
+    @apply bg-noozi-default_screen text-noozi-text font-sans;
   }
 
   h1, h2, h3, h4, h5, h6 {
