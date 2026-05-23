@@ -2,7 +2,7 @@ import { useMemo, useState, useEffect } from "react";
 import type { filter } from "@/types/FilterSearchbar.types";
 import { structureSearch } from "@/constants/MiniSearch";
 import type { Product } from "@/types/Product.types";
-import TableHearder from "@/components/Cards/TableHeader/TableHeader";
+import TableHeader from "@/components/Cards/TableHeader/TableHeader";
 import { GetBreakpoints } from "../../../utils/GetBreakpoints";
 import { COLUMNS, GRID_COLS } from "@/constants/columns";
 import { useProductCardColumns } from "@/hooks/ProductCardColumns";
@@ -36,7 +36,7 @@ export default function CreateCardItem({ filter, products }: filter) {
   return (
     <>
       <div className="flex flex-col gap-5 w-full px-3 py-5">
-        <TableHearder />
+        <TableHeader />
         {itemsFilter.map((item) => (
           <CardItem key={item.id_product} item={item} />
         ))}

@@ -1,7 +1,7 @@
 import { COLUMNS,GRID_COLS } from "@/constants/columns";
 import { GetBreakpoints } from "@/utils/GetBreakpoints";
 
-export default function TableHearder() {
+export default function TableHeader() {
   return (
     <div className={`grid ${GRID_COLS} w-full rounded-xl text-white font-semibold bg-noozi-bright_blue`}>
       {COLUMNS.map((col, index, arr) => (
