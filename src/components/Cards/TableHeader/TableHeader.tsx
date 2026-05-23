@@ -1,5 +1,5 @@
-import { COLUMNS, GRID_COLS } from "./Columns";
-import { GetBreakpoints } from "./GetBrakpoints";
+import { COLUMNS,GRID_COLS } from "@/constants/Columns";
+import { GetBreakpoints } from "@/utils/GetBrakpoints";
 
 export default function TableHearder() {
   return (

@@ -15,7 +15,7 @@ export default function Products() {
 
   return (
     <>
-      <div className="p-4">
+      <div className="p-4 bg-[#f9faff]">
         <h1 className="flex items-center justify-center text-4xl font-bold text-noozi-bright_blue">
           Noozi/products-page
         </h1>
