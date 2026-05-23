@@ -27,12 +27,22 @@
   .product-form-grid {
     @apply grid gap-4 mx-auto max-w-7xl;
     grid-template-columns: repeat(2, minmax(0, 1fr));
+    font-size: 13px;
+  }
+
+  /* Tela extremamente pequena */
+  @media (max-width: 366px){
+    .product-form-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      font-size: 11px;
+    }
   }
 
   /* Tablet: 768px+ */
   @media (min-width: 768px) {
     .product-form-grid {
       grid-template-columns: repeat(2, minmax(0, 1fr));
+      font-size: medium;
     }
   }
 
@@ -40,7 +50,23 @@
   @media (min-width: 1024px) {
     .product-form-grid {
       grid-template-columns: repeat(4, minmax(0, 1fr));
+      font-size: large
     }
+  }
+
+  /* Seção do formulário com card visual */
+  .form-section {
+    @apply bg-white rounded-xl shadow-sm border border-noozi-gray-200 p-6;
+    transition: all 0.2s ease;
+  }
+
+  .form-section:hover {
+    @apply shadow-md border-noozi-gray-300;
+  }
+
+  /* Título da seção */
+  .form-section-title {
+    @apply text-lg font-semibold text-gray-800 mb-5 pb-3 border-b border-noozi-gray-200;
   }
 
   /* Campos que ocupam toda a largura (Nome, Marca, Descrição) */
@@ -105,7 +131,7 @@
     transition: background-color 0.3s ease;
   }
 
-  /* Bolinha que desliza */
+  /* Círculo indicador do botão */
   .toggle-slider::before {
     content: "";
     position: absolute;
@@ -124,7 +150,7 @@
     @apply bg-noozi-bright_blue; 
   }
 
-  /* Estado ATIVO (checked) - Bolinha desliza para direita */
+  /* Estado ATIVO (checked) - Move círculo para a direita */
   .toggle-switch input:checked + .toggle-slider::before {
     transform: translateX(42px);
   }

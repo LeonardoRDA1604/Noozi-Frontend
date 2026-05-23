@@ -17,7 +17,7 @@ export function TextInput({
 
   return (
     <div className={className}>
-      <div className='flex items-center gap-2 mb-2"'>
+      <div className='flex items-center gap-2 mb-2'>
       <label htmlFor={id} className="mb-[1.5px] font-medium">
         {label}
       </label>
@@ -25,7 +25,7 @@ export function TextInput({
       </div>
       <div className="relative">
         <input
-          className="w-full bg-[#f5f5f5] border border-solid border-noozi-gray-300 rounded-lg px-3 py-2 pr-16"
+          className="w-full bg-noozi-input_field border border-solid border-noozi-gray-300 rounded-lg px-3 py-2 pr-16"
           type="text"
           id={id}
           value={value}

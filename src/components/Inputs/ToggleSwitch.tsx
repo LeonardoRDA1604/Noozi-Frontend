@@ -10,7 +10,7 @@ export function ToggleSwitch({
 }: ToggleSwitchProps) {
   return (
     <div>
-      <div className='flex items-center gap-2 mb-2"'>
+      <div className='flex items-center gap-2 mb-2'>
       <label className="mb-[1.5px] font-medium">
         {label}
       </label>

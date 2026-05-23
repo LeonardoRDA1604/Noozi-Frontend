@@ -12,14 +12,14 @@ export function NumberInput({
 }: NumberInputProps) {
   return (
     <div className="form-field-single">
-      <div className='flex items-center gap-2 mb-2"'>
+      <div className='flex items-center gap-2 mb-2'>
       <label htmlFor={id} className="mb-[1.5px] font-medium">
         {label}
       </label>
       {tooltip && <Tooltip text={tooltip} />}
       </div>
       <input
-        className="w-full bg-noozi-surface border border-solid border-noozi-gray-300 rounded-lg px-3 py-2"
+        className="w-full bg-noozi-input_field border border-solid border-noozi-gray-300 rounded-lg px-3 py-2"
         type="number"
         id={id}
         value={value}

@@ -4,6 +4,7 @@ import type {
   CreateProductDTO,
   UpdateProductDTO,
 } from "@/types/Product.types";
+import { formatCurrency } from "@/utils/Currency";
 
 export const productService = {
   // Retorna todos os produtos
@@ -18,11 +19,29 @@ export const productService = {
     return data;
   },
 
-  // Cria um novo produto — id_product, created_at e updated_at são gerados pelo servidor
-  create: async (payload: CreateProductDTO): Promise<Product> => {
-    const { data } = await api.post("/products", payload);
-    return data;
-  },
+  // Cria um novo produto com id_product auto-incrementado
+create: async (payload: CreateProductDTO): Promise<Product> => {
+  const { data: allProducts } = await api.get("/products");
+
+  const nextId =
+    allProducts.length > 0
+      ? String(
+          Math.max(
+            ...allProducts
+              .map((p: Product) => Number(p.id_product))
+              .filter((n: number) => !isNaN(n)) // ignora produtos sem id_product válido
+          ) + 1
+        )
+      : "1";
+
+  const { data } = await api.post("/products", {
+    id_product: nextId,
+    ...payload,
+    item_price: parseFloat(payload.item_price.toFixed(2)),
+  });
+
+  return data;
+},
 
   // Atualiza um produto — apenas os campos enviados no payload são alterados
   update: async (id: string, payload: UpdateProductDTO): Promise<Product> => {
@@ -69,6 +88,24 @@ export const productService = {
       if (!p.expiration_date) return false;
       return new Date(p.expiration_date) < today; // venceu antes de hoje
     });
+  },
+
+  // Retorna o custo total de todos os produtos expirados (preço do item * quantidade em estoque)
+  getExpiredProductCost: async(): Promise<string> => {
+    const { data } = await api.get("/products");
+    const today = new Date();
+    const totalCost = data
+    .filter((p: Product) => {
+      if (!p.expiration_date) return false;
+      return new Date(p.expiration_date) < today;
+    })
+    .reduce((total: number, p: Product) => {
+        const price = p.item_price || 0;
+        const quantity = p.stock_quantity || 0;
+        return total + (price * quantity);
+      }, 0); // 0 é o valor inicial da soma
+    
+    return  formatCurrency(totalCost);
   },
 
   // Retorna produtos ativos

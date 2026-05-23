@@ -6,6 +6,8 @@ import TableHearder from "@/components/Cards/TableHeader/TableHeader";
 import { GetBreakpoints } from "../../../utils/GetBrakpoints";
 import { COLUMNS, GRID_COLS } from "@/constants/Columns";
 import { useProductCardColumns } from "@/hooks/ProductCardColumns";
+import { formatCurrency } from "@/utils/Currency";
+
 
 export default function CreateCardItem({ filter, products }: filter) {
   const miniSearch = useMemo(() => structureSearch, []);
