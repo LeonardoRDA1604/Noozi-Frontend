@@ -6,7 +6,7 @@ import TableHeader from "@/components/Cards/TableHeader/TableHeader";
 import { GetBreakpoints } from "../../../utils/GetBreakpoints";
 import { COLUMNS, GRID_COLS } from "@/constants/columns";
 import { useProductCardColumns } from "@/hooks/ProductCardColumns";
-import { formatCurrency } from "@/utils/Currency";
+// import { formatCurrency } from "@/utils/Currency";
 
 
 export default function CreateCardItem({ filter, products }: filter) {
