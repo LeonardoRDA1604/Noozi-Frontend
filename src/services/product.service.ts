@@ -35,8 +35,8 @@ create: async (payload: CreateProductDTO): Promise<Product> => {
       : "1";
 
   const { data } = await api.post("/products", {
-    ...payload,
     id_product: nextId,
+    ...payload,
     item_price: parseFloat(payload.item_price.toFixed(2)),
   });
 
