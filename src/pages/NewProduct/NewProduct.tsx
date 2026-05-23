@@ -8,7 +8,8 @@ import { DateInput } from "@/components/Inputs/DateInput";
 import { ToggleSwitch } from "@/components/Inputs/ToggleSwitch";
 import { Send } from "lucide-react";
 import { ActionButton } from "@/components/Buttons/ActionButton/ActionButton";
-import { useProductMetrics } from "@/hooks/useProductMetrics";
+import { productService } from "@/services/product.service";
+import type { CreateProductDTO } from "@/types/Product.types";
 
 const CHAR_LIMITS = {
   NAME: 120,
@@ -23,7 +24,6 @@ const CHAR_LIMITS = {
 } as const;
 
 export default function NewProductForm() {
-  const { isLoading } = useProductMetrics();
   const [name, setName] = useState("");
   const [brand, setBrand] = useState("");
   const [description, setDescription] = useState("");
@@ -36,8 +36,90 @@ export default function NewProductForm() {
   const [sku, setSku] = useState("");
   const [status, setStatus] = useState(true);
   const [lowLevel, setLowLevel] = useState("");
-  const [highLevel, setHighLevel] = useState("")
+  const [highLevel, setHighLevel] = useState("");
   // const [image, setImage] = useState<File | null>(null);
+
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
+
+  // Converte data DD/MM/AAAA para YYYY-MM-DD (formato ISO)
+  const convertDateToISO = (dateStr: string): string | undefined => {
+    if (!dateStr || dateStr.length !== 10) return undefined;
+    const [day, month, year] = dateStr.split("/");
+    return `${year}-${month}-${day}`;
+  };
+
+  // Reseta todos os campos do formulário
+  const resetForm = () => {
+    setName("");
+    setBrand("");
+    setDescription("");
+    setCategory("");
+    setQuantity("");
+    setUnit("");
+    setPriceValue(0);
+    setDate("");
+    setBatch("");
+    setSku("");
+    setStatus(true);
+    setLowLevel("");
+    setHighLevel("");
+    setSubmitError(null);
+  };
+
+  // Função de submit do formulário
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setSubmitError(null);
+
+    // Validação de campos obrigatórios
+    if (!name.trim()) {
+      setSubmitError("O nome do produto é obrigatório.");
+      return;
+    }
+
+    if (!sku.trim()) {
+      setSubmitError("O SKU é obrigatório.");
+      return;
+    }
+
+    if (!quantity || parseInt(quantity) < 0) {
+      setSubmitError("A quantidade deve ser um número válido.");
+      return;
+    }
+
+    // Monta o payload para enviar ao servidor
+    const productData: CreateProductDTO = {
+      sku: sku.trim(),
+      name: name.trim(),
+      description: description.trim() || undefined,
+      category: category.trim() || undefined,
+      brand: brand.trim() || undefined,
+      item_price: priceValue / 100, // converte centavos para reais
+      stock_quantity: parseInt(quantity),
+      unit_measure: unit.trim() || undefined,
+      low_stock_level: lowLevel ? parseInt(lowLevel) : undefined,
+      over_stock_level: highLevel ? parseInt(highLevel) : undefined,
+      batch_code: batch.trim() || undefined,
+      expiration_date: convertDateToISO(date),
+      is_active: status,
+    };
+
+    try {
+      setIsSubmitting(true);
+      await productService.create(productData);
+      
+      // Sucesso: limpa o formulário e mostra mensagem
+      alert("✅ Produto cadastrado com sucesso!");
+      resetForm();
+      
+    } catch (error) {
+      console.error("Erro ao cadastrar produto:", error);
+      setSubmitError("Erro ao cadastrar produto. Por favor, tente novamente.");
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
 
   return (
     <div
@@ -51,7 +133,14 @@ export default function NewProductForm() {
           <p className="text-sm text-noozi-gray-600 mt-1">Preencha os dados abaixo para cadastrar um novo produto</p>
         </div>
 
-        <form className="space-y-6">
+        {/* Mensagem de erro */}
+        {submitError && (
+          <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-lg">
+            <p className="text-sm text-red-600">{submitError}</p>
+          </div>
+        )}
+
+        <form className="space-y-6" onSubmit={handleSubmit}>
           {/* Seção: Informações Básicas */}
           <div className="form-section">
             <h2 className="form-section-title">Informações Básicas</h2>
@@ -212,7 +301,8 @@ export default function NewProductForm() {
                 variant="submit"
                 icon={Send}
                 label="CADASTRAR PRODUTO"
-                isLoading={isLoading}
+                isLoading={isSubmitting}
+                disabled={isSubmitting}
               />
             </div>
           </div>

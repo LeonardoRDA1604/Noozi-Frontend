@@ -3,6 +3,7 @@ import type { filter } from '@/types/FilterSearchbar.types';
 import { structureSearch } from '@/constants/MiniSearch';
 import type { Product } from '@/types/Product.types';
 import arrozRice from '../../../assets/images/arrozRice.png'
+import { formatCurrency } from "@/utils/Currency";
 
 
 export default function CreateCardItem({ filter, products }: filter) {
@@ -62,7 +63,7 @@ function CardItem({ item }: { item: Product }) {
 
           <div>
             <p className="text-[1.9vh] font-medium text-[#9F9F9F]">Preço</p>
-            <p className="text-[1.8vh] font-bold">R$ {item.item_price}</p>
+            <p className="text-[1.8vh] font-bold">{formatCurrency(item.item_price)}</p>
           </div>
           <div>
             <p className="text-[1.9vh] font-medium text-[#9F9F9F]">Quantidade</p>
