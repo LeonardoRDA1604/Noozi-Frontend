@@ -12,26 +12,26 @@ import { formatCurrency } from "@/utils/Currency";
 export default function CreateCardItem({ filter, products }: filter) {
   const miniSearch = useMemo(() => structureSearch, []);
 
-  const [filterDebouncado, setFilterDebouncado] = useState(filter);
+  const [filterDebounced, setFilterDebounced] = useState(filter);
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      setFilterDebouncado(filter);
+      setFilterDebounced(filter);
     }, 200);
 
     return () => clearTimeout(timer);
   }, [filter]);
 
   const itemsFilter = useMemo(() => {
-    if (!filterDebouncado) return products;
+    if (!filterDebounced) return products;
 
-    const searchResults = miniSearch.search(filterDebouncado);
+    const searchResults = miniSearch.search(filterDebounced);
     if (searchResults.length === 0) return products;
 
     return searchResults
       .map((r) => products.find((item) => item.id_product === r.id_product))
       .filter(Boolean) as Product[];
-  }, [filterDebouncado, miniSearch, products]);
+  }, [filterDebounced, miniSearch, products]);
 
   return (
     <>
