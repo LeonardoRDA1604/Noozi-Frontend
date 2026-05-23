@@ -19,9 +19,14 @@ export default function Products() {
 
   return (
     <>
-      <div>
-        <Searchbar currentText={currentText} setCurrentText={setCurrentText} />
-        <CreateCardItem products={products} filter={currentText} />
+      <div className="p-4 bg-[#f9faff]">
+        <h1 className="flex items-center justify-center text-4xl font-bold text-noozi-bright_blue">
+          Noozi/products-page
+        </h1>
+      </div>
+      
+      <Searchbar currentText={currentText} setCurrentText={setCurrentText}/>
+      <CreateCardItem products={products} filter={currentText}/>
 
         {/* Div dos botões de edição e delete */}
         <div className="gap-2 my-6 max-w-xs ">
