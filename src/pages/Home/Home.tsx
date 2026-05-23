@@ -6,6 +6,7 @@ import { MetricsModal } from "@/components/Modals/MetricsModal/MetricsModal";
 import { useProductMetrics } from "@/hooks/useProductMetrics";
 import type { ModalType } from "@/types/ModalType.types";
 import { SectionTitle } from "@/components/SectionTitle/SectionTitle";
+import { RecentActivities } from "@/components/RecentActivities/RecentActivities";
 
 export default function Home() {
   const [activeModal, setActiveModal] = useState<ModalType>(null); // null = nenhum modal aberto
@@ -40,7 +41,7 @@ export default function Home() {
       </SectionTitle>
 
       <SectionTitle title="Atividades Recentes:">
-        {/* Componente de Atividades Recentes */}
+        <RecentActivities limit={8} deletedRetentionDays={30} />
       </SectionTitle>
 
       {/* Modal de métricas — abre ao clicar no título do MetricsCard (Renderiza o modal apenas quando activeModal não é null. O componente receberá o tipo para buscar os produtos corretos.) */}
