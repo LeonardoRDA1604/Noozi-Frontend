@@ -10,6 +10,7 @@ import { Send } from "lucide-react";
 import { ActionButton } from "@/components/Buttons/ActionButton/ActionButton";
 import { productService } from "@/services/product.service";
 import type { CreateProductDTO } from "@/types/Product.types";
+import { convertDateToISO } from "@/utils/ConvertDateToISO";
 
 const CHAR_LIMITS = {
   NAME: 120,
@@ -41,13 +42,6 @@ export default function NewProductForm() {
 
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
-
-  // Converte data DD/MM/AAAA para YYYY-MM-DD (formato ISO)
-  const convertDateToISO = (dateStr: string): string | undefined => {
-    if (!dateStr || dateStr.length !== 10) return undefined;
-    const [day, month, year] = dateStr.split("/");
-    return `${year}-${month}-${day}`;
-  };
 
   // Reseta todos os campos do formulário
   const resetForm = () => {
