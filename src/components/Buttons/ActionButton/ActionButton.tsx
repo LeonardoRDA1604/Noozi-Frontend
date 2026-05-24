@@ -5,29 +5,18 @@ import { productService } from "@/services/product.service";
 
 // Estilos base compartilhados por todas as variantes
 // rounded xl se for deixar no padrão do resto da página
-const baseStyle = "inline-flex items-center justify-center gap-2 font-medium rounded-lg transition-all duration-150 disabled:opacity-50 disabled:cursor-not-allowed active:scale-[0.98] focus:outline-none focus:ring-2 focus:ring-offset-1";
+const baseStyle = "inline-flex items-center justify-center gap-2 font-medium rounded-lg transition-all duration-150 will-change-transform active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none focus:ring-2";
 
 // Estilos específicos por variante
 const variantStyles: Record<ActionButtonVariant, string> = {
-  primary: "w-full h-11 bg-noozi-bright_blue text-white text-sm hover:opacity-90 focus:ring-noozi-bright_blue/40",
-  submit:  "w-full h-11 bg-noozi-bright_blue text-white text-sm hover:opacity-90 focus:ring-noozi-bright_blue/40",
-  edit:    "h-8 px-3 bg-noozi-surface text-noozi-text text-xs border border-noozi-border hover:bg-noozi-gray-200 focus:ring-noozi-border",
-  delete:  "h-8 px-3 bg-status-danger/10 text-status-danger text-xs border border-status-danger/20 hover:bg-status-danger/20 focus:ring-status-danger/40",
+  primary: "w-full h-11 bg-noozi-bright_blue text-white text-sm hover:opacity-90 active:opacity-80 focus:ring-noozi-bright_blue/40",
+  submit:  "w-full h-11 bg-noozi-bright_blue text-white text-sm hover:opacity-90 active:opacity-80 focus:ring-noozi-bright_blue/40",
+  edit:    "h-8 px-3 bg-noozi-bright_blue/10 text-noozi-bright_blue text-xs border border-noozi-bright_blue/20 hover:bg-noozi-bright_blue/20 active:opacity-80 focus:ring-noozi-bright_blue/40",
+  delete:  "h-8 px-3 bg-status-danger/10 text-status-danger text-xs border border-status-danger/20 hover:bg-status-danger/20 active:bg-status-danger/30 focus:ring-status-danger/40",
   cancel:  "h-8 px-3 bg-noozi-surface text-noozi-muted text-xs border border-noozi-border hover:bg-noozi-gray-200 focus:ring-noozi-border",
-  save:    "h-8 px-3 bg-noozi-bright_blue text-white text-xs hover:opacity-90 focus:ring-noozi-bright_blue/40",
+  // antigo edit(maybe cancel):    "h-8 px-3 bg-noozi-surface text-noozi-text text-xs border border-noozi-border hover:bg-noozi-gray-200 focus:ring-noozi-border",
+  save:    "h-8 px-3 bg-noozi-bright_blue text-white text-xs hover:opacity-90 active:opacity-80 focus:ring-noozi-bright_blue/40",
 };
-
-// const baseStyle = "inline-flex items-center rounded-md justify-center gap-2 font-medium transition-all duration-150 will-change-transform disabled:opacity-50 disabled:cursor-not-allowed active:scale-[0.98] focus:outline-none focus:ring-2 focus:ring-noozi-bright_blue/40";
-
-// const variantStyles: Record<ActionButtonVariant, string> = {
-//   primary: "w-full h-11 bg-noozi-bright_blue text-white text-sm hover:opacity-90 active:opacity-80 focus:ring-noozi-bright_blue/40",
-//   submit:  "w-full h-11 bg-noozi-bright_blue text-white text-sm hover:opacity-90 active:opacity-80 focus:ring-noozi-bright_blue/40",
-//   edit:    "h-8 px-3 bg-noozi-surface text-noozi-text text-xs border border-noozi-border hover:bg-noozi-gray-200 focus:ring-noozi-bright_blue/40",
-//   delete:  "h-8 px-3 bg-status-danger/10 text-status-danger text-xs border border-status-danger/20 hover:bg-status-danger/20 active:bg-status-danger/30 focus:ring-status-danger/40",
-//   cancel:  "h-8 px-3 bg-noozi-surface text-noozi-muted text-xs border border-noozi-border hover:bg-noozi-gray-200 focus:ring-noozi-border",
-//   save:    "h-8 px-3 bg-noozi-bright_blue text-white text-xs hover:opacity-90 active:opacity-80 focus:ring-noozi-bright_blue/40",
-// };
-
 
 export function ActionButton({
   label, 
