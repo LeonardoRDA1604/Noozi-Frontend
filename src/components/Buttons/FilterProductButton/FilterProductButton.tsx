@@ -17,18 +17,18 @@ export default function FilterProductButton({
   const [filterModal, setFilterModal] = useState(false);
 
   return (
-    <div className="mr-6 flex justify-center items-center w-[30px] h-[90%]">
-      <div className="relative w-full">
+    <div className="flex items-center pr-6">
+      <div className="relative">
         <button
-          className="bg-noozi-input_field rounded-[3.5px] w-full"
           onClick={() => setFilterModal(true)}
+          className="flex items-center justify-center h-[70%] aspect-square min-h-[42px] min-w-[42px] bg-noozi-input_field border border-solid border-noozi-gray-300 rounded-lg hover:bg-noozi-gray-100 transition-colors duration-150"
         >
-          <Funnel />
+          <Funnel size={18} color={hasActiveFilters ? "#0B4EFF" : "#8a8a8a"} />
         </button>
 
         {/* Badge indicando filtros ativos */}
         {hasActiveFilters && (
-          <span className="absolute -top-1 -right-1 w-2.5 h-2.5 bg-noozi-bright_blue rounded-full" />
+          <span className="absolute -top-1 -right-1 w-2.5 h-2.5 bg-noozi-bright_blue rounded-full border-2 border-white" />
         )}
       </div>
 
