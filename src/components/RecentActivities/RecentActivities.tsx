@@ -1,36 +1,7 @@
-import { PackagePlus, PackageMinus, RefreshCw } from "lucide-react";
 import { useRecentActivities } from "@/hooks/useRecentActivities";
-import type { RecentActivitiesProps, RecentActivity, ActivityType } from "@/types/ActivityLog.types";
-
-const activityConfig: Record<ActivityType, {
-  label: string;
-  icon: React.ElementType;
-  iconClass: string;
-  badgeClass: string;
-  badgeText: string;
-}> = {
-  created: {
-    label:      "Produto cadastrado",
-    icon:       PackagePlus,
-    iconClass:  "text-status-success",
-    badgeClass: "bg-status-success/10 text-status-success",
-    badgeText:  "Cadastrado",
-  },
-  updated: {
-    label:      "Produto atualizado",
-    icon:       RefreshCw,
-    iconClass:  "text-noozi-sky_blue",
-    badgeClass: "bg-noozi-sky_blue/10 text-noozi-sky_blue",
-    badgeText:  "Atualizado",
-  },
-  deleted: {
-    label:      "Produto removido",
-    icon:       PackageMinus,
-    iconClass:  "text-status-danger",
-    badgeClass: "bg-status-danger/10 text-status-danger",
-    badgeText:  "Removido",
-  },
-};
+import type { RecentActivitiesProps, RecentActivity } from "@/types/ActivityLog.types";
+import { ACTIVITY_CONFIG } from "@/constants/activityConfig";
+import { RefreshCw } from "lucide-react";
 
 // Formata ISO → "01/01/2024 às 14:30"
 function formatDateTime(iso: string): string {
@@ -46,7 +17,7 @@ function formatDateTime(iso: string): string {
 }
 
 function ActivityItem({ activity }: { activity: RecentActivity }) {
-  const config = activityConfig[activity.activity_type];
+  const config = ACTIVITY_CONFIG[activity.activity_type];
   const Icon   = config.icon;
 
   return (
