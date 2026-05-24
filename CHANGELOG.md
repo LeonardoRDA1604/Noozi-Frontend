@@ -21,6 +21,8 @@ Formato baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.0.0/), 
     - [[1.1.0] - 2026-05-13](#110---2026-05-13)
     - [[1.2.0] - 2026-05-18](#120---2026-05-18)
     - [[1.2.1] - 2026-05-21](#121---2026-05-21)
+    - [[1.3.0] - 2026-05-24](#130---2026-05-24)
+    - [[1.4.0] - 2026-05-24](#140---2026-05-24)
 
 ---
 
@@ -153,8 +155,6 @@ Formato baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.0.0/), 
 - Removido `invisible` do Footer que escondia o elemento mas mantinha espaço no layout
 - Substituídos `div` com `onClick` por `Link` e `button` nos itens de navegação (semântica e acessibilidade)
 
----
-
 </details>
 
 ---
@@ -284,8 +284,6 @@ Formato baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.0.0/), 
 
 O problema não impacta o funcionamento atual da aplicação e será tratado em uma correção futura.
 
----
-
 </details>
 
 ---
@@ -364,7 +362,206 @@ O problema não impacta o funcionamento atual da aplicação e será tratado em 
 
 - Alguns tokens de cor arbitrários (`bg-[#f5f5f5]`) ainda precisam ser migrados totalmente para os tokens oficiais do Design System.
 
+</details>
+
 ---
+
+### [1.3.0] - 2026-05-24
+
+<details>
+  <summary style="background-color: white; color: black"><b>ℹ️ Clique para expandir o log de alterações da versão [1.3.0]</b></summary>
+  <br />
+
+#### ✨ Adicionado
+- Sistema reutilizável de Tooltips para inputs e formulários
+- Suporte opcional a tooltips em componentes de input reutilizáveis
+- Estrutura tipada dedicada para inputs e tooltips
+- Campos de alerta de estoque mínimo e máximo no formulário de produtos
+- Novos variants (`cancel` e `save`) para `ActionButton`
+- Sistema completo de modais reutilizáveis:
+  - `BaseModal`
+  - `MetricsModal`
+  - `ProductModal`
+- Estrutura reutilizável de seções com componente `SectionTitle`
+- Sistema de rastreamento de atividades recentes:
+  - criação
+  - atualização
+  - remoção de produtos
+- Componente `RecentActivities`
+- Serviço `activityLogService`
+- Tabela `activity_logs` no `db.json`
+- Métrica de custo total de produtos vencidos
+- Novo card de métricas financeiras na Home
+- Persistência funcional do formulário `NewProduct` integrada ao `db.json`
+- Utilitário compartilhado `dateHelpers.ts`
+- Estrutura responsiva baseada em colunas para produtos
+- Componente reutilizável `TableHeader`
+- Sistema de breakpoints reutilizável para tabela responsiva
+- Novos tokens de Design System:
+  - `default_screen`
+  - `input_field`
+
+---
+
+#### 🎨 Melhorado
+- Organização visual do formulário `NewProduct` em seções semânticas
+- Hierarquia visual da Home
+- Responsividade geral da listagem de produtos
+- Escalabilidade da arquitetura de tabelas responsivas
+- UX dos inputs monetários
+- Estrutura visual da Searchbar e filtros
+- Consistência visual utilizando tokens oficiais do Design System
+- Legibilidade em telas extremamente pequenas
+- Responsividade de métricas, status e atividades recentes
+- Organização e padronização da arquitetura de componentes reutilizáveis
+- Estrutura visual dos modais com header sticky
+- Feedback visual dos cards e seções através de hover states
+- Estrutura visual dos indicadores de status ativos/inativos
+
+---
+
+#### 🔧 Alterado
+- Refatoração do `NewProduct` para fluxo totalmente vertical
+- Refatoração dos componentes de input para tipagem desacoplada
+- Refatoração da Home para utilização de `SectionTitle`
+- Refatoração do layout de produtos de cards para tabela responsiva
+- Extração da configuração de colunas para hook reutilizável
+- Extração da lógica de conversão de data para utilitário compartilhado
+- Centralização de cores através do `tailwind.config.js`
+- Atualização do sistema de filtros e Searchbar para Design Tokens
+- Ajuste progressivo de tipografia baseado em breakpoints
+- Padronização dos nomes:
+  - `GetBreakpoints`
+  - `TableHeader`
+  - `filterDebounced`
+- Estrutura de imports reorganizada após refactors
+- Atualização do README para status `v1.2.1`
+
+---
+
+#### 🧹 Removido
+- Upload temporário de imagem no formulário de produtos
+- Estados e imports obsoletos relacionados ao upload
+- Headings temporários de identificação de páginas
+- Tipagens não utilizadas relacionadas ao formulário de produto
+
+---
+
+#### 🐛 Corrigido
+- Problema de scroll no header dos modais
+- Problemas de responsividade em telas muito pequenas
+- Erro de tag não fechada na página `Products`
+- Correção de typo em:
+  - `GetBrakpoints`
+  - `TableHearder`
+  - `filterDebouncado`
+- Correções de imports quebrados após renomeações
+- Correção do identificador `id_log` incompatível com `json-server`
+- Correções de renderização de estados vazios em `RecentActivities`
+- Correções de alinhamento visual entre Searchbar e inputs reutilizáveis
+- Ajustes de bordas, espaçamentos e responsividade em componentes de listagem
+
+---
+
+#### ⚠️ Débito Técnico
+- O sistema ainda utiliza `json-server` como camada mock temporária
+- O upload de imagens permanece comentado aguardando implementação futura
+- O sistema de atividades ainda depende parcialmente de timestamps mockados
+- O fluxo de atualização de produtos ainda pode ser expandido para persistência completa via backend real
+- Algumas implementações futuras permanecem temporariamente comentadas para evitar warnings de lint/build
+
+</details>
+
+---
+
+### [1.4.0] - 2026-05-24
+
+<details>
+  <summary style="background-color: white; color: black"><b>ℹ️ Clique para expandir o log de alterações da versão [1.4.0]</b></summary>
+  <br />
+
+#### ✨ Adicionado
+- Indicador visual ativo aprimorado na navegação mobile do Footer
+- Badge de notificação no Header
+- Badges contextuais de atividades recentes:
+  - `Cadastrado`
+  - `Atualizado`
+  - `Removido`
+- Subtítulos opcionais em `SectionTitle`
+- Estados interativos avançados nos botões reutilizáveis:
+  - active scale
+  - focus ring refinado
+  - transitions aprimoradas
+- Melhorias de acessibilidade:
+  - `aria-current`
+  - `aria-modal`
+  - `role="dialog"`
+  - `aria-label`
+- Comentários semânticos documentando tokens do Design System
+
+---
+
+#### 🎨 Melhorado
+- UX geral do Sidebar Drawer com visual mais moderno e responsivo
+- Feedback visual e microinterações de botões reutilizáveis
+- Estrutura visual do Header com hierarquia e espaçamento refinados
+- Layout da Home reorganizado em abordagem mobile-first
+- Organização visual do formulário `NewProduct`
+- Clareza textual da Searchbar de produtos
+- Estados ativos da navegação mobile
+- Hierarquia visual de `RecentActivities`
+- Responsividade dos cards de métricas
+- Consistência visual entre cards, botões e modais utilizando `rounded-xl`
+- Contraste e visibilidade de Tooltips para acessibilidade
+- Navegação por teclado com focus states mais consistentes
+- Feedback visual de hover, active e focus em múltiplos componentes
+- Estrutura visual das atividades recentes com cards individuais
+- Legibilidade e hierarquia tipográfica de títulos e subtítulos
+- Consistência visual de headings e títulos de seção
+- Animações e transições gerais da interface
+
+---
+
+#### 🔧 Alterado
+- Limite de exibição de atividades recentes alterado de `8` para `10`
+- Refatoração do Header para estrutura semântica utilizando `nav`
+- Refatoração do Sidebar para animações e overlay aprimorados
+- Refatoração dos `MetricsCard` para sizing responsivo
+- Refatoração de `SectionTitle`:
+  - redução de tipografia
+  - substituição de `space-y` por `gap`
+- Refatoração do componente `RecentActivities`
+- Atualização do variant `edit` para utilizar paleta oficial da marca
+- Centralização de estados visuais utilizando Design Tokens
+- Ajustes de espaçamento e grid responsivo na Home
+- Atualização da arquitetura visual dos botões reutilizáveis
+
+---
+
+#### 🧹 Removido
+- Comentário residual deixado acidentalmente no código
+- Dois pontos (`:`) desnecessários em títulos de seção da Home
+
+---
+
+#### 🐛 Corrigido
+- Fechamento do Sidebar ao clicar fora do menu
+- Contraste insuficiente em Tooltips
+- Acessibilidade da Searchbar com `aria-label`
+- Acessibilidade da navegação Home no Header
+- Texto alternativo (`alt`) do logo para leitores de tela
+- Ajustes de alinhamento e balanceamento visual de ícones
+- Correções de estados visuais ativos no Footer mobile
+- Melhorias de acessibilidade e navegação por teclado
+- Correções de consistência visual em estados hover/active
+
+---
+
+#### ⚠️ Débito Técnico
+- Algumas animações ainda dependem exclusivamente de transições CSS locais e podem futuramente ser centralizadas
+- O sistema visual ainda possui partes parcialmente desacopladas do Design System global
+- A arquitetura de acessibilidade continua em evolução incremental componente por componente
+- Alguns componentes reutilizáveis ainda podem receber abstrações adicionais para reduzir duplicação de estilos
 
 </details>
 
