@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { productService } from "@/services/product.service";
 import type { ProductMetrics } from "@/types/ProductMetrics.types";
-import type { Product } from "@/types/Product.types";
+// import type { Product } from "@/types/Product.types";
 
 export function useProductMetrics() {
   const [metrics, setMetrics] = useState<ProductMetrics>({

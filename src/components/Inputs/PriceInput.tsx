@@ -1,4 +1,4 @@
-import { useState } from "react";
+// import { useState } from "react";
 import { Tooltip } from "@/components/ToolTip/ToolTip";
 
 import type { PriceInputProps } from "@/types/InputTypes/PriceInput.types";
@@ -64,7 +64,7 @@ export function PriceInput({ label, id, value, tooltip, onChange }: PriceInputPr
         type="text"
         id={id}
         placeholder="R$ 0,00"
-        value={formatPrice(value)}
+        value={value === 0 ? "" : formatPrice(value)}
         onChange={handleChange}
         onKeyDown={handleKeyDown}
       />

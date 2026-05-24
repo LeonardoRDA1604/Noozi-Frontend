@@ -22,8 +22,8 @@ Este repositório contém o código-fonte do **Frontend** da aplicação em sua 
 ## Índice
 - [1. Descrição](#-descrição)
 - [2. Objetivo do Projeto](#-objetivo-do-projeto)
-- [2.1. Para o Negócio (Empreendedores e Gestores de PMEs)](#-para-o-negócio-empreendedores-e-gestores-de-pmes)
-- [2.2. Para a Equipe de Desenvolvimento (Aprendizado e Experiência de Mercado)](#-para-a-equipe-de-desenvolvimento-aprendizado-e-experiência-de-mercado)
+    - [2.1. Para o Negócio (Empreendedores e Gestores de PMEs)](#-para-o-negócio-empreendedores-e-gestores-de-pmes)
+    - [2.2. Para a Equipe de Desenvolvimento (Aprendizado e Experiência de Mercado)](#-para-a-equipe-de-desenvolvimento-aprendizado-e-experiência-de-mercado)
 - [3. Tecnologias e Ferramentas Utilizadas](#️-tecnologias-e-ferramentas-utilizadas)
 - [4. Design de Interfaces e Prototipação](#-design-de-interfaces-e-prototipação-figma)
 - [5. Responsividade](#-responsividade)
@@ -364,9 +364,9 @@ npm run server
 
 ## 🚧 Status do Projeto
 
-🟡 **Em desenvolvimento (Construção do MVP)**: A arquitetura base e o ambiente de desenvolvimento do frontend já foram estabelecidos. O Design System completo (cores, tipografia, componentes base) e o roteamento global com *Mobile-First* (AppLayout, Header, Footer e Sidebar) já estão implementados e funcionais. 
+🟡 **Em desenvolvimento (Construção do MVP - v1.2.1)**: A arquitetura base, o roteamento global e o Design System (*Mobile-First*) já estão plenamente estabelecidos. O projeto avançou na construção do *módulo de produtos*, com a listagem dinâmica de itens, barra de pesquisa funcional e a tela de cadastro de novos produtos, que conta com um sistema de formulários reutilizáveis (incluindo máscaras de preço e datas).
 
-No momento, o desenvolvimento foca na construção das *features* principais detalhadas no *backlog*: componentes das telas, criação dos formulários de cadastro, listagem e filtros de produtos, além da configuração da API simulada (`db.json` / JSON Server) para validar as regras de negócio e os fluxos de navegação.
+No momento, a aplicação já está integrada a uma API simulada (`json-server`) através de uma camada centralizada de serviços e *hooks* (`useProducts`). O foco atual do desenvolvimento está na implementação de *indicadores-chave na Home* (que servirão de base estrutural para um futuro *Dashboard*), na criação de um *log de registros de entrada, saída e edição de produtos*, além da inclusão de *validações de frontend nos campos de formulário*, finalização dos *filtros de listagem* e resolução de débitos técnicos de UI/UX. Este processo visa consolidar toda a interface do MVP e preparar o terreno para a futura integração com o *Backend* definitivo.
 
 ---
 

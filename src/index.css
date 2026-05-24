@@ -6,7 +6,7 @@
 
 @layer base {
   body {
-    @apply bg-noozi-background text-noozi-text font-sans;
+    @apply bg-noozi-default_screen text-noozi-text font-sans;
   }
 
   h1, h2, h3, h4, h5, h6 {
@@ -30,10 +30,19 @@
     font-size: 13px;
   }
 
+  /* Tela extremamente pequena */
+  @media (max-width: 366px){
+    .product-form-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      font-size: 11px;
+    }
+  }
+
   /* Tablet: 768px+ */
   @media (min-width: 768px) {
     .product-form-grid {
       grid-template-columns: repeat(2, minmax(0, 1fr));
+      font-size: medium;
     }
   }
 
@@ -41,6 +50,7 @@
   @media (min-width: 1024px) {
     .product-form-grid {
       grid-template-columns: repeat(4, minmax(0, 1fr));
+      font-size: large
     }
   }
 
