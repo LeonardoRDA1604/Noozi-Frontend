@@ -3,7 +3,8 @@ import { ActionButton } from "@/components/Buttons/ActionButton/ActionButton";
 import type { Product } from "@/types/Product.types";
 
 export function useProductCardColumns(item: Product) {
-    const circleColor = "bg-green-400 border-green-200 shadow-green-400/50";
+    const circleColor = item.is_active ? "bg-green-400 border-green-300 shadow-green-400/50": "bg-gray-400 border-gray-300 shadow-gray-400/50";
+    const textStatus =item.is_active ? "Ativo" : "Inativo";
     const value: Record<string, React.ReactNode> = {
 
     Status: (
@@ -11,7 +12,7 @@ export function useProductCardColumns(item: Product) {
         <div
           className={`w-2 h-2 shrink-0 rounded-full border-2 shadow-lg ${circleColor} sm:w-2 sm:h-2 md:w-3 md:h-3 lg:w-3 lg:h-3 xl:w-4 xl:h-4 2xl:w-4 2xl:h-4`}
         />
-        <span className="text-black font-medium text-[12px] sm:text-[14px] md:text-[16px] lg:text-[16px] xl:text-[16px] 2xl:text-[16px]">Ativo</span>
+        <span className="text-black font-medium text-[12px] sm:text-[14px] md:text-[16px] lg:text-[16px] xl:text-[16px] 2xl:text-[16px]">{textStatus}</span>
       </div>
     ),
 
