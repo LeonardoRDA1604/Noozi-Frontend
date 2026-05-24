@@ -45,7 +45,12 @@ export default function Products() {
           variant="delete"
           label="Apagar"
           icon={Trash2}
-          onSuccess={() => {}}
+          // productId={product.id_product}
+          onSuccess={() => {
+            // onClose()      // fecha o modal
+            // refetch()      // atualiza a lista de produtos
+          }}
+            // onError={() => toast("Erro ao apagar produto")}
         />
       </div>
     </>
