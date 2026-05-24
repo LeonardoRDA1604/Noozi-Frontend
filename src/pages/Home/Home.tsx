@@ -18,7 +18,7 @@ export default function Home() {
 
   return (
     <div className="flex flex-col gap-6 p-4">
-      <SectionTitle title="Resumo Geral:" className="my-4 mx-2">
+      <SectionTitle title="Resumo Geral" className="my-4 mx-2">
         {/* Cards de métricas — valores vindos da API via useProductMetrics */}
         <div className="flex flex-wrap gap-4">
           <MetricsCard icon={Package}           title="Total de cadastros"          value={isLoading ? "..." : metrics.total}               href="/products" />
@@ -32,7 +32,7 @@ export default function Home() {
         </div>
       </SectionTitle>
 
-      <SectionTitle title="Ações Rápidas:" className="my-4 mx-2">
+      <SectionTitle title="Ações Rápidas" className="my-4 mx-2">
         {/* Botões de Ações rápidas */}
         <div className="flex flex-col gap-2 max-w-xs">
           <ActionButton variant="primary"       label="Cadastro de Produto"   icon={CirclePlus}   href="/products/new" />
@@ -40,7 +40,7 @@ export default function Home() {
         </div>
       </SectionTitle>
 
-      <SectionTitle title="Atividades Recentes:" className="my-4 mx-2">
+      <SectionTitle title="Atividades Recentes" className="my-4 mx-2">
         <RecentActivities limit={10} deletedRetentionDays={30} />
       </SectionTitle>
 
