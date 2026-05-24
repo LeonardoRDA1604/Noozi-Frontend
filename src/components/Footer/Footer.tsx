@@ -13,19 +13,53 @@ export function Footer() {
             const isActive = pathname === href;
 
             return (
-              <li key={href}>
+              <li key={href} className="relative flex-1">
                 <Link
                   to={href}
                   aria-label={label}
                   aria-current={isActive ? "page" : undefined}
-                  className="flex flex-col items-center gap-1 min-w-[44px] min-h-[44px] justify-center"
+                  className={`
+                    relative flex flex-col items-center justify-center gap-1 min-h-[44px] py-3 transition-all duration-200 active:scale-95 text-xs font-medium`}
                 >
+                  {/* indicador superior (Active Tab Indicator) */}
+                  <span
+                    className={`
+                      absolute top-0 left-1/2 -translate-x-1/2
+                      h-[3px] w-1/2 rounded-full
+                      bg-noozi-bright_blue
+                      transition-all duration-200
+                      ${isActive ? "opacity-100" : "opacity-0"}
+                    `}
+                  />
+
+                  {/* fundo leve no ativo */}
+                  <div
+                    className={`
+                      absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2
+                      w-1/2 h-[85%]
+                      rounded-lg
+                      transition-colors duration-200
+                      ${isActive ? "bg-noozi-bright_blue/10" : "bg-transparent"}
+                    `}
+                  />
+
+                  {/* ícone */}
                   <Icon
                     size={22}
-                    className={isActive ? "text-noozi-bright_blue" : "text-noozi-muted"}
-                    strokeWidth={isActive ? 2.5 : 1.8}
+                    strokeWidth={2}
+                    className={`
+                      relative z-10 transition-colors duration-200
+                      ${isActive ? "text-noozi-bright_blue" : "text-noozi-muted"}
+                    `}
                   />
-                  <span className={`text-[10px] font-medium ${isActive ? "text-noozi-bright_blue" : "text-noozi-muted"}`}>
+
+                  {/* label */}
+                  <span
+                    className={`
+                      relative z-10 text-[10px] transition-colors duration-200
+                      ${isActive ? "text-noozi-bright_blue" : "text-noozi-muted"}
+                    `}
+                  >
                     {label}
                   </span>
                 </Link>
