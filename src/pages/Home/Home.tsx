@@ -41,7 +41,7 @@ export default function Home() {
       </SectionTitle>
 
       <SectionTitle title="Atividades Recentes:" className="my-4 mx-2">
-        <RecentActivities limit={8} deletedRetentionDays={30} />
+        <RecentActivities limit={10} deletedRetentionDays={30} />
       </SectionTitle>
 
       {/* Modal de métricas — abre ao clicar no título do MetricsCard (Renderiza o modal apenas quando activeModal não é null. O componente receberá o tipo para buscar os produtos corretos.) */}
