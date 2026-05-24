@@ -472,7 +472,98 @@ O problema não impacta o funcionamento atual da aplicação e será tratado em 
 
 ---
 
+### [1.4.0] - 2026-05-24
 
+<details>
+  <summary style="background-color: white; color: black"><b>ℹ️ Clique para expandir o log de alterações da versão [1.4.0]</b></summary>
+  <br />
+
+#### ✨ Adicionado
+- Indicador visual ativo aprimorado na navegação mobile do Footer
+- Badge de notificação no Header
+- Badges contextuais de atividades recentes:
+  - `Cadastrado`
+  - `Atualizado`
+  - `Removido`
+- Subtítulos opcionais em `SectionTitle`
+- Estados interativos avançados nos botões reutilizáveis:
+  - active scale
+  - focus ring refinado
+  - transitions aprimoradas
+- Melhorias de acessibilidade:
+  - `aria-current`
+  - `aria-modal`
+  - `role="dialog"`
+  - `aria-label`
+- Comentários semânticos documentando tokens do Design System
+
+---
+
+#### 🎨 Melhorado
+- UX geral do Sidebar Drawer com visual mais moderno e responsivo
+- Feedback visual e microinterações de botões reutilizáveis
+- Estrutura visual do Header com hierarquia e espaçamento refinados
+- Layout da Home reorganizado em abordagem mobile-first
+- Organização visual do formulário `NewProduct`
+- Clareza textual da Searchbar de produtos
+- Estados ativos da navegação mobile
+- Hierarquia visual de `RecentActivities`
+- Responsividade dos cards de métricas
+- Consistência visual entre cards, botões e modais utilizando `rounded-xl`
+- Contraste e visibilidade de Tooltips para acessibilidade
+- Navegação por teclado com focus states mais consistentes
+- Feedback visual de hover, active e focus em múltiplos componentes
+- Estrutura visual das atividades recentes com cards individuais
+- Legibilidade e hierarquia tipográfica de títulos e subtítulos
+- Consistência visual de headings e títulos de seção
+- Animações e transições gerais da interface
+
+---
+
+#### 🔧 Alterado
+- Limite de exibição de atividades recentes alterado de `8` para `10`
+- Refatoração do Header para estrutura semântica utilizando `nav`
+- Refatoração do Sidebar para animações e overlay aprimorados
+- Refatoração dos `MetricsCard` para sizing responsivo
+- Refatoração de `SectionTitle`:
+  - redução de tipografia
+  - substituição de `space-y` por `gap`
+- Refatoração do componente `RecentActivities`
+- Atualização do variant `edit` para utilizar paleta oficial da marca
+- Centralização de estados visuais utilizando Design Tokens
+- Ajustes de espaçamento e grid responsivo na Home
+- Atualização da arquitetura visual dos botões reutilizáveis
+
+---
+
+#### 🧹 Removido
+- Comentário residual deixado acidentalmente no código
+- Dois pontos (`:`) desnecessários em títulos de seção da Home
+
+---
+
+#### 🐛 Corrigido
+- Fechamento do Sidebar ao clicar fora do menu
+- Contraste insuficiente em Tooltips
+- Acessibilidade da Searchbar com `aria-label`
+- Acessibilidade da navegação Home no Header
+- Texto alternativo (`alt`) do logo para leitores de tela
+- Ajustes de alinhamento e balanceamento visual de ícones
+- Correções de estados visuais ativos no Footer mobile
+- Melhorias de acessibilidade e navegação por teclado
+- Correções de consistência visual em estados hover/active
+
+---
+
+#### ⚠️ Débito Técnico
+- Algumas animações ainda dependem exclusivamente de transições CSS locais e podem futuramente ser centralizadas
+- O sistema visual ainda possui partes parcialmente desacopladas do Design System global
+- A arquitetura de acessibilidade continua em evolução incremental componente por componente
+- Alguns componentes reutilizáveis ainda podem receber abstrações adicionais para reduzir duplicação de estilos
+
+</details>
+
+---
 
 <!-- 
 ### [1.3.0] - 2026-05-01
