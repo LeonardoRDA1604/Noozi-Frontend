@@ -11,7 +11,7 @@ export function Header({ onMenuOpen }: HeaderProps) {
     <header className="fixed top-0 left-0 right-0 z-50 bg-white border-b border-noozi-border h-14">
       <div className="flex items-center justify-between h-full px-4">
 
-        {/* Hamburguer — só mobile e tablet */}
+        {/* Hamburguer */}
         <button
           onClick={onMenuOpen}
           aria-label="Abrir menu"
@@ -21,13 +21,13 @@ export function Header({ onMenuOpen }: HeaderProps) {
         </button>
 
         {/* Logo — centralizado */}
-        <Link to="/" aria-label="Ir para início">
-          <img src={nooziLogo} alt="Noozi" width={200} />
+        <Link to="/" aria-label="Ir para a página inicial">
+          <img src={nooziLogo} alt="Logo do Noozi" width={200} />
         </Link>
 
         {/* Notificações */}
         <button
-          aria-label="Notificações"
+          aria-label="Ver notificações"
           className="flex items-center justify-center h-9 w-9 rounded-md hover:bg-noozi-surface transition-colors"
         >
           <Bell size={22} className="text-noozi-text" />
