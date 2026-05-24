@@ -1,14 +1,16 @@
 import { useState } from "react";
-import { TextInput } from "@/components/Inputs/TextInput"
+import { TextInput } from "@/components/Inputs/TextInput";
 import { TextArea } from "@/components/Inputs/TextArea";
 import { NumberInput } from "@/components/Inputs/NumberInput";
 import { PriceInput } from "@/components/Inputs/PriceInput";
 import { DateInput } from "@/components/Inputs/DateInput";
-import { FileUpload } from "@/components/Inputs/FileUpload";
+// import { FileUpload } from "@/components/Inputs/FileUpload";
 import { ToggleSwitch } from "@/components/Inputs/ToggleSwitch";
-// import { Send } from "lucide-react";
-// import { ActionButton } from "@/components/Buttons/ActionButton/ActionButton";
-// import { useProductMetrics } from "@/hooks/useProductMetrics";
+import { Send } from "lucide-react";
+import { ActionButton } from "@/components/Buttons/ActionButton/ActionButton";
+import { productService } from "@/services/product.service";
+import type { CreateProductDTO } from "@/types/Product.types";
+import { convertDateToISO } from "@/utils/ConvertDateToISO";
 
 const CHAR_LIMITS = {
   NAME: 120,
@@ -18,10 +20,11 @@ const CHAR_LIMITS = {
   UNIT: 10,
   BATCH: 50,
   SKU: 50,
+  LOW_LEVEL: 10,
+  HIGH_LEVEL: 10
 } as const;
 
 export default function NewProductForm() {
-  // const { isLoading } = useProductMetrics();
   const [name, setName] = useState("");
   const [brand, setBrand] = useState("");
   const [description, setDescription] = useState("");
@@ -33,178 +36,272 @@ export default function NewProductForm() {
   const [batch, setBatch] = useState("");
   const [sku, setSku] = useState("");
   const [status, setStatus] = useState(true);
-  const [image, setImage] = useState<File | null>(null);
+  const [lowLevel, setLowLevel] = useState("");
+  const [highLevel, setHighLevel] = useState("");
+  // const [image, setImage] = useState<File | null>(null);
 
-  const handleSubmit = () => {
-    // Lógica de submit aqui para testes
-    console.log({
-      name,
-      brand,
-      description,
-      category,
-      quantity: Number(quantity),
-      unit,
-      price: priceValue / 100, // converte centavos para reais
-      date,
-      batch,
-      sku,
-      status,
-      image
-    });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
+
+  // Reseta todos os campos do formulário
+  const resetForm = () => {
+    setName("");
+    setBrand("");
+    setDescription("");
+    setCategory("");
+    setQuantity("");
+    setUnit("");
+    setPriceValue(0);
+    setDate("");
+    setBatch("");
+    setSku("");
+    setStatus(true);
+    setLowLevel("");
+    setHighLevel("");
+    setSubmitError(null);
+  };
+
+  // Função de submit do formulário
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setSubmitError(null);
+
+    // Validação de campos obrigatórios
+    if (!name.trim()) {
+      setSubmitError("O nome do produto é obrigatório.");
+      return;
+    }
+
+    if (!sku.trim()) {
+      setSubmitError("O SKU é obrigatório.");
+      return;
+    }
+
+    if (!quantity || parseInt(quantity) < 0) {
+      setSubmitError("A quantidade deve ser um número válido.");
+      return;
+    }
+
+    // Monta o payload para enviar ao servidor
+    const productData: CreateProductDTO = {
+      sku: sku.trim(),
+      name: name.trim(),
+      description: description.trim() || undefined,
+      category: category.trim() || undefined,
+      brand: brand.trim() || undefined,
+      item_price: priceValue / 100, // converte centavos para reais
+      stock_quantity: parseInt(quantity),
+      unit_measure: unit.trim() || undefined,
+      low_stock_level: lowLevel ? parseInt(lowLevel) : undefined,
+      over_stock_level: highLevel ? parseInt(highLevel) : undefined,
+      batch_code: batch.trim() || undefined,
+      expiration_date: convertDateToISO(date),
+      is_active: status,
+    };
+
+    try {
+      setIsSubmitting(true);
+      await productService.create(productData);
+      
+      // Sucesso: limpa o formulário e mostra mensagem
+      alert("✅ Produto cadastrado com sucesso!");
+      resetForm();
+      
+    } catch (error) {
+      console.error("Erro ao cadastrar produto:", error);
+      setSubmitError("Erro ao cadastrar produto. Por favor, tente novamente.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
     <div
       id="register"
-      className="bg-[#EFEFEF] w-full min-h-dvh p-6 overflow-y-auto"
+      className="w-full min-h-dvh p-4 md:p-6 lg:p-8 overflow-y-auto overflow-x-hidden"
     >
-      <form className="product-form-grid">
-        {/* Nome */}
-        <TextInput
-          label="Nome:"
-          id="inputName"
-          value={name}
-          onChange={setName}
-          maxLength={CHAR_LIMITS.NAME}
-        />
+      <div className="max-w-7xl mx-auto">
+        {/* Título Principal */}
+        <div className="mb-6">
+          <h1 className="text-2xl md:text-3xl font-bold text-noozi-gray-800">Novo Produto</h1>
+          <p className="text-sm text-noozi-gray-600 mt-1">Preencha os dados abaixo para cadastrar um novo produto</p>
+        </div>
 
-        {/* Marca */}
-        <TextInput
-          label="Marca:"
-          id="inputBrand"
-          value={brand}
-          onChange={setBrand}
-          maxLength={CHAR_LIMITS.BRAND}
-        />
+        {/* Mensagem de erro */}
+        {submitError && (
+          <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-lg">
+            <p className="text-sm text-red-600">{submitError}</p>
+          </div>
+        )}
 
-        {/* Descrição */}
-        <TextArea
-          label="Descrição:"
-          id="inputDescription"
-          value={description}
-          onChange={setDescription}
-          maxLength={CHAR_LIMITS.DESCRIPTION}
-        />
-
-        {/* Categoria */}
-        <TextInput
-          label="Categoria:"
-          id="inputCategory"
-          value={category}
-          onChange={setCategory}
-          maxLength={CHAR_LIMITS.CATEGORY}
-          className="form-field-single"
-        />
-
-        {/* Quantidade */}
-        <NumberInput
-          label="Quantidade:"
-          id="inputQuantity"
-          value={quantity}
-          onChange={setQuantity}
-          min="0"
-        />
-
-        {/* Unidade de Medida */}
-        <TextInput
-          label="Unidade de Medida:"
-          id="inputUnity"
-          value={unit}
-          onChange={setUnit}
-          maxLength={CHAR_LIMITS.UNIT}
-          placeholder="Ex: kg, un, L"
-          className="form-field-single"
-        />
-
-        {/* Preço Unitário */}
-        <PriceInput
-          label="Preço Unitário:"
-          id="inputValue"
-          value={priceValue}
-          onChange={setPriceValue}
-        />
-
-        {/* Grid 2 colunas */}
-        <div className="form-nested-grid">
-          {/* Coluna esquerda */}
-          <div className="form-inventory-fields">
-            <div className="flex justify-between flex-col">
-              <DateInput
-                label="Validade:"
-                id="inputDate"
-                value={date}
-                onChange={setDate}
+        <form className="space-y-6" onSubmit={handleSubmit}>
+          {/* Seção: Informações Básicas */}
+          <div className="form-section">
+            <h2 className="form-section-title">Informações Básicas</h2>
+            <div className="product-form-grid">
+              <TextInput
+                label="Nome"
+                id="inputName"
+                value={name}
+                onChange={setName}
+                maxLength={CHAR_LIMITS.NAME}
+                tooltip="Informe o nome completo do produto."
               />
 
-              <div>
-                <label className="block font-medium">Lote:</label>
-                <div className="relative mt-2">
-                  <TextInput
-                    label=""
-                    id="inputBatch"
-                    value={batch}
-                    onChange={setBatch}
-                    maxLength={CHAR_LIMITS.BATCH}
-                    className=""
-                  />
-                </div>
-              </div>
+              <TextInput
+                label="Marca"
+                id="inputBrand"
+                value={brand}
+                onChange={setBrand}
+                maxLength={CHAR_LIMITS.BRAND}
+                tooltip="Marca ou fabricante do produto."
+              />
 
-              <div>
-                <label className="block font-medium">SKU:</label>
-                <div className="relative mt-2">
-                  <TextInput
-                    label=""
-                    id="inputSKU"
-                    value={sku}
-                    onChange={setSku}
-                    maxLength={CHAR_LIMITS.SKU}
-                    className=""
-                  />
-                </div>
-              </div>
+              <TextArea
+                label="Descrição"
+                id="inputDescription"
+                value={description}
+                onChange={setDescription}
+                maxLength={CHAR_LIMITS.DESCRIPTION}
+                tooltip="Detalhes adicionais sobre o produto (características, composição, etc.)"
+              />
 
-              <ToggleSwitch
-                label="Status do Produto:"
-                checked={status}
-                onChange={setStatus}
+              <TextInput
+                label="Categoria"
+                id="inputCategory"
+                value={category}
+                onChange={setCategory}
+                maxLength={CHAR_LIMITS.CATEGORY}
+                className="form-field-single"
+                tooltip="Grupo ao qual o produto pertence. "
               />
             </div>
           </div>
 
-          {/* Coluna direita */}
-          <FileUpload
-            label="Imagem do Produto:"
-            id="inputImage"
-            onChange={setImage}
-          />
-        </div>
+          {/* Seção: Estoque e Precificação */}
+          <div className="form-section">
+            <h2 className="form-section-title">Estoque e Precificação</h2>
+            <div className="product-form-grid">
+              <NumberInput
+                label="Quantidade"
+                id="inputQuantity"
+                value={quantity}
+                onChange={setQuantity}
+                min="0"
+                tooltip="Número de unidades disponíveis em estoque. Use apenas números inteiros."
+              />
 
-        {/* Botão */}
-        <div className="form-field-full mt-4">
-          <button
-            id="btn_register"
-            className="w-full px-6 py-3 font-semibold text-white transition-colors duration-200 bg-noozi-bright_blue rounded-lg hover:bg-[#063CD4] active:bg-[#052EB0]"
-            type="button"
-            onClick={handleSubmit}
-          >
-            CADASTRAR PRODUTO
-          </button>
-        </div>
-      </form>
+              <TextInput
+                label="Unidade de Medida"
+                id="inputUnity"
+                value={unit}
+                onChange={setUnit}
+                maxLength={CHAR_LIMITS.UNIT}
+                placeholder="Ex: kg, un, L"
+                className="form-field-single"
+                tooltip="Unidade de venda ou armazenamento. Ex: kg, un, L, pacote, caixa"
+              />
+
+              <PriceInput
+                label="Preço Unitário"
+                id="inputValue"
+                value={priceValue}
+                onChange={setPriceValue}
+                tooltip="Valor de venda por unidade. Digite apenas os números – a formatação é automática."
+              />
+            </div>
+          </div>
+
+          {/* Seção: Rastreamento e Validade */}
+          <div className="form-section">
+            <h2 className="form-section-title">Rastreamento e Validade</h2>
+            <div className="product-form-grid">
+              <DateInput
+                label="Validade"
+                id="inputDate"
+                value={date}
+                onChange={setDate}
+                tooltip="Data de vencimento do produto no formato DD/MM/AAAA. Digite dia, mês e ano."
+              />
+
+              <TextInput
+                label="Lote"
+                id="inputBatch"
+                value={batch}
+                onChange={setBatch}
+                maxLength={CHAR_LIMITS.BATCH}
+                className="form-field-single"
+                tooltip="Código de identificação do lote de fabricação (se aplicável)."
+              />
+
+              <TextInput
+                label="SKU"
+                id="inputSKU"
+                value={sku}
+                onChange={setSku}
+                maxLength={CHAR_LIMITS.SKU}
+                className="form-field-single"
+                tooltip="Código único de identificação do produto (Stock Keeping Unit)."
+                placeholder="Ex: ABC01"
+              />
+            </div>
+          </div>
+
+          {/* Seção: Alertas de Estoque */}
+          <div className="form-section">
+            <h2 className="form-section-title">Alertas de Estoque</h2>
+            <div className="product-form-grid">
+              <TextInput
+                label="Quantidade de estoque baixo"
+                id="inputLStock"
+                value={lowLevel}
+                onChange={setLowLevel}
+                maxLength={CHAR_LIMITS.LOW_LEVEL}
+                className="form-field-single"
+                tooltip="Quantidade mínima que, ao ser atingida, dispara um aviso de reposição."
+              />
+
+              <TextInput
+                label="Quantidade de estoque alto"
+                id="inputHStock"
+                value={highLevel}
+                onChange={setHighLevel}
+                maxLength={CHAR_LIMITS.HIGH_LEVEL}
+                className="form-field-single"
+                tooltip="Quantidade máxima que, ao ser ultrapassada, dispara um aviso de excesso."
+              />
+            </div>
+          </div>
+
+          {/* Seção: Configurações */}
+          <div className="form-section">
+            <h2 className="form-section-title">Configurações</h2>
+            <div className="product-form-grid">
+              <div className="form-field-single">
+                <ToggleSwitch
+                  label="Status do Produto"
+                  checked={status}
+                  onChange={setStatus}
+                  tooltip="Produto ativo: disponível para venda. Inativo: oculto ou indisponível."
+                />
+              </div>
+            </div>
+          </div>
+
+          {/* Botão de cadastrar produto */}
+          <div className="flex justify-center pt-4" id="btn_cadastro">
+            <div className="w-full lg:w-1/2">
+              <ActionButton
+                variant="submit"
+                icon={Send}
+                label="CADASTRAR PRODUTO"
+                isLoading={isSubmitting}
+                disabled={isSubmitting}
+              />
+            </div>
+          </div>
+        </form>
+      </div>
     </div>
   );
 }
-
-
-
-
-      // {/* Div do botão de submit */}
-      // <div className="flex flex-col gap-2 my-6 max-w-xs">
-      //   <ActionButton
-      //     variant="submit"
-      //     icon={Send}
-      //     label="Cadastrar produto"
-      //     isLoading={isLoading}
-      //   />
-      // </div>
