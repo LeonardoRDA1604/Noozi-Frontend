@@ -34,7 +34,7 @@ export function BaseModal({
 
         {/* Cabeçalho fixo */}
         <div className="flex items-center justify-between p-5 pb-0 shrink-0">
-          <h2 className="text-base font-bold text-noozi-text">{title}</h2>
+          <h2 className="text-xl font-bold text-noozi-text">{title}</h2>
           <button
             type="button"
             onClick={onClose}
