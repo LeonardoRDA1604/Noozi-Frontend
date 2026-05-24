@@ -10,13 +10,13 @@ export type SortBy =
 export interface ProductFilters {
   sortBy: SortBy;
   onlyActive: boolean;
-  priceFrom: string;
-  priceTo: string;
+  priceFrom: number; // em centavos
+  priceTo: number;   // em centavos
 }
 
 export const DEFAULT_FILTERS: ProductFilters = {
   sortBy: null,
   onlyActive: false,
-  priceFrom: "",
-  priceTo: "",
+  priceFrom: 0,
+  priceTo: 0,
 };

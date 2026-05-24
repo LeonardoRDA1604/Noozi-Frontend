@@ -7,6 +7,7 @@ import {
   type SortBy,
   DEFAULT_FILTERS,
 } from "@/types/ProductFilters.types";
+import { PriceInput } from "../Inputs/PriceInput";
 
 interface ModalProps {
   isOpen: boolean;
@@ -24,8 +25,8 @@ export default function ProductFilterButtonModal({
   // Cópia local dos filtros — só vai para o pai ao clicar em Aplicar
   const [sortBy, setSortBy] = useState<SortBy>(currentFilters.sortBy);
   const [onlyActive, setOnlyActive] = useState(currentFilters.onlyActive);
-  const [priceFrom, setPriceFrom] = useState(currentFilters.priceFrom);
-  const [priceTo, setPriceTo] = useState(currentFilters.priceTo);
+  const [priceFrom, setPriceFrom] = useState<number>(currentFilters.priceFrom);
+  const [priceTo, setPriceTo] = useState<number>(currentFilters.priceTo);
 
   if (!isOpen) return null;
 
@@ -41,8 +42,8 @@ export default function ProductFilterButtonModal({
   const handleClear = () => {
     setSortBy(null);
     setOnlyActive(false);
-    setPriceFrom("");
-    setPriceTo("");
+    setPriceFrom(0);
+    setPriceTo(0);
   };
 
   const toggleBtn =
@@ -126,35 +127,19 @@ export default function ProductFilterButtonModal({
             Faixa de Preço
           </p>
           <div className="flex items-center gap-3">
-            <div className="flex-1">
-              <label className="block text-xs text-noozi-gray-500 mb-1">De</label>
-              <div className="relative">
-                <span className="absolute left-3 top-1/2 -translate-y-1/2 text-sm text-noozi-gray-400">R$</span>
-                <input
-                  type="number"
-                  min="0"
-                  placeholder="0"
-                  value={priceFrom}
-                  onChange={(e) => setPriceFrom(e.target.value)}
-                  className="w-full pl-9 pr-3 py-2 text-sm bg-noozi-surface border border-noozi-gray-300 rounded-lg focus:outline-none focus:border-noozi-bright_blue transition-colors"
-                />
-              </div>
-            </div>
-            <span className="text-noozi-gray-400 mt-4">—</span>
-            <div className="flex-1">
-              <label className="block text-xs text-noozi-gray-500 mb-1">Até</label>
-              <div className="relative">
-                <span className="absolute left-3 top-1/2 -translate-y-1/2 text-sm text-noozi-gray-400">R$</span>
-                <input
-                  type="number"
-                  min="0"
-                  placeholder="0"
-                  value={priceTo}
-                  onChange={(e) => setPriceTo(e.target.value)}
-                  className="w-full pl-9 pr-3 py-2 text-sm bg-noozi-surface border border-noozi-gray-300 rounded-lg focus:outline-none focus:border-noozi-bright_blue transition-colors"
-                />
-              </div>
-            </div>
+            <PriceInput
+              label="De"
+              id="filterPriceFrom"
+              value={priceFrom}
+              onChange={setPriceFrom}
+            />
+            <span className="text-noozi-gray-400 mt-8">—</span>
+            <PriceInput
+              label="Até"
+              id="filterPriceTo"
+              value={priceTo}
+              onChange={setPriceTo}
+            />
           </div>
         </section>
 

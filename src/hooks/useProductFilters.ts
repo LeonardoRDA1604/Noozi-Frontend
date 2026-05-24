@@ -13,18 +13,15 @@ export function useProductFilters(products: Product[]) {
       result = result.filter((p) => p.is_active);
     }
 
-    // Faixa de preço
-    const from = parseFloat(filters.priceFrom);
-    const to = parseFloat(filters.priceTo);
-
-    if (!isNaN(from)) {
-      result = result.filter((p) => p.item_price >= from);
+    // Faixa de preço — converte centavos para reais na comparação
+    if (filters.priceFrom > 0) {
+      result = result.filter((p) => p.item_price >= filters.priceFrom / 100);
     }
-    if (!isNaN(to)) {
-      result = result.filter((p) => p.item_price <= to);
+    if (filters.priceTo > 0) {
+      result = result.filter((p) => p.item_price <= filters.priceTo / 100);
     }
 
-    // Ordenação — apenas uma ativa por vez
+    // Ordenação
     switch (filters.sortBy) {
       case "az":
         result.sort((a, b) => a.name.localeCompare(b.name, "pt-BR"));
@@ -40,7 +37,6 @@ export function useProductFilters(products: Product[]) {
         break;
       case "expiry-nearest":
         result.sort((a, b) => {
-          // Produtos sem validade vão para o fim
           if (!a.expiration_date) return 1;
           if (!b.expiration_date) return -1;
           return new Date(a.expiration_date).getTime() - new Date(b.expiration_date).getTime();
@@ -61,13 +57,8 @@ export function useProductFilters(products: Product[]) {
   const hasActiveFilters =
     filters.sortBy !== null ||
     filters.onlyActive ||
-    filters.priceFrom !== "" ||
-    filters.priceTo !== "";
+    filters.priceFrom > 0 ||
+    filters.priceTo > 0;
 
-  return {
-    filters,
-    setFilters,
-    filteredProducts,
-    hasActiveFilters,
-  };
+  return { filters, setFilters, filteredProducts, hasActiveFilters };
 }
