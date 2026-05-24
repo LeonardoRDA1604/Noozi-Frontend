@@ -111,9 +111,15 @@
 
 
     .toggle-switch {
-    @apply flex items-center gap-3 cursor-pointer;
+    @apply flex items-center gap-2 cursor-pointer;
     user-select: none;
-  }
+    }
+
+    @media (min-width: 640px) {
+      .toggle-switch {
+        @apply gap-3;
+      }
+    }
 
   /* Esconde o checkbox real */
   .toggle-switch input[type="checkbox"] {
@@ -124,8 +130,8 @@
   .toggle-slider {
     position: relative;
     display: inline-block;
-    width: 80px;
-    height: 38px;
+    width: 3.5rem;
+    height: 2rem;
     background-color: #cbd5e1; /* Cinza quando inativo */
     border-radius: 34px;
     transition: background-color 0.3s ease;
@@ -135,10 +141,10 @@
   .toggle-slider::before {
     content: "";
     position: absolute;
-    height: 32px;
-    width: 32px;
-    left: 3px;
-    bottom: 3px;
+    height: 1.625rem;
+    width: 1.625rem;
+    left: 0.1875rem;
+    bottom: 0.1875rem;
     background-color: white;
     border-radius: 50%;
     transition: transform 0.3s ease;
@@ -152,7 +158,7 @@
 
   /* Estado ATIVO (checked) - Move círculo para a direita */
   .toggle-switch input:checked + .toggle-slider::before {
-    transform: translateX(42px);
+    transform: translateX(1.5rem);
   }
 
   /* Efeito hover no fundo */
