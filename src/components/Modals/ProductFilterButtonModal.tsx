@@ -74,21 +74,21 @@ export default function ProductFilterButtonModal({
           </p>
           <div className="flex flex-col gap-3">
             <div className="grid grid-cols-1 gap-2">
-              <span className="text-sm font-medium text-noozi-gray-700">Ordem alfabética:</span>
+              <span className="text-sm font-medium text-noozi-gray-700">Ordem alfabética</span>
               <div className="flex gap-2">
                 {btn("az", "A → Z")}
                 {btn("za", "Z → A")}
               </div>
             </div>
             <div className="grid grid-cols-1 gap-2">
-              <span className="text-sm font-medium text-noozi-gray-700">Estoque:</span>
+              <span className="text-sm font-medium text-noozi-gray-700">Estoque</span>
               <div className="flex gap-2">
                 {btn("stock-high", "Maior")}
                 {btn("stock-low", "Menor")}
               </div>
             </div>
             <div className="grid grid-cols-1 gap-2">
-              <span className="text-sm font-medium text-noozi-gray-700">Validade:</span>
+              <span className="text-sm font-medium text-noozi-gray-700">Validade</span>
               <div className="flex gap-2">
                 {btn("expiry-nearest", "Mais próxima")}
                 {btn("expiry-furthest", "Mais distante")}
