@@ -40,7 +40,7 @@ export default {
           surface: "#F5F5F5", // fundo de cards, painéis
           border: "#E8E8E8",
           text: "#111111",
-          muted: "#9F9F9F", // texto secundário
+          muted: "#9F9F9F", // texto secundário (também usado no cinza médio / gray-500)
         },
 
         // Status — para ícones, badges, alertas
