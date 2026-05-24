@@ -29,7 +29,7 @@ export const activityLogService = {
     // Remove em paralelo
     await Promise.all(
       expired.map((log: ActivityLog) =>
-        api.delete(`/activity_logs/${log.id_log}`)
+        api.delete(`/activity_logs/${log.id}`)
       )
     );
   },

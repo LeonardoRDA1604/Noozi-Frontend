@@ -40,7 +40,7 @@ export default function Home() {
         </div>
       </SectionTitle>
 
-      <SectionTitle title="Atividades Recentes:">
+      <SectionTitle title="Atividades Recentes:" className="my-4 mx-2">
         <RecentActivities limit={8} deletedRetentionDays={30} />
       </SectionTitle>
 

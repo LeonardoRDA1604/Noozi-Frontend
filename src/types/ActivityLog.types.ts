@@ -1,7 +1,7 @@
 export type ActivityType = "created" | "updated" | "deleted";
 
 export interface ActivityLog {
-  id_log: string;
+  id: string;
   id_product: string;
   product_name: string;       // snapshot do nome — preservado após o delete
   activity_type: ActivityType;
@@ -10,7 +10,7 @@ export interface ActivityLog {
 }
 
 // Payload para POST — id_log gerado pelo servidor
-export type CreateActivityLogDTO = Omit<ActivityLog, "id_log">;
+export type CreateActivityLogDTO = Omit<ActivityLog, "id">;
 
 // O que o componente de atividades recentes exibe
 export interface RecentActivity {

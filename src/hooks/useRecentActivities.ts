@@ -45,7 +45,7 @@ export function useRecentActivities({ limit = 5, deletedRetentionDays = 30 }: Re
 
       // Monta atividades de deleted — vem dos activity_logs
       const deletedActivities: RecentActivity[] = deletedLogs.map((log) => ({
-        id:            log.id_log,
+        id:            log.id,
         id_product:    log.id_product,
         product_name:  log.product_name,
         activity_type: "deleted" as const,

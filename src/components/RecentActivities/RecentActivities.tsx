@@ -3,7 +3,6 @@ import { useRecentActivities } from "@/hooks/useRecentActivities";
 import type { RecentActivitiesProps, RecentActivity } from "@/types/ActivityLog.types";
 import type { ActivityType } from "@/types/ActivityLog.types";
 
-// Tailwind requer classes completas — não concatenar dinamicamente
 const activityConfig: Record<ActivityType, {
   label: string;
   icon: React.ElementType;
@@ -48,7 +47,7 @@ function ActivityItem({ activity }: { activity: RecentActivity }) {
   const Icon   = config.icon;
 
   return (
-    <li className="flex items-center gap-3 p-3 rounded-lg border border-noozi-border bg-noozi-surface">
+    <li className="flex items-center gap-3 p-3 rounded-lg border border-noozi-border bg-noozi-input_field">
 
       {/* Ícone do tipo de atividade */}
       <div className="shrink-0 flex items-center justify-center h-8 w-8 rounded-md bg-white border border-noozi-border">
@@ -72,34 +71,42 @@ function ActivityItem({ activity }: { activity: RecentActivity }) {
   );
 }
 
-export function RecentActivities({
-  limit = 5,
-  deletedRetentionDays = 30,
-}: RecentActivitiesProps) {
-  const { activities, isLoading, error } = useRecentActivities({
-    limit,
-    deletedRetentionDays,
-  });
-
-  if (isLoading) {
-    return <p className="text-sm text-noozi-muted">Carregando atividades...</p>;
-  }
-
-  if (error) {
-    return <p className="text-sm text-status-danger">{error}</p>;
-  }
-
-  if (activities.length === 0) {
-    return (
-      <p className="text-sm text-noozi-muted">Nenhuma atividade registrada.</p>
-    );
-  }
+export function RecentActivities({ limit = 5, deletedRetentionDays = 30 }: RecentActivitiesProps) {
+  const { activities, isLoading, error } = useRecentActivities({ limit, deletedRetentionDays });
 
   return (
-    <ul className="flex flex-col gap-2">
-      {activities.map((activity) => (
-        <ActivityItem key={activity.id} activity={activity} />
-      ))}
-    </ul>
+    <div className="flex flex-col gap-2">
+
+      {/* Loading */}
+      {isLoading && (
+        <p className="text-sm text-noozi-muted">Carregando atividades...</p>
+      )}
+
+      {/* Erro — dentro da estrutura, não substitui ela */}
+      {error && (
+        <div className="p-3 rounded-lg border border-status-danger/20 bg-status-danger/5">
+          <p className="text-sm text-status-danger">{error}</p>
+        </div>
+      )}
+
+      {/* Lista vazia */}
+      {!isLoading && !error && activities.length === 0 && (
+        <div className="p-3 rounded-lg border border-noozi-border bg-noozi-surface">
+          <p className="text-sm text-noozi-muted text-center">
+            Nenhuma atividade registrada.
+          </p>
+        </div>
+      )}
+
+      {/* Lista de atividades */}
+      {!isLoading && !error && activities.length > 0 && (
+        <ul className="flex flex-col gap-2">
+          {activities.map((activity) => (
+            <ActivityItem key={activity.id} activity={activity} />
+          ))}
+        </ul>
+      )}
+
+    </div>
   );
 }
