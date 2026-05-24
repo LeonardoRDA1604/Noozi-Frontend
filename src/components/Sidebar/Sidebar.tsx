@@ -15,7 +15,7 @@ export function Sidebar({ isOpen, onClose }: SidebarProps) {
       {/* Overlay escuro atrás do sidebar */}
       {isOpen && (
         <div
-          className="fixed inset-0 z-40 bg-black/40 lg:hidden"
+          className="fixed inset-0 z-40 bg-black/40"
           onClick={onClose}
           aria-hidden="true"
         />
