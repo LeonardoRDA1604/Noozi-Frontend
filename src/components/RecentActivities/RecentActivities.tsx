@@ -47,11 +47,11 @@ function ActivityItem({ activity }: { activity: RecentActivity }) {
   const Icon   = config.icon;
 
   return (
-    <li className="flex items-center gap-3 p-3 rounded-lg border border-noozi-border bg-noozi-input_field">
+    <li className="flex items-center gap-3 p-3 rounded-lg border border-noozi-gray-300 bg-noozi-input_field">
 
       {/* Ícone do tipo de atividade */}
       <div className="shrink-0 flex items-center justify-center h-8 w-8 rounded-md bg-white border border-noozi-border">
-        <Icon size={15} className={config.iconClass} />
+        <Icon size={25} className={config.iconClass} />
       </div>
 
       {/* Informações */}
@@ -64,8 +64,8 @@ function ActivityItem({ activity }: { activity: RecentActivity }) {
         </p>
       </div>
 
-      {/* Indicador de cor por tipo */}
-      <div className={`shrink-0 w-2 h-2 rounded-full ${config.dotClass}`} />
+      {/* Indicador de cor por tipo (status: deletado, atualizado, criado) */}
+      <div className={`shrink-0 w-2 h-2 rounded-full border-2 shadow-lg  ${config.dotClass} sm:w-2 sm:h-2 md:w-3 md:h-3 lg:w-3 lg:h-3 xl:w-4 xl:h-4 2xl:w-4 2xl:h-4`} />
 
     </li>
   );
@@ -75,7 +75,7 @@ export function RecentActivities({ limit = 5, deletedRetentionDays = 30 }: Recen
   const { activities, isLoading, error } = useRecentActivities({ limit, deletedRetentionDays });
 
   return (
-    <div className="flex flex-col gap-2">
+    <div className="flex flex-col gap-2 border border-noozi-gray-300 border-solid rounded-lg bg-noozi-gray-200 p-4">
 
       {/* Loading */}
       {isLoading && (
