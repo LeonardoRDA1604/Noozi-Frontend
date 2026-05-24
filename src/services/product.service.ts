@@ -1,10 +1,9 @@
 import { api } from "@/lib/api";
-import type {
-  Product,
-  CreateProductDTO,
-  UpdateProductDTO,
-} from "@/types/Product.types";
+import type { Product, CreateProductDTO, UpdateProductDTO } from "@/types/Product.types";
 import { formatCurrency } from "@/utils/Currency";
+import { activityLogService } from "@/services/activityLog.service";
+
+
 
 export const productService = {
   // Retorna todos os produtos
@@ -49,10 +48,31 @@ create: async (payload: CreateProductDTO): Promise<Product> => {
     return data;
   },
 
-  // Remove um produto pelo id
-  remove: async (id: string): Promise<void> => {
-    await api.delete(`/products/${id}`);
-  },
+  // // Remove um produto pelo id
+  // remove: async (id: string): Promise<void> => {
+  //   await api.delete(`/products/${id}`);
+  // },
+
+// Remove um produto pelo id, salva snapshot no activity_logs antes de deletar
+remove: async (id: string, retentionDays = 30): Promise<void> => {
+  // Busca o nome antes de deletar — após o delete o produto não existe mais
+  const { data: product } = await api.get(`/products/${id}`);
+
+  await api.delete(`/products/${id}`);
+
+  // Calcula até quando o log fica visível nas atividades recentes
+  const expiresAt = new Date();
+  expiresAt.setDate(expiresAt.getDate() + retentionDays);
+
+  // Guarda snapshot mínimo do produto deletado
+  await activityLogService.create({
+    id_product:    id,
+    product_name:  product.name,
+    activity_type: "deleted",
+    occurred_at:   new Date().toISOString(),
+    expires_at:    expiresAt.toISOString(),
+  });
+},
 
   // Retorna produtos com estoque abaixo ou igual ao nível mínimo
   // ?? 0 — se low_stock_level não estiver definido, considera 0 como limite

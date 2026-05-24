@@ -6,6 +6,7 @@ import { MetricsModal } from "@/components/Modals/MetricsModal/MetricsModal";
 import { useProductMetrics } from "@/hooks/useProductMetrics";
 import type { ModalType } from "@/types/ModalType.types";
 import { SectionTitle } from "@/components/SectionTitle/SectionTitle";
+import { RecentActivities } from "@/components/RecentActivities/RecentActivities";
 
 export default function Home() {
   const [activeModal, setActiveModal] = useState<ModalType>(null); // null = nenhum modal aberto
@@ -17,7 +18,7 @@ export default function Home() {
 
   return (
     <div className="flex flex-col gap-6 p-4">
-      <SectionTitle title="Resumo Geral:" className="my-4 mx-2">
+      <SectionTitle title="Resumo Geral" className="my-4 mx-2">
         {/* Cards de métricas — valores vindos da API via useProductMetrics */}
         <div className="flex flex-wrap gap-4">
           <MetricsCard icon={Package}           title="Total de cadastros"          value={isLoading ? "..." : metrics.total}               href="/products" />
@@ -31,7 +32,7 @@ export default function Home() {
         </div>
       </SectionTitle>
 
-      <SectionTitle title="Ações Rápidas:" className="my-4 mx-2">
+      <SectionTitle title="Ações Rápidas" className="my-4 mx-2">
         {/* Botões de Ações rápidas */}
         <div className="flex flex-col gap-2 max-w-xs">
           <ActionButton variant="primary"       label="Cadastro de Produto"   icon={CirclePlus}   href="/products/new" />
@@ -39,8 +40,8 @@ export default function Home() {
         </div>
       </SectionTitle>
 
-      <SectionTitle title="Atividades Recentes:">
-        {/* Componente de Atividades Recentes */}
+      <SectionTitle title="Atividades Recentes" className="my-4 mx-2">
+        <RecentActivities limit={10} deletedRetentionDays={30} />
       </SectionTitle>
 
       {/* Modal de métricas — abre ao clicar no título do MetricsCard (Renderiza o modal apenas quando activeModal não é null. O componente receberá o tipo para buscar os produtos corretos.) */}

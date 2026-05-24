@@ -7,9 +7,9 @@ export function useProductCardColumns(item: Product) {
     const value: Record<string, React.ReactNode> = {
 
     Status: (
-      <div className="flex items-center gap-1">
+      <div className="flex items-center gap-2">
         <div
-          className={`w-2 h-2 shrink-0 rounded-full border-2 shadow-lg ${circleColor} sm:w-4 sm:h-4 md:w-5 md:h-5 lg:w-5 lg:h-5 xl:w-6 xl:h-6 2xl:w-6 2xl:h-6`}
+          className={`w-2 h-2 shrink-0 rounded-full border-2 shadow-lg ${circleColor} sm:w-2 sm:h-2 md:w-3 md:h-3 lg:w-3 lg:h-3 xl:w-4 xl:h-4 2xl:w-4 2xl:h-4`}
         />
         <span className="text-black font-medium text-[12px] sm:text-[14px] md:text-[16px] lg:text-[16px] xl:text-[16px] 2xl:text-[16px]">Ativo</span>
       </div>
