@@ -212,6 +212,32 @@ export default function NewProductForm() {
             </div>
           </div>
 
+          {/* Seção: Alertas de Estoque */}
+          <div className="form-section">
+            <h2 className="form-section-title">Alertas de Estoque</h2>
+            <div className="product-form-grid">
+              <TextInput
+                label="Quantidade de estoque baixo"
+                id="inputLStock"
+                value={lowLevel}
+                onChange={setLowLevel}
+                maxLength={CHAR_LIMITS.LOW_LEVEL}
+                className="form-field-single"
+                tooltip="Quantidade mínima que, ao ser atingida, dispara um aviso de reposição."
+              />
+
+              <TextInput
+                label="Quantidade de estoque alto"
+                id="inputHStock"
+                value={highLevel}
+                onChange={setHighLevel}
+                maxLength={CHAR_LIMITS.HIGH_LEVEL}
+                className="form-field-single"
+                tooltip="Quantidade máxima que, ao ser ultrapassada, dispara um aviso de excesso."
+              />
+            </div>
+          </div>
+
           {/* Seção: Rastreamento e Validade */}
           <div className="form-section">
             <h2 className="form-section-title">Rastreamento e Validade</h2>
@@ -243,32 +269,6 @@ export default function NewProductForm() {
                 className="form-field-single"
                 tooltip="Código único de identificação do produto (Stock Keeping Unit)."
                 placeholder="Ex: ABC01"
-              />
-            </div>
-          </div>
-
-          {/* Seção: Alertas de Estoque */}
-          <div className="form-section">
-            <h2 className="form-section-title">Alertas de Estoque</h2>
-            <div className="product-form-grid">
-              <TextInput
-                label="Quantidade de estoque baixo"
-                id="inputLStock"
-                value={lowLevel}
-                onChange={setLowLevel}
-                maxLength={CHAR_LIMITS.LOW_LEVEL}
-                className="form-field-single"
-                tooltip="Quantidade mínima que, ao ser atingida, dispara um aviso de reposição."
-              />
-
-              <TextInput
-                label="Quantidade de estoque alto"
-                id="inputHStock"
-                value={highLevel}
-                onChange={setHighLevel}
-                maxLength={CHAR_LIMITS.HIGH_LEVEL}
-                className="form-field-single"
-                tooltip="Quantidade máxima que, ao ser ultrapassada, dispara um aviso de excesso."
               />
             </div>
           </div>
