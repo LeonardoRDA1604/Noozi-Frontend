@@ -53,7 +53,7 @@ function ActivityItem({ activity }: { activity: RecentActivity }) {
     <li className="flex items-center gap-3 px-4 py-3 bg-white rounded-xl border border-noozi-border hover:border-noozi-gray-300 hover:shadow-sm transition-all duration-150">
       {/* Ícone do tipo de atividade */}
       <div className="shrink-0 flex items-center justify-center h-9 w-9 rounded-lg bg-noozi-surface border border-noozi-border">
-        <Icon size={16} className={config.iconClass} /> AUMENTAR SIZE (TAVA 25)
+        <Icon size={25} className={config.iconClass} />
       </div>
 
       {/* Nome + data */}
