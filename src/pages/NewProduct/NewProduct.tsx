@@ -282,7 +282,7 @@ export default function NewProductForm() {
                   label="Status do Produto"
                   checked={status}
                   onChange={setStatus}
-                  tooltip="Produto ativo: disponível para venda. Inativo: oculto ou indisponível."
+                  tooltip="Ativo: disponível para venda, com alertas de estoque. Inativo: indisponível para venda, sem alertas de estoque."
                 />
               </div>
             </div>
