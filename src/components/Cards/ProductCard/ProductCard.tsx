@@ -6,10 +6,13 @@ import TableHeader from "@/components/Cards/TableHeader/TableHeader";
 import { GetBreakpoints } from "../../../utils/GetBreakpoints";
 import { COLUMNS, GRID_COLS } from "@/constants/columns";
 import { ProductCardColumns } from "@/hooks/ProductCardColumns";
+import { ProductModal } from "@/components/Modals/ProductModal/ProductModal";
 // import { formatCurrency } from "@/utils/Currency";
 
 
 export default function CreateCardItem({ filter, products }: filter) {
+  const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
+
   const miniSearch = useMemo(() => structureSearch, []);
 
   const [filterDebounced, setFilterDebounced] = useState(filter);
@@ -38,19 +41,32 @@ export default function CreateCardItem({ filter, products }: filter) {
       <div className="flex flex-col gap-5 w-full px-3 py-5">
         <TableHeader />
         {itemsFilter.map((item) => (
-          <CardItem key={item.id_product} item={item} />
+          <CardItem
+          key={item.id_product}
+          item={item}
+          onSelect={() => setSelectedProduct(item)}
+          />
         ))}
       </div>
+      {selectedProduct && (
+      <ProductModal
+      product={selectedProduct}
+      onClose={() => setSelectedProduct(null)}
+      onDeleted={() => setSelectedProduct(null)}
+      onUpdated={() => setSelectedProduct(null)}
+      />
+      )}
     </>
   );
 }
 
-function CardItem({ item }: { item: Product }) {
+function CardItem({ item, onSelect }: { item: Product }) {
   const { value } = ProductCardColumns(item)
   
   return (
     <div
-    className={`grid ${GRID_COLS} w-full rounded-xl shadow-sm`}
+    onClick={onSelect}
+    className={`grid ${GRID_COLS} w-full rounded-xl shadow-sm hover:bg-gray-100 cursor-pointer transition-colors duration-200`}
     >
       {COLUMNS.map((col, index, arr) => (
         <div
