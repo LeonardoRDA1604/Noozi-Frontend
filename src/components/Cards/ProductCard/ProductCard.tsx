@@ -60,7 +60,7 @@ export default function CreateCardItem({ filter, products }: filter) {
   );
 }
 
-function CardItem({ item, onSelect }: { item: Product }) {
+function CardItem({ item, onSelect }: { item: Product,  onSelect: () => void}) {
   const { value } = productCardColumns(item)
   
   return (

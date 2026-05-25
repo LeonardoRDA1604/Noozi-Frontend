@@ -8,7 +8,6 @@ import { SectionTitle } from "@/components/SectionTitle/SectionTitle";
 import { useProductMetrics } from "@/hooks/useProductMetrics";
 import type { ModalType } from "@/types/ModalType.types";
 
-
 export default function Home() {
   const [activeModal, setActiveModal] = useState<ModalType>(null); // null = nenhum modal aberto
   const { metrics, isLoading, error } = useProductMetrics();
@@ -20,7 +19,6 @@ export default function Home() {
       </div>
     );
   }
-
 
   return (
     <div className="flex flex-col gap-6 p-4 md:p-6 max-w-screen-xl mx-auto">

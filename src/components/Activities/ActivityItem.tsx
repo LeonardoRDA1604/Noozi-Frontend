@@ -25,9 +25,6 @@ export function ActivityItem({ activity }: { activity: RecentActivity }) {
       </div>
 
       {/* Badge de tipo */}
-      {/* <span className={`shrink-0 text-[10px] font-semibold px-2 py-0.5 rounded-full ${config.badgeClass}`}>
-        {config.badgeText}
-      </span> */}
       <StatusBadge badgeClass={config.badgeClass} badgeText={config.badgeText} />
 
     </li>

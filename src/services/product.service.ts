@@ -3,8 +3,6 @@ import type { Product, CreateProductDTO, UpdateProductDTO } from "@/types/Produc
 import { formatCurrency } from "@/utils/formatCurrency";
 import { activityLogService } from "@/services/activityLog.service";
 
-
-
 export const productService = {
   // Retorna todos os produtos
   getAll: async (): Promise<Product[]> => {
