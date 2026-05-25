@@ -1,6 +1,6 @@
 import { Menu, Bell } from "lucide-react";
 import { Link } from "react-router-dom";
-import nooziLogo from "@/assets/logos/logoNoozi.svg";
+import nooziLogo from "@/assets/logos/noozi-logo-default.svg";
 
 interface HeaderProps {
   onMenuOpen: () => void;
