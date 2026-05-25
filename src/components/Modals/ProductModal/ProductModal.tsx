@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Pencil, Trash2, Save, XCircle, Dice1 } from "lucide-react";
+import { Pencil, Trash2, Save, XCircle } from "lucide-react";
 import { BaseModal } from "@/components/Modals/BaseModal/BaseModal";
 import { ActionButton } from "@/components/Buttons/ActionButton/ActionButton";
 import { productService } from "@/services/product.service";

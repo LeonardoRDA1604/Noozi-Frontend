@@ -1,13 +1,13 @@
 import { useState } from "react";
-import { ActionButton } from "../Buttons/ActionButton/ActionButton";
+import { ActionButton } from "../../Buttons/ActionButton/ActionButton";
 import { CheckIcon } from "lucide-react";
-import { BaseModal } from "./BaseModal/BaseModal";
+import { BaseModal } from "../BaseModal/BaseModal";
 import {
   type ProductFilters,
   type SortBy,
   DEFAULT_FILTERS,
 } from "@/types/ProductFilters.types";
-import { PriceInput } from "../Inputs/PriceInput";
+import { PriceInput } from "../../Inputs/PriceInput";
 
 interface ModalProps {
   isOpen: boolean;

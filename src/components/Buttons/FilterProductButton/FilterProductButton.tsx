@@ -1,4 +1,4 @@
-import FilterButtonModal from "@/components/Modals/ProductFilterButtonModal";
+import FilterButtonModal from "@/components/Modals/ProductFilterButtonModal/ProductFilterButtonModal";
 import { Funnel } from "lucide-react";
 import { useState } from "react";
 import type { ProductFilters } from "@/types/ProductFilters.types";
