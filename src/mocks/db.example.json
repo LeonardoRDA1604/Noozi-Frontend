@@ -1,0 +1,46 @@
+{
+  "products": [
+    {
+      "id_product": "1",
+      "sku": "ARR-INT-1KG",
+      "name": "Arroz Integral 1kg",
+      "description": "Arroz integral de grãos selecionados",
+      "category": "Alimentos",
+      "brand": "Tio João",
+      "item_price": 8.9,
+      "stock_quantity": 12,
+      "unit_measure": "kg",
+      "low_stock_level": 10,
+      "over_stock_level": 100,
+      "batch_code": "LOTE-2024-001",
+      "expiration_date": "2025-12-31",
+      "is_active": true,
+      "created_at": "2024-01-01T00:00:00Z",
+      "updated_at": "2024-01-01T00:00:00Z",
+      "id": "xtiN_jgmuzY"
+    }
+  ],
+  "transaction_records": [
+    {
+      "id_record": "T1",
+      "id_product": "1",
+      "record_type": "entrada",
+      "quantity": 50,
+      "source_destination": "Fornecedor XYZ",
+      "observation": "Recebimento inicial",
+      "recorded_at": "2024-01-01T00:00:00Z",
+      "id": "olpkTAkP3lU"
+    }
+  ],
+  "activity_logs": [
+    {
+      "id": "LOG1",
+      "id_product": "99",
+      "product_name": "Produto Teste Deletado",
+      "activity_type": "deleted",
+      "occurred_at": "2026-05-01T11:00:00Z",
+      "expires_at": "2026-12-31T11:00:00Z"
+    }
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
+}
