@@ -6,5 +6,6 @@ export interface NumberInputProps {
   min?: string;
   placeholder?: string;
   tooltip?: string;
-  required?: string
+  required?: string;
+  error?: string
 }

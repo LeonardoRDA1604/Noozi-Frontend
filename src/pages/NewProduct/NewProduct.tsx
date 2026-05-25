@@ -4,13 +4,14 @@ import { TextArea } from "@/components/Inputs/TextArea";
 import { NumberInput } from "@/components/Inputs/NumberInput";
 import { PriceInput } from "@/components/Inputs/PriceInput";
 import { DateInput } from "@/components/Inputs/DateInput";
-// import { FileUpload } from "@/components/Inputs/FileUpload";
 import { ToggleSwitch } from "@/components/Inputs/ToggleSwitch";
 import { Send } from "lucide-react";
 import { ActionButton } from "@/components/Buttons/ActionButton/ActionButton";
 import { productService } from "@/services/product.service";
 import type { CreateProductDTO } from "@/types/Product.types";
 import { convertDateToISO } from "@/utils/convertDateToISO";
+import { useFormValidation } from "@/hooks/useFormValidation";
+import type { NewProductForm } from "@/types/NewProductForm.types";
 
 const CHAR_LIMITS = {
   NAME: 120,
@@ -21,7 +22,7 @@ const CHAR_LIMITS = {
   BATCH: 50,
   SKU: 50,
   LOW_LEVEL: 10,
-  HIGH_LEVEL: 10
+  HIGH_LEVEL: 10,
 } as const;
 
 export default function NewProductForm() {
@@ -31,19 +32,30 @@ export default function NewProductForm() {
   const [category, setCategory] = useState("");
   const [quantity, setQuantity] = useState("");
   const [unit, setUnit] = useState("");
-  const [priceValue, setPriceValue] = useState(0); // em centavos
+  const [priceValue, setPriceValue] = useState(0);
   const [date, setDate] = useState("");
   const [batch, setBatch] = useState("");
   const [sku, setSku] = useState("");
   const [status, setStatus] = useState(true);
   const [lowLevel, setLowLevel] = useState("");
   const [highLevel, setHighLevel] = useState("");
-  // const [image, setImage] = useState<File | null>(null);
 
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
 
-  // Reseta todos os campos do formulário
+  // ─── Validação ─────────────────────────────────────────────────────────────
+  const { errors, validate, clearError, clearAllErrors } =
+    useFormValidation<NewProductForm>({
+      name: (v) => (!v.trim() ? 'O campo "Nome" é obrigatório.' : null),
+      sku: (v) => (!v.trim() ? 'O campo "SKU" é obrigatório.' : null),
+      stock_quantity: (v) => {
+        const num = parseInt(v);
+        return isNaN(num) || num < 0 ? 'O campo "Quantidade" é obrigatório.' : null;
+      },
+      item_price: (v) => (v === 0 ? 'O campo "Preço Unitário" é obrigatório.' : null),
+    });
+
+  // ─── Reset ─────────────────────────────────────────────────────────────────
   const resetForm = () => {
     setName("");
     setBrand("");
@@ -59,30 +71,22 @@ export default function NewProductForm() {
     setLowLevel("");
     setHighLevel("");
     setSubmitError(null);
+    clearAllErrors();
   };
 
-  // Função de submit do formulário
+  // ─── Submit ────────────────────────────────────────────────────────────────
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setSubmitError(null);
 
-    // Validação de campos obrigatórios
-    if (!name.trim()) {
-      setSubmitError("O nome do produto é obrigatório.");
-      return;
-    }
+    const isValid = validate({
+      name,
+      sku,
+      stock_quantity: quantity,  // string ✓ — ProductFormFields.stock_quantity é string
+      item_price: priceValue,    // number ✓ — ProductFormFields.item_price é number
+    });
+    if (!isValid) return;
 
-    if (!sku.trim()) {
-      setSubmitError("O SKU é obrigatório.");
-      return;
-    }
-
-    if (!quantity || parseInt(quantity) < 0) {
-      setSubmitError("A quantidade deve ser um número válido.");
-      return;
-    }
-
-    // Monta o payload para enviar ao servidor
     const productData: CreateProductDTO = {
       sku: sku.trim(),
       name: name.trim(),
@@ -102,11 +106,8 @@ export default function NewProductForm() {
     try {
       setIsSubmitting(true);
       await productService.create(productData);
-      
-      // Sucesso: limpa o formulário e mostra mensagem
       alert("✅ Produto cadastrado com sucesso!");
       resetForm();
-      
     } catch (error) {
       console.error("Erro ao cadastrar produto:", error);
       setSubmitError("Erro ao cadastrar produto. Por favor, tente novamente.");
@@ -116,18 +117,13 @@ export default function NewProductForm() {
   };
 
   return (
-    <div
-      id="register"
-      className="w-full min-h-dvh p-4 md:p-6 lg:p-8 overflow-y-auto overflow-x-hidden"
-    >
+    <div className="w-full min-h-dvh p-4 md:p-6 lg:p-8 overflow-y-auto overflow-x-hidden">
       <div className="max-w-7xl mx-auto">
-        {/* Título Principal */}
         <div className="mb-6">
           <h1 className="text-2xl md:text-3xl font-bold text-noozi-gray-800">Novo Produto</h1>
           <p className="text-sm text-noozi-gray-600 mt-1">Preencha os dados abaixo para cadastrar um novo produto</p>
         </div>
 
-        {/* Mensagem de erro */}
         {submitError && (
           <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-lg">
             <p className="text-sm text-red-600">{submitError}</p>
@@ -143,12 +139,12 @@ export default function NewProductForm() {
                 label="Nome"
                 id="inputName"
                 value={name}
-                onChange={setName}
+                onChange={(v) => { setName(v); clearError("name"); }}
                 maxLength={CHAR_LIMITS.NAME}
                 tooltip="Informe o nome completo do produto."
                 required="Obrigatório"
+                error={errors.name}
               />
-
               <TextInput
                 label="Marca"
                 id="inputBrand"
@@ -157,7 +153,6 @@ export default function NewProductForm() {
                 maxLength={CHAR_LIMITS.BRAND}
                 tooltip="Marca ou fabricante do produto."
               />
-
               <TextArea
                 label="Descrição"
                 id="inputDescription"
@@ -166,7 +161,6 @@ export default function NewProductForm() {
                 maxLength={CHAR_LIMITS.DESCRIPTION}
                 tooltip="Detalhes adicionais sobre o produto (características, composição, etc.)"
               />
-
               <TextInput
                 label="Categoria"
                 id="inputCategory"
@@ -174,7 +168,7 @@ export default function NewProductForm() {
                 onChange={setCategory}
                 maxLength={CHAR_LIMITS.CATEGORY}
                 className="form-field-single"
-                tooltip="Grupo ao qual o produto pertence. "
+                tooltip="Grupo ao qual o produto pertence."
               />
             </div>
           </div>
@@ -187,12 +181,12 @@ export default function NewProductForm() {
                 label="Quantidade"
                 id="inputQuantity"
                 value={quantity}
-                onChange={setQuantity}
+                onChange={(v) => { setQuantity(v); clearError("stock_quantity"); }}
                 min="0"
                 tooltip="Número de unidades disponíveis em estoque. Use apenas números inteiros."
                 required="Obrigatório"
+                error={errors.stock_quantity}
               />
-
               <TextInput
                 label="Unidade de Medida"
                 id="inputUnity"
@@ -203,14 +197,14 @@ export default function NewProductForm() {
                 className="form-field-single"
                 tooltip="Unidade de venda ou armazenamento. Ex: kg, un, L, pacote, caixa"
               />
-
               <PriceInput
                 label="Preço Unitário"
                 id="inputValue"
                 value={priceValue}
-                onChange={setPriceValue}
+                onChange={(v) => { setPriceValue(v); clearError("item_price"); }}
                 tooltip="Valor de venda por unidade. Digite apenas os números – a formatação é automática."
                 required="Obrigatório"
+                error={errors.item_price}
               />
             </div>
           </div>
@@ -228,7 +222,6 @@ export default function NewProductForm() {
                 className="form-field-single"
                 tooltip="Quantidade mínima que, ao ser atingida, dispara um aviso de reposição."
               />
-
               <TextInput
                 label="Quantidade de estoque alto"
                 id="inputHStock"
@@ -252,7 +245,6 @@ export default function NewProductForm() {
                 onChange={setDate}
                 tooltip="Data de vencimento do produto no formato DD/MM/AAAA. Digite dia, mês e ano."
               />
-
               <TextInput
                 label="Lote"
                 id="inputBatch"
@@ -262,17 +254,17 @@ export default function NewProductForm() {
                 className="form-field-single"
                 tooltip="Código de identificação do lote de fabricação (se aplicável)."
               />
-
               <TextInput
                 label="SKU"
                 id="inputSKU"
                 value={sku}
-                onChange={setSku}
+                onChange={(v) => { setSku(v); clearError("sku"); }}
                 maxLength={CHAR_LIMITS.SKU}
                 className="form-field-single"
                 tooltip="Código único de identificação do produto (Stock Keeping Unit)."
                 placeholder="Ex: ABC01"
                 required="Obrigatório"
+                error={errors.sku}
               />
             </div>
           </div>
@@ -292,7 +284,7 @@ export default function NewProductForm() {
             </div>
           </div>
 
-          {/* Botão de cadastrar produto */}
+          {/* Botão */}
           <div className="flex justify-center pt-4" id="btn_cadastro">
             <div className="w-full lg:w-1/2">
               <ActionButton
