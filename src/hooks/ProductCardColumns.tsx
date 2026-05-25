@@ -2,8 +2,8 @@ import { Pencil, Trash2 } from "lucide-react";
 import { ActionButton } from "@/components/Buttons/ActionButton/ActionButton";
 import { StatusBadge } from "@/components/Status/StatusBadge";
 import type { Product } from "@/types/Product.types";
-
 import { PRODUCT_STATUS_CONFIG } from "@/constants/productStatusConfig";
+//import { convertDateToISO } from "@/utils/ConvertDateToISO";
 
 export function ProductCardColumns(item: Product) {
     // const circleColor = "bg-green-400 border-green-200 shadow-green-400/50";
@@ -41,13 +41,13 @@ export function ProductCardColumns(item: Product) {
     ),
 
     Quantidade: (
-      <span className="text-black font-bold text-[12px] sm:text-[14px] md:text-[14px] lg:text-[15px] xl:text-[16px] 2xl:text-[16px]">
+      <span className="text-black font-medium text-[12px] sm:text-[14px] md:text-[16px] lg:text-[18px] xl:text-[18px] 2xl:text-[18px]">
         {item.stock_quantity} un.
       </span>
     ),
 
     Preço: (
-      <span className="text-black font-bold text-[14px] md:text-[16px] lg:text-[18px] xl:text-[20px] 2xl:text-[20px]">
+      <span className="text-black font-medium text-[12px] sm:text-[14px] md:text-[16px] lg:text-[18px] xl:text-[18px] 2xl:text-[18px]">
         R$ {item.item_price}
       </span>
     ),
@@ -59,13 +59,13 @@ export function ProductCardColumns(item: Product) {
     ),
 
     Validade: (
-      <span className="text-black font-bold text-[12px] lg:text-[15px] xl:text-[16px] 2xl:text-[16px]">
+      <span className="text-black font-medium text-[12px] sm:text-[14px] md:text-[16px] lg:text-[18px] xl:text-[18px] 2xl:text-[18px]">
         {item.expiration_date}
       </span>
     ),
 
     Marca: (
-      <span className="text-black font-medium text-[16px]">
+      <span className="text-black font-medium text-[18px]">
         {item.brand}
       </span>
     ),
