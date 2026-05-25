@@ -11,7 +11,8 @@ export function TextInput({
   maxLength,
   placeholder,
   className = "form-field-full",
-  tooltip
+  tooltip,
+  required
 }: TextInputProps) {
   const { remaining, color, showCounter } = useCharCounter(value, maxLength);
 
@@ -22,6 +23,9 @@ export function TextInput({
         {label}
       </label>
       {tooltip && <Tooltip text={tooltip} />}
+      <span className="text-xs italic text-noozi-gray-400 font-normal">
+          {required}
+      </span>
       </div>
       <div className="relative">
         <input

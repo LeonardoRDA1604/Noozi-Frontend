@@ -3,7 +3,7 @@ import { Tooltip } from "@/components/ToolTip/ToolTip";
 
 import type { PriceInputProps } from "@/types/InputTypes/PriceInput.types";
 
-export function PriceInput({ label, id, value, tooltip, onChange }: PriceInputProps) {
+export function PriceInput({ label, id, value, tooltip,required, onChange }: PriceInputProps) {
   const formatPrice = (valueInCents: number): string => {
     const valueInReais = valueInCents / 100;
     const formatted = valueInReais.toLocaleString("pt-BR", {
@@ -58,6 +58,9 @@ export function PriceInput({ label, id, value, tooltip, onChange }: PriceInputPr
         {label}
       </label>
       {tooltip && <Tooltip text={tooltip} />}
+      <span className="text-xs italic text-noozi-gray-400 font-normal">
+          {required}
+      </span>
       </div>
       <input
         className="w-full bg-noozi-input_field border border-solid border-noozi-gray-300 rounded-lg px-3 py-2"

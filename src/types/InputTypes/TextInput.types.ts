@@ -6,5 +6,6 @@ export interface TextInputProps {
   maxLength: number;
   placeholder?: string;
   className?: string;
-  tooltip?: string
+  tooltip?: string;
+  required?: string
 }
