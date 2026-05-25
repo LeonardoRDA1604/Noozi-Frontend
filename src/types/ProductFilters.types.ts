@@ -1,17 +1,20 @@
 export type SortBy =
   | "az"
   | "za"
+  | "price-high"
+  | "price-low"
   | "stock-high"
   | "stock-low"
   | "expiry-nearest"
   | "expiry-furthest"
+  | "expiry-expired"
   | null;
 
 export interface ProductFilters {
   sortBy: SortBy;
   onlyActive: boolean;
-  priceFrom: number; // em centavos
-  priceTo: number;   // em centavos
+  priceFrom: number;
+  priceTo: number;
 }
 
 export const DEFAULT_FILTERS: ProductFilters = {
