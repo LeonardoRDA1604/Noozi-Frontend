@@ -1,9 +1,17 @@
-// import { useState } from "react";
 import { Tooltip } from "@/components/ToolTip/ToolTip";
-
 import type { PriceInputProps } from "@/types/InputTypes/PriceInput.types";
 
-export function PriceInput({ label, id, value, tooltip,required, onChange }: PriceInputProps) {
+export function PriceInput({
+  label,
+  id,
+  value,
+  tooltip,
+  required,
+  onChange,
+  error,
+}: PriceInputProps) {
+  const hasError = Boolean(error);
+
   const formatPrice = (valueInCents: number): string => {
     const valueInReais = valueInCents / 100;
     const formatted = valueInReais.toLocaleString("pt-BR", {
@@ -54,16 +62,20 @@ export function PriceInput({ label, id, value, tooltip,required, onChange }: Pri
   return (
     <div className="form-field-single">
       <div className='flex items-center gap-2 mb-2'>
-      <label htmlFor={id} className="mb-[1.5px] font-medium">
-        {label}
-      </label>
-      {tooltip && <Tooltip text={tooltip} />}
-      <span className="text-xs italic text-noozi-gray-400 font-normal">
+        <label htmlFor={id} className="mb-[1.5px] font-medium">
+          {label}
+        </label>
+        {tooltip && <Tooltip text={tooltip} />}
+        <span className="text-xs italic text-noozi-gray-400 font-normal">
           {required}
-      </span>
+        </span>
       </div>
       <input
-        className="w-full bg-noozi-input_field border border-solid border-noozi-gray-300 rounded-lg px-3 py-2"
+        className={`w-full bg-noozi-input_field border border-solid rounded-lg px-3 py-2 transition-colors ${
+          hasError
+            ? "border-red-500 focus:outline-none focus:ring-1 focus:ring-red-500"
+            : "border-noozi-gray-300"
+        }`}
         type="text"
         id={id}
         placeholder="R$ 0,00"
@@ -71,6 +83,9 @@ export function PriceInput({ label, id, value, tooltip,required, onChange }: Pri
         onChange={handleChange}
         onKeyDown={handleKeyDown}
       />
+      {hasError && (
+        <p className="mt-1 text-xs text-red-500">{error}</p>
+      )}
     </div>
   );
 }

@@ -7,5 +7,6 @@ export interface TextInputProps {
   placeholder?: string;
   className?: string;
   tooltip?: string;
-  required?: string
+  required?: string;
+  error?: string
 }
