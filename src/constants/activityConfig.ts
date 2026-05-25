@@ -1,5 +1,5 @@
 import type { ActivityType } from "@/types/ActivityLog.types";
-import { PackagePlus, PackageMinus, RefreshCw, BadgeCheck, Badge, CirclePlay, CirclePause } from "lucide-react";
+import { PackagePlus, PackageMinus, RefreshCw} from "lucide-react";
 
 export const ACTIVITY_CONFIG: Record<ActivityType, {
   label: string;
@@ -28,21 +28,5 @@ export const ACTIVITY_CONFIG: Record<ActivityType, {
     iconClass:  "text-status-danger",
     badgeClass: "bg-status-danger/10 text-status-danger",
     badgeText:  "Removido",
-  },
-  active: {
-    label:      "Produto ativo",
-    // icon:       BadgeCheck,
-    icon:       CirclePlay,
-    iconClass:  "text-status-success",
-    badgeClass: "bg-status-success/10 text-status-success",
-    badgeText:  "Ativo",
-  },
-  inactive: {
-    label:      "Produto inativo",
-    // icon:       Badge,
-    icon:       CirclePause,
-    iconClass:  "text-noozi-muted",
-    badgeClass: "bg-noozi-muted/10 text-noozi-muted",
-    badgeText:  "Inativo",
-  },
+  }
 };

@@ -3,7 +3,7 @@ import { Ban, CalendarClock, Package, TriangleAlert, CirclePlus, Layers, Siren, 
 import { MetricsCard } from "@/components/Cards/Metrics/MetricsCard/MetricsCard";
 import { ActionButton } from "@/components/Buttons/ActionButton/ActionButton";
 import { MetricsModal } from "@/components/Modals/MetricsModal/MetricsModal";
-import { RecentActivities } from "@/components/RecentActivities/RecentActivities";
+import { RecentActivities } from "@/components/Activities/RecentActivities/RecentActivities";
 import { SectionTitle } from "@/components/SectionTitle/SectionTitle";
 import { useProductMetrics } from "@/hooks/useProductMetrics";
 import type { ModalType } from "@/types/ModalType.types";

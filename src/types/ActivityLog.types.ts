@@ -1,4 +1,4 @@
-export type ActivityType = "created" | "updated" | "deleted" | "active" | "inactive";
+export type ActivityType = "created" | "updated" | "deleted";
 
 export interface ActivityLog {
   id: string;

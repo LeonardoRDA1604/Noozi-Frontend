@@ -5,7 +5,7 @@ import type { Product } from "@/types/Product.types";
 import TableHeader from "@/components/Cards/TableHeader/TableHeader";
 import { GetBreakpoints } from "../../../utils/GetBreakpoints";
 import { COLUMNS, GRID_COLS } from "@/constants/columns";
-import { useProductCardColumns } from "@/hooks/ProductCardColumns";
+import { ProductCardColumns } from "@/hooks/ProductCardColumns";
 import { ProductModal } from "@/components/Modals/ProductModal/ProductModal";
 // import { formatCurrency } from "@/utils/Currency";
 
@@ -60,8 +60,8 @@ export default function CreateCardItem({ filter, products }: filter) {
   );
 }
 
-function CardItem({ item, onSelect }: { item: Product, onSelect: () => void}) {
-  const { value } = useProductCardColumns(item)
+function CardItem({ item, onSelect }: { item: Product }) {
+  const { value } = ProductCardColumns(item)
   
   return (
     <div
