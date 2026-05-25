@@ -5,7 +5,7 @@ import type { Product } from "@/types/Product.types";
 
 import { PRODUCT_STATUS_CONFIG } from "@/constants/productStatusConfig";
 
-export function ProductCardColumns(item: Product) {
+export function productCardColumns(item: Product) {
     // const circleColor = "bg-green-400 border-green-200 shadow-green-400/50";
     const status = item.is_active ? "active" : "inactive";
     const config = PRODUCT_STATUS_CONFIG[status];

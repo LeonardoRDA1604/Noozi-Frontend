@@ -1,5 +1,5 @@
 import { COLUMNS,GRID_COLS } from "@/constants/columns";
-import { GetBreakpoints } from "@/utils/GetBreakpoints";
+import { getBreakpoints } from "@/utils/getBreakpoints";
 
 export default function TableHeader() {
   return (
@@ -8,7 +8,7 @@ export default function TableHeader() {
         <div
           key={col.label}
           className={`
-            ${GetBreakpoints(col.priority)}
+            ${getBreakpoints(col.priority)}
             items-center justify-center
             p-3 text-[12px] sm:text-[14px] md:text-[16px] lg:text-[18px] xl:text-[18px] 2xl:text-[20px]
             ${index < arr.length - 1 ? "border-r-2 border-white" : ""}

@@ -1,6 +1,6 @@
 import { api } from "@/lib/api";
 import type { Product, CreateProductDTO, UpdateProductDTO } from "@/types/Product.types";
-import { formatCurrency } from "@/utils/Currency";
+import { formatCurrency } from "@/utils/formatCurrency";
 import { activityLogService } from "@/services/activityLog.service";
 
 

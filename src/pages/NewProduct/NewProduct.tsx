@@ -10,7 +10,7 @@ import { Send } from "lucide-react";
 import { ActionButton } from "@/components/Buttons/ActionButton/ActionButton";
 import { productService } from "@/services/product.service";
 import type { CreateProductDTO } from "@/types/Product.types";
-import { convertDateToISO } from "@/utils/ConvertDateToISO";
+import { convertDateToISO } from "@/utils/convertDateToISO";
 
 const CHAR_LIMITS = {
   NAME: 120,

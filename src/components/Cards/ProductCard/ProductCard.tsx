@@ -3,11 +3,11 @@ import type { filter } from "@/types/FilterSearchbar.types";
 import { structureSearch } from "@/constants/MiniSearch";
 import type { Product } from "@/types/Product.types";
 import TableHeader from "@/components/Cards/TableHeader/TableHeader";
-import { GetBreakpoints } from "../../../utils/GetBreakpoints";
+import { getBreakpoints } from "../../../utils/getBreakpoints";
 import { COLUMNS, GRID_COLS } from "@/constants/columns";
-import { ProductCardColumns } from "@/hooks/ProductCardColumns";
+import { productCardColumns } from "@/utils/productCardColumns";
 import { ProductModal } from "@/components/Modals/ProductModal/ProductModal";
-// import { formatCurrency } from "@/utils/Currency";
+// import { formatCurrency } from "@/utils/formatCurrency";
 
 
 export default function CreateCardItem({ filter, products }: filter) {
@@ -61,7 +61,7 @@ export default function CreateCardItem({ filter, products }: filter) {
 }
 
 function CardItem({ item, onSelect }: { item: Product }) {
-  const { value } = ProductCardColumns(item)
+  const { value } = productCardColumns(item)
   
   return (
     <div
@@ -72,7 +72,7 @@ function CardItem({ item, onSelect }: { item: Product }) {
         <div
           key={col.label}
           className={`
-            ${GetBreakpoints(col.priority)}
+            ${getBreakpoints(col.priority)}
             items-center justify-center py-2
             px-1 sm:px-3 sm:py-4 md:px-4 md:py-3 shadow-md rounded-md
             ${index < arr.length - 1 ? "border-r-2 border-noozi-gray-300" : ""}

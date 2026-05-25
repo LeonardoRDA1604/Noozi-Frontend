@@ -431,7 +431,7 @@ O problema não impacta o funcionamento atual da aplicação e será tratado em 
 - Atualização do sistema de filtros e Searchbar para Design Tokens
 - Ajuste progressivo de tipografia baseado em breakpoints
 - Padronização dos nomes:
-  - `GetBreakpoints`
+  - `getBreakpoints`
   - `TableHeader`
   - `filterDebounced`
 - Estrutura de imports reorganizada após refactors
