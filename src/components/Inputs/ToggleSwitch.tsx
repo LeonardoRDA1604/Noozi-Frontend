@@ -8,16 +8,18 @@ export function ToggleSwitch({
   activeLabel = "Ativo",
   tooltip
 }: ToggleSwitchProps) {
+  const id = "toggle-status";
   return (
     <div>
       <div className='flex items-center gap-2 mb-2'>
-      <label className="mb-[1.5px] font-medium">
+      <label htmlFor={id} className="mb-[1.5px] font-medium">
         {label}
       </label>
       {tooltip && <Tooltip text={tooltip} />}
       </div>
       <label className="toggle-switch">
         <input
+          id={id}
           type="checkbox"
           checked={checked}
           onChange={(e) => onChange(e.target.checked)}
