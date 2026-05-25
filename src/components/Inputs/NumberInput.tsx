@@ -8,7 +8,8 @@ export function NumberInput({
   onChange,
   min = "0",
   placeholder,
-  tooltip
+  tooltip,
+  required
 }: NumberInputProps) {
   return (
     <div className="form-field-single">
@@ -17,6 +18,9 @@ export function NumberInput({
         {label}
       </label>
       {tooltip && <Tooltip text={tooltip} />}
+      <span className="text-xs italic text-noozi-gray-400 font-normal">
+          {required}
+      </span>
       </div>
       <input
         className="w-full bg-noozi-input_field border border-solid border-noozi-gray-300 rounded-lg px-3 py-2"

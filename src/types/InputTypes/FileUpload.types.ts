@@ -4,4 +4,5 @@ export interface FileUploadProps {
   onChange: (file: File | null) => void;
   accept?: string;
   maxSize?: string;
+  required?: string
 }

@@ -146,6 +146,7 @@ export default function NewProductForm() {
                 onChange={setName}
                 maxLength={CHAR_LIMITS.NAME}
                 tooltip="Informe o nome completo do produto."
+                required="Obrigatório"
               />
 
               <TextInput
@@ -189,6 +190,7 @@ export default function NewProductForm() {
                 onChange={setQuantity}
                 min="0"
                 tooltip="Número de unidades disponíveis em estoque. Use apenas números inteiros."
+                required="Obrigatório"
               />
 
               <TextInput
@@ -208,6 +210,7 @@ export default function NewProductForm() {
                 value={priceValue}
                 onChange={setPriceValue}
                 tooltip="Valor de venda por unidade. Digite apenas os números – a formatação é automática."
+                required="Obrigatório"
               />
             </div>
           </div>
@@ -269,6 +272,7 @@ export default function NewProductForm() {
                 className="form-field-single"
                 tooltip="Código único de identificação do produto (Stock Keeping Unit)."
                 placeholder="Ex: ABC01"
+                required="Obrigatório"
               />
             </div>
           </div>

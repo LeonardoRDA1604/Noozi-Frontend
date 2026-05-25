@@ -6,7 +6,8 @@ export function ToggleSwitch({
   checked,
   onChange,
   activeLabel = "Ativo",
-  tooltip
+  tooltip,
+  required
 }: ToggleSwitchProps) {
   return (
     <div className="flex flex-col gap-2">
@@ -14,8 +15,10 @@ export function ToggleSwitch({
         <label className="font-medium text-sm">
           {label}
         </label>
-
         {tooltip && <Tooltip text={tooltip} />}
+        <span className="text-xs italic text-noozi-gray-400 font-normal">
+          {required}
+        </span>
       </div>
 
       <label className="flex items-center gap-3 cursor-pointer select-none relative">
