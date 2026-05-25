@@ -26,29 +26,61 @@ export function useProductFilters(products: Product[]) {
       case "az":
         result.sort((a, b) => a.name.localeCompare(b.name, "pt-BR"));
         break;
+
       case "za":
         result.sort((a, b) => b.name.localeCompare(a.name, "pt-BR"));
         break;
+
+      case "price-high":
+        result.sort((a, b) => b.item_price - a.item_price);
+        break;
+
+      case "price-low":
+        result.sort((a, b) => a.item_price - b.item_price);
+        break;
+
       case "stock-high":
         result.sort((a, b) => b.stock_quantity - a.stock_quantity);
         break;
+
       case "stock-low":
         result.sort((a, b) => a.stock_quantity - b.stock_quantity);
         break;
+
+      // Exibe apenas produtos COM validade cadastrada, do mais próximo ao mais distante
       case "expiry-nearest":
-        result.sort((a, b) => {
-          if (!a.expiration_date) return 1;
-          if (!b.expiration_date) return -1;
-          return new Date(a.expiration_date).getTime() - new Date(b.expiration_date).getTime();
-        });
+        result = result.filter((p) => Boolean(p.expiration_date));
+        result.sort(
+          (a, b) =>
+            new Date(a.expiration_date!).getTime() -
+            new Date(b.expiration_date!).getTime()
+        );
         break;
+
+      // Exibe apenas produtos COM validade cadastrada, do mais distante ao mais próximo
       case "expiry-furthest":
-        result.sort((a, b) => {
-          if (!a.expiration_date) return 1;
-          if (!b.expiration_date) return -1;
-          return new Date(b.expiration_date).getTime() - new Date(a.expiration_date).getTime();
-        });
+        result = result.filter((p) => Boolean(p.expiration_date));
+        result.sort(
+          (a, b) =>
+            new Date(b.expiration_date!).getTime() -
+            new Date(a.expiration_date!).getTime()
+        );
         break;
+
+      // Exibe apenas produtos com validade vencida (expiration_date < hoje)
+      case "expiry-expired": {
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
+        result = result.filter(
+          (p) => p.expiration_date && new Date(p.expiration_date) < today
+        );
+        result.sort(
+          (a, b) =>
+            new Date(a.expiration_date!).getTime() -
+            new Date(b.expiration_date!).getTime()
+        );
+        break;
+      }
     }
 
     return result;
