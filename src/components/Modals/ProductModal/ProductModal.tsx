@@ -5,24 +5,14 @@ import { ActionButton } from "@/components/Buttons/ActionButton/ActionButton";
 import { productService } from "@/services/product.service";
 import type { Product, UpdateProductDTO } from "@/types/Product.types";
 import { Tooltip } from "@/components/ToolTip/ToolTip";
+import { formatCurrency } from "@/utils/formatCurrency";
+import { formatISODate } from "@/utils/formatISODate";
 
 interface ProductModalProps {
   product: Product;
   onClose: () => void;
   onDeleted: () => void; // recarrega lista após deletar
   onUpdated: () => void; // recarrega lista após editar
-}
-
-// Formata data ISO → dd/mm/aaaa
-function formatDate(iso?: string): string {
-  if (!iso) return "—";
-  const [year, month, day] = iso.split("-");
-  return `${day}/${month}/${year}`;
-}
-
-// Formata número → moeda brasileira
-function formatCurrency(value: number): string {
-  return value.toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
 }
 
 export function ProductModal({
@@ -211,7 +201,7 @@ export function ProductModal({
               onChange={(v) => setEditData({ ...editData, expiration_date: v })}
             />
           ) : (
-            <ModalValue>{formatDate(product.expiration_date)}</ModalValue>
+            <ModalValue>{formatISODate(product.expiration_date)}</ModalValue>
           )}
         </ModalField>
 
