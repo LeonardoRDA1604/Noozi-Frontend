@@ -16,36 +16,5 @@
   *, *::before, *::after {
     box-sizing: border-box;
   }
-
   
- /* RESPONSIVIDADE DO FORMULÁRIO(NEWPRODUCT.TSX) */
-
-
-@layer components {
-
-
-  /* Seção do formulário com card visual */
-  .form-section {
-    @apply bg-white rounded-xl shadow-sm border border-noozi-gray-200 p-6;
-    transition: all 0.2s ease;
-  }
-
-  .form-section:hover {
-    @apply shadow-md border-noozi-gray-300;
-  }
-
-
-  /* Grid aninhado (Validade/Lote/SKU + Upload) */
-  .form-nested-grid {
-    @apply grid gap-4;
-    grid-column: 1 / -1; /* col-span-full */
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
-  /* Coluna esquerda - Validade, Lote, SKU */
-  .form-inventory-fields {
-    @apply grid gap-4;
-    grid-template-columns: repeat(1, minmax(0, 1fr));
-  }
-}
 }
