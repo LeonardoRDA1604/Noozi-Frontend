@@ -3,8 +3,8 @@ import { ActionButton } from "@/components/Buttons/ActionButton/ActionButton";
 import { StatusBadge } from "@/components/Status/StatusBadge";
 import type { Product } from "@/types/Product.types";
 import { PRODUCT_STATUS_CONFIG } from "@/constants/productStatusConfig";
-import { formatCurrency } from "./formatCurrency";
-import { formatISODate } from "./formatISODate";
+import { formatCurrency } from "../currency/formatCurrency";
+import { formatISODate } from "../date/formatISODate";
 
 export function productCardColumns(item: Product) {
     const status = item.is_active ? "active" : "inactive";

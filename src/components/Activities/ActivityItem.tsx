@@ -1,6 +1,6 @@
 import { ACTIVITY_CONFIG } from "@/constants/activityConfig";
 import type { RecentActivity } from "@/types/ActivityLog.types";
-import { formatDateTime } from "@/utils/formatDateTime";
+import { formatDateTime } from "@/utils/date/formatDateTime";
 import { StatusBadge } from "@/components/Status/StatusBadge";
 
 export function ActivityItem({ activity }: { activity: RecentActivity }) {

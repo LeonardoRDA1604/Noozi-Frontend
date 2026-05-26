@@ -5,8 +5,8 @@ import { ActionButton } from "@/components/Buttons/ActionButton/ActionButton";
 import { productService } from "@/services/product.service";
 import type { Product, UpdateProductDTO } from "@/types/Product.types";
 import { Tooltip } from "@/components/ToolTip/ToolTip";
-import { formatCurrency } from "@/utils/formatCurrency";
-import { formatISODate } from "@/utils/formatISODate";
+import { formatCurrency } from "@/utils/currency/formatCurrency";
+import { formatISODate } from "@/utils/date/formatISODate";
 
 import { StatusBadge } from "@/components/Status/StatusBadge";
 import { PRODUCT_STATUS_CONFIG } from "@/constants/productStatusConfig";

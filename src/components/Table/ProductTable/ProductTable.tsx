@@ -2,9 +2,9 @@ import { useMemo, useState, useEffect } from "react";
 import type { filter } from "@/types/FilterSearchbar.types";
 import { structureSearch } from "@/constants/MiniSearch";
 import type { Product } from "@/types/Product.types";
-import { getBreakpoints } from "@/utils/getBreakpoints";
+import { getBreakpoints } from "@/utils/responsive/getBreakpoints";
 import { COLUMNS, GRID_COLS } from "@/constants/columns";
-import { productCardColumns } from "@/utils/productCardColumns";
+import { productCardColumns } from "@/utils/products/productCardColumns";
 import { ProductModal } from "@/components/Modals/ProductModal/ProductModal";
 
 // Adiciona onProductChange ao tipo existente (FilterSearchbar.types)
