@@ -17,7 +17,8 @@ export function Tooltip({ text, position = "top" }: TooltipProps ) {
     <div className="relative group inline-flex items-center">
       <Info
         size={14}
-        className="text-noozi-gray-400 cursor-help"
+        className="text-tooltip cursor-help"
+        // Cor do ToolTip: #8c9bb4
       />
       <div className={`
         absolute
