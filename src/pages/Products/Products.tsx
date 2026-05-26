@@ -20,12 +20,12 @@ export default function Products() {
 
   return (
     <>
-      <div className="flex justify-between mt-12">
+      <div className="flex justify-between pl-3 mt-12">
         <Searchbar            currentText={currentText}     setCurrentText={setCurrentText} />
         <FilterProductButton  filters={filters}             setFilters={setFilters}              hasActiveFilters={hasActiveFilters} />
       </div>
+        <ProductTable         products={filteredProducts}   filter={currentText}                 onProductChange={refetch} />
 
-      <ProductTable         products={filteredProducts}   filter={currentText}                 onProductChange={refetch} />
 
     </>
   );
