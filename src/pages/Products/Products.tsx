@@ -4,7 +4,7 @@ import { useState } from "react";
 import Searchbar from "@/components/Searchbar/Searchbar";
 import { useProducts } from "@/hooks/useProducts";
 import { useProductFilters } from "@/hooks/useProductFilters";
-import CreateCardItem from "@/components/Cards/ProductCard/ProductCard";
+import ProductTable from "@/components/Cards/ProductTable/ProductTable";
 import FilterProductButton from "@/components/Buttons/FilterProductButton/FilterProductButton";
 
 export default function Products() {
@@ -31,7 +31,7 @@ export default function Products() {
         />
       </div>
 
-      <CreateCardItem products={filteredProducts} filter={currentText} />
+      <ProductTable products={filteredProducts} filter={currentText} />
 
       {/* Div dos botões de edição e delete */}
       <div className="gap-2 my-6 max-w-xs">
