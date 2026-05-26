@@ -2,7 +2,7 @@ import { useState } from "react";
 import Searchbar from "@/components/Searchbar/Searchbar";
 import { useProducts } from "@/hooks/useProducts";
 import { useProductFilters } from "@/hooks/useProductFilters";
-import ProductTable from "@/components/ProductTable/ProductTable";
+import ProductTable from "@/components/Table/ProductTable/ProductTable";
 import FilterProductButton from "@/components/Buttons/FilterProductButton/FilterProductButton";
 
 export default function Products() {

@@ -9,7 +9,7 @@ import { Send } from "lucide-react";
 import { ActionButton } from "@/components/Buttons/ActionButton/ActionButton";
 import { productService } from "@/services/product.service";
 import type { CreateProductDTO } from "@/types/Product.types";
-import { convertDateToISO } from "@/utils/convertDateToISO";
+import { convertDateISO } from "@/utils/convertDateISO";
 import { useFormValidation } from "@/hooks/useFormValidation";
 import type { NewProductForm } from "@/types/NewProductForm.types";
 
@@ -99,7 +99,7 @@ export default function NewProductForm() {
       low_stock_level: lowLevel ? parseInt(lowLevel) : undefined,
       over_stock_level: highLevel ? parseInt(highLevel) : undefined,
       batch_code: batch.trim() || undefined,
-      expiration_date: convertDateToISO(date),
+      expiration_date: convertDateISO(date),
       is_active: status,
     };
 
