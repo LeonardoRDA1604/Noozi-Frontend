@@ -1,7 +1,7 @@
 import type { DateInputProps } from "@/types/InputTypes/DateInput.types";
 import { Tooltip } from "@/components/ToolTip/ToolTip";
 
-export function DateInput({ label, id, value, tooltip, onChange }: DateInputProps) {
+export function DateInput({ label, id, value, tooltip, required, onChange }: DateInputProps) {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     let newValue = e.target.value.replace(/\D/g, "");
     if (newValue.length > 8) newValue = newValue.slice(0, 8);
@@ -40,6 +40,9 @@ export function DateInput({ label, id, value, tooltip, onChange }: DateInputProp
         {label}
       </label>
       {tooltip && <Tooltip text={tooltip} />}
+      <span className="text-xs italic text-noozi-gray-400 font-normal">
+          {required}
+      </span>
       </div>
       </div>
       <input

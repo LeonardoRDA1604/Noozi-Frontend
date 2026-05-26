@@ -1,22 +1,29 @@
-export type SortBy =
-  | "az"
-  | "za"
-  | "stock-high"
-  | "stock-low"
-  | "expiry-nearest"
-  | "expiry-furthest"
-  | null;
+export type SortAlpha = "az" | "za" | null;
+export type SortPrice = "price-high" | "price-low" | null;
+export type SortStock = "stock-high" | "stock-low" | null;
+export type SortExpiry = "expiry-nearest" | "expiry-furthest" | null;
+export type SortStockLevel = "stock-level-critical" | "stock-level-normal" | null;
 
 export interface ProductFilters {
-  sortBy: SortBy;
+  sortAlpha: SortAlpha;
+  sortPrice: SortPrice;
+  sortStock: SortStock;
+  sortExpiry: SortExpiry;
+  sortStockLevel: SortStockLevel;
   onlyActive: boolean;
-  priceFrom: number; // em centavos
-  priceTo: number;   // em centavos
+  onlyExpired: boolean;
+  priceFrom: number;
+  priceTo: number;
 }
 
 export const DEFAULT_FILTERS: ProductFilters = {
-  sortBy: null,
+  sortAlpha: null,
+  sortPrice: null,
+  sortStock: null,
+  sortExpiry: null,
+  sortStockLevel: null,
   onlyActive: false,
+  onlyExpired: false,
   priceFrom: 0,
   priceTo: 0,
 };

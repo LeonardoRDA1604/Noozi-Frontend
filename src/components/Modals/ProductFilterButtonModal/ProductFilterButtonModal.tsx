@@ -4,10 +4,16 @@ import { CheckIcon } from "lucide-react";
 import { BaseModal } from "../BaseModal/BaseModal";
 import {
   type ProductFilters,
-  type SortBy,
+  type SortAlpha,
+  type SortPrice,
+  type SortStock,
+  type SortExpiry,
+  type SortStockLevel,
   DEFAULT_FILTERS,
 } from "@/types/ProductFilters.types";
 import { PriceInput } from "../../Inputs/PriceInput";
+import { ToggleSwitch } from "../../Inputs/ToggleSwitch";
+import { Tooltip } from "@/components/ToolTip/ToolTip";
 
 interface ModalProps {
   isOpen: boolean;
@@ -22,106 +28,176 @@ export default function ProductFilterButtonModal({
   onApply,
   currentFilters,
 }: ModalProps) {
-  // Cópia local dos filtros — só vai para o pai ao clicar em Aplicar
-  const [sortBy, setSortBy] = useState<SortBy>(currentFilters.sortBy);
+  const [sortAlpha, setSortAlpha] = useState<SortAlpha>(currentFilters.sortAlpha);
+  const [sortPrice, setSortPrice] = useState<SortPrice>(currentFilters.sortPrice);
+  const [sortStock, setSortStock] = useState<SortStock>(currentFilters.sortStock);
+  const [sortExpiry, setSortExpiry] = useState<SortExpiry>(currentFilters.sortExpiry);
+  const [sortStockLevel, setSortStockLevel] = useState<SortStockLevel>(currentFilters.sortStockLevel);
   const [onlyActive, setOnlyActive] = useState(currentFilters.onlyActive);
+  const [onlyExpired, setOnlyExpired] = useState(currentFilters.onlyExpired);
   const [priceFrom, setPriceFrom] = useState<number>(currentFilters.priceFrom);
   const [priceTo, setPriceTo] = useState<number>(currentFilters.priceTo);
 
   if (!isOpen) return null;
 
-  // Alterna sortBy: clica no mesmo botão = desmarca, outro = troca
-  const handleSort = (value: SortBy) =>
-    setSortBy((prev) => (prev === value ? null : value));
+  // Toggle genérico: clicar no mesmo valor desmarca; clicar em outro troca
+  function toggle<T>(
+    current: T | null,
+    value: T,
+    set: (v: T | null) => void
+  ) {
+    set(current === value ? null : value);
+  }
 
   const handleApply = () => {
-    onApply({ sortBy, onlyActive, priceFrom, priceTo });
+    onApply({
+      sortAlpha,
+      sortPrice,
+      sortStock,
+      sortExpiry,
+      sortStockLevel,
+      onlyActive,
+      onlyExpired,
+      priceFrom,
+      priceTo,
+    });
     onClose();
   };
 
   const handleClear = () => {
-    setSortBy(null);
+    setSortAlpha(null);
+    setSortPrice(null);
+    setSortStock(null);
+    setSortExpiry(null);
+    setSortStockLevel(null);
     setOnlyActive(false);
+    setOnlyExpired(false);
     setPriceFrom(0);
     setPriceTo(0);
   };
 
-  const toggleBtn =
-    "px-4 py-1.5 rounded-full text-sm font-medium border transition-all duration-150 cursor-pointer";
-  const activeBtn =
-    "bg-noozi-bright_blue text-white border-noozi-bright_blue shadow-sm";
-  const inactiveBtn =
-    "bg-white text-noozi-gray-600 border-noozi-gray-300 hover:border-noozi-bright_blue hover:text-noozi-bright_blue";
+  // ── Estilos de botão ───────────────────────────────────────────────────────
+  const base = "px-4 py-1.5 rounded-full text-sm font-medium border transition-all duration-150 cursor-pointer";
+  const active = "bg-noozi-bright_blue text-white border-noozi-bright_blue shadow-sm";
+  const inactive = "bg-white text-noozi-gray-600 border-noozi-gray-300 hover:border-noozi-bright_blue hover:text-noozi-bright_blue";
 
-  const btn = (value: SortBy, label: string) => (
-    <button
-      type="button"
-      onClick={() => handleSort(value)}
-      className={`${toggleBtn} ${sortBy === value ? activeBtn : inactiveBtn}`}
-    >
-      {label}
-    </button>
-  );
+  function btn<T>(
+    value: T,
+    label: string,
+    current: T | null,
+    set: (v: T | null) => void
+  ) {
+    return (
+      <button
+        type="button"
+        onClick={() => toggle(current, value, set)}
+        className={`${base} ${current === value ? active : inactive}`}
+      >
+        {label}
+      </button>
+    );
+  }
 
   return (
     <BaseModal isOpen={isOpen} onClose={onClose} title="Filtros" size="lg">
       <div className="flex flex-col gap-6">
 
-        {/* Ordenar Por */}
+        {/* ── Ordenar por ─────────────────────────────────────────────────── */}
         <section>
           <p className="text-xs font-semibold uppercase tracking-widest text-noozi-gray-400 mb-3">
             Ordenar por
           </p>
           <div className="flex flex-col gap-3">
+
+            {/* Ordem alfabética */}
             <div className="grid grid-cols-1 gap-2">
               <span className="text-sm font-medium text-noozi-gray-700">Ordem alfabética</span>
               <div className="flex gap-2">
-                {btn("az", "A → Z")}
-                {btn("za", "Z → A")}
+                {btn<SortAlpha>("az", "A → Z", sortAlpha, setSortAlpha)}
+                {btn<SortAlpha>("za", "Z → A", sortAlpha, setSortAlpha)}
               </div>
             </div>
+
+            {/* Preço */}
+            <div className="grid grid-cols-1 gap-2">
+              <span className="text-sm font-medium text-noozi-gray-700">Preço</span>
+              <div className="flex gap-2">
+                {btn<SortPrice>("price-high", "Maior preço", sortPrice, setSortPrice)}
+                {btn<SortPrice>("price-low", "Menor preço", sortPrice, setSortPrice)}
+              </div>
+            </div>
+
+            {/* Estoque */}
             <div className="grid grid-cols-1 gap-2">
               <span className="text-sm font-medium text-noozi-gray-700">Estoque</span>
               <div className="flex gap-2">
-                {btn("stock-high", "Maior")}
-                {btn("stock-low", "Menor")}
+                {btn<SortStock>("stock-high", "Maior", sortStock, setSortStock)}
+                {btn<SortStock>("stock-low", "Menor", sortStock, setSortStock)}
               </div>
             </div>
+
+            {/* Nível de estoque */}
+            <div className="grid grid-cols-1 gap-2">
+              <span className="text-sm font-medium text-noozi-gray-700 flex items-center gap-2">
+                Nível de estoque
+                <Tooltip text=" Indica o quão próximo o produto está do limite mínimo (estoque baixo) ou máximo (estoque alto). Quanto mais próximo, maior o alerta."></Tooltip>
+              </span>
+              <div className="flex gap-2">
+                {btn<SortStockLevel>(
+                  "stock-level-critical",
+                  "Mais crítico",
+                  sortStockLevel,
+                  setSortStockLevel
+                )}
+                {btn<SortStockLevel>(
+                  "stock-level-normal",
+                  "Mais normal",
+                  sortStockLevel,
+                  setSortStockLevel
+                )}
+              </div>
+            </div>
+
+            {/* Validade */}
             <div className="grid grid-cols-1 gap-2">
               <span className="text-sm font-medium text-noozi-gray-700">Validade</span>
-              <div className="flex gap-2">
-                {btn("expiry-nearest", "Mais próxima")}
-                {btn("expiry-furthest", "Mais distante")}
+              <div className="flex flex-wrap gap-2">
+                {btn<SortExpiry>("expiry-nearest", "Mais próxima", sortExpiry, setSortExpiry)}
+                {btn<SortExpiry>("expiry-furthest", "Mais distante", sortExpiry, setSortExpiry)}
               </div>
             </div>
+
           </div>
         </section>
 
         <hr className="border-noozi-gray-200" />
 
-        {/* Somente Ativos */}
+        {/* ── Status ──────────────────────────────────────────────────────── */}
         <section>
           <p className="text-xs font-semibold uppercase tracking-widest text-noozi-gray-400 mb-3">
             Status
           </p>
-          <label className="flex items-center gap-3 cursor-pointer w-fit">
-            <div className="relative">
-              <input
-                type="checkbox"
-                className="sr-only"
-                checked={onlyActive}
-                onChange={(e) => setOnlyActive(e.target.checked)}
-              />
-              <div className={`w-10 h-5 rounded-full transition-colors duration-200 ${onlyActive ? "bg-noozi-bright_blue" : "bg-noozi-gray-300"}`} />
-              <div className={`absolute top-0.5 left-0.5 w-4 h-4 bg-white rounded-full shadow transition-transform duration-200 ${onlyActive ? "translate-x-5" : "translate-x-0"}`} />
-            </div>
-            <span className="text-sm font-medium text-noozi-gray-700">Somente ativos</span>
-          </label>
+          <div className="flex flex-col gap-3">
+            <ToggleSwitch
+              label="Somente ativos"
+              checked={onlyActive}
+              onChange={setOnlyActive}
+              activeLabel={onlyActive ? "Ativo" : "Todos"}
+              tooltip="Exibe apenas produtos marcados como ativos no cadastro."
+            />
+            <ToggleSwitch
+              label="Somente vencidos"
+              checked={onlyExpired}
+              onChange={setOnlyExpired}
+              activeLabel={onlyExpired ? "Vencidos" : "Todos"}
+              tooltip='Exibe apenas produtos com validade expirada. Combine com "Mais próxima" ou "Mais distante" para ordenar pelo tempo de vencimento.'
+            />
+          </div>
         </section>
 
         <hr className="border-noozi-gray-200" />
 
-        {/* Faixa de Preço */}
+        {/* ── Faixa de preço ──────────────────────────────────────────────── */}
         <section>
           <p className="text-xs font-semibold uppercase tracking-widest text-noozi-gray-400 mb-3">
             Faixa de Preço
@@ -143,7 +219,7 @@ export default function ProductFilterButtonModal({
           </div>
         </section>
 
-        {/* Botões de ação */}
+        {/* ── Ações ───────────────────────────────────────────────────────── */}
         <div className="flex gap-3 pt-2">
           <button
             type="button"

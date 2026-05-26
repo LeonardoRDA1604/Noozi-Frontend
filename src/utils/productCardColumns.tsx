@@ -3,10 +3,12 @@ import { ActionButton } from "@/components/Buttons/ActionButton/ActionButton";
 import { StatusBadge } from "@/components/Status/StatusBadge";
 import type { Product } from "@/types/Product.types";
 import { PRODUCT_STATUS_CONFIG } from "@/constants/productStatusConfig";
+import { formatCurrency } from "./formatCurrency";
 
 export function productCardColumns(item: Product) {
     const status = item.is_active ? "active" : "inactive";
     const config = PRODUCT_STATUS_CONFIG[status];
+    const fontBaseStyle = "w-full min-w-0 text-black text-center text-[12px] sm:text-[14px] md:text-[16px] lg:text-[18px] xl:text-[18px] 2xl:text-[18px] break-words leading-tight";
     const value: Record<string, React.ReactNode> = {
 
     Status: (
@@ -16,43 +18,43 @@ export function productCardColumns(item: Product) {
     ),
 
      ID: (
-      <span className="text-black font-medium  text-[12px] sm:text-[14px] md:text-[16px] lg:text-[18px] xl:text-[18px] 2xl:text-[18px]">
+      <span className={`font-medium ${fontBaseStyle}`}>
         {item.id_product}
       </span>
     ),
 
     Nome: (
-      <span className="text-black font-bold text-center leading-tight text-[12px] sm:text-[14px] lg:text-[16px] xl:text-[18px] 2xl:text-[18px]">
+      <span className={`font-bold ${fontBaseStyle} truncate max-w-[30ch]`}>
         {item.name}
       </span>
     ),
 
     Quantidade: (
-      <span className="text-black font-bold text-[12px] sm:text-[14px] md:text-[14px] lg:text-[15px] xl:text-[16px] 2xl:text-[16px]">
+      <span className={`font-medium ${fontBaseStyle}`}>
         {item.stock_quantity} un.
       </span>
     ),
 
     Preço: (
-      <span className="text-black font-bold text-[14px] md:text-[16px] lg:text-[18px] xl:text-[20px] 2xl:text-[20px]">
-        R$ {item.item_price}
+      <span className={`font-medium ${fontBaseStyle} truncate max-w-[100ch]`}>
+        {formatCurrency(item.item_price)}
       </span>
     ),
 
     Categoria: (
-      <span className="text-black font-medium text-[12px] sm:text-[14px] md:text-[16px] lg:text-[18px] xl:text-[18px] 2xl:text-[18px]">
+      <span className={`font-medium ${fontBaseStyle}`}>
         {item.category}
       </span>
     ),
 
     Validade: (
-      <span className="text-black font-bold text-[12px] lg:text-[15px] xl:text-[16px] 2xl:text-[16px]">
+      <span className={`font-medium ${fontBaseStyle}`}>
         {item.expiration_date}
       </span>
     ),
 
     Marca: (
-      <span className="text-black font-medium text-[16px]">
+      <span className={`font-medium ${fontBaseStyle}`}>
         {item.brand}
       </span>
     ),
