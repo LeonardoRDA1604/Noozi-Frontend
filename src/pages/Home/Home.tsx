@@ -3,11 +3,10 @@ import { Ban, CalendarClock, Package, TriangleAlert, CirclePlus, Layers, Siren, 
 import { MetricsCard } from "@/components/Cards/Metrics/MetricsCard/MetricsCard";
 import { ActionButton } from "@/components/Buttons/ActionButton/ActionButton";
 import { MetricsModal } from "@/components/Modals/MetricsModal/MetricsModal";
-import { RecentActivities } from "@/components/RecentActivities/RecentActivities";
+import { RecentActivities } from "@/components/Activities/RecentActivities/RecentActivities";
 import { SectionTitle } from "@/components/SectionTitle/SectionTitle";
 import { useProductMetrics } from "@/hooks/useProductMetrics";
 import type { ModalType } from "@/types/ModalType.types";
-
 
 export default function Home() {
   const [activeModal, setActiveModal] = useState<ModalType>(null); // null = nenhum modal aberto
@@ -20,7 +19,6 @@ export default function Home() {
       </div>
     );
   }
-
 
   return (
     <div className="flex flex-col gap-6 p-4 md:p-6 max-w-screen-xl mx-auto">

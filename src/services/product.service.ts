@@ -1,9 +1,7 @@
 import { api } from "@/lib/api";
 import type { Product, CreateProductDTO, UpdateProductDTO } from "@/types/Product.types";
-import { formatCurrency } from "@/utils/Currency";
+import { formatCurrency } from "@/utils/formatCurrency";
 import { activityLogService } from "@/services/activityLog.service";
-
-
 
 export const productService = {
   // Retorna todos os produtos
@@ -12,70 +10,76 @@ export const productService = {
     return data;
   },
 
-  // Retorna um produto pelo id
+  // Retorna um produto pelo id do json-server
+  // Ao migrar para API real: trocar para /products/:id_product
   getById: async (id: string): Promise<Product> => {
     const { data } = await api.get(`/products/${id}`);
     return data;
   },
 
   // Cria um novo produto com id_product auto-incrementado
-create: async (payload: CreateProductDTO): Promise<Product> => {
-  const { data: allProducts } = await api.get("/products");
+  // Ao migrar para API real: remover o bloco de nextId — o servidor vai gerar id_product
+  create: async (payload: CreateProductDTO): Promise<Product> => {
+    const { data: allProducts } = await api.get("/products");
 
-  const nextId =
-    allProducts.length > 0
-      ? String(
-          Math.max(
-            ...allProducts
-              .map((p: Product) => Number(p.id_product))
-              .filter((n: number) => !isNaN(n)) // ignora produtos sem id_product válido
-          ) + 1
-        )
-      : "1";
+    const nextId =
+      allProducts.length > 0
+        ? String(
+            Math.max(
+              ...allProducts
+                .map((p: Product) => Number(p.id_product))
+                .filter((n: number) => !isNaN(n)) // ignora produtos sem id_product válido
+            ) + 1
+          )
+        : "1";
 
-  const { data } = await api.post("/products", {
-    id_product: nextId,
-    ...payload,
-    item_price: parseFloat(payload.item_price.toFixed(2)),
-  });
+    const now = new Date().toISOString();
 
-  return data;
-},
+    const { data } = await api.post("/products", {
+      id_product: nextId,
+      ...payload,
+      item_price: parseFloat(payload.item_price.toFixed(2)),
+      created_at: now,
+      updated_at: now,
+    });
 
-  // Atualiza um produto — apenas os campos enviados no payload são alterados
-  update: async (id: string, payload: UpdateProductDTO): Promise<Product> => {
-    const { data } = await api.put(`/products/${id}`, payload);
     return data;
   },
 
-  // // Remove um produto pelo id
-  // remove: async (id: string): Promise<void> => {
-  //   await api.delete(`/products/${id}`);
-  // },
+  // Atualiza um produto — PATCH preserva campos não enviados — apenas os campos enviados no payload são alterados
+  // Ao migrar para API real: continuar usando PATCH /products/:id_product
+  update: async (id: string, payload: UpdateProductDTO): Promise<Product> => {
+    const now = new Date().toISOString();
+    const { data } = await api.patch(`/products/${id}`, {
+      ...payload,
+      updated_at: now, // atualiza o timestamp automaticamente
+    });
+    return data;
+  },
 
-// Remove um produto pelo id, salva snapshot no activity_logs antes de deletar
-remove: async (id: string, retentionDays = 30): Promise<void> => {
-  // Busca o nome antes de deletar — após o delete o produto não existe mais
-  const { data: product } = await api.get(`/products/${id}`);
+  // Remove um produto pelo id e salva snapshot no activity_logs antes de deletar
+  // Ao migrar para API real: trocar product.id por product.id_product na URL
+  remove: async (id: string, retentionDays = 30): Promise<void> => {
+    // Busca nome antes de deletar — após o delete o produto não existe mais
+    const { data: product } = await api.get(`/products/${id}`);
 
-  await api.delete(`/products/${id}`);
+    await api.delete(`/products/${id}`);
 
-  // Calcula até quando o log fica visível nas atividades recentes
-  const expiresAt = new Date();
-  expiresAt.setDate(expiresAt.getDate() + retentionDays);
+    // Calcula até quando o log fica visível nas atividades recentes
+    const expiresAt = new Date();
+    expiresAt.setDate(expiresAt.getDate() + retentionDays);
 
-  // Guarda snapshot mínimo do produto deletado
-  await activityLogService.create({
-    id_product:    id,
-    product_name:  product.name,
-    activity_type: "deleted",
-    occurred_at:   new Date().toISOString(),
-    expires_at:    expiresAt.toISOString(),
-  });
-},
+    // Guarda snapshot mínimo do produto deletado
+    await activityLogService.create({
+      id_product:    product.id_product,
+      product_name:  product.name,
+      activity_type: "deleted",
+      occurred_at:   new Date().toISOString(),
+      expires_at:    expiresAt.toISOString(),
+    });
+  },
 
   // Retorna produtos com estoque abaixo ou igual ao nível mínimo
-  // ?? 0 — se low_stock_level não estiver definido, considera 0 como limite
   getLowStock: async (): Promise<Product[]> => {
     const { data } = await api.get("/products");
     return data.filter(
@@ -86,7 +90,9 @@ remove: async (id: string, retentionDays = 30): Promise<void> => {
   // Retorna produtos com estoque em excesso ou igual ao nível máximo
   getOverStock: async (): Promise<Product[]> => {
     const { data } = await api.get("/products");
-    return data.filter((p: Product) => p.stock_quantity >= p.over_stock_level);
+    return data.filter(
+      (p: Product) => p.over_stock_level != null && p.stock_quantity >= p.over_stock_level,
+    );
   },
 
   // Retorna produtos que vencem dentro do número de dias informado (padrão: 30)
@@ -106,26 +112,23 @@ remove: async (id: string, retentionDays = 30): Promise<void> => {
     const today = new Date();
     return data.filter((p: Product) => {
       if (!p.expiration_date) return false;
-      return new Date(p.expiration_date) < today; // venceu antes de hoje
+      return new Date(p.expiration_date) < today; // venceu antes do dia atual (hoje)
     });
   },
 
-  // Retorna o custo total de todos os produtos expirados (preço do item * quantidade em estoque)
-  getExpiredProductCost: async(): Promise<string> => {
+    // Retorna o custo total dos produtos vencidos (preço do item * quantidade em estoque)
+  getExpiredProductCost: async (): Promise<string> => {
     const { data } = await api.get("/products");
     const today = new Date();
     const totalCost = data
-    .filter((p: Product) => {
-      if (!p.expiration_date) return false;
-      return new Date(p.expiration_date) < today;
-    })
-    .reduce((total: number, p: Product) => {
-        const price = p.item_price || 0;
-        const quantity = p.stock_quantity || 0;
-        return total + (price * quantity);
-      }, 0); // 0 é o valor inicial da soma
-    
-    return  formatCurrency(totalCost);
+      .filter((p: Product) => {
+        if (!p.expiration_date) return false;
+        return new Date(p.expiration_date) < today;
+      })
+      .reduce((total: number, p: Product) => {
+        return total + (p.item_price || 0) * (p.stock_quantity || 0); // 0 é o valor inicial da soma
+      }, 0);
+    return formatCurrency(totalCost);
   },
 
   // Retorna produtos ativos

@@ -5,5 +5,7 @@ export interface NumberInputProps {
   onChange: (value: string) => void;
   min?: string;
   placeholder?: string;
-  tooltip?: string
+  tooltip?: string;
+  required?: string;
+  error?: string
 }

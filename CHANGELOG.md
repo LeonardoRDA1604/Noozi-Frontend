@@ -21,6 +21,9 @@ Formato baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.0.0/), 
     - [[1.1.0] - 2026-05-13](#110---2026-05-13)
     - [[1.2.0] - 2026-05-18](#120---2026-05-18)
     - [[1.2.1] - 2026-05-21](#121---2026-05-21)
+    - [[1.3.0] - 2026-05-24](#130---2026-05-24)
+    - [[1.4.0] - 2026-05-24](#140---2026-05-24)
+    - [[1.5.0] - 2026-05-24](#150---2026-05-26)
 
 ---
 
@@ -429,7 +432,7 @@ O problema não impacta o funcionamento atual da aplicação e será tratado em 
 - Atualização do sistema de filtros e Searchbar para Design Tokens
 - Ajuste progressivo de tipografia baseado em breakpoints
 - Padronização dos nomes:
-  - `GetBreakpoints`
+  - `getBreakpoints`
   - `TableHeader`
   - `filterDebounced`
 - Estrutura de imports reorganizada após refactors
@@ -560,6 +563,131 @@ O problema não impacta o funcionamento atual da aplicação e será tratado em 
 - O sistema visual ainda possui partes parcialmente desacopladas do Design System global
 - A arquitetura de acessibilidade continua em evolução incremental componente por componente
 - Alguns componentes reutilizáveis ainda podem receber abstrações adicionais para reduzir duplicação de estilos
+
+</details>
+
+---
+
+### [1.5.0] - 2026-05-26
+
+<details>
+  <summary style="background-color: white; color: black"><b>ℹ️ Clique para expandir o log de alterações da versão [1.5.0]</b></summary>
+  <br />
+
+#### ✨ Adicionado
+- Sistema completo de filtros avançados para produtos
+- Modal reutilizável de filtros integrado ao módulo de produtos
+- Filtros por:
+  - status ativo/inativo
+  - produtos vencidos
+  - faixa de preço
+- Ordenação multi-categoria:
+  - alfabética
+  - preço
+  - estoque
+  - nível crítico de estoque
+  - validade
+  - SKU
+- Suporte a múltiplas prioridades de ordenação encadeadas
+- Integração reutilizável do componente `PriceInput` nos filtros
+- Indicadores visuais de filtros ativos
+- Tooltips contextuais em filtros e status
+- Toggle switches reutilizáveis e responsivos
+- Sistema reutilizável de badges de status (`StatusBadge`)
+- Integração do `ProductModal` diretamente ao fluxo do `ProductCard`
+- Visualização expandida de produtos contendo:
+  - descrição
+  - identificador do produto
+  - alerta de estoque baixo
+  - alerta de estoque alto
+- Sistema completo de validação do formulário `NewProduct`
+- Indicadores visuais de campos obrigatórios
+- Feedback de erro em tempo real nos inputs
+- Scroll automático para o topo em falhas de validação
+- Novas variantes de logo em:
+  - PNG
+  - AVIF
+  - grayscale
+  - horizontal
+  - wordmark
+- Banco mockado de exemplo:
+  - `db.example.json`
+  - `db.seed.json`
+- Atualização automática de timestamps:
+  - `created_at`
+  - `updated_at`
+
+---
+
+#### 🎨 Melhorado
+- UX geral do modal de filtros com agrupamento visual mais claro
+- Layout responsivo do sistema de filtros
+- Feedback visual de botões ativos e filtros aplicados
+- Responsividade e acessibilidade dos toggle switches
+- Organização visual do `ProductModal`
+- Hierarquia tipográfica da tabela de produtos
+- Tratamento de overflow e quebra automática de texto em tabelas
+- Alinhamento vertical da `Searchbar`
+- Consistência visual do sistema de status
+- Estrutura visual da listagem de produtos
+- Fluxo de atualização automática após operações CRUD
+- Organização de assets e estrutura de componentes
+- Experiência de onboarding para ambiente local mockado
+
+---
+
+#### 🔧 Alterado
+- Refatoração completa da arquitetura de filtros de produtos
+- Centralização da lógica de filtros em hooks reutilizáveis
+- Refatoração da tabela de produtos para `ProductTable`
+- Unificação estrutural de `TableHeader` e `ProductCard`
+- Extração de:
+  - `ActivityItem`
+  - `StatusBadge`
+  - `formatDateTime`
+  - configurações de atividades
+- Separação semântica entre status de produto e atividades
+- Reorganização de módulos utilitários e convenções de nomenclatura
+- Migração de componentes para estruturas mais reutilizáveis
+- Atualização do fluxo CRUD para utilizar `PATCH` ao invés de `PUT`
+- Atualização automática de refetch após edição e exclusão
+- Reorganização da ordem de campos no formulário `NewProduct`
+- Atualização da estrutura mockada para refletir o schema atual
+- Melhorias de organização interna de imports e diretórios
+
+---
+
+#### 🧹 Removido
+- Componentes obsoletos:
+  - `TableHeader.tsx`
+  - `ProductCard.tsx`
+- Comentários temporários e anotações de desenvolvimento
+- Imports e ícones não utilizados
+- Estruturas antigas de toggle switch baseadas em CSS legado
+- Botões órfãos de edição e remoção na página de produtos
+
+---
+
+#### 🐛 Corrigido
+- Correção do botão de exclusão que ignorava `onClick`
+- Correção de updates destrutivos utilizando `PUT`
+- Correção de tipagem em `CreateProductDTO` e `UpdateProductDTO`
+- Correção de renderização de bordas responsivas na tabela
+- Correção de labels duplicadas em alertas de estoque
+- Correção de imports após reorganização estrutural
+- Correção de tipagem do `CardItem`
+- Correção de alinhamento e responsividade de toggle switches
+- Correção da atualização automática da listagem após CRUD
+- Correção de validação e feedback visual em campos obrigatórios
+
+---
+
+#### ⚠️ Débito Técnico
+- Parte da lógica ainda depende de estruturas específicas do `json-server`
+- O fluxo CRUD ainda utiliza IDs temporários preparados para futura migração de API
+- O sistema de filtros pode futuramente ser desacoplado para persistência em query params
+- Alguns componentes reutilizáveis ainda podem ser abstraídos para reduzir duplicação de layouts
+- A arquitetura de tabelas ainda pode evoluir para virtualização em listas maiores
 
 </details>
 

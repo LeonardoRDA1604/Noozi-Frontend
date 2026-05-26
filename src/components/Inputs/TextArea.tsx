@@ -11,7 +11,8 @@ export function TextArea({
   maxLength,
   placeholder,
   rows = 3,
-  tooltip
+  tooltip,
+  required
 }: TextAreaProps) {
   const { remaining, color, showCounter } = useCharCounter(value, maxLength);
 
@@ -22,6 +23,9 @@ export function TextArea({
         {label}
       </label>
       {tooltip && <Tooltip text={tooltip} />}
+      <span className="text-xs italic text-noozi-gray-400 font-normal">
+          {required}
+      </span>
       </div>
       <div className="relative">
         <textarea
