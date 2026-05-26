@@ -3,34 +3,32 @@ import type { filter } from "@/types/FilterSearchbar.types";
 import { structureSearch } from "@/constants/MiniSearch";
 import type { Product } from "@/types/Product.types";
 import TableHeader from "@/components/Cards/TableHeader/TableHeader";
-import { getBreakpoints } from "../../../utils/getBreakpoints";
+import { getBreakpoints } from "@/utils/getBreakpoints";
 import { COLUMNS, GRID_COLS } from "@/constants/columns";
 import { productCardColumns } from "@/utils/productCardColumns";
 import { ProductModal } from "@/components/Modals/ProductModal/ProductModal";
 // import { formatCurrency } from "@/utils/formatCurrency";
 
+// Adiciona onProductChange ao tipo existente (FilterSearchbar.types)
+interface ProductCardListProps extends filter {
+  onProductChange: () => void; // chamado após editar ou deletar — atualiza a lista
+}
 
-export default function CreateCardItem({ filter, products }: filter) {
+export default function CreateCardItem({ filter, products, onProductChange }: ProductCardListProps) {
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
 
   const miniSearch = useMemo(() => structureSearch, []);
-
   const [filterDebounced, setFilterDebounced] = useState(filter);
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setFilterDebounced(filter);
-    }, 200);
-
+    const timer = setTimeout(() => setFilterDebounced(filter), 200);
     return () => clearTimeout(timer);
   }, [filter]);
 
   const itemsFilter = useMemo(() => {
     if (!filterDebounced) return products;
-
     const searchResults = miniSearch.search(filterDebounced);
     if (searchResults.length === 0) return products;
-
     return searchResults
       .map((r) => products.find((item) => item.id_product === r.id_product))
       .filter(Boolean) as Product[];
@@ -48,20 +46,27 @@ export default function CreateCardItem({ filter, products }: filter) {
           />
         ))}
       </div>
+
       {selectedProduct && (
       <ProductModal
-      product={selectedProduct}
-      onClose={() => setSelectedProduct(null)}
-      onDeleted={() => setSelectedProduct(null)}
-      onUpdated={() => setSelectedProduct(null)}
+        product={selectedProduct}
+        onClose={() => setSelectedProduct(null)}
+        onDeleted={() => {
+          setSelectedProduct(null);
+          onProductChange(); // atualiza lista após deletar
+        }}
+        onUpdated={() => {
+          setSelectedProduct(null);
+          onProductChange(); // atualiza lista após editar
+        }}
       />
       )}
     </>
   );
 }
 
-function CardItem({ item, onSelect }: { item: Product,  onSelect: () => void}) {
-  const { value } = productCardColumns(item)
+function CardItem({ item, onSelect }: { item: Product;  onSelect: () => void}) {
+  const { value } = productCardColumns(item);
   
   return (
     <div
@@ -71,12 +76,7 @@ function CardItem({ item, onSelect }: { item: Product,  onSelect: () => void}) {
       {COLUMNS.map((col, index, arr) => (
         <div
           key={col.label}
-          className={`
-            ${getBreakpoints(col.priority)}
-            items-center justify-center py-2
-            px-1 sm:px-3 sm:py-4 md:px-4 md:py-3 shadow-md rounded-md
-            ${index < arr.length - 1 ? "border-r-2 border-noozi-gray-300" : ""}
-          `}
+          className={`${getBreakpoints(col.priority)} items-center justify-center py-2 px-1 sm:px-3 sm:py-4 md:px-4 md:py-3 shadow-md rounded-md ${index < arr.length - 1 ? "border-r-2 border-noozi-gray-300" : ""}`}
         >
           {value[col.label]}
         </div>
