@@ -117,18 +117,20 @@ function TableCell({
   children: React.ReactNode;
 }) {
   // último visível em cada breakpoint
-  const ultimoBase = "Quantidade";
-  const ultimoSm = "Categoria";
-  const ultimoMd = "Ação";
-  const ultimoLg = "Validade";
-  const ultimoXl = "Marca";
+  const quantity   = "Quantidade";
+  const category   =  "Categoria";
+  const actionMd   =       "Ação";
+  const action2xl  =       "Ação";
+  const actionlg   =       "Ação";
+  const brand      =      "Marca";
 
   const bordaClasse = [
-    col.label === ultimoBase ? "border-r-0" : "border-r-2",
-    col.label === ultimoSm ? "sm:border-r-0" : "sm:border-r-2",
-    col.label === ultimoMd ? "md:border-r-0" : "md:border-r-2",
-    col.label === ultimoLg ? "lg:border-r-0" : "lg:border-r-2",
-    col.label === ultimoXl ? "xl:border-r-0" : "xl:border-r-2",
+    col.label === quantity   ? "border-r-0"    : "border-r-2",
+    col.label === category   ? "sm:border-r-0" : "sm:border-r-2",
+    col.label === actionMd   ? "md:border-r-0" : "md:border-r-2",
+    col.label === actionlg   ? "lg:border-r-0" : "lg:border-r-2",
+    col.label === brand      ? "xl:border-r-0" : "xl:border-r-2",
+    col.label === action2xl  ? "xl:border-r-0" : "xl:border-r-2",
   ].join(" ");
 
   return (
