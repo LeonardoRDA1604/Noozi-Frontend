@@ -143,6 +143,7 @@ export default function NewProductForm() {
                 maxLength={CHAR_LIMITS.NAME}
                 required="Obrigatório"
                 error={errors.name}
+                helpText="Por favor, insira o nome do produto"
               />
 
               <TextArea
@@ -159,6 +160,7 @@ export default function NewProductForm() {
                 value={brand}
                 onChange={setBrand}
                 maxLength={CHAR_LIMITS.BRAND}
+                placeholder="Ex: Noozi"
               />
               
               <TextInput
@@ -168,6 +170,7 @@ export default function NewProductForm() {
                 onChange={setCategory}
                 maxLength={CHAR_LIMITS.CATEGORY}
                 className="form-field-single"
+                placeholder="Ex: Tecnologia"
               />
             </div>
           </div>
@@ -192,7 +195,7 @@ export default function NewProductForm() {
                 value={unit}
                 onChange={setUnit}
                 maxLength={CHAR_LIMITS.UNIT}
-                placeholder="Ex: kg, un, L, pacote, caixa"
+                placeholder="Ex: kg, un, L, pacote"
                 className="form-field-single"
               />
               <PriceInput
@@ -203,6 +206,7 @@ export default function NewProductForm() {
                 tooltip="Valor de venda por unidade."
                 required="Obrigatório"
                 error={errors.item_price}
+                helpText="Digite apenas números – a formatação é automática."
               />
             </div>
           </div>
@@ -241,7 +245,8 @@ export default function NewProductForm() {
                 id="inputDate"
                 value={date}
                 onChange={setDate}
-                tooltip="Data de vencimento do produto."
+                tooltip="Obrigatório apenas para produtos perecíveis ou cosméticos."
+                helpText="Digite dia, mês e ano no formato DD/MM/AAAA. "
               />
               <TextInput
                 label="Lote"
@@ -251,6 +256,7 @@ export default function NewProductForm() {
                 maxLength={CHAR_LIMITS.BATCH}
                 className="form-field-single"
                 tooltip="Código de identificação do lote de fabricação (se aplicável)."
+                placeholder="Ex: NZ202605"
               />
               <TextInput
                 label="SKU"
