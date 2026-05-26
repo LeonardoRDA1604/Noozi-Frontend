@@ -8,6 +8,7 @@ import {
   DEFAULT_FILTERS,
 } from "@/types/ProductFilters.types";
 import { PriceInput } from "../../Inputs/PriceInput";
+import { ToggleSwitch } from "../../Inputs/ToggleSwitch";
 
 interface ModalProps {
   isOpen: boolean;
@@ -22,26 +23,27 @@ export default function ProductFilterButtonModal({
   onApply,
   currentFilters,
 }: ModalProps) {
-  // Cópia local dos filtros — só vai para o pai ao clicar em Aplicar
   const [sortBy, setSortBy] = useState<SortBy>(currentFilters.sortBy);
   const [onlyActive, setOnlyActive] = useState(currentFilters.onlyActive);
+  const [onlyExpired, setOnlyExpired] = useState(currentFilters.onlyExpired);
   const [priceFrom, setPriceFrom] = useState<number>(currentFilters.priceFrom);
   const [priceTo, setPriceTo] = useState<number>(currentFilters.priceTo);
 
   if (!isOpen) return null;
 
-  // Alterna sortBy: clica no mesmo botão = desmarca, outro = troca
+  // Clica no mesmo = desmarca; clica em outro = troca
   const handleSort = (value: SortBy) =>
     setSortBy((prev) => (prev === value ? null : value));
 
   const handleApply = () => {
-    onApply({ sortBy, onlyActive, priceFrom, priceTo });
+    onApply({ sortBy, onlyActive, onlyExpired, priceFrom, priceTo });
     onClose();
   };
 
   const handleClear = () => {
     setSortBy(null);
     setOnlyActive(false);
+    setOnlyExpired(false);
     setPriceFrom(0);
     setPriceTo(0);
   };
@@ -73,6 +75,7 @@ export default function ProductFilterButtonModal({
             Ordenar por
           </p>
           <div className="flex flex-col gap-3">
+
             <div className="grid grid-cols-1 gap-2">
               <span className="text-sm font-medium text-noozi-gray-700">Ordem alfabética</span>
               <div className="flex gap-2">
@@ -80,6 +83,15 @@ export default function ProductFilterButtonModal({
                 {btn("za", "Z → A")}
               </div>
             </div>
+
+            <div className="grid grid-cols-1 gap-2">
+              <span className="text-sm font-medium text-noozi-gray-700">Preço</span>
+              <div className="flex gap-2">
+                {btn("price-high", "Maior preço")}
+                {btn("price-low", "Menor preço")}
+              </div>
+            </div>
+
             <div className="grid grid-cols-1 gap-2">
               <span className="text-sm font-medium text-noozi-gray-700">Estoque</span>
               <div className="flex gap-2">
@@ -87,36 +99,41 @@ export default function ProductFilterButtonModal({
                 {btn("stock-low", "Menor")}
               </div>
             </div>
+
             <div className="grid grid-cols-1 gap-2">
               <span className="text-sm font-medium text-noozi-gray-700">Validade</span>
-              <div className="flex gap-2">
+              <div className="flex flex-wrap gap-2">
                 {btn("expiry-nearest", "Mais próxima")}
                 {btn("expiry-furthest", "Mais distante")}
               </div>
             </div>
+
           </div>
         </section>
 
         <hr className="border-noozi-gray-200" />
 
-        {/* Somente Ativos */}
+        {/* Status */}
         <section>
           <p className="text-xs font-semibold uppercase tracking-widest text-noozi-gray-400 mb-3">
             Status
           </p>
-          <label className="flex items-center gap-3 cursor-pointer w-fit">
-            <div className="relative">
-              <input
-                type="checkbox"
-                className="sr-only"
-                checked={onlyActive}
-                onChange={(e) => setOnlyActive(e.target.checked)}
-              />
-              <div className={`w-10 h-5 rounded-full transition-colors duration-200 ${onlyActive ? "bg-noozi-bright_blue" : "bg-noozi-gray-300"}`} />
-              <div className={`absolute top-0.5 left-0.5 w-4 h-4 bg-white rounded-full shadow transition-transform duration-200 ${onlyActive ? "translate-x-5" : "translate-x-0"}`} />
-            </div>
-            <span className="text-sm font-medium text-noozi-gray-700">Somente ativos</span>
-          </label>
+          <div className="flex flex-col gap-3">
+            <ToggleSwitch
+              label="Somente ativos"
+              checked={onlyActive}
+              onChange={setOnlyActive}
+              activeLabel={onlyActive ? "Ativo" : "Todos"}
+              tooltip="Exibe apenas produtos marcados como ativos no cadastro."
+            />
+            <ToggleSwitch
+              label="Somente vencidos"
+              checked={onlyExpired}
+              onChange={setOnlyExpired}
+              activeLabel={onlyExpired ? "Vencidos" : "Todos"}
+              tooltip='Exibe apenas produtos com validade expirada. Combine com "Mais próxima" ou "Mais distante" para ordenar pelo tempo de vencimento.'
+            />
+          </div>
         </section>
 
         <hr className="border-noozi-gray-200" />

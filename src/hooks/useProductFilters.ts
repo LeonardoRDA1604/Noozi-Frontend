@@ -8,9 +8,29 @@ export function useProductFilters(products: Product[]) {
   const filteredProducts = useMemo(() => {
     let result = [...products];
 
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+
     // Somente ativos
     if (filters.onlyActive) {
       result = result.filter((p) => p.is_active);
+    }
+
+    // Filtro de vencidos vs. válidos:
+    // - onlyExpired=true  → apenas produtos com validade JÁ expirada
+    // - sortBy de validade sem onlyExpired → apenas produtos com validade AINDA válida
+    // - nenhum dos dois → nenhum filtro de validade aplicado
+    if (filters.onlyExpired) {
+      result = result.filter(
+        (p) => p.expiration_date && new Date(p.expiration_date) < today
+      );
+    } else if (
+      filters.sortBy === "expiry-nearest" ||
+      filters.sortBy === "expiry-furthest"
+    ) {
+      result = result.filter(
+        (p) => p.expiration_date && new Date(p.expiration_date) >= today
+      );
     }
 
     // Faixa de preço — converte centavos para reais na comparação
@@ -47,40 +67,41 @@ export function useProductFilters(products: Product[]) {
         result.sort((a, b) => a.stock_quantity - b.stock_quantity);
         break;
 
-      // Exibe apenas produtos COM validade cadastrada, do mais próximo ao mais distante
       case "expiry-nearest":
-        result = result.filter((p) => Boolean(p.expiration_date));
-        result.sort(
-          (a, b) =>
-            new Date(a.expiration_date!).getTime() -
-            new Date(b.expiration_date!).getTime()
-        );
+        result.sort((a, b) => {
+          if (!a.expiration_date) return 1;
+          if (!b.expiration_date) return -1;
+
+          const dateA = new Date(a.expiration_date).getTime();
+          const dateB = new Date(b.expiration_date).getTime();
+          const todayMs = today.getTime();
+
+          if (filters.onlyExpired) {
+            // Vencidos: "mais próximo" = venceu mais recentemente (data MAIOR → diff menor)
+            return Math.abs(dateA - todayMs) - Math.abs(dateB - todayMs);
+          }
+          // Válidos: "mais próximo" = vence mais cedo (data MENOR)
+          return dateA - dateB;
+        });
         break;
 
-      // Exibe apenas produtos COM validade cadastrada, do mais distante ao mais próximo
       case "expiry-furthest":
-        result = result.filter((p) => Boolean(p.expiration_date));
-        result.sort(
-          (a, b) =>
-            new Date(b.expiration_date!).getTime() -
-            new Date(a.expiration_date!).getTime()
-        );
-        break;
+        result.sort((a, b) => {
+          if (!a.expiration_date) return 1;
+          if (!b.expiration_date) return -1;
 
-      // Exibe apenas produtos com validade vencida (expiration_date < hoje)
-      case "expiry-expired": {
-        const today = new Date();
-        today.setHours(0, 0, 0, 0);
-        result = result.filter(
-          (p) => p.expiration_date && new Date(p.expiration_date) < today
-        );
-        result.sort(
-          (a, b) =>
-            new Date(a.expiration_date!).getTime() -
-            new Date(b.expiration_date!).getTime()
-        );
+          const dateA = new Date(a.expiration_date).getTime();
+          const dateB = new Date(b.expiration_date).getTime();
+          const todayMs = today.getTime();
+
+          if (filters.onlyExpired) {
+            // Vencidos: "mais distante" = venceu há mais tempo (data MENOR → diff maior)
+            return Math.abs(dateB - todayMs) - Math.abs(dateA - todayMs);
+          }
+          // Válidos: "mais distante" = vence mais tarde (data MAIOR)
+          return dateB - dateA;
+        });
         break;
-      }
     }
 
     return result;
@@ -89,6 +110,7 @@ export function useProductFilters(products: Product[]) {
   const hasActiveFilters =
     filters.sortBy !== null ||
     filters.onlyActive ||
+    filters.onlyExpired ||
     filters.priceFrom > 0 ||
     filters.priceTo > 0;
 
