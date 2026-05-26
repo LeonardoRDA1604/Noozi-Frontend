@@ -172,9 +172,7 @@ export function ProductModal({
             <ModalInput
               type="number"
               value={String(editData.low_stock_level ?? "")}
-              onChange={(v) =>
-                 setEditData({ ...editData, low_stock_level: Number(v) })
-                }
+              onChange={(v) => setEditData({ ...editData, low_stock_level: Number(v) })}
             />
           ) : (
             <ModalValue>{product.low_stock_level}</ModalValue>
