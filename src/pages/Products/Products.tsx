@@ -2,7 +2,7 @@ import { useState } from "react";
 import Searchbar from "@/components/Searchbar/Searchbar";
 import { useProducts } from "@/hooks/useProducts";
 import { useProductFilters } from "@/hooks/useProductFilters";
-import ProductTable from "@/components/Cards/ProductTable/ProductTable";
+import ProductTable from "@/components/ProductTable/ProductTable";
 import FilterProductButton from "@/components/Buttons/FilterProductButton/FilterProductButton";
 
 export default function Products() {
@@ -25,7 +25,7 @@ export default function Products() {
         <FilterProductButton  filters={filters}             setFilters={setFilters}              hasActiveFilters={hasActiveFilters} />
       </div>
 
-      <CreateCardItem         products={filteredProducts}   filter={currentText}                 onProductChange={refetch} />
+      <ProductTable         products={filteredProducts}   filter={currentText}                 onProductChange={refetch} />
 
     </>
   );
