@@ -7,15 +7,18 @@ import { COLUMNS, GRID_COLS } from "@/constants/columns";
 import { productCardColumns } from "@/utils/productCardColumns";
 import { ProductModal } from "@/components/Modals/ProductModal/ProductModal";
 
-export default function ProductTable({ filter, products }: filter) {
+// Adiciona onProductChange ao tipo existente (FilterSearchbar.types)
+interface ProductCardListProps extends filter {
+  onProductChange: () => void; // chamado após editar ou deletar — atualiza a lista
+}
+
+export default function ProductTable({ filter, products, onProductChange }: ProductCardListProps) {
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
   const miniSearch = useMemo(() => structureSearch, []);
   const [filterDebounced, setFilterDebounced] = useState(filter);
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setFilterDebounced(filter);
-    }, 200);
+    const timer = setTimeout(() => setFilterDebounced(filter), 200);
     return () => clearTimeout(timer);
   }, [filter]);
 
@@ -52,8 +55,14 @@ export default function ProductTable({ filter, products }: filter) {
         <ProductModal
           product={selectedProduct}
           onClose={() => setSelectedProduct(null)}
-          onDeleted={() => setSelectedProduct(null)}
-          onUpdated={() => setSelectedProduct(null)}
+          onDeleted={() => {
+            setSelectedProduct(null);
+            onProductChange(); // atualiza lista após deletar
+          }}
+          onUpdated={() => {
+            setSelectedProduct(null);
+            onProductChange(); // atualiza lista após editar
+          }}
         />
       )}
     </>

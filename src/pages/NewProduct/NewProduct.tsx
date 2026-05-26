@@ -145,14 +145,7 @@ export default function NewProductForm() {
                 required="Obrigatório"
                 error={errors.name}
               />
-              <TextInput
-                label="Marca"
-                id="inputBrand"
-                value={brand}
-                onChange={setBrand}
-                maxLength={CHAR_LIMITS.BRAND}
-                tooltip="Marca ou fabricante do produto."
-              />
+
               <TextArea
                 label="Descrição"
                 id="inputDescription"
@@ -161,6 +154,16 @@ export default function NewProductForm() {
                 maxLength={CHAR_LIMITS.DESCRIPTION}
                 tooltip="Detalhes adicionais sobre o produto (características, composição, etc.)"
               />
+
+              <TextInput
+                label="Marca"
+                id="inputBrand"
+                value={brand}
+                onChange={setBrand}
+                maxLength={CHAR_LIMITS.BRAND}
+                tooltip="Marca ou fabricante do produto."
+              />
+              
               <TextInput
                 label="Categoria"
                 id="inputCategory"

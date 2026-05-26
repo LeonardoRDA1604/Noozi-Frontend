@@ -34,13 +34,12 @@
   ],
   "activity_logs": [
     {
-      "id": "LOG1",
-      "id_product": "99",
-      "product_name": "Produto Teste Deletado",
-      "activity_type": "deleted",
-      "occurred_at": "2026-05-01T11:00:00Z",
-      "expires_at": "2026-12-31T11:00:00Z"
+        "id_product": "99",
+        "product_name": "Produto Teste Deletado",
+        "activity_type": "deleted",
+        "occurred_at": "2026-05-01T11:00:00Z",
+        "expires_at": "2026-12-31T11:00:00Z",
+        "id": "LOG1"
     }
-  ],
-  "$schema": "./node_modules/json-server/schema.json"
+  ]
 }

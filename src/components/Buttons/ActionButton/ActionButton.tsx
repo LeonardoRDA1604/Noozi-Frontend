@@ -51,7 +51,17 @@ export function ActionButton({
 
   // ─── Variante delete — chama productService.remove ────────────────────────
   if (variant === "delete") {
-    async function handleDelete() {
+    // Se tem onClick externo, usa ele diretamente
+    if (onClick) {
+      return (
+        <button type="button" disabled={disabled || isLoading} className={className} onClick={onClick}>
+          {content}
+        </button>
+      );
+    }
+
+    // Sem onClick, usa a lógica interna com productId
+    async function handleDeleteInternal() {
       if (!productId) return;
       try {
         await productService.remove(productId);
@@ -60,8 +70,9 @@ export function ActionButton({
         onError?.(error);
       }
     }
+
     return (
-      <button type="button" disabled={disabled || isLoading} className={className} onClick={handleDelete}>
+      <button type="button" disabled={disabled || isLoading} className={className} onClick={handleDeleteInternal}>
         {content}
       </button>
     );
