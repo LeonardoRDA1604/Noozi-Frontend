@@ -1,6 +1,5 @@
 import { Tooltip } from "@/components/ToolTip/ToolTip";
 import type { PriceInputProps } from "@/types/InputTypes/PriceInput.types";
-import { FORM_FIELD_SINGLE } from "@/styles/NewProductsPageStyles";
 
 export function PriceInput({
   label,
@@ -61,7 +60,7 @@ export function PriceInput({
   };
 
   return (
-    <div className={FORM_FIELD_SINGLE}>
+    <div className="grid col-span-1">
       <div className='flex items-center gap-2 mb-2'>
         <label htmlFor={id} className="mb-[1.5px] font-medium">
           {label}

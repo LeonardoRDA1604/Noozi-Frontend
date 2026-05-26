@@ -1,6 +1,5 @@
 import { useCharCounter } from '@/hooks/useCharCounter';
 import { Tooltip } from '@/components/ToolTip/ToolTip';
-import { INPUTS_NEW_PRODUCTS } from '@/styles/NewProductsPageStyles';
 import type { TextInputProps } from '@/types/InputTypes/TextInput.types';
 
 export function TextInput({
@@ -10,7 +9,7 @@ export function TextInput({
   onChange,
   maxLength,
   placeholder,
-  className = INPUTS_NEW_PRODUCTS,
+  className = "form-field-full",
   tooltip,
   required,
   error,
@@ -25,7 +24,7 @@ export function TextInput({
         <label htmlFor={id} className="mb-[1.5px] font-medium">
           {label}
         </label>
-        {tooltip && <Tooltip text={tooltip} />}
+        {tooltip && <Tooltip text={tooltip}/>}
         <span className="text-xs italic text-noozi-gray-400 font-normal">
           {required}
         </span>

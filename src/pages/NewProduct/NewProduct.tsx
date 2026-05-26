@@ -12,7 +12,8 @@ import type { CreateProductDTO } from "@/types/Product.types";
 import { convertDateToISO } from "@/utils/convertDateToISO";
 import { useFormValidation } from "@/hooks/useFormValidation";
 import type { NewProductForm } from "@/types/NewProductForm.types";
-import { FORMS_NEW_PRODUCTS, FORM_SECTION_TITLE, FORM_FIELD_SINGLE  } from "@/styles/NewProductsPageStyles";
+import "@/styles/NewProduct.css";
+
 const CHAR_LIMITS = {
   NAME: 120,
   BRAND: 30,
@@ -133,8 +134,8 @@ export default function NewProductForm() {
         <form className="space-y-6" onSubmit={handleSubmit}>
           {/* Seção: Informações Básicas */}
           <div className="form-section">
-            <h2 className={FORM_SECTION_TITLE}>Informações Básicas</h2>
-            <div className={FORMS_NEW_PRODUCTS}>      
+            <h2 className="form-section-title">Informações Básicas</h2>
+            <div className="product-form-grid">      
               <TextInput
                 label="Nome"
                 id="inputName"
@@ -170,7 +171,7 @@ export default function NewProductForm() {
                 value={category}
                 onChange={setCategory}
                 maxLength={CHAR_LIMITS.CATEGORY}
-                className={FORM_FIELD_SINGLE}
+                className="form-field-single"
                 tooltip="Grupo ao qual o produto pertence."
               />
             </div>
@@ -178,8 +179,8 @@ export default function NewProductForm() {
 
           {/* Seção: Estoque e Precificação */}
           <div className="form-section">
-            <h2 className={FORM_SECTION_TITLE}>Estoque e Precificação</h2>
-            <div className={FORMS_NEW_PRODUCTS}>
+            <h2 className="form-section-title">Estoque e Precificação</h2>
+            <div className="product-form-grid">
               <NumberInput
                 label="Quantidade"
                 id="inputQuantity"
@@ -197,7 +198,7 @@ export default function NewProductForm() {
                 onChange={setUnit}
                 maxLength={CHAR_LIMITS.UNIT}
                 placeholder="Ex: kg, un, L"
-                className={FORM_FIELD_SINGLE}
+                className="form-field-single"
                 tooltip="Unidade de venda ou armazenamento. Ex: kg, un, L, pacote, caixa"
               />
               <PriceInput
@@ -214,15 +215,15 @@ export default function NewProductForm() {
 
           {/* Seção: Alertas de Estoque */}
           <div className="form-section">
-            <h2 className={FORM_SECTION_TITLE}>Alertas de Estoque</h2>
-            <div className={FORMS_NEW_PRODUCTS}>
+            <h2 className="form-section-title">Alertas de Estoque</h2>
+            <div className="product-form-grid">
               <TextInput
                 label="Quantidade de estoque baixo"
                 id="inputLStock"
                 value={lowLevel}
                 onChange={setLowLevel}
                 maxLength={CHAR_LIMITS.LOW_LEVEL}
-                className={FORM_FIELD_SINGLE}
+                className="form-field-single"
                 tooltip="Quantidade mínima que, ao ser atingida, dispara um aviso de reposição."
               />
               <TextInput
@@ -231,7 +232,7 @@ export default function NewProductForm() {
                 value={highLevel}
                 onChange={setHighLevel}
                 maxLength={CHAR_LIMITS.HIGH_LEVEL}
-                className={FORM_FIELD_SINGLE}
+                className="form-field-single"
                 tooltip="Quantidade máxima que, ao ser ultrapassada, dispara um aviso de excesso."
               />
             </div>
@@ -239,8 +240,8 @@ export default function NewProductForm() {
 
           {/* Seção: Rastreamento e Validade */}
           <div className="form-section">
-            <h2 className={FORM_SECTION_TITLE}>Rastreamento e Validade</h2>
-            <div className={FORMS_NEW_PRODUCTS}>
+            <h2 className="form-section-title">Rastreamento e Validade</h2>
+            <div className="product-form-grid">
               <DateInput
                 label="Validade"
                 id="inputDate"
@@ -254,7 +255,7 @@ export default function NewProductForm() {
                 value={batch}
                 onChange={setBatch}
                 maxLength={CHAR_LIMITS.BATCH}
-                className={FORM_FIELD_SINGLE}
+                className="form-field-single"
                 tooltip="Código de identificação do lote de fabricação (se aplicável)."
               />
               <TextInput
@@ -263,7 +264,7 @@ export default function NewProductForm() {
                 value={sku}
                 onChange={(v) => { setSku(v); clearError("sku"); }}
                 maxLength={CHAR_LIMITS.SKU}
-                className={FORM_FIELD_SINGLE}
+                className="form-field-single"
                 tooltip="Código único de identificação do produto (Stock Keeping Unit)."
                 placeholder="Ex: ABC01"
                 required="Obrigatório"
@@ -274,9 +275,9 @@ export default function NewProductForm() {
 
           {/* Seção: Configurações */}
           <div className="form-section">
-            <h2 className={FORM_SECTION_TITLE}>Configurações</h2>
-            <div className={FORMS_NEW_PRODUCTS}>
-              <div className={FORM_FIELD_SINGLE}>
+            <h2 className="form-section-title">Configurações</h2>
+            <div className="product-form-grid">
+              <div className="form-field-single">
                 <ToggleSwitch
                   label="Status do Produto"
                   checked={status}

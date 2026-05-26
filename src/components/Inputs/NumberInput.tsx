@@ -1,6 +1,5 @@
 import type { NumberInputProps } from "@/types/InputTypes/NumberInput.types";
 import { Tooltip } from "@/components/ToolTip/ToolTip";
-import { FORM_FIELD_SINGLE } from "@/styles/NewProductsPageStyles";
 export function NumberInput({
   label,
   id,
@@ -15,7 +14,7 @@ export function NumberInput({
   const hasError = Boolean(error);
 
   return (
-    <div className={FORM_FIELD_SINGLE}>
+    <div className="grid col-span-1">
       <div className='flex items-center gap-2 mb-2'>
         <label htmlFor={id} className="mb-[1.5px] font-medium">
           {label}

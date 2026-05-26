@@ -1,6 +1,5 @@
 import type { DateInputProps } from "@/types/InputTypes/DateInput.types";
 import { Tooltip } from "@/components/ToolTip/ToolTip";
-import { FORM_FIELD_SINGLE } from "@/styles/NewProductsPageStyles";
 export function DateInput({ label, id, value, tooltip, required, onChange }: DateInputProps) {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     let newValue = e.target.value.replace(/\D/g, "");
@@ -34,7 +33,7 @@ export function DateInput({ label, id, value, tooltip, required, onChange }: Dat
 
   return (
     <div>
-      <div className={FORM_FIELD_SINGLE}>
+      <div className="grid col-span-1">
       <div className="flex gap-2 items-center mb-2">
       <label htmlFor={id} className="mb-[1.5px] font-medium">
         {label}
