@@ -18,7 +18,7 @@ export function Tooltip({ text, position = "top" }: TooltipProps ) {
       <Info
         size={14}
         className="text-tooltip cursor-help"
-        // Cor do ToolTip: #8c9bb4
+        // Cor do ToolTip: #465a78
       />
       <div className={`
         absolute
