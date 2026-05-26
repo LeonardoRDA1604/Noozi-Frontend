@@ -12,25 +12,25 @@ export default function ProductTable({ filter, products }: filter) {
   const miniSearch = useMemo(() => structureSearch, []);
   const [filterDebounced, setFilterDebounced] = useState(filter);
 
-    useEffect(() => {
+  useEffect(() => {
     const timer = setTimeout(() => {
-      setFilterDebounced(filter)
-    }, 200)
-    return () => clearTimeout(timer)
-  }, [filter])
+      setFilterDebounced(filter);
+    }, 200);
+    return () => clearTimeout(timer);
+  }, [filter]);
 
   const itemsFilter = useMemo(() => {
-    if (!filterDebounced) return products
-    const searchResults = miniSearch.search(filterDebounced)
-    if (searchResults.length === 0) return products
+    if (!filterDebounced) return products;
+    const searchResults = miniSearch.search(filterDebounced);
+    if (searchResults.length === 0) return products;
     return searchResults
       .map((r) => products.find((item) => item.id_product === r.id_product))
-      .filter(Boolean) as Product[]
-  }, [filterDebounced, miniSearch, products])
+      .filter(Boolean) as Product[];
+  }, [filterDebounced, miniSearch, products]);
 
-  return(
+  return (
     <>
-         <div className="flex flex-col gap-5 w-full px-3 py-5">
+      <div className="flex flex-col gap-5 w-full px-3 py-5">
         <TableHeader />
         {itemsFilter.map((item) => (
           <CardItem
@@ -50,9 +50,10 @@ export default function ProductTable({ filter, products }: filter) {
         />
       )}
     </>
-  )
+  );
 }
 
+// Header
 function TableHeader() {
   return (
     <TableRow isHeader>
@@ -65,6 +66,7 @@ function TableHeader() {
   );
 }
 
+// Card
 function CardItem({ item, onSelect }: { item: Product; onSelect: () => void }) {
   const { value } = productCardColumns(item);
 
@@ -92,7 +94,7 @@ function TableRow({
     <div
       onClick={onClick}
       className={`
-            grid ${GRID_COLS} w-full rounded-xl
+            grid ${GRID_COLS} w-full rounded-xl min-w-0 overflow-hidden
             ${
               isHeader
                 ? "bg-noozi-bright_blue text-white font-semibold"
@@ -117,20 +119,20 @@ function TableCell({
   children: React.ReactNode;
 }) {
   // último visível em cada breakpoint
-  const quantity   = "Quantidade";
-  const category   =  "Categoria";
-  const actionMd   =       "Ação";
-  const action2xl  =       "Ação";
-  const actionlg   =       "Ação";
-  const brand      =      "Marca";
+  const quantity = "Quantidade";
+  const quantitySm = "Quantidade";
+  const actionMd = "Ação";
+  const action2xl = "Ação";
+  const actionlg = "Ação";
+  const actionXl = "Ação";
 
   const bordaClasse = [
-    col.label === quantity   ? "border-r-0"    : "border-r-2",
-    col.label === category   ? "sm:border-r-0" : "sm:border-r-2",
-    col.label === actionMd   ? "md:border-r-0" : "md:border-r-2",
-    col.label === actionlg   ? "lg:border-r-0" : "lg:border-r-2",
-    col.label === brand      ? "xl:border-r-0" : "xl:border-r-2",
-    col.label === action2xl  ? "xl:border-r-0" : "xl:border-r-2",
+    col.label === quantity ? "border-r-0" : "border-r-2",
+    col.label === quantitySm ? "sm:border-r-0" : "sm:border-r-2",
+    col.label === actionMd ? "md:border-r-0" : "md:border-r-2",
+    col.label === actionlg ? "lg:border-r-0" : "lg:border-r-2",
+    col.label === actionXl ? "xl:border-r-0" : "xl:border-r-2",
+    col.label === action2xl ? "2xl:border-r-0" : "2xl:border-r-2",
   ].join(" ");
 
   return (
@@ -141,12 +143,13 @@ function TableCell({
         px-1 sm:px-3 md:px-4
         py-3 sm:py-4 md:py-3
         self-stretch
+        min-w-0 w-full overflow-hidden
         ${
           isHeader
             ? "border-white"
             : "border-noozi-gray-300 shadow-sm rounded-md"
         }
-        border-r-2 ${bordaClasse}
+        ${bordaClasse}
         ${
           isHeader
             ? "p-3 text-[12px] sm:text-[14px] md:text-[16px] lg:text-[18px] xl:text-[18px] 2xl:text-[20px]"

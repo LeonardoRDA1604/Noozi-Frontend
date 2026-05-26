@@ -4,16 +4,21 @@ export const COLUMNS = [
   { label: "Nome", priority: 1 },
   { label: "Quantidade", priority: 1 },
   { label: "Preço", priority: 3 },
-  { label: "Categoria", priority: 2 },
+  { label: "Categoria", priority: 3 },
   { label: "Validade", priority: 4 },
   { label: "Marca", priority: 5 },
   { label: "Ação", priority: 3 },
 ]
 
 export const GRID_COLS = [
-  "grid-cols-[0.67fr_0.4fr_1.5fr_0.9fr]",                                     // base mobile
-  "sm:grid-cols-[0.9fr_0.5fr_1fr_1fr_1fr]",                                     // sm 640px
-  "md:grid-cols-[1fr_0.4fr_1.2fr_0.8fr_1fr_1fr_1fr]",                                     // + Preço, Categoria
-  "lg:grid-cols-[1fr_0.4fr_1.2fr_0.8fr_1fr_1fr_1fr_1fr]",                                     // + Validade
-  "xl:grid-cols-[1fr_0.4fr_1.2fr_0.8fr_1fr_1fr_1fr_1fr_1fr]",                                     // + Marca
+  "grid-cols-[minmax(0,0.7fr)_minmax(0,0.4fr)_minmax(0,1.5fr)_minmax(0,0.9fr)]",
+
+  "sm:grid-cols-[minmax(0,0.4fr)_minmax(0,0.3fr)_minmax(0,1fr)_minmax(0,0.5fr)]",
+
+  "md:grid-cols-[minmax(0,0.6fr)_minmax(0,0.4fr)_minmax(0,1.2fr)_minmax(0,0.8fr)_minmax(0,1fr)_minmax(0,1fr)_minmax(0,1fr)]",
+
+  "lg:grid-cols-[minmax(0,0.5fr)_minmax(0,0.4fr)_minmax(0,1.2fr)_minmax(0,0.8fr)_minmax(0,1fr)_minmax(0,1fr)_minmax(0,1fr)_minmax(0,1fr)]",
+
+  "xl:grid-cols-[minmax(0,0.5fr)_minmax(0,0.4fr)_minmax(0,1.2fr)_minmax(0,0.8fr)_minmax(0,1fr)_minmax(0,1fr)_minmax(0,1fr)_minmax(0,1fr)_minmax(0,1fr)]",
+
 ].join(" ")
