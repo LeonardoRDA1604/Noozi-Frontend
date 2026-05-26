@@ -6,5 +6,6 @@ export interface TextAreaProps {
   maxLength: number;
   placeholder?: string;
   rows?: number;
-  tooltip?: string
+  tooltip?: string;
+  required?: string
 }

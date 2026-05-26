@@ -3,6 +3,7 @@ import { ActionButton } from "@/components/Buttons/ActionButton/ActionButton";
 import { StatusBadge } from "@/components/Status/StatusBadge";
 import type { Product } from "@/types/Product.types";
 import { PRODUCT_STATUS_CONFIG } from "@/constants/productStatusConfig";
+import { formatCurrency } from "./formatCurrency";
 
 export function productCardColumns(item: Product) {
     const status = item.is_active ? "active" : "inactive";
@@ -36,7 +37,7 @@ export function productCardColumns(item: Product) {
 
     Preço: (
       <span className={`font-medium ${fontBaseStyle} truncate max-w-[100ch]`}>
-        R$ {item.item_price}
+        {formatCurrency(item.item_price)}
       </span>
     ),
 
