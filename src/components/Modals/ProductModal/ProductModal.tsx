@@ -6,6 +6,8 @@ import { productService } from "@/services/product.service";
 import type { Product, UpdateProductDTO } from "@/types/Product.types";
 import { Tooltip } from "@/components/ToolTip/ToolTip";
 
+import { StatusBadge } from "@/components/Status/StatusBadge";
+import { PRODUCT_STATUS_CONFIG } from "@/constants/productStatusConfig";
 interface ProductModalProps {
   product: Product;
   onClose: () => void;
@@ -34,6 +36,8 @@ export function ProductModal({
   const [isEditing, setIsEditing] = useState(false);
   const [confirmingDelete, setConfirmingDelete] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const status = product.is_active ? "active" : "inactive";
+  const config = PRODUCT_STATUS_CONFIG[status];
 
   function getInitialEditData(): UpdateProductDTO {
     return {
@@ -90,9 +94,22 @@ export function ProductModal({
           <ModalValue children={`#${product.id_product}`}     tooltip="ID: Identificador único de produto" />
         </div>
         <div className="flex items-center gap-2">
-          <span className={`shrink-0 text-[10px] font-semibold px-2 py-0.5 rounded-full ${product.is_active ? " bg-status-success/10 text-status-success" : " bg-noozi-gray-800/10 text-noozi-gray-500"}`} >
+          
+          
+          
+          
+
+          <StatusBadge badgeClass={config.badgeClass} badgeText={config.badgeText} />
+          
+          {/* <span className={`shrink-0 text-[10px] font-semibold px-2 py-0.5 rounded-full ${product.is_active ? " bg-status-success/10 text-status-success" : " bg-noozi-gray-800/10 text-noozi-gray-500"}`} >
             {product.is_active ? "Ativo" : "Inativo"}
-          </span>
+          </span> */}
+
+
+
+
+
+
         </div>
       </div>
 
