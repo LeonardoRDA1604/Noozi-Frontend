@@ -141,7 +141,6 @@ export default function NewProductForm() {
                 value={name}
                 onChange={(v) => { setName(v); clearError("name"); }}
                 maxLength={CHAR_LIMITS.NAME}
-                tooltip="Informe o nome completo do produto."
                 required="Obrigatório"
                 error={errors.name}
               />
@@ -152,7 +151,6 @@ export default function NewProductForm() {
                 value={description}
                 onChange={setDescription}
                 maxLength={CHAR_LIMITS.DESCRIPTION}
-                tooltip="Detalhes adicionais sobre o produto (características, composição, etc.)"
               />
 
               <TextInput
@@ -161,7 +159,6 @@ export default function NewProductForm() {
                 value={brand}
                 onChange={setBrand}
                 maxLength={CHAR_LIMITS.BRAND}
-                tooltip="Marca ou fabricante do produto."
               />
               
               <TextInput
@@ -171,7 +168,6 @@ export default function NewProductForm() {
                 onChange={setCategory}
                 maxLength={CHAR_LIMITS.CATEGORY}
                 className="form-field-single"
-                tooltip="Grupo ao qual o produto pertence."
               />
             </div>
           </div>
@@ -196,16 +192,15 @@ export default function NewProductForm() {
                 value={unit}
                 onChange={setUnit}
                 maxLength={CHAR_LIMITS.UNIT}
-                placeholder="Ex: kg, un, L"
+                placeholder="Ex: kg, un, L, pacote, caixa"
                 className="form-field-single"
-                tooltip="Unidade de venda ou armazenamento. Ex: kg, un, L, pacote, caixa"
               />
               <PriceInput
                 label="Preço Unitário"
                 id="inputValue"
                 value={priceValue}
                 onChange={(v) => { setPriceValue(v); clearError("item_price"); }}
-                tooltip="Valor de venda por unidade. Digite apenas os números – a formatação é automática."
+                tooltip="Valor de venda por unidade."
                 required="Obrigatório"
                 error={errors.item_price}
               />
@@ -246,7 +241,7 @@ export default function NewProductForm() {
                 id="inputDate"
                 value={date}
                 onChange={setDate}
-                tooltip="Data de vencimento do produto no formato DD/MM/AAAA. Digite dia, mês e ano."
+                tooltip="Data de vencimento do produto."
               />
               <TextInput
                 label="Lote"
