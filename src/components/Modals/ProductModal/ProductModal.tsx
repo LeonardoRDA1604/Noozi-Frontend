@@ -42,6 +42,9 @@ export function ProductModal({
       category: product.category,
       item_price: product.item_price,
       stock_quantity: product.stock_quantity,
+      description: product.description,
+      low_stock_level: product.low_stock_level,
+      over_stock_level: product.over_stock_level,
       expiration_date: product.expiration_date,
     };
   }
@@ -58,8 +61,7 @@ export function ProductModal({
   async function handleSave() {
     try {
       setIsLoading(true);
-      await productService.update(product.id_product, editData);
-
+      await productService.update(product.id, editData); // product.id = chave do json-server
       setIsEditing(false);
       onUpdated();
       onClose();
@@ -71,7 +73,7 @@ export function ProductModal({
   async function handleDelete() {
     try {
       setIsLoading(true);
-      await productService.remove(product.id_product);
+      await productService.remove(product.id); // product.id = chave do json-server
       onDeleted();
       onClose();
     } finally {
@@ -80,23 +82,15 @@ export function ProductModal({
   }
 
   return (
-    <BaseModal
-      isOpen={true}
-      onClose={onClose}
-      title={isEditing ? "Editar produto" : "Detalhes do produto"}
-      size="lg"
-    >
+    <BaseModal isOpen={true}      onClose={onClose}           title={isEditing ? "Editar produto" : "Detalhes do produto"}      size="lg" >
       <hr />
       {/* Indicador de status e ID */}
       <div className="grid grid-cols-2 gap-3">
         <div className="flex text-xl gap-2 text-noozi-gray-700 font-semibold">
-          <ModalValue 
-          children={`#${product.id_product}`}
-          tooltip="ID: Identificador único de produto"
-          />
+          <ModalValue children={`#${product.id_product}`}     tooltip="ID: Identificador único de produto" />
         </div>
         <div className="flex items-center gap-2">
-          <span className={`shrink-0 text-[10px] font-semibold px-2 py-0.5 rounded-full ${product.is_active ? " bg-status-success/10 text-status-success" : " bg-noozi-gray-800/10 text-noozi-gray-500"}`}>
+          <span className={`shrink-0 text-[10px] font-semibold px-2 py-0.5 rounded-full ${product.is_active ? " bg-status-success/10 text-status-success" : " bg-noozi-gray-800/10 text-noozi-gray-500"}`} >
             {product.is_active ? "Ativo" : "Inativo"}
           </span>
         </div>
@@ -106,10 +100,7 @@ export function ProductModal({
       <div className="flex flex-col gap-3">
         <ModalField label="Nome">
           {isEditing ? (
-            <ModalInput
-              value={editData.name ?? ""}
-              onChange={(v) => setEditData({ ...editData, name: v })}
-            />
+            <ModalInput value={editData.name ?? ""}         onChange={(v) => setEditData({ ...editData, name: v })} />
           ) : (
             <ModalValue>{product.name}</ModalValue>
           )}
@@ -118,20 +109,14 @@ export function ProductModal({
         <div className="grid grid-cols-2 gap-3">
           <ModalField label="Marca">
             {isEditing ? (
-              <ModalInput
-                value={editData.brand ?? ""}
-                onChange={(v) => setEditData({ ...editData, brand: v })}
-              />
+              <ModalInput value={editData.brand ?? ""}      onChange={(v) => setEditData({ ...editData, brand: v })} />
             ) : (
               <ModalValue>{product.brand ?? "—"}</ModalValue>
             )}
           </ModalField>
           <ModalField label="Categoria">
             {isEditing ? (
-              <ModalInput
-                value={editData.category ?? ""}
-                onChange={(v) => setEditData({ ...editData, category: v })}
-              />
+              <ModalInput value={editData.category ?? ""}   onChange={(v) => setEditData({ ...editData, category: v })} />
             ) : (
               <ModalValue>{product.category ?? "—"}</ModalValue>
             )}
@@ -141,63 +126,37 @@ export function ProductModal({
         <div className="grid grid-cols-2 gap-3">
           <ModalField label="Preço">
             {isEditing ? (
-              <ModalInput
-                type="number"
-                value={String(editData.item_price ?? "")}
-                onChange={(v) =>
-                  setEditData({ ...editData, item_price: Number(v) })
-                }
-              />
+              <ModalInput type="number"         value={String(editData.item_price ?? "")}       onChange={(v) => setEditData({ ...editData, item_price: Number(v) })} />
             ) : (
               <ModalValue>{formatCurrency(product.item_price)}</ModalValue>
             )}
           </ModalField>
           <ModalField label="Estoque">
             {isEditing ? (
-              <ModalInput
-                type="number"
-                value={String(editData.stock_quantity ?? "")}
-                onChange={(v) =>
-                  setEditData({ ...editData, stock_quantity: Number(v) })
-                }
-              />
+              <ModalInput type="number"         value={String(editData.stock_quantity ?? "")}   onChange={(v) => setEditData({ ...editData, stock_quantity: Number(v) })} />
             ) : (
-              <ModalValue>
-                {product.stock_quantity} {product.unit_measure ?? "un."}
-              </ModalValue>
+              <ModalValue>{product.stock_quantity} {product.unit_measure ?? "un."}</ModalValue>
             )}
           </ModalField>
           <ModalField label="Alerta de Estoque Baixo">
-          {isEditing ? (
-            <ModalInput
-              type="number"
-              value={String(editData.low_stock_level ?? "")}
-              onChange={(v) => setEditData({ ...editData, low_stock_level: Number(v) })}
-            />
-          ) : (
-            <ModalValue>{product.low_stock_level}</ModalValue>
-          )}
-        </ModalField>
-          <ModalField label="Alerta de Estoque Baixo">
-          {isEditing ? (
-            <ModalInput
-              type="number"
-              value={String(editData.over_stock_level ?? "")}
-              onChange={(v) => setEditData({ ...editData, over_stock_level: Number(v) })}
-            />
-          ) : (
-            <ModalValue>{product.over_stock_level}</ModalValue>
-          )}
-        </ModalField>
+            {isEditing ? (
+              <ModalInput type="number" value={String(editData.low_stock_level ?? "")}          onChange={(v) => setEditData({ ...editData, low_stock_level: Number(v) })} />
+            ) : (
+              <ModalValue>{product.low_stock_level}</ModalValue>
+            )}
+          </ModalField>
+          <ModalField label="Alerta de Estoque Alto">
+            {isEditing ? (
+              <ModalInput type="number" value={String(editData.over_stock_level ?? "")}         onChange={(v) => setEditData({ ...editData, over_stock_level: Number(v) })} />
+            ) : (
+              <ModalValue>{product.over_stock_level}</ModalValue>
+            )}
+          </ModalField>
         </div>
 
         <ModalField label="Descrição">
           {isEditing ? (
-            <ModalInput
-              type="text"
-              value={editData.description ?? ""}
-              onChange={(v) => setEditData({ ...editData, description: v })}
-            />
+            <ModalInput type="text"     value={editData.description ?? ""}                      onChange={(v) => setEditData({ ...editData, description: v })} />
           ) : (
             <ModalValue>{product.description}</ModalValue>
           )}
@@ -205,11 +164,7 @@ export function ProductModal({
 
         <ModalField label="Vencimento">
           {isEditing ? (
-            <ModalInput
-              type="date"
-              value={editData.expiration_date ?? ""}
-              onChange={(v) => setEditData({ ...editData, expiration_date: v })}
-            />
+            <ModalInput type="date"     value={editData.expiration_date ?? ""}                  onChange={(v) => setEditData({ ...editData, expiration_date: v })} />
           ) : (
             <ModalValue>{formatDate(product.expiration_date)}</ModalValue>
           )}
@@ -231,18 +186,8 @@ export function ProductModal({
         {/* Visualização normal */}
         {!isEditing && !confirmingDelete && (
           <div className="flex gap-2">
-            <ActionButton
-              variant="edit"
-              label="Editar"
-              icon={Pencil}
-              onClick={() => setIsEditing(true)}
-            />
-            <ActionButton
-              variant="delete"
-              label="Apagar"
-              icon={Trash2}
-              onClick={() => setConfirmingDelete(true)}
-            />
+            <ActionButton variant="edit"        label="Editar"         icon={Pencil}               onClick={() => setIsEditing(true)} />
+            <ActionButton variant="delete"      label="Apagar"         icon={Trash2}               onClick={() => setConfirmingDelete(true)} />
           </div>
         )}
 
@@ -253,19 +198,8 @@ export function ProductModal({
               Tem certeza que deseja apagar este produto?
             </p>
             <div className="flex gap-2">
-              <ActionButton
-                variant="cancel"
-                label="Cancelar"
-                icon={XCircle}
-                onClick={() => setConfirmingDelete(false)}
-              />
-              <ActionButton
-                variant="delete"
-                label="Confirmar"
-                icon={Trash2}
-                isLoading={isLoading}
-                onClick={handleDelete}
-              />
+              <ActionButton variant="cancel"    label="Cancelar"       icon={XCircle}              onClick={() => setConfirmingDelete(false)} />
+              <ActionButton variant="delete"    label="Confirmar"      icon={Trash2}               onClick={handleDelete}                           isLoading={isLoading} />
             </div>
           </>
         )}
@@ -273,19 +207,8 @@ export function ProductModal({
         {/* Modo edição */}
         {isEditing && (
           <div className="flex gap-2">
-            <ActionButton
-              variant="cancel"
-              label="Cancelar"
-              icon={XCircle}
-              onClick={handleCancel}
-            />
-            <ActionButton
-              variant="save"
-              label="Salvar"
-              icon={Save}
-              isLoading={isLoading}
-              onClick={handleSave}
-            />
+            <ActionButton variant="cancel"      label="Cancelar"       icon={XCircle}              onClick={handleCancel} />
+            <ActionButton variant="save"        label="Salvar"         icon={Save}                 onClick={handleSave}                             isLoading={isLoading} />
           </div>
         )}
       </div>
@@ -312,13 +235,19 @@ function ModalField({
   );
 }
 
-function ModalValue({ children,tooltip }: { children: React.ReactNode, tooltip?: string }) {
+function ModalValue({
+  children,
+  tooltip,
+}: {
+  children: React.ReactNode;
+  tooltip?: string;
+}) {
   return (
     <div className="flex gap-1">
       <p className="text-sm font-medium text-noozi-text break-words whitespace-pre-wrap w-full min-w-0">
         {children}
       </p>
-      {tooltip && <Tooltip text={tooltip} position="right"/>}
+      {tooltip && <Tooltip text={tooltip} position="right" />}
     </div>
   );
 }
