@@ -29,9 +29,15 @@ export default function ProductTable({ filter, products }: filter) {
   }, [filterDebounced, miniSearch, products]);
 
   return (
-    <>
-      <div className="flex flex-col gap-5 w-full px-3 py-5">
+  <>
+    <div className="w-full px-3 overflow-hidden">
+      {/* Header fora do scroll, fixo */}
+      <div className="px-3 pt-5">
         <TableHeader />
+      </div>
+
+      {/* Apenas os itens scrollam */}
+      <div className="flex flex-col gap-5 w-full px-3 py-5 overflow-y-auto max-h-[calc(100vh-200px)]">
         {itemsFilter.map((item) => (
           <CardItem
             key={item.id_product}
@@ -40,6 +46,7 @@ export default function ProductTable({ filter, products }: filter) {
           />
         ))}
       </div>
+    </div>
 
       {selectedProduct && (
         <ProductModal
@@ -85,21 +92,24 @@ function TableRow({
   children,
   onClick,
   isHeader = false,
+  sticky = false,
 }: {
   children: React.ReactNode;
   onClick?: () => void;
   isHeader?: boolean;
+  sticky?: boolean;
 }) {
   return (
     <div
       onClick={onClick}
       className={`
-            grid ${GRID_COLS} w-full rounded-xl min-w-0 overflow-hidden
+            grid ${GRID_COLS} w-full rounded-xl min-w-0
             ${
               isHeader
                 ? "bg-noozi-bright_blue text-white font-semibold"
                 : "shadow-sm hover:bg-gray-100 cursor-pointer transition-colors duration-200"
             }
+            ${sticky ? "sticky top-0 z-20" : ""}
             `}
     >
       {children}
