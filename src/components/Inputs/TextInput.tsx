@@ -1,6 +1,6 @@
 import { useCharCounter } from '@/hooks/useCharCounter';
 import { Tooltip } from '@/components/ToolTip/ToolTip';
-
+import { INPUTS_NEW_PRODUCTS } from '@/styles/NewProductsPageStyles';
 import type { TextInputProps } from '@/types/InputTypes/TextInput.types';
 
 export function TextInput({
@@ -10,7 +10,7 @@ export function TextInput({
   onChange,
   maxLength,
   placeholder,
-  className = "form-field-full",
+  className = INPUTS_NEW_PRODUCTS,
   tooltip,
   required,
   error,
