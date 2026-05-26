@@ -4,6 +4,7 @@ import { StatusBadge } from "@/components/Status/StatusBadge";
 import type { Product } from "@/types/Product.types";
 import { PRODUCT_STATUS_CONFIG } from "@/constants/productStatusConfig";
 import { formatCurrency } from "./formatCurrency";
+import { formatISODate } from "./formatISODate";
 
 export function productCardColumns(item: Product) {
     const status = item.is_active ? "active" : "inactive";
@@ -49,7 +50,7 @@ export function productCardColumns(item: Product) {
 
     Validade: (
       <span className={`font-medium ${fontBaseStyle}`}>
-        {item.expiration_date}
+        {formatISODate(item.expiration_date)}
       </span>
     ),
 
