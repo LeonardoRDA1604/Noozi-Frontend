@@ -4,5 +4,6 @@ export interface DateInputProps {
   value: string;
   onChange: (value: string) => void;
   tooltip?: string;
-  required?: string
+  required?: string;
+  error?: string | null
 }

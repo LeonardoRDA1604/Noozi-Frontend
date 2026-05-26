@@ -25,6 +25,28 @@ const CHAR_LIMITS = {
   HIGH_LEVEL: 10,
 } as const;
 
+function isValidDate(value: string): boolean {
+  if (!value) return true; // campo opcional
+
+  // Must match DD/MM/YYYY
+  if (!/^\d{2}\/\d{2}\/\d{4}$/.test(value)) return false;
+
+  const [day, month, year] = value.split("/").map(Number);
+
+  // Basic calendar sanity
+  const date = new Date(year, month - 1, day);
+  if (
+    date.getFullYear() !== year ||
+    date.getMonth() !== month - 1 ||
+    date.getDate() !== day
+  ) return false;
+
+  // Must not be in the past
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+  return date >= today;
+}
+
 export default function NewProductForm() {
   const [name, setName] = useState("");
   const [brand, setBrand] = useState("");
@@ -42,7 +64,7 @@ export default function NewProductForm() {
 
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
-
+  let today = new Date()
   // ─── Validação ─────────────────────────────────────────────────────────────
   const { errors, validate, clearError, clearAllErrors } =
     useFormValidation<NewProductForm>({
@@ -53,6 +75,17 @@ export default function NewProductForm() {
         return isNaN(num) || num < 0 ? 'O campo "Quantidade" é obrigatório.' : null;
       },
       item_price: (v) => (v === 0 ? 'O campo "Preço Unitário" é obrigatório.' : null),
+      expiration_date: (v) => {
+        if (!v) return null; //não altera caso o campo esteja vazio
+
+        if (!/^\d{2}\/\d{2}\/\d{4}$/.test(v))
+          return "Data incompleta. Use o formato DD/MM/AAAA.";
+
+        if (!isValidDate(v))
+          return "Data inválida.";
+
+        return null;
+      }
     });
 
   // ─── Reset ─────────────────────────────────────────────────────────────────
@@ -84,6 +117,7 @@ export default function NewProductForm() {
       sku,
       stock_quantity: quantity,  // string ✓ — ProductFormFields.stock_quantity é string
       item_price: priceValue,    // number ✓ — ProductFormFields.item_price é number
+      expiration_date: date,     // Date - ProductFormFields.expiration_date é uma data
     });
     if (!isValid) return;
 
@@ -247,6 +281,7 @@ export default function NewProductForm() {
                 value={date}
                 onChange={setDate}
                 tooltip="Data de vencimento do produto no formato DD/MM/AAAA. Digite dia, mês e ano."
+                error={errors.expiration_date}
               />
               <TextInput
                 label="Lote"
