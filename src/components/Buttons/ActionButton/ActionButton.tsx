@@ -49,24 +49,6 @@ export function ActionButton({
     return <Link to={href} className={className}>{content}</Link>;
   }
 
-  // // ─── Variante delete — chama productService.remove ────────────────────────
-  // if (variant === "delete") {
-  //   async function handleDelete() {
-  //     if (!productId) return;
-  //     try {
-  //       await productService.remove(productId);
-  //       onSuccess?.(); // ex: fecha modal e atualiza lista
-  //     } catch (error) {
-  //       onError?.(error);
-  //     }
-  //   }
-  //   return (
-  //     <button type="button" disabled={disabled || isLoading} className={className} onClick={handleDelete}>
-  //       {content}
-  //     </button>
-  //   );
-  // }
-
   // ─── Variante delete — chama productService.remove ────────────────────────
   if (variant === "delete") {
     // Se tem onClick externo, usa ele diretamente
@@ -95,15 +77,6 @@ export function ActionButton({
       </button>
     );
   }
-
-
-
-
-
-
-
-
-
 
   // ─── Variantes edit, cancel, save e submit caem aqui
   // onClick tem prioridade — onSuccess é fallback
