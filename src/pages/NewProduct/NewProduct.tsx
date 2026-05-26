@@ -148,15 +148,6 @@ export default function NewProductForm() {
                 tooltip="Informe o nome completo do produto."
               />
 
-              <TextInput
-                label="Marca"
-                id="inputBrand"
-                value={brand}
-                onChange={setBrand}
-                maxLength={CHAR_LIMITS.BRAND}
-                tooltip="Marca ou fabricante do produto."
-              />
-
               <TextArea
                 label="Descrição"
                 id="inputDescription"
@@ -166,6 +157,15 @@ export default function NewProductForm() {
                 tooltip="Detalhes adicionais sobre o produto (características, composição, etc.)"
               />
 
+              <TextInput
+                label="Marca"
+                id="inputBrand"
+                value={brand}
+                onChange={setBrand}
+                maxLength={CHAR_LIMITS.BRAND}
+                tooltip="Marca ou fabricante do produto."
+              />
+              
               <TextInput
                 label="Categoria"
                 id="inputCategory"
