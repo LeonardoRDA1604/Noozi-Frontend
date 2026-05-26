@@ -41,7 +41,7 @@ export function NumberInput({
         placeholder={placeholder}
       />
       {hasError && (
-        <p className="mt-1 text-xs text-red-500">{error}</p>
+        <p className="mt-1 ml-1 text-xs text-red-500">{error}</p>
       )}
     </div>
   );

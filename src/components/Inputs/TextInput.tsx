@@ -56,7 +56,7 @@ export function TextInput({
         )}
       </div>
       {hasError && (
-        <p className="mt-1 text-xs text-red-500">{error}</p>
+        <p className="mt-1 ml-1 text-xs text-red-500">{error}</p>
       )}
       {!hasError && (<p className='mt-1 ml-1 text-xs text-noozi-gray-500'>{helpText}</p>)}
     </div>
