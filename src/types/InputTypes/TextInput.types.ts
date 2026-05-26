@@ -8,5 +8,6 @@ export interface TextInputProps {
   className?: string;
   tooltip?: string;
   required?: string;
-  error?: string
+  error?: string;
+  helpText?: string
 }
