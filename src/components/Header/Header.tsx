@@ -24,12 +24,14 @@ export function Header({ onMenuOpen }: HeaderProps) {
         {/* Logo */}
         <Link
           to="/"
-          aria-label="Ir para página inicial"
+          aria-hidden="true"
+          tabIndex={-1}
+          title="Ir para a página inicial"
           className="flex items-center justify-center"
         >
           <img
             src={nooziLogo}
-            alt="Logo do Noozi"
+            alt=""
             className="h-10 w-auto object-contain"
           />
         </Link>
