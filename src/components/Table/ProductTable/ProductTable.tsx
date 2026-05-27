@@ -132,7 +132,6 @@ function TableRow({
 
 function TableCell({
   col,
-  index,
   isHeader = false,
   noOverflow = false,
   children,
