@@ -32,11 +32,14 @@ export function ProductModal({ product, onClose, onDeleted, onUpdated }: Product
       brand:           product.brand,
       category:        product.category,
       item_price:      product.item_price,
+      unit_measure:    product.unit_measure,
       stock_quantity:  product.stock_quantity,
       description:     product.description,
       low_stock_level: product.low_stock_level,
       over_stock_level:product.over_stock_level,
       expiration_date: product.expiration_date,
+      batch_code:      product.batch_code,
+      sku:             product.sku,
     };
   }
 
@@ -94,6 +97,7 @@ export function ProductModal({ product, onClose, onDeleted, onUpdated }: Product
         {/* Campos */}
         <div className="flex flex-col gap-4">
 
+          {/* Nome */}
           <ModalField label="Nome">
             {isEditing
               ? <ModalInput value={editData.name ?? ""} onChange={(v) => setEditData({ ...editData, name: v })} />
@@ -102,12 +106,15 @@ export function ProductModal({ product, onClose, onDeleted, onUpdated }: Product
           </ModalField>
 
           <div className="grid grid-cols-2 gap-4">
+            {/* Marca */}
             <ModalField label="Marca">
               {isEditing
                 ? <ModalInput value={editData.brand ?? ""} onChange={(v) => setEditData({ ...editData, brand: v })} />
                 : <ModalValue>{product.brand ?? "—"}</ModalValue>
               }
             </ModalField>
+
+            {/* Categoria */}
             <ModalField label="Categoria">
               {isEditing
                 ? <ModalInput value={editData.category ?? ""} onChange={(v) => setEditData({ ...editData, category: v })} />
@@ -117,24 +124,41 @@ export function ProductModal({ product, onClose, onDeleted, onUpdated }: Product
           </div>
 
           <div className="grid grid-cols-2 gap-4">
+            {/* Preço */}
             <ModalField label="Preço">
               {isEditing
                 ? <ModalInput type="number" value={String(editData.item_price ?? "")} onChange={(v) => setEditData({ ...editData, item_price: Number(v) })} />
                 : <ModalValue>{formatCurrency(product.item_price)}</ModalValue>
               }
             </ModalField>
-            <ModalField label="Estoque">
-              {isEditing
-                ? <ModalInput type="number" value={String(editData.stock_quantity ?? "")} onChange={(v) => setEditData({ ...editData, stock_quantity: Number(v) })} />
-                : <ModalValue>{product.stock_quantity} {product.unit_measure ?? "un."}</ModalValue>
-              }
-            </ModalField>
+
+            {/* Estoque e Unidade de medida juntos */}
+            {isEditing ? (
+              <div className="flex gap-4">
+                <ModalField label="Estoque">
+                  <ModalInput type="number" value={String(editData.stock_quantity ?? "")} onChange={(v) => setEditData({...editData, stock_quantity: Number(v) })} />
+                </ModalField>
+                <ModalField label="Un. medida">
+                  <ModalInput type="text"   value={String(editData.unit_measure ?? "")}   onChange={(v) => setEditData({...editData, unit_measure: v })} />
+                </ModalField>
+              </div>
+            ) : (
+              <ModalField label="Estoque">
+                <ModalValue>
+                  {product.stock_quantity} {product.unit_measure ?? "un."}
+                </ModalValue>
+              </ModalField>
+            )}
+
+            {/* Alerta de Estoque Baixo */}
             <ModalField label="Alerta de Estoque Baixo">
               {isEditing
                 ? <ModalInput type="number" value={String(editData.low_stock_level ?? "")} onChange={(v) => setEditData({ ...editData, low_stock_level: Number(v) })} />
                 : <ModalValue>{product.low_stock_level ?? "—"}</ModalValue>
               }
             </ModalField>
+
+            {/* Alerta de Estoque Alto */}
             <ModalField label="Alerta de Estoque Alto">
               {isEditing
                 ? <ModalInput type="number" value={String(editData.over_stock_level ?? "")} onChange={(v) => setEditData({ ...editData, over_stock_level: Number(v) })} />
@@ -143,6 +167,7 @@ export function ProductModal({ product, onClose, onDeleted, onUpdated }: Product
             </ModalField>
           </div>
 
+          {/* Descrição */}
           <ModalField label="Descrição">
             {isEditing
               ? <ModalInput value={editData.description ?? ""} onChange={(v) => setEditData({ ...editData, description: v })} />
@@ -150,6 +175,7 @@ export function ProductModal({ product, onClose, onDeleted, onUpdated }: Product
             }
           </ModalField>
 
+          {/* Vencimento */}
           <ModalField label="Vencimento">
             {isEditing
               ? <ModalInput type="date" value={editData.expiration_date ?? ""} onChange={(v) => setEditData({ ...editData, expiration_date: v })} />
@@ -157,6 +183,7 @@ export function ProductModal({ product, onClose, onDeleted, onUpdated }: Product
             }
           </ModalField>
 
+          {/* SKU */}
           <ModalField label="SKU">
             {isEditing
               ? <ModalInput value={editData.sku ?? ""} onChange={(v) => setEditData({ ...editData, sku: v })} />
@@ -164,6 +191,7 @@ export function ProductModal({ product, onClose, onDeleted, onUpdated }: Product
             }
           </ModalField>
 
+          {/* Batch_code - Lote */}
           <ModalField label="Lote">
             {isEditing
               ? <ModalInput value={editData.batch_code ?? ""} onChange={(v) => setEditData({ ...editData, batch_code: v })} />

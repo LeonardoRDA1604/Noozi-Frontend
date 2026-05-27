@@ -6,7 +6,7 @@ export function Footer() {
 
   return (
     // lg:hidden — some no desktop, só mobile e tablet
-    <footer className="fixed bottom-0 left-0 right-0 z-50 bg-noozi-background border-t border-noozi-border lg:hidden">
+    <footer className="fixed bottom-0 left-0 right-0 z-40 bg-noozi-background border-t border-noozi-border lg:hidden">
       <nav aria-label="Navegação principal">
         <ul className="flex items-center justify-around h-16 px-2">
           {NAV_ITEMS.map(({ label, href, icon: Icon }) => {
