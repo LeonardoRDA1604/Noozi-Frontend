@@ -26,14 +26,14 @@ export function RecentActivities({ limit = 5, deletedRetentionDays = 30 }: Recen
 
       {/* Lista vazia */}
       {!isLoading && !error && activities.length === 0 && (
-        <div className="px-4 py-6 rounded-xl border border-noozi-border bg-white text-center">
+        <div className="px-4 py-6 rounded-xl border border-noozi-border bg-noozi-background text-center">
           <p className="text-sm text-noozi-muted">Nenhuma atividade registrada.</p>
         </div>
       )}
 
       {/* Lista de atividades */}
       {!isLoading && !error && activities.length > 0 && (
-        <ul className="flex flex-col gap-2">
+        <ul className="flex flex-col gap-2" role="list" aria-label="Lista de atividades recentes">
           {activities.map((activity) => (
             <ActivityItem key={activity.id} activity={activity} />
           ))}

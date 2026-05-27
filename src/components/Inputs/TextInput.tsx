@@ -1,5 +1,6 @@
 import { useCharCounter } from '@/hooks/useCharCounter';
 import { Tooltip } from '@/components/ToolTip/ToolTip';
+
 import type { TextInputProps } from '@/types/InputTypes/TextInput.types';
 
 export function TextInput({
@@ -9,14 +10,16 @@ export function TextInput({
   onChange,
   maxLength,
   placeholder,
-  className = "grid col-span-2 lg:col-span-4",
+  className = "form-field-full",
   tooltip,
   required,
   error,
+  helpText
 }: TextInputProps) {
   const { remaining, color, showCounter } = useCharCounter(value, maxLength);
 
   const hasError = Boolean(error);
+  const hasRequired = Boolean(required);
 
   return (
     <div className={className}>
@@ -24,10 +27,11 @@ export function TextInput({
         <label htmlFor={id} className="mb-[1.5px] font-medium">
           {label}
         </label>
-        {tooltip && <Tooltip text={tooltip}/>}
-        <span className="text-xs italic text-noozi-gray-400 font-normal">
-          {required}
-        </span>
+        {tooltip && <Tooltip text={tooltip} />}
+        {hasRequired && (
+        <span className='text-xs italic text-noozi-gray-400 font-normal'>
+          <span className='text-status-danger'>*</span> {required}
+        </span>)}
       </div>
       <div className="relative">
         <input
@@ -54,6 +58,7 @@ export function TextInput({
       {hasError && (
         <p className="mt-1 text-xs text-red-500">{error}</p>
       )}
+      {!hasError && (<p className='mt-1 ml-1 text-xs text-noozi-gray-500'>{helpText}</p>)}
     </div>
   );
 }

@@ -1,6 +1,6 @@
 import { api } from "@/lib/api";
 import type { Product, CreateProductDTO, UpdateProductDTO } from "@/types/Product.types";
-import { formatCurrency } from "@/utils/formatCurrency";
+import { formatCurrency } from "@/utils/currency/formatCurrency";
 import { activityLogService } from "@/services/activityLog.service";
 
 export const productService = {

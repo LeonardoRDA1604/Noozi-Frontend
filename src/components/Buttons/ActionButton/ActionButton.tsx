@@ -16,6 +16,7 @@ const variantStyles: Record<ActionButtonVariant, string> = {
   cancel:  "h-8 px-3 bg-noozi-surface text-noozi-muted text-xs border border-noozi-border hover:bg-noozi-gray-200 focus:ring-noozi-border",
   // antigo edit(maybe cancel):    "h-8 px-3 bg-noozi-surface text-noozi-text text-xs border border-noozi-border hover:bg-noozi-gray-200 focus:ring-noozi-border",
   save:    "h-8 px-3 bg-noozi-bright_blue text-white text-xs hover:opacity-90 active:opacity-80 focus:ring-noozi-bright_blue/40",
+  filter: "h-10 px-3 bg-noozi-background border border-noozi-border text-noozi-text text-sm hover:bg-noozi-surface focus:ring-noozi-bright_blue/40",
 };
 
 export function ActionButton({
@@ -29,7 +30,9 @@ export function ActionButton({
   onClick, 
   disabled = false, 
   isLoading = false,
-}: ActionButtonProps) {
+  hideLabelVisual = false,
+  isActive
+}: ActionButtonProps & {hideLabelVisual?: boolean}) {
 
   const className = `${baseStyle} ${variantStyles[variant]}`;
 
@@ -40,14 +43,16 @@ export function ActionButton({
         ? <Loader2 className="h-4 w-4 animate-spin" />
         : Icon && <Icon className="h-4 w-4 shrink-0" />
       }
+      <span className={hideLabelVisual ? "sr-only" : ""}>
       {label}
+    </span>
     </>
   );
 
   // ─── Variante primary — navegação via Link ─────────────────────────────────
   if (variant === "primary" && href) {
-    return <Link to={href} className={className}>{content}</Link>;
-  }
+  return <Link to={href} className={className} aria-label={label}>{content}</Link>;
+}
 
   // ─── Variante delete — chama productService.remove ────────────────────────
   if (variant === "delete") {
@@ -78,6 +83,26 @@ export function ActionButton({
     );
   }
 
+// ─── Variante filter — botão de filtro com indicador de ativos ────────────
+if (variant === "filter") {
+  return (
+    <button
+      type="button"
+      disabled={disabled || isLoading}
+      aria-label={isActive ? "Filtros ativos — clique para filtrar" : "Abrir filtros"}
+      aria-pressed={isActive}
+      className={`${className} ${isActive ? "border-noozi-bright_blue text-noozi-bright_blue bg-noozi-bright_blue/5" : ""}`}
+      onClick={onClick ?? onSuccess}
+    >
+      {content}
+      {isActive && (
+        <span className="h-2 w-2 rounded-full bg-noozi-bright_blue shrink-0" aria-hidden="true" />
+      )}
+    </button>
+  );
+}
+
+
   // ─── Variantes edit, cancel, save e submit caem aqui
   // onClick tem prioridade — onSuccess é fallback
   return (
@@ -86,6 +111,7 @@ export function ActionButton({
       disabled={disabled || isLoading}
       className={className}
       onClick={onClick ?? onSuccess}
+      aria-label={label}
     >
       {content}
     </button>

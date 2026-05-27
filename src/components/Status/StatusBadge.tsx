@@ -9,7 +9,7 @@ export function StatusBadge({
 }: StatusBadgeProps) {
   return (
     <span
-      className={`shrink-0 text-[14px] font-semibold px-2 py-0.5 rounded-full  ${badgeClass}`}>
+      className={`shrink-0 text-[12px] font-semibold px-2 py-0.5 rounded-full  ${badgeClass}`}>
       {badgeText}
     </span>
   );

@@ -4,6 +4,27 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ─── CSS Variables para dark mode */
+:root {
+  --color-default-screen: #F9FAFF; /* default screen background, default theme */
+  --color-input-field:    #F1F2F7;
+  --color-background:     #FFFFFF;
+  --color-surface:        #F5F5F5;
+  --color-border:         #E8E8E8;
+  --color-text:           #111111;
+  --color-muted:          #9F9F9F;
+}
+
+.dark {
+  --color-default-screen: #0F1117; /* default screen background, dark theme */
+  --color-input-field:    #1A1D27;
+  --color-background:     #16181F;
+  --color-surface:        #1F2230;
+  --color-border:         #2E3147;
+  --color-text:           #F0F1F5;
+  --color-muted:          #6B7280;
+}
+
 @layer base {
   body {
     @apply bg-noozi-default_screen text-noozi-text font-sans;
@@ -16,5 +37,160 @@
   *, *::before, *::after {
     box-sizing: border-box;
   }
-  
+}
+
+              /* RESPONSIVIDADE DO FORMULÁRIO (NewProduct.tsx) */
+
+@layer components {
+
+  /* ─── Formulário de produto ─────────────────────────────────────────── */
+
+  /* Grid principal do formulário */
+  .product-form-grid {
+    @apply grid gap-4 mx-auto max-w-7xl;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    font-size: 13px;
+  }
+
+  /* Tela extremamente pequena */
+  @media (max-width: 366px) {
+    .product-form-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      font-size: 11px;
+    }
+  }
+
+  /* Tablet: 768px+ */
+  @media (min-width: 768px) {
+    .product-form-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      font-size: medium;
+    }
+  }
+
+  /* Desktop: 1024px+ */
+  @media (min-width: 1024px) {
+    .product-form-grid {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      font-size: large;
+    }
+  }
+
+  /* Seção do formulário com card visual */
+  .form-section {
+    @apply bg-noozi-background rounded-xl shadow-sm border border-noozi-border p-6;
+    transition: all 0.2s ease;
+  }
+
+  .form-section:hover {
+    @apply shadow-md;
+  }
+
+  /* Título da seção */
+  .form-section-title {
+    @apply text-lg font-semibold text-noozi-text mb-5 pb-3 border-b border-noozi-border;
+  }
+
+  /* Campos que ocupam toda a largura (Nome, Marca, Descrição) */
+  .form-field-full {
+    grid-column: span 2 / span 2;
+  }
+
+  @media (min-width: 1024px) {
+    .form-field-full {
+      grid-column: span 4 / span 4; /* padrão span 2 / span 2*/
+    }
+  }
+
+  /* Campos de 1 coluna (Categoria, Quantidade, Unidade, Preço) */
+  .form-field-single {
+    grid-column: span 1 / span 1;
+  }
+
+  /* Grid aninhado (Validade/Lote/SKU + Upload) */
+  .form-nested-grid {
+    @apply grid gap-4;
+    grid-column: 1 / -1;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .form-inventory-fields {
+    @apply grid gap-4;
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+  }
+
+  /* ─── Toggle switch ─────────────────────────────────────────────────── */
+  .toggle-switch {
+    @apply flex items-center gap-2 cursor-pointer;
+    user-select: none;
+  }
+
+  @media (min-width: 640px) {
+    .toggle-switch {
+      @apply gap-3;
+    }
+  }
+
+  .toggle-switch input[type="checkbox"] {
+    @apply hidden;
+  }
+
+  .toggle-slider {
+    position: relative;
+    display: inline-block;
+    width: 3.5rem;
+    height: 2rem;
+    background-color: #cbd5e1;
+    border-radius: 2rem;
+    transition: background-color 0.3s ease;
+    flex-shrink: 0;
+  }
+
+  .toggle-slider::before {
+    content: "";
+    position: absolute;
+    height: 1.625rem;
+    width: 1.625rem;
+    left: 0.1875rem;
+    bottom: 0.1875rem;
+    background-color: white;
+    border-radius: 50%;
+    transition: transform 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  }
+
+  .toggle-switch input:checked + .toggle-slider {
+    @apply bg-noozi-bright_blue;
+  }
+
+  .toggle-switch input:checked + .toggle-slider::before {
+    transform: translateX(1.5rem);
+  }
+
+  .toggle-switch:hover .toggle-slider {
+    opacity: 0.9;
+  }
+
+  .toggle-label {
+    @apply font-medium text-noozi-gray-700;
+    transition: color 0.2s ease;
+    font-size: 0;
+    white-space: nowrap;
+  }
+
+  .toggle-label::before {
+    font-size: 0.875rem;
+  }
+
+  .toggle-switch input:checked ~ .toggle-label {
+    @apply text-noozi-bright_blue;
+  }
+
+  .toggle-switch input:checked ~ .toggle-label::before {
+    content: "Ativo";
+  }
+
+  .toggle-switch input:not(:checked) ~ .toggle-label::before {
+    content: "Inativo";
+  }
 }
