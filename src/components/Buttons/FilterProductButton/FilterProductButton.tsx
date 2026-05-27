@@ -21,9 +21,10 @@ export default function FilterProductButton({
       <div className="relative">
         <button
           onClick={() => setFilterModal(true)}
+          aria-label="Filtrar produtos"
           className="flex items-center justify-center h-[70%] aspect-square min-h-[42px] min-w-[42px] bg-noozi-input_field border border-solid border-noozi-gray-300 rounded-lg hover:bg-noozi-gray-100 transition-colors duration-150"
         >
-          <Funnel size={18} color={hasActiveFilters ? "#0B4EFF" : "#8a8a8a"} />
+          <Funnel size={18} color={hasActiveFilters ? "#0B4EFF" : "#8a8a8a"} aria-hidden="true" />
         </button>
 
         {/* Badge indicando filtros ativos */}
