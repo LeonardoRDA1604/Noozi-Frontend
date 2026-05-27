@@ -14,10 +14,12 @@ export function TextInput({
   tooltip,
   required,
   error,
+  helpText
 }: TextInputProps) {
   const { remaining, color, showCounter } = useCharCounter(value, maxLength);
 
   const hasError = Boolean(error);
+  const hasRequired = Boolean(required);
 
   return (
     <div className={className}>
@@ -26,9 +28,10 @@ export function TextInput({
           {label}
         </label>
         {tooltip && <Tooltip text={tooltip} />}
-        <span className="text-xs italic text-noozi-gray-400 font-normal">
-          {required}
-        </span>
+        {hasRequired && (
+        <span className='text-xs italic text-noozi-gray-400 font-normal'>
+          <span className='text-status-danger'>*</span> {required}
+        </span>)}
       </div>
       <div className="relative">
         <input
@@ -55,6 +58,7 @@ export function TextInput({
       {hasError && (
         <p className="mt-1 text-xs text-red-500">{error}</p>
       )}
+      {!hasError && (<p className='mt-1 ml-1 text-xs text-noozi-gray-500'>{helpText}</p>)}
     </div>
   );
 }

@@ -5,5 +5,6 @@ export interface PriceInputProps {
   onChange: (valueInCents: number) => void;
   tooltip?: string;
   required?: string;
-  error?: string
+  error?: string;
+  helpText?: string
 }

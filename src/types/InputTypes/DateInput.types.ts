@@ -6,4 +6,5 @@ export interface DateInputProps {
   tooltip?: string;
   required?: string;
   error?: string | null
+  helpText?: string
 }

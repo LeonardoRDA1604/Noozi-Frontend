@@ -13,6 +13,7 @@ export function NumberInput({
   error,
 }: NumberInputProps) {
   const hasError = Boolean(error);
+  const hasRequired = Boolean(required);
 
   return (
     <div className="form-field-single">
@@ -21,9 +22,10 @@ export function NumberInput({
           {label}
         </label>
         {tooltip && <Tooltip text={tooltip} />}
-        <span className="text-xs italic text-noozi-gray-400 font-normal">
-          {required}
-        </span>
+        {hasRequired && (
+        <span className='text-xs italic text-noozi-gray-400 font-normal'>
+          <span className='text-status-danger'>*</span> {required}
+        </span>)}
       </div>
       <input
         className={`w-full bg-noozi-input_field border border-solid rounded-lg px-3 py-2 transition-colors ${

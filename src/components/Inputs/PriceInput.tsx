@@ -9,8 +9,10 @@ export function PriceInput({
   required,
   onChange,
   error,
+  helpText
 }: PriceInputProps) {
   const hasError = Boolean(error);
+  const hasRequired = Boolean(required);
 
   const formatPrice = (valueInCents: number): string => {
     const valueInReais = valueInCents / 100;
@@ -66,9 +68,10 @@ export function PriceInput({
           {label}
         </label>
         {tooltip && <Tooltip text={tooltip} />}
-        <span className="text-xs italic text-noozi-gray-400 font-normal">
-          {required}
-        </span>
+        {hasRequired && (
+        <span className='text-xs italic text-noozi-gray-400 font-normal'>
+          <span className='text-status-danger'>*</span> {required}
+        </span>)}
       </div>
       <input
         className={`w-full bg-noozi-input_field border border-solid rounded-lg px-3 py-2 transition-colors ${
@@ -86,6 +89,7 @@ export function PriceInput({
       {hasError && (
         <p className="mt-1 text-xs text-red-500">{error}</p>
       )}
+      {!hasError &&(<p className="mt-1 ml-1 text-xs text-noozi-gray-500">{helpText}</p>)}
     </div>
   );
 }
