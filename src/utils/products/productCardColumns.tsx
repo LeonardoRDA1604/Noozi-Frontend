@@ -9,7 +9,8 @@ import { formatISODate } from "../date/formatISODate";
 export function productCardColumns(item: Product) {
     const status = item.is_active ? "active" : "inactive";
     const config = PRODUCT_STATUS_CONFIG[status];
-    const fontBaseStyle = "w-full min-w-0 text-black text-center text-[12px] sm:text-[14px] md:text-[16px] lg:text-[18px] xl:text-[18px] 2xl:text-[18px] break-words leading-tight";
+
+    const fontBaseStyle = "w-full min-w-0 text-noozi-text text-center text-[12px] sm:text-[14px] md:text-[15px] break-words leading-tight";
     const value: Record<string, React.ReactNode> = {
 
     Status: (
