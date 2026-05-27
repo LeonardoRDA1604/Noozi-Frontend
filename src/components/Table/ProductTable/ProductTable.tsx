@@ -12,7 +12,11 @@ interface ProductCardListProps extends filter {
   onProductChange: () => void; // chamado após editar ou deletar — atualiza a lista
 }
 
-export default function ProductTable({ filter, products, onProductChange }: ProductCardListProps) {
+export default function ProductTable({
+  filter,
+  products,
+  onProductChange,
+}: ProductCardListProps) {
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
   const miniSearch = useMemo(() => structureSearch, []);
   const [filterDebounced, setFilterDebounced] = useState(filter);
@@ -32,24 +36,24 @@ export default function ProductTable({ filter, products, onProductChange }: Prod
   }, [filterDebounced, miniSearch, products]);
 
   return (
-  <>
-    <div className="w-full px-3 overflow-hidden">
-      {/* Header fora do scroll, fixo */}
-      <div className="px-3 pt-5">
-        <TableHeader />
-      </div>
+    <>
+      <div className="w-full px-3 overflow-hidden">
+        {/* Header fora do scroll, fixo */}
+        <div className="px-3 pt-5">
+          <TableHeader />
+        </div>
 
-      {/* Apenas os itens scrollam */}
-      <div className="flex flex-col gap-5 w-full px-3 py-5 overflow-y-auto max-h-[calc(100vh-200px)]">
-        {itemsFilter.map((item) => (
-          <CardItem
-            key={item.id_product}
-            item={item}
-            onSelect={() => setSelectedProduct(item)}
-          />
-        ))}
+        {/* Apenas os itens scrollam */}
+        <div className="flex flex-col gap-5 w-full px-3 py-5 overflow-y-auto max-h-[calc(100vh-200px)]">
+          {itemsFilter.map((item) => (
+            <CardItem
+              key={item.id_product}
+              item={item}
+              onSelect={() => setSelectedProduct(item)}
+            />
+          ))}
+        </div>
       </div>
-    </div>
 
       {selectedProduct && (
         <ProductModal
@@ -89,8 +93,8 @@ function CardItem({ item, onSelect }: { item: Product; onSelect: () => void }) {
   return (
     <TableRow onClick={onSelect}>
       {COLUMNS.map((col, index) => (
-        <TableCell key={col.label} col={col} index={index}>
-          {value[col.label]}
+        <TableCell key={col.label} col={col} index={index} noOverflow={col.label === "Ação"}>
+          {value[col.label]} 
         </TableCell>
       ))}
     </TableRow>
@@ -115,7 +119,7 @@ function TableRow({
             grid ${GRID_COLS} w-full rounded-xl min-w-0
             ${
               isHeader
-                ? "bg-noozi-bright_blue text-white font-semibold"
+                ? "bg-noozi-bright_blue text-white font-semibold overflow-hidden"
                 : "shadow-sm hover:bg-gray-100 cursor-pointer transition-colors duration-200"
             }
             ${sticky ? "sticky top-0 z-20" : ""}
@@ -130,11 +134,13 @@ function TableCell({
   col,
   index,
   isHeader = false,
+  noOverflow = false,
   children,
 }: {
   col: { label: string; priority: number };
   index: number;
   isHeader?: boolean;
+  noOverflow? : boolean;
   children: React.ReactNode;
 }) {
   // último visível em cada breakpoint
@@ -163,6 +169,7 @@ function TableCell({
         py-3 sm:py-4 md:py-3
         self-stretch
         min-w-0 w-full overflow-hidden
+        ${noOverflow ? "overflow-visible" : "overflow-hidden"}
         ${
           isHeader
             ? "border-white"
