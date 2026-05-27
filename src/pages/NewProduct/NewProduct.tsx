@@ -12,6 +12,7 @@ import type { CreateProductDTO } from "@/types/Product.types";
 import { formatDateISO } from "@/utils/date/formatDateISO";
 import { useFormValidation } from "@/hooks/useFormValidation";
 import type { NewProductForm } from "@/types/NewProductForm.types";
+import { SectionTitle } from "@/components/SectionTitle/SectionTitle";
 
 const CHAR_LIMITS = {
   NAME: 120,
@@ -153,10 +154,13 @@ export default function NewProductForm() {
   return (
     <div className="w-full min-h-dvh p-4 md:p-6 lg:p-8 overflow-y-auto overflow-x-hidden">
       <div className="max-w-7xl mx-auto">
-        <div className="mb-6">
-          <h1 className="text-2xl md:text-3xl font-bold text-noozi-gray-800">Novo Produto</h1>
-          <p className="text-sm text-noozi-gray-600 mt-1">Preencha os dados abaixo para cadastrar um novo produto</p>
-        </div>
+
+        {/* Cabeçalho da página */}
+        <SectionTitle
+          title="Novo Produto"
+          subtitle="Preencha os dados abaixo para cadastrar um novo produto"
+          className="mb-6"
+        />
 
         {submitError && (
           <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-lg">
