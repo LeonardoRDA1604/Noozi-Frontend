@@ -20,7 +20,7 @@ export function BaseModal({
   return (
     // Overlay — cobre toda a tela, clique fora fecha
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 px-4"
+      className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm px-4"
       onClick={onClose}
       aria-modal="true"
       role="dialog"

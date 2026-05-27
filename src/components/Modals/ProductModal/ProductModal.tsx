@@ -10,6 +10,7 @@ import { formatISODate } from "@/utils/date/formatISODate";
 
 import { StatusBadge } from "@/components/Status/StatusBadge";
 import { PRODUCT_STATUS_CONFIG } from "@/constants/productStatusConfig";
+import CardDelete from "@/components/Modals/DeleteModal/DeleteModal";
 interface ProductModalProps {
   product: Product;
   onClose: () => void;
@@ -200,15 +201,12 @@ export function ProductModal({
 
         {/* Confirmação de delete */}
         {confirmingDelete && (
-          <>
-            <p className="text-xs text-status-danger font-medium text-center">
-              Tem certeza que deseja apagar este produto?
-            </p>
-            <div className="flex gap-2">
-              <ActionButton variant="cancel"    label="Cancelar"       icon={XCircle}              onClick={() => setConfirmingDelete(false)} />
-              <ActionButton variant="delete"    label="Confirmar"      icon={Trash2}               onClick={handleDelete}                           isLoading={isLoading} />
-            </div>
-          </>
+          <CardDelete
+          productName={product.name}
+          onConfirm={handleDelete}
+          onCancel={() => setConfirmingDelete(false)}
+          isLoading={isLoading}
+          />
         )}
 
         {/* Modo edição */}

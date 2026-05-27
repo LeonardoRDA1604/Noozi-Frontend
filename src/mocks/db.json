@@ -179,36 +179,6 @@
       "created_at": "2026-05-26T05:58:09.378Z",
       "updated_at": "2026-05-26T05:58:09.378Z",
       "id": "blkuTmqG6VQ"
-    },
-    {
-      "id_product": "12",
-      "sku": "SAB-PO-1KG",
-      "name": "Sabão em Pó Multiuso 1kg",
-      "description": "Sabão em pó rende muito, ideal para roupas brancas e coloridas.",
-      "category": "Limpeza",
-      "brand": "Brilhante",
-      "item_price": 14.9,
-      "stock_quantity": 500,
-      "unit_measure": "cx",
-      "low_stock_level": 50,
-      "over_stock_level": 200,
-      "batch_code": "LOTE-SP-001",
-      "expiration_date": "2028-05-10",
-      "is_active": true,
-      "created_at": "2026-05-26T05:58:52.815Z",
-      "updated_at": "2026-05-26T05:58:52.815Z",
-      "id": "1QQu7ih-icQ"
-    },
-    {
-      "id_product": "13",
-      "sku": "CAN-BICA-AZ",
-      "name": "Caneta Esferográfica Azul",
-      "item_price": 1.5,
-      "stock_quantity": 150,
-      "is_active": true,
-      "created_at": "2026-05-26T05:59:12.768Z",
-      "updated_at": "2026-05-26T05:59:12.768Z",
-      "id": "3r5nXXIRNJQ"
     }
   ],
   "transaction_records": [
@@ -231,6 +201,22 @@
       "occurred_at": "2026-05-01T11:00:00Z",
       "expires_at": "2026-12-31T11:00:00Z",
       "id": "LOG1"
+    },
+    {
+      "id_product": "13",
+      "product_name": "Caneta Esferográfica Azul",
+      "activity_type": "deleted",
+      "occurred_at": "2026-05-27T00:09:21.203Z",
+      "expires_at": "2026-06-26T00:09:21.203Z",
+      "id": "BlNpaaQL3f8"
+    },
+    {
+      "id_product": "12",
+      "product_name": "Sabão em Pó Multiuso 1kg",
+      "activity_type": "deleted",
+      "occurred_at": "2026-05-27T00:09:28.839Z",
+      "expires_at": "2026-06-26T00:09:28.839Z",
+      "id": "NNVuQlU_1ws"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"
