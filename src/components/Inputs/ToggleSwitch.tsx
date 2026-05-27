@@ -1,5 +1,6 @@
 import type { ToggleSwitchProps } from "@/types/InputTypes/ToggleSwitch.types";
 import { Tooltip } from "@/components/ToolTip/ToolTip";
+import { useId } from "react";
 
 export function ToggleSwitch({
   label,
@@ -9,25 +10,32 @@ export function ToggleSwitch({
   tooltip,
   required
 }: ToggleSwitchProps) {
+  const id = useId();
+  const labelId = `${id}-label`;
+
   return (
     <div className="flex flex-col gap-2">
-      <div className="flex items-center gap-2">
-        <label className="font-medium text-sm">
-          {label}
-        </label>
-        {tooltip && <Tooltip text={tooltip} />}
-        <span className="text-xs italic text-noozi-gray-400 font-normal">
-          {required}
-        </span>
-      </div>
+    <div className="flex items-center gap-2">
+      <span id={labelId} className="font-medium text-sm">
+        {label}
+      </span>
+      {tooltip && <Tooltip text={tooltip} />}
+      <span className="text-xs italic text-noozi-gray-400 font-normal">
+        {required}
+      </span>
+    </div>
 
-      <label className="flex items-center gap-3 cursor-pointer select-none relative">
-  <input
-    type="checkbox"
-    checked={checked}
-    onChange={(e) => onChange(e.target.checked)}
-    className="sr-only peer"
-  />
+    <label htmlFor={id} className="flex items-center gap-3 cursor-pointer select-none relative">
+        <input
+          id={id}
+          type="checkbox"
+          role="switch"
+          aria-checked={checked}
+          aria-labelledby={labelId}
+          checked={checked}
+          onChange={(e) => onChange(e.target.checked)}
+          className="sr-only peer"
+        />
 
   <div
     className="

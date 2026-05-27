@@ -30,8 +30,9 @@ export function ActionButton({
   onClick, 
   disabled = false, 
   isLoading = false,
+  hideLabelVisual = false
   isActive,
-}: ActionButtonProps) {
+}: ActionButtonProps & {hideLabelVisual?: boolean}) {
 
   const className = `${baseStyle} ${variantStyles[variant]}`;
 
@@ -42,14 +43,16 @@ export function ActionButton({
         ? <Loader2 className="h-4 w-4 animate-spin" />
         : Icon && <Icon className="h-4 w-4 shrink-0" />
       }
+      <span className={hideLabelVisual ? "sr-only" : ""}>
       {label}
+    </span>
     </>
   );
 
   // ─── Variante primary — navegação via Link ─────────────────────────────────
   if (variant === "primary" && href) {
-    return <Link to={href} className={className}>{content}</Link>;
-  }
+  return <Link to={href} className={className} aria-label={label}>{content}</Link>;
+}
 
   // ─── Variante delete — chama productService.remove ────────────────────────
   if (variant === "delete") {
@@ -108,6 +111,7 @@ if (variant === "filter") {
       disabled={disabled || isLoading}
       className={className}
       onClick={onClick ?? onSuccess}
+      aria-label={label}
     >
       {content}
     </button>
