@@ -133,9 +133,9 @@ export default function NewProductForm() {
 
         <form className="space-y-6" onSubmit={handleSubmit}>
           {/* Seção: Informações Básicas */}
-          <div className="form-section">
-            <h2 className="form-section-title">Informações Básicas</h2>
-            <div className="product-form-grid">      
+          <div className="bg-white rounded-xl shadow-sm border border-noozi-gray-200 p-6 transition-all hover:shadow-md border-noozi-gray-300"> {/* form-section */}
+            <h2 className="text-lg font-semibold text-gray-800 mb-5 pb-3 border-b border-noozi-gray-200" >Informações Básicas</h2> {/* form-section-title */}
+            <div className="grid gap-4 mx-auto max-w-7xl grid-cols-2 text-sm sm:text-xs grid-cols-2 md:text-md lg:text-lg"> {/* product-form-grid */}
               <TextInput
                 label="Nome"
                 id="inputName"
@@ -171,16 +171,16 @@ export default function NewProductForm() {
                 value={category}
                 onChange={setCategory}
                 maxLength={CHAR_LIMITS.CATEGORY}
-                className="form-field-single"
+                className="grid col-span-1"
                 tooltip="Grupo ao qual o produto pertence."
               />
             </div>
           </div>
 
           {/* Seção: Estoque e Precificação */}
-          <div className="form-section">
-            <h2 className="form-section-title">Estoque e Precificação</h2>
-            <div className="product-form-grid">
+          <div className="bg-white rounded-xl shadow-sm border border-noozi-gray-200 p-6 transition-all hover:shadow-md border-noozi-gray-300">
+            <h2 className="text-lg font-semibold text-gray-800 mb-5 pb-3 border-b border-noozi-gray-200">Estoque e Precificação</h2>
+            <div className="grid gap-4 mx-auto max-w-7xl grid-cols-2 text-[13px] max-[385px]:grid-cols-1 max-[385px]:text-[11px] md:text-base lg:grid-cols-3 lg:text-lg">
               <NumberInput
                 label="Quantidade"
                 id="inputQuantity"
@@ -198,7 +198,7 @@ export default function NewProductForm() {
                 onChange={setUnit}
                 maxLength={CHAR_LIMITS.UNIT}
                 placeholder="Ex: kg, un, L"
-                className="form-field-single"
+                className="grid col-span-1"
                 tooltip="Unidade de venda ou armazenamento. Ex: kg, un, L, pacote, caixa"
               />
               <PriceInput
@@ -214,16 +214,16 @@ export default function NewProductForm() {
           </div>
 
           {/* Seção: Alertas de Estoque */}
-          <div className="form-section">
-            <h2 className="form-section-title">Alertas de Estoque</h2>
-            <div className="product-form-grid">
+          <div className="bg-white rounded-xl shadow-sm border border-noozi-gray-200 p-6 transition-all hover:shadow-md border-noozi-gray-300">
+            <h2 className="text-lg font-semibold text-gray-800 mb-5 pb-3 border-b border-noozi-gray-200">Alertas de Estoque</h2>
+            <div className="grid gap-4 mx-auto max-w-7xl grid-cols-2 text-[13px] max-[385px]:grid-cols-1 max-[385px]:text-[11px] md:text-base lg:grid-cols-3 lg:text-lg">
               <TextInput
                 label="Quantidade de estoque baixo"
                 id="inputLStock"
                 value={lowLevel}
                 onChange={setLowLevel}
                 maxLength={CHAR_LIMITS.LOW_LEVEL}
-                className="form-field-single"
+                className="grid col-span-1"
                 tooltip="Quantidade mínima que, ao ser atingida, dispara um aviso de reposição."
               />
               <TextInput
@@ -232,16 +232,16 @@ export default function NewProductForm() {
                 value={highLevel}
                 onChange={setHighLevel}
                 maxLength={CHAR_LIMITS.HIGH_LEVEL}
-                className="form-field-single"
+                className="grid col-span-1"
                 tooltip="Quantidade máxima que, ao ser ultrapassada, dispara um aviso de excesso."
               />
             </div>
           </div>
 
           {/* Seção: Rastreamento e Validade */}
-          <div className="form-section">
-            <h2 className="form-section-title">Rastreamento e Validade</h2>
-            <div className="product-form-grid">
+          <div className="bg-white rounded-xl shadow-sm border border-noozi-gray-200 p-6 transition-all hover:shadow-md border-noozi-gray-300">
+            <h2 className="text-lg font-semibold text-gray-800 mb-5 pb-3 border-b border-noozi-gray-200">Rastreamento e Validade</h2>
+            <div className="grid gap-4 mx-auto max-w-7xl grid-cols-2 text-[13px] max-[385px]:grid-cols-1 max-[385px]:text-[11px] md:text-base lg:grid-cols-3 lg:text-lg">
               <DateInput
                 label="Validade"
                 id="inputDate"
@@ -255,7 +255,7 @@ export default function NewProductForm() {
                 value={batch}
                 onChange={setBatch}
                 maxLength={CHAR_LIMITS.BATCH}
-                className="form-field-single"
+                className="grid col-span-1"
                 tooltip="Código de identificação do lote de fabricação (se aplicável)."
               />
               <TextInput
@@ -264,7 +264,7 @@ export default function NewProductForm() {
                 value={sku}
                 onChange={(v) => { setSku(v); clearError("sku"); }}
                 maxLength={CHAR_LIMITS.SKU}
-                className="form-field-single"
+                className="grid col-span-1"
                 tooltip="Código único de identificação do produto (Stock Keeping Unit)."
                 placeholder="Ex: ABC01"
                 required="Obrigatório"
@@ -274,10 +274,10 @@ export default function NewProductForm() {
           </div>
 
           {/* Seção: Configurações */}
-          <div className="form-section">
-            <h2 className="form-section-title">Configurações</h2>
-            <div className="product-form-grid">
-              <div className="form-field-single">
+          <div className="bg-white rounded-xl shadow-sm border border-noozi-gray-200 p-6 transition-all hover:shadow-md border-noozi-gray-300">
+            <h2 className="text-lg font-semibold text-gray-800 mb-5 pb-3 border-b border-noozi-gray-200">Configurações</h2>
+            <div className="grid gap-4 mx-auto max-w-7xl grid-cols-2 text-[13px] max-[385px]:grid-cols-1 max-[385px]:text-[11px] md:text-base lg:grid-cols-3 lg:text-lg">
+              <div className="grid col-span-1">
                 <ToggleSwitch
                   label="Status do Produto"
                   checked={status}
