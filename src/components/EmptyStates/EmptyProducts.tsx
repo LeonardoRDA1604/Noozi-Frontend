@@ -1,4 +1,6 @@
 import { Package, PackageSearch } from "lucide-react";
+import { ActionButton } from "../Buttons/ActionButton/ActionButton";
+import { CirclePlus } from "lucide-react";
 
 interface EmptyProductsProps {
   /** Se há um filtro/busca ativa — muda o texto e o ícone */
@@ -37,6 +39,7 @@ export function EmptyProducts({ isFiltered = false }: EmptyProductsProps) {
             ? "Tente ajustar os filtros ou o termo de busca para encontrar o que procura."
             : "Cadastre o primeiro produto para começar a gerenciar seu estoque."}
         </p>
+        <ActionButton variant="primary"     label="Cadastrar Produto"           icon={CirclePlus}          href="/products/new" />
       </div>
 
     </div>
