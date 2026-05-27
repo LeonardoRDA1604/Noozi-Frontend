@@ -24,6 +24,7 @@ Formato baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.0.0/), 
     - [[1.3.0] - 2026-05-24](#130---2026-05-24)
     - [[1.4.0] - 2026-05-24](#140---2026-05-24)
     - [[1.5.0] - 2026-05-26](#150---2026-05-26)
+    - [[1.6.0] - 2026-05-27](#160---2026-05-27)
 
 ---
 
@@ -688,6 +689,140 @@ O problema não impacta o funcionamento atual da aplicação e será tratado em 
 - O sistema de filtros pode futuramente ser desacoplado para persistência em query params
 - Alguns componentes reutilizáveis ainda podem ser abstraídos para reduzir duplicação de layouts
 - A arquitetura de tabelas ainda pode evoluir para virtualização em listas maiores
+
+</details>
+
+---
+
+### [1.6.0] - 2026-05-27
+
+<details>
+  <summary style="background-color: white; color: black"><b>ℹ️ Clique para expandir o log de alterações da versão [1.6.0]</b></summary>
+  <br />
+
+#### ✨ Adicionado
+- Sistema completo de Dark Mode utilizando estratégia `darkMode: class`
+- Hook reutilizável `useDarkMode`
+- Persistência automática de tema via `localStorage`
+- Suporte automático à preferência do sistema operacional (`prefers-color-scheme`)
+- Variáveis CSS globais para:
+  - background
+  - surface
+  - border
+  - text
+  - muted
+  - input_field
+  - default_screen
+- Toggle avançado de tema no Sidebar:
+  - ícones Sun/Moon
+  - labels CLARO/ESCURO
+  - animações reativas
+  - acessibilidade com `role="switch"`
+- Novo componente reutilizável `DeleteConfirmModal`
+- Novo variant `filter` no `ActionButton`
+- Indicador visual de filtro ativo no botão de filtros
+- Helper texts reutilizáveis em:
+  - `Input`
+  - `Select`
+  - `CurrencyInput`
+- Validação de data no formulário de criação de produtos
+- Estados semânticos de loading e erro na página de produtos
+- Estrutura semântica acessível utilizando:
+  - `role="search"`
+  - `aria-live`
+  - `aria-label`
+  - `role="tooltip"`
+  - `fieldset`
+  - `legend`
+  - `role="radiogroup"`
+- Suporte completo de Dark Mode em:
+  - Sidebar
+  - BaseModal
+  - ProductModal
+  - ProductFilterModal
+  - Header
+  - Footer
+  - MetricsCard
+  - RecentActivities
+  - ActivityItem
+- Header sticky na tabela de produtos
+- Layout de cards flutuantes na listagem de produtos
+- Scrollbar customizada via `tailwindcss-scrollbar`
+
+---
+
+#### 🎨 Melhorado
+- UX geral do sistema de tema escuro
+- Consistência visual entre modais, páginas e tabelas
+- Acessibilidade da `Searchbar`
+- Estrutura visual do `ProductTable`
+- Legibilidade de badges de status
+- Hierarquia visual das páginas `Products` e `NewProduct`
+- Espaçamento e organização visual do `ProductModal`
+- Responsividade do toggle de tema
+- Clareza visual dos filtros de produtos
+- Alinhamento da `Searchbar` com a tabela de produtos
+- Fluxo de confirmação de exclusão de produtos
+- Feedback visual de foco em inputs e botões
+- Organização arquitetural de tabelas e utilities
+- Padronização de formatação monetária e de datas
+- Consistência visual de datas no padrão `DD/MM/YYYY`
+
+---
+
+#### 🔧 Alterado
+- Centralização de utilitários:
+  - `formatCurrency`
+  - `formatISODate`
+- Reorganização estrutural do `ProductTable`
+- Criação da pasta centralizada `Table`
+- Renomeação e padronização de utilities relacionadas a datas
+- Refatoração do `Searchbar` para estrutura mais acessível e semântica
+- Refatoração do `SectionTitle` para centralizar headers de páginas
+- Refatoração do `ProductFilterModal` para utilizar:
+  - `ActionButton`
+  - semântica acessível
+  - tokens oficiais do Design System
+- Refatoração do `ProductModal`:
+  - suporte ao Dark Mode
+  - utilização do `DeleteConfirmModal`
+  - integração do `StatusBadge`
+- Refatoração da navegação do Sidebar para melhorar UX
+- Reorganização de layouts e componentes relacionados a tabelas
+- Substituição de cores hardcoded por Design Tokens oficiais
+- Atualização do fluxo visual de tooltips e indicadores obrigatórios
+- Remoção de tooltips não essenciais no formulário `NewProduct`
+
+---
+
+#### 🧹 Removido
+- Arquivo obsoleto `mockItems.ts`
+- Tooltips redundantes em campos autoexplicativos
+- Estruturas antigas inline de confirmação de exclusão
+- Estruturas visuais antigas da Searchbar
+- Cores hardcoded substituídas por tokens globais
+
+---
+
+#### 🐛 Corrigido
+- Correção do formato de exibição da validade dos produtos
+- Correção da data da versão no índice do `CHANGELOG`
+- Correção de inconsistências de formatação monetária
+- Correção de alinhamentos visuais na tabela de produtos
+- Correção de acessibilidade em modais e tooltips
+- Correção de contraste visual no Dark Mode
+- Correção de comportamento do botão limpar da Searchbar
+- Correção de nomenclatura inconsistente em utilities de data
+
+---
+
+#### ⚠️ Débito Técnico
+- O sistema de tema ainda depende parcialmente de classes utilitárias legadas
+- Alguns componentes ainda utilizam estrutura híbrida entre tokens CSS e Tailwind utilities
+- O gerenciamento de preferências visuais ainda não está sincronizado com backend
+- O ProductTable ainda pode futuramente evoluir para virtualização em listas extensas
+- O sistema de filtros ainda não persiste estado via URL/query params
+- Algumas utilities de formatação ainda podem ser internacionalizadas futuramente
 
 </details>
 
