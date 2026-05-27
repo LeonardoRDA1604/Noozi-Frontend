@@ -1,6 +1,7 @@
 import { useRecentActivities } from "@/hooks/useRecentActivities";
 import type { RecentActivitiesProps } from "@/types/ActivityLog.types";
 import { ActivityItem } from "@/components/Activities/ActivityItem";
+import { EmptyActivities } from "@/components/EmptyStates/EmptyActivities";
 import { RefreshCw } from "lucide-react";
 
 export function RecentActivities({ limit = 5, deletedRetentionDays = 30 }: RecentActivitiesProps) {
@@ -17,7 +18,7 @@ export function RecentActivities({ limit = 5, deletedRetentionDays = 30 }: Recen
         </div>
       )}
 
-      {/* Erro — dentro da estrutura, não substitui ela */}
+      {/* Erro */}
       {error && (
         <div className="px-4 py-3 rounded-xl border border-status-danger/20 bg-status-danger/5">
           <p className="text-sm text-status-danger">{error}</p>
@@ -26,9 +27,7 @@ export function RecentActivities({ limit = 5, deletedRetentionDays = 30 }: Recen
 
       {/* Lista vazia */}
       {!isLoading && !error && activities.length === 0 && (
-        <div className="px-4 py-6 rounded-xl border border-noozi-border bg-noozi-background text-center">
-          <p className="text-sm text-noozi-muted">Nenhuma atividade registrada.</p>
-        </div>
+        <EmptyActivities />
       )}
 
       {/* Lista de atividades */}
