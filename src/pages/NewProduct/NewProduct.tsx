@@ -12,6 +12,7 @@ import type { CreateProductDTO } from "@/types/Product.types";
 import { formatDateISO } from "@/utils/date/formatDateISO";
 import { useFormValidation } from "@/hooks/useFormValidation";
 import type { NewProductForm } from "@/types/NewProductForm.types";
+import { SectionTitle } from "@/components/SectionTitle/SectionTitle";
 
 const CHAR_LIMITS = {
   NAME: 120,
@@ -24,6 +25,28 @@ const CHAR_LIMITS = {
   LOW_LEVEL: 10,
   HIGH_LEVEL: 10,
 } as const;
+
+function isValidDate(value: string): boolean {
+  if (!value) return true; // campo opcional
+
+  // Must match DD/MM/YYYY
+  if (!/^\d{2}\/\d{2}\/\d{4}$/.test(value)) return false;
+
+  const [day, month, year] = value.split("/").map(Number);
+
+  // Basic calendar sanity
+  const date = new Date(year, month - 1, day);
+  if (
+    date.getFullYear() !== year ||
+    date.getMonth() !== month - 1 ||
+    date.getDate() !== day
+  ) return false;
+
+  // Must not be in the past
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+  return date >= today;
+}
 
 export default function NewProductForm() {
   const [name, setName] = useState("");
@@ -42,7 +65,7 @@ export default function NewProductForm() {
 
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
-
+  let today = new Date()
   // ─── Validação ─────────────────────────────────────────────────────────────
   const { errors, validate, clearError, clearAllErrors } =
     useFormValidation<NewProductForm>({
@@ -53,6 +76,17 @@ export default function NewProductForm() {
         return isNaN(num) || num < 0 ? 'O campo "Quantidade" é obrigatório.' : null;
       },
       item_price: (v) => (v === 0 ? 'O campo "Preço Unitário" é obrigatório.' : null),
+      expiration_date: (v) => {
+        if (!v) return null; //não altera caso o campo esteja vazio
+
+        if (!/^\d{2}\/\d{2}\/\d{4}$/.test(v))
+          return "Data incompleta. Use o formato DD/MM/AAAA.";
+
+        if (!isValidDate(v))
+          return "Data inválida.";
+
+        return null;
+      }
     });
 
   // ─── Reset ─────────────────────────────────────────────────────────────────
@@ -84,6 +118,7 @@ export default function NewProductForm() {
       sku,
       stock_quantity: quantity,  // string ✓ — ProductFormFields.stock_quantity é string
       item_price: priceValue,    // number ✓ — ProductFormFields.item_price é number
+      expiration_date: date,     // Date - ProductFormFields.expiration_date é uma data
     });
     if (!isValid) return;
 
@@ -119,10 +154,13 @@ export default function NewProductForm() {
   return (
     <div className="w-full min-h-dvh p-4 md:p-6 lg:p-8 overflow-y-auto overflow-x-hidden">
       <div className="max-w-7xl mx-auto">
-        <div className="mb-6">
-          <h1 className="text-2xl md:text-3xl font-bold text-noozi-gray-800">Novo Produto</h1>
-          <p className="text-sm text-noozi-gray-600 mt-1">Preencha os dados abaixo para cadastrar um novo produto</p>
-        </div>
+
+        {/* Cabeçalho da página */}
+        <SectionTitle
+          title="Novo Produto"
+          subtitle="Preencha os dados abaixo para cadastrar um novo produto"
+          className="mb-6"
+        />
 
         {submitError && (
           <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-lg">
@@ -246,6 +284,7 @@ export default function NewProductForm() {
                 value={date}
                 onChange={setDate}
                 tooltip="Obrigatório apenas para produtos perecíveis ou cosméticos."
+                error={errors.expiration_date}
                 helpText="Digite dia, mês e ano no formato DD/MM/AAAA. "
               />
               <TextInput

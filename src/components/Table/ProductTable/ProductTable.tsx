@@ -1,4 +1,4 @@
-import { useMemo, useState, useEffect } from "react";
+import { useMemo, useState, useEffect, useRef } from "react";
 import type { filter } from "@/types/FilterSearchbar.types";
 import { structureSearch } from "@/constants/MiniSearch";
 import type { Product } from "@/types/Product.types";
@@ -7,15 +7,15 @@ import { COLUMNS, GRID_COLS } from "@/constants/columns";
 import { productCardColumns } from "@/utils/products/productCardColumns";
 import { ProductModal } from "@/components/Modals/ProductModal/ProductModal";
 
-// Adiciona onProductChange ao tipo existente (FilterSearchbar.types)
 interface ProductCardListProps extends filter {
-  onProductChange: () => void; // chamado após editar ou deletar — atualiza a lista
+  onProductChange: () => void;
 }
 
 export default function ProductTable({ filter, products, onProductChange }: ProductCardListProps) {
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
-  const miniSearch = useMemo(() => structureSearch, []);
+  const miniSearch  = useMemo(() => structureSearch, []);
   const [filterDebounced, setFilterDebounced] = useState(filter);
+  const scrollRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const timer = setTimeout(() => setFilterDebounced(filter), 200);
@@ -24,159 +24,125 @@ export default function ProductTable({ filter, products, onProductChange }: Prod
 
   const itemsFilter = useMemo(() => {
     if (!filterDebounced) return products;
-    const searchResults = miniSearch.search(filterDebounced);
-    if (searchResults.length === 0) return products;
-    return searchResults
+    const results = miniSearch.search(filterDebounced);
+    if (results.length === 0) return products;
+    return results
       .map((r) => products.find((item) => item.id_product === r.id_product))
       .filter(Boolean) as Product[];
   }, [filterDebounced, miniSearch, products]);
 
   return (
-  <>
-    <div className="w-full px-3 overflow-hidden">
-      {/* Header fora do scroll, fixo */}
-      <div className="px-3 pt-5">
-        <TableHeader />
-      </div>
+    <>
+      <div className="flex flex-col w-full gap-0">
 
-      {/* Apenas os itens scrollam */}
-      <div className="flex flex-col gap-5 w-full px-3 py-5 overflow-y-auto max-h-[calc(100vh-200px)]">
-        {itemsFilter.map((item) => (
-          <CardItem
-            key={item.id_product}
-            item={item}
-            onSelect={() => setSelectedProduct(item)}
-          />
-        ))}
+        {/* Header fixo — não scrolla, apenas os itens*/}
+        <div
+          role="rowgroup"
+          aria-label="Cabeçalho da tabela"
+          className="sticky top-14 z-10 rounded-xl overflow-hidden shadow-sm"
+        >
+
+          <div role="row" className={`grid ${GRID_COLS} w-full bg-noozi-bright_blue`}>
+            {COLUMNS.map((col) => (
+              <div
+                key={col.label}
+                role="columnheader"
+                aria-sort="none"
+                className={`
+                  ${getBreakpoints(col.priority)}
+                  items-center justify-center
+                  px-3 py-3 md:px-4
+                  text-xs sm:text-sm font-semibold text-white
+                  border-r border-white/20 last:border-r-0
+                `}
+              >
+                {col.label}
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Lista de cards scrollável */}
+        <div
+          ref={scrollRef}
+          className="
+            flex flex-col gap-3 mt-3
+            overflow-y-auto
+            max-h-[calc(100vh-280px)]
+            pr-1
+
+            /* scrollbar minimalista */
+            scrollbar-thin
+            scrollbar-track-transparent
+            scrollbar-thumb-noozi-border
+            hover:scrollbar-thumb-noozi-muted/40
+          "
+          role="rowgroup"
+          aria-label="Lista de produtos"
+        >
+          {itemsFilter.length === 0 ? (
+            <div className="flex items-center justify-center py-16 text-sm text-noozi-muted">
+              Nenhum produto encontrado.
+            </div>
+          ) : (
+            itemsFilter.map((item) => (
+              <CardItem
+                key={item.id_product}
+                item={item}
+                onSelect={() => setSelectedProduct(item)}
+              />
+            ))
+          )}
+        </div>
       </div>
-    </div>
 
       {selectedProduct && (
         <ProductModal
           product={selectedProduct}
           onClose={() => setSelectedProduct(null)}
-          onDeleted={() => {
-            setSelectedProduct(null);
-            onProductChange(); // atualiza lista após deletar
-          }}
-          onUpdated={() => {
-            setSelectedProduct(null);
-            onProductChange(); // atualiza lista após editar
-          }}
+          onDeleted={() => { setSelectedProduct(null); onProductChange(); }}
+          onUpdated={() => { setSelectedProduct(null); onProductChange(); }}
         />
       )}
     </>
   );
 }
 
-// Header
-function TableHeader() {
-  return (
-    <TableRow isHeader>
-      {COLUMNS.map((col, index) => (
-        <TableCell key={col.label} col={col} index={index} isHeader>
-          <span className="font-medium">{col.label}</span>
-        </TableCell>
-      ))}
-    </TableRow>
-  );
-}
-
-// Card
 function CardItem({ item, onSelect }: { item: Product; onSelect: () => void }) {
   const { value } = productCardColumns(item);
 
   return (
-    <TableRow onClick={onSelect}>
-      {COLUMNS.map((col, index) => (
-        <TableCell key={col.label} col={col} index={index}>
+    <div
+      role="row"
+      tabIndex={0}
+      aria-label={`Produto ${item.name}, clique para ver detalhes`}
+      onClick={onSelect}
+      onKeyDown={(e) => e.key === "Enter" && onSelect()}
+      className={`
+        grid ${GRID_COLS} w-full
+        bg-noozi-background rounded-xl
+        border border-noozi-border
+        shadow-card
+        hover:shadow-md hover:border-noozi-muted/40
+        cursor-pointer transition-all duration-150
+        focus:outline-none focus:ring-2 focus:ring-noozi-bright_blue/40
+      `}
+    >
+      {COLUMNS.map((col, index, arr) => (
+        <div
+          key={col.label}
+          role="cell"
+          className={`
+            ${getBreakpoints(col.priority)}
+            items-center justify-center
+            px-3 py-3 md:px-4
+            min-w-0 overflow-hidden
+            ${index < arr.length - 1 ? "border-r border-noozi-border" : ""}
+          `}
+        >
           {value[col.label]}
-        </TableCell>
+        </div>
       ))}
-    </TableRow>
-  );
-}
-
-function TableRow({
-  children,
-  onClick,
-  isHeader = false,
-  sticky = false,
-}: {
-  children: React.ReactNode;
-  onClick?: () => void;
-  isHeader?: boolean;
-  sticky?: boolean;
-}) {
-  return (
-    <div
-      onClick={onClick}
-      className={`
-            grid ${GRID_COLS} w-full rounded-xl min-w-0
-            ${
-              isHeader
-                ? "bg-noozi-bright_blue text-white font-semibold"
-                : "shadow-sm hover:bg-gray-100 cursor-pointer transition-colors duration-200"
-            }
-            ${sticky ? "sticky top-0 z-20" : ""}
-            `}
-    >
-      {children}
-    </div>
-  );
-}
-
-function TableCell({
-  col,
-  index,
-  isHeader = false,
-  children,
-}: {
-  col: { label: string; priority: number };
-  index: number;
-  isHeader?: boolean;
-  children: React.ReactNode;
-}) {
-  // último visível em cada breakpoint
-  const quantity = "Quantidade";
-  const quantitySm = "Quantidade";
-  const actionMd = "Ação";
-  const action2xl = "Ação";
-  const actionlg = "Ação";
-  const actionXl = "Ação";
-
-  const bordaClasse = [
-    col.label === quantity ? "border-r-0" : "border-r-2",
-    col.label === quantitySm ? "sm:border-r-0" : "sm:border-r-2",
-    col.label === actionMd ? "md:border-r-0" : "md:border-r-2",
-    col.label === actionlg ? "lg:border-r-0" : "lg:border-r-2",
-    col.label === actionXl ? "xl:border-r-0" : "xl:border-r-2",
-    col.label === action2xl ? "2xl:border-r-0" : "2xl:border-r-2",
-  ].join(" ");
-
-  return (
-    <div
-      className={`
-        ${getBreakpoints(col.priority)}
-        items-center justify-center
-        px-1 sm:px-3 md:px-4
-        py-3 sm:py-4 md:py-3
-        self-stretch
-        min-w-0 w-full overflow-hidden
-        ${
-          isHeader
-            ? "border-white"
-            : "border-noozi-gray-300 shadow-sm rounded-md"
-        }
-        ${bordaClasse}
-        ${
-          isHeader
-            ? "p-3 text-[12px] sm:text-[14px] md:text-[16px] lg:text-[18px] xl:text-[18px] 2xl:text-[20px]"
-            : ""
-        }
-        `}
-    >
-      {children}
     </div>
   );
 }
