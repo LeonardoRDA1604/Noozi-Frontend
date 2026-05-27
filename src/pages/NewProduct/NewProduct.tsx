@@ -172,7 +172,7 @@ export default function NewProductForm() {
           {/* Seção: Informações Básicas */}
           <div className="bg-white rounded-xl shadow-sm border border-noozi-gray-200 p-6 transition-all hover:shadow-md border-noozi-gray-300"> {/* form-section */}
             <h2 className="text-lg font-semibold text-gray-800 mb-5 pb-3 border-b border-noozi-gray-200" >Informações Básicas</h2> {/* form-section-title */}
-            <div className="grid gap-4 mx-auto max-w-7xl grid-cols-2 text-sm sm:text-xs grid-cols-2 md:text-md lg:text-lg"> {/* product-form-grid */}
+            <div className="grid gap-4 mx-auto max-w-7xl grid-cols-2 text-[13px] max-[385px]:grid-cols-1 max-[385px]:text-[11px] md:text-base lg:grid-cols-3 lg:text-lg"> {/* product-form-grid */}
               <TextInput
                 label="Nome"
                 id="inputName"
@@ -207,7 +207,7 @@ export default function NewProductForm() {
                 value={category}
                 onChange={setCategory}
                 maxLength={CHAR_LIMITS.CATEGORY}
-                className="form-field-single"
+                className="grid col-span-1"
                 placeholder="Ex: Tecnologia"
               />
             </div>
@@ -234,7 +234,7 @@ export default function NewProductForm() {
                 onChange={setUnit}
                 maxLength={CHAR_LIMITS.UNIT}
                 placeholder="Ex: kg, un, L, pacote"
-                className="form-field-single"
+                className="grid col-span-1"
               />
               <PriceInput
                 label="Preço Unitário"

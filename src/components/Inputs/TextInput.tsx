@@ -10,7 +10,7 @@ export function TextInput({
   onChange,
   maxLength,
   placeholder,
-  className = "form-field-full",
+  className = "grid col-span-2 lg:col-span-4",
   tooltip,
   required,
   error,
