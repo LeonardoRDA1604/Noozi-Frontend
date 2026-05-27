@@ -6,6 +6,7 @@ import { getBreakpoints } from "@/utils/responsive/getBreakpoints";
 import { COLUMNS, GRID_COLS } from "@/constants/columns";
 import { productCardColumns } from "@/utils/products/productCardColumns";
 import { ProductModal } from "@/components/Modals/ProductModal/ProductModal";
+import { EmptyProducts } from "@/components/EmptyStates/EmptyProducts";
 
 interface ProductCardListProps extends filter {
   onProductChange: () => void;
@@ -31,6 +32,11 @@ export default function ProductTable({ filter, products, onProductChange }: Prod
       .filter(Boolean) as Product[];
   }, [filterDebounced, miniSearch, products]);
 
+  // Sem produtos cadastrados (lista original vazia)
+  if (products.length === 0) {
+    return <EmptyProducts isFiltered={false} />;
+  }
+
   return (
     <>
       <div className="flex flex-col w-full gap-0">
@@ -41,7 +47,6 @@ export default function ProductTable({ filter, products, onProductChange }: Prod
           aria-label="Cabeçalho da tabela"
           className="sticky top-14 z-10 rounded-xl overflow-hidden shadow-sm"
         >
-
           <div role="row" className={`grid ${GRID_COLS} w-full bg-noozi-bright_blue`}>
             {COLUMNS.map((col) => (
               <div
@@ -80,10 +85,9 @@ export default function ProductTable({ filter, products, onProductChange }: Prod
           role="rowgroup"
           aria-label="Lista de produtos"
         >
+          {/* Busca sem resultados — produtos existem mas nenhum bate com o filtro */}
           {itemsFilter.length === 0 ? (
-            <div className="flex items-center justify-center py-16 text-sm text-noozi-muted">
-              Nenhum produto encontrado.
-            </div>
+            <EmptyProducts isFiltered={true} />
           ) : (
             itemsFilter.map((item) => (
               <CardItem
