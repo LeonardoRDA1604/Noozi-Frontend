@@ -30,8 +30,8 @@ export function ActionButton({
   onClick, 
   disabled = false, 
   isLoading = false,
-  hideLabelVisual = false
-  isActive,
+  hideLabelVisual = false,
+  isActive
 }: ActionButtonProps & {hideLabelVisual?: boolean}) {
 
   const className = `${baseStyle} ${variantStyles[variant]}`;
