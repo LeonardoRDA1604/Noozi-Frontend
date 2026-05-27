@@ -212,8 +212,8 @@ export function ProductModal({ product, onClose, onDeleted, onUpdated }: Product
           {/* Visualização normal */}
           {!isEditing && (
             <>
-              <ActionButton variant="edit"   label="Editar" icon={Pencil} onClick={() => setIsEditing(true)} />
-              <ActionButton variant="delete" label="Apagar" icon={Trash2} onClick={() => setConfirmingDelete(true)} />
+              <ActionButton variant="edit"   label="Editar produto" icon={Pencil} onClick={() => setIsEditing(true)} />
+              <ActionButton variant="delete" label="Apagar produto" icon={Trash2} onClick={() => setConfirmingDelete(true)} />
             </>
           )}
           {isEditing && (

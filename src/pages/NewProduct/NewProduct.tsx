@@ -65,7 +65,7 @@ export default function NewProductForm() {
 
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
-  let today = new Date()
+  
   // ─── Validação ─────────────────────────────────────────────────────────────
   const { errors, validate, clearError, clearAllErrors } =
     useFormValidation<NewProductForm>({
@@ -168,6 +168,10 @@ export default function NewProductForm() {
           </div>
         )}
 
+        {/* Nota de campos obrigatórios */}
+        <p className="text-xs text-noozi-gray-500 mb-6">
+          Campos marcados com <span className="text-status-danger font-medium">*</span> são obrigatórios.
+        </p>
         <form className="space-y-6" onSubmit={handleSubmit}>
           {/* Seção: Informações Básicas */}
           <div className="form-section">
@@ -181,7 +185,8 @@ export default function NewProductForm() {
                 maxLength={CHAR_LIMITS.NAME}
                 required="Obrigatório"
                 error={errors.name}
-                helpText="Por favor, insira o nome do produto"
+                helpText="Nome completo do produto, como aparece no estoque."
+                placeholder="Ex: Impressora Térmica de Etiquetas 80mm"
               />
 
               <TextArea
@@ -190,6 +195,7 @@ export default function NewProductForm() {
                 value={description}
                 onChange={setDescription}
                 maxLength={CHAR_LIMITS.DESCRIPTION}
+                placeholder="Ex: Impressão sem tinta, velocidade de 150mm/s, compatível com USB e Bluetooth"
               />
 
               <TextInput
@@ -223,7 +229,8 @@ export default function NewProductForm() {
                 value={quantity}
                 onChange={(v) => { setQuantity(v); clearError("stock_quantity"); }}
                 min="0"
-                tooltip="Número de unidades disponíveis em estoque. Use apenas números inteiros."
+                placeholder="Ex: 25"
+                tooltip="Quantidade atual em estoque. Use apenas números inteiros."
                 required="Obrigatório"
                 error={errors.stock_quantity}
               />
@@ -234,6 +241,7 @@ export default function NewProductForm() {
                 onChange={setUnit}
                 maxLength={CHAR_LIMITS.UNIT}
                 placeholder="Ex: kg, un, L, pacote"
+                tooltip="Como o produto é contado ou pesado."
                 className="form-field-single"
               />
               <PriceInput
@@ -241,10 +249,10 @@ export default function NewProductForm() {
                 id="inputValue"
                 value={priceValue}
                 onChange={(v) => { setPriceValue(v); clearError("item_price"); }}
-                tooltip="Valor de venda por unidade."
+                tooltip="Valor por unidade de produto vendido."
                 required="Obrigatório"
                 error={errors.item_price}
-                helpText="Digite apenas números – a formatação é automática."
+                helpText="Digite apenas números. A formatação é automática."
               />
             </div>
           </div>
@@ -260,7 +268,8 @@ export default function NewProductForm() {
                 onChange={setLowLevel}
                 maxLength={CHAR_LIMITS.LOW_LEVEL}
                 className="form-field-single"
-                tooltip="Quantidade mínima que, ao ser atingida, dispara um aviso de reposição."
+                placeholder="Ex: 10"
+                tooltip="Abaixo deste número, você recebe um aviso de reposição."
               />
               <TextInput
                 label="Quantidade de estoque alto"
@@ -269,7 +278,8 @@ export default function NewProductForm() {
                 onChange={setHighLevel}
                 maxLength={CHAR_LIMITS.HIGH_LEVEL}
                 className="form-field-single"
-                tooltip="Quantidade máxima que, ao ser ultrapassada, dispara um aviso de excesso."
+                placeholder="Ex: 100"
+                tooltip="Acima deste número, você recebe um aviso de excesso."
               />
             </div>
           </div>
@@ -283,7 +293,7 @@ export default function NewProductForm() {
                 id="inputDate"
                 value={date}
                 onChange={setDate}
-                tooltip="Obrigatório apenas para produtos perecíveis ou cosméticos."
+                tooltip="Deixe em branco caso o produto não tenha validade."
                 error={errors.expiration_date}
                 helpText="Digite dia, mês e ano no formato DD/MM/AAAA. "
               />
@@ -304,8 +314,8 @@ export default function NewProductForm() {
                 onChange={(v) => { setSku(v); clearError("sku"); }}
                 maxLength={CHAR_LIMITS.SKU}
                 className="form-field-single"
-                tooltip="Código único de identificação do produto (Stock Keeping Unit)."
-                placeholder="Ex: ABC01"
+                tooltip="Código interno único de identificação do produto. Crie ou use o código do fornecedor."
+                placeholder="Ex: ABC-DEF-123"
                 required="Obrigatório"
                 error={errors.sku}
               />
@@ -333,7 +343,7 @@ export default function NewProductForm() {
               <ActionButton
                 variant="submit"
                 icon={Send}
-                label="CADASTRAR PRODUTO"
+                label="Cadastrar Produto"
                 isLoading={isSubmitting}
                 disabled={isSubmitting}
               />
