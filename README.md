@@ -105,7 +105,7 @@ Como um MVP, o foco atual desta etapa do projeto divide-se em duas frentes princ
 - <img src="https://ui.shadcn.com/apple-touch-icon.png" alt="shadcn/ui" width="20" height="20"/> **[*Shadcn/UI*](https://ui.shadcn.com/)**
 
 <!-- JSON Server -->
-- <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/json/json-original.svg" alt="JSON" width="20" height="20"/> **[*JSON Server*](https://my-json-server.typicode.com/)** (API fake para simulação de backend)
+- <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/json/json-original.svg" alt="JSON" width="20" height="20"/> **[*JSON Server*](https://my-json-server.typicode.com/)** (API fake para simulação de backend e persistência de dados em ambiente de desenvolvimento)
 
 <!-- Git -->
 - <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/git/git-original.svg" alt="Git" width="20" height="20"/> **[*Git*](https://git-scm.com/)**
@@ -375,9 +375,11 @@ No momento, com as funcionalidades essenciais do *frontend* concluídas, o foco 
 
 ## 🎬 Demonstração do Software (Demo)
 
-Um *walkthrough* detalhado pelas funcionalidades da plataforma, destacando a interface responsiva, a fluidez da experiência do usuário (UX) e as regras de negócio aplicadas.
-* [Assistir à Demo do Software](link-da-demo)
-<!-- TO DO -->
+Um *Walkthrough* das principais funcionalidades da plataforma, incluindo cadastro e gerenciamento de produtos, aplicação das regras de negócio, interface responsiva adaptada para diferentes dispositivos e a experiência de uso aos temas claro e escuro.
+
+A demonstração destaca como a solução contribui para a redução de perdas de recursos e retrabalho, melhor controle de estoque e maior eficiência operacional por meio da centralização e organização das informações.
+
+* [▶️ Clique aqui para assistir à Demo de Software do Noozi](https://youtu.be/v0ZUCdH6AO4)
 
 ---
 
