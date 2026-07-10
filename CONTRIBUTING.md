@@ -26,35 +26,52 @@ Obrigado pelo interesse em contribuir com o **Noozi**! Este é um sistema de ges
   - [6.1. Checklist antes de abrir o PR](#-checklist-antes-de-abrir-o-pr)
 - [7. Critérios de Revisão](#-critérios-de-revisão)
 - [8. Quem Pode Aprovar](#-quem-pode-aprovar)
-- [9. Padrão de Código e Interface](#-padrão-de-código-e-interface)
-  - [9.1. ESLint e Formatação](#eslint-e-formatação)
-  - [9.2. Componentes Reutilizáveis](#componentes-reutilizáveis)
-  - [9.3. Ícones](#ícones)
-  - [9.4. shadcn/ui](#shadcnui)
-    - [9.4.1. Instalando componentes](#instalando-componentes)
-    - [9.4.2. Estrutura dos componentes](#estrutura-dos-componentes)
-    - [9.4.3. Estilização e customização](#estilização-e-customização)
-    - [9.4.4. Boas práticas](#boas-práticas)
-  - [9.5. Design System](#design-system)
-    - [9.5.1. Usando cores sem token (valores arbitrários)](#usando-cores-sem-token-valores-arbitrários)
-    - [9.5.2. Identidade Visual](#identidade-visual)
-    - [9.5.3. Tipografia](#tipografia)
-    - [9.5.4. Bordas](#bordas)
-    - [9.5.5. Sombras](#sombras)
-    - [9.5.6. Breakpoints e Responsividade](#breakpoints-e-responsividade)
-- [10. UX/UI e Acessibilidade](#-uxui-e-acessibilidade)
-  - [10.1. Elementos Interativos](#elementos-interativos)
-  - [10.2. HTML Semântico](#html-semântico)
-  - [10.3. Acessibilidade (a11y)](#acessibilidade-a11y)
-  - [10.4. Hierarquia Visual](#hierarquia-visual)
-  - [10.5. Feedback ao Usuário](#feedback-ao-usuário)
-  - [10.6. Consistência](#consistência)
-- [11. Nomenclatura de Arquivos e Pastas](#️-nomenclatura-de-arquivos-e-pastas)
-- [12. Acessibilidade](#-acessibilidade)
-- [13. Versionamento](#️-versionamento)
-- [14. Reportando Bugs](#-reportando-bugs)
-- [15. Comunicação](#-comunicação)
-- [16. Precisa de Ajuda?](#-precisa-de-ajuda)
+- [9. Critérios de Validação (QA)](#-critérios-de-validação-qa)
+- [10. Responsabilidades do Tech Leader](#-responsabilidades-do-tech-leader)
+- [11. Jira — Fluxo de Trabalho](#️-jira--fluxo-de-trabalho)
+  - [11.1. Quadro da Sprint](#quadro-da-sprint)
+  - [11.2. Descrição de cada coluna](#descrição-de-cada-coluna)
+    - [11.2.1. To Do (Sprint Backlog)](#1-to-do-sprint-backlog)
+    - [11.2.2. Doing (In Progress)](#2-doing-in-progress)
+    - [11.2.3. In Review / Pull Request](#3-in-review--pull-request)
+    - [11.2.4. Staging (QA / Testing)](#4-staging-qa--testing)
+    - [11.2.5. PO & TL Validation](#5-po--tl-validation)
+    - [11.2.6. Release Candidate](#6-release-candidate)
+    - [11.2.7. User Testing (Production)](#7-user-testing-production)
+    - [11.2.8. Done](#8-done)
+  - [11.3. Regras de Retorno entre colunas](#regras-de-retorno-entre-colunas)
+  - [11.4. Quem move cada card](#quem-move-cada-card)
+  - [11.5. Hotfix — correção urgente em produção](#hotfix--correção-urgente-em-produção)
+  - [11.6. Resumo do fluxo de branches](#resumo-do-fluxo-de-branches)
+- [12. Padrão de Código e Interface](#-padrão-de-código-e-interface)
+  - [12.1. ESLint e Formatação](#eslint-e-formatação)
+  - [12.2. Componentes Reutilizáveis](#componentes-reutilizáveis)
+  - [12.3. Ícones](#ícones)
+  - [12.4. shadcn/ui](#shadcnui)
+    - [12.4.1. Instalando componentes](#instalando-componentes)
+    - [12.4.2. Estrutura dos componentes](#estrutura-dos-componentes)
+    - [12.4.3. Estilização e customização](#estilização-e-customização)
+    - [12.4.4. Boas práticas](#boas-práticas)
+  - [12.5. Design System](#design-system)
+    - [12.5.1. Usando cores sem token (valores arbitrários)](#usando-cores-sem-token-valores-arbitrários)
+    - [12.5.2. Identidade Visual](#identidade-visual)
+    - [12.5.3. Tipografia](#tipografia)
+    - [12.5.4. Bordas](#bordas)
+    - [12.5.5. Sombras](#sombras)
+    - [12.5.6. Breakpoints e Responsividade](#breakpoints-e-responsividade)
+- [13. UX/UI e Acessibilidade](#-uxui-e-acessibilidade)
+  - [13.1. Elementos Interativos](#elementos-interativos)
+  - [13.2. HTML Semântico](#html-semântico)
+  - [13.3. Acessibilidade (a11y)](#acessibilidade-a11y)
+  - [13.4. Hierarquia Visual](#hierarquia-visual)
+  - [13.5. Feedback ao Usuário](#feedback-ao-usuário)
+  - [13.6. Consistência](#consistência)
+- [14. Nomenclatura de Arquivos e Pastas](#️-nomenclatura-de-arquivos-e-pastas)
+- [15. Acessibilidade](#-acessibilidade)
+- [16. Versionamento](#️-versionamento)
+- [17. Reportando Bugs](#-reportando-bugs)
+- [18. Comunicação](#-comunicação)
+- [19. Precisa de Ajuda?](#-precisa-de-ajuda)
 
 ---
 
@@ -131,12 +148,14 @@ Isso ajuda a manter:
 
 Crie branches a partir da `dev` seguindo o padrão:
 
-- `feat/*` — novas funcionalidades
-- `fix/*` — correção de bugs
-- `chore/*` — tarefas de manutenção ou configuração
-- `refactor/*` — refatoração de código sem mudança de comportamento
-- `style/*` — ajustes visuais, CSS, identidade visual
-- `docs/*` — alterações em documentação (README, CONTRIBUTING, CHANGELOG, etc.)
+- `feat/*` — Novas funcionalidades ou melhorias que adicionam comportamento ao sistema.
+- `refactor/*` — Refatoração de código sem alterar o comportamento da aplicação.
+- `style/*` — Ajustes visuais, CSS, identidade visual e melhorias de UI/UX sem alterar regras de negócio.
+- `docs/*` — Alterações em documentação (README, CONTRIBUTING, CHANGELOG, Wiki, etc.).
+- `fix/*` — Correção de bugs ou problemas de funcionamento.
+- `chore/*` — Tarefas de manutenção, configuração, build, tooling, CI/CD, dependências e arquivos auxiliares.
+- `hotfix/*` — Correção crítica aplicada diretamente sobre uma versão em produção, normalmente criada a partir da main e depois mesclada de volta para main e dev.
+<!-- - `release/*` — Branch de preparação para uma nova versão. Utilizada para estabilização, testes finais, ajustes de versão, changelog e correções menores antes do merge na main. -->
 
 > ⚠️  **O nome da branch deve sempre ser em inglês**, seguindo o mesmo padrão dos [commits](#-padrão-de-mensagens-de-commit).
 
@@ -146,14 +165,28 @@ git checkout -b feat/product-registration
 git checkout -b feat/stock-list-view
 git checkout -b feat/category-filter
 git checkout -b feat/export-report
+
+git checkout -b refactor/product-table-component
+git checkout -b refactor/status-badge-system
+
+git checkout -b style/brand-color-palette
+git checkout -b style/mobile-dashboard
+
+git checkout -b docs/update-contributing
+git checkout -b docs/components-documentation
+
 git checkout -b fix/quantity-validation
 git checkout -b fix/minimum-stock-calculation
+
 git checkout -b chore/update-lucide-icons
 git checkout -b chore/config-eslint-prettier
-git checkout -b refactor/product-table-component
-git checkout -b style/brand-color-palette
-git checkout -b docs/update-contributing
+
+git checkout -b hotfix/login-authentication
+git checkout -b hotfix/product-delete-crash
+
 ```
+<!-- git checkout -b release/v1.2.1
+git checkout -b release/v2.0.0 --> 
 
 ### Preparando o ambiente antes de criar sua branch
 
@@ -286,34 +319,46 @@ Antes de submeter seu Pull Request, confirme que:
 
 ## 🔍 Critérios de Revisão
 
-O Tech Leader avalia os Pull Requests com base nos seguintes critérios:
+O Tech Leader avalia o Pull Request considerando os seguintes critérios.
 
-**Funcionalidade**
-- A feature ou fix funciona conforme descrito no PR?
-- Há casos de borda não tratados?
+### Funcionalidade
 
-**Qualidade de código**
-- O código está limpo, legível e sem duplicação desnecessária?
-- A lógica está no lugar correto (componente, hook, utils)?
-- Segue os padrões de nomenclatura do projeto?
+- A implementação atende aos critérios de aceitação do card?
+- O comportamento está de acordo com o esperado?  (Conforme descrito no PR)
+- Casos de borda foram tratados adequadamente?
 
-**Componentes e reutilização**
-- O componente criado é genérico o suficiente para ser reaproveitado?
-- Props estão tipadas corretamente?
+### Qualidade de código
 
-**Interface e identidade visual**
-- Foram usadas apenas (ou majoritariamente) cores da paleta oficial?
-- A interface está responsiva?
-- Os ícones são do Lucide React?
+- Código limpo, legível e sem duplicação desnecessária.
+- Responsabilidades bem distribuídas entre componentes, hooks, utils e services.
+- Convenções de nomenclatura foram respeitadas.
+- Não existem comentários, código morto ou `console.log` desnecessários.
 
-**Acessibilidade**
-- Elementos interativos têm `aria-label` ou texto acessível?
-- A semântica HTML está correta?
-- O contraste de cores atende ao mínimo recomendado (WCAG AA)?
+### Componentização e reutilização
 
-**Impacto e segurança**
-- A mudança pode quebrar algo existente?
-- Há dados sensíveis expostos no código ou nos logs?
+- Componentes possuem responsabilidade única.
+- Componentes podem ser reutilizados quando aplicável.
+- Props estão corretamente tipadas.
+- Não há lógica duplicada que poderia ser abstraída.
+
+### Interface (UI)
+- Interface segue o Design System.
+- Apenas (ou majoritariamente) cores oficiais foram utilizadas.
+- Ícones pertencem ao Lucide React.
+- Layout permanece responsivo.
+
+### Acessibilidade
+
+- Estrutura HTML semântica.
+- Elementos interativos possuem atributos acessíveis (`aria-*`, labels, roles).
+- Navegação por teclado permanece funcional.
+- Contraste de cores atende, quando possível, ao WCAG AA.
+
+### Segurança
+
+- Não existem dados sensíveis expostos.
+- Não foram adicionadas dependências desnecessárias.
+- Alterações não introduzem riscos evidentes de regressão. (A mudança pode quebrar algo existente?)
 
 ---
 
@@ -321,6 +366,287 @@ O Tech Leader avalia os Pull Requests com base nos seguintes critérios:
 
 - Apenas o revisor designado (**Tech Leader**) pode aprovar Pull Requests
 - Contribuidores podem abrir Pull Requests e **solicitar revisão**
+
+---
+
+## 🧪 Critérios de Validação (QA)
+
+Após a aprovação do Pull Request e merge para `dev`, o Tech Leader realiza uma validação integrada da funcionalidade.
+
+### Fluxo funcional
+
+- O comportamento atende aos critérios de aceitação do card e do PR.
+- Não existem erros aparentes durante o uso.
+
+### Integração
+
+- A alteração não interfere em funcionalidades existentes.
+- Fluxos relacionados continuam funcionando normalmente.
+
+### Responsividade
+
+- Interface permanece funcional em mobile, tablet e desktop.
+- Não há quebra de layout.
+
+### Consistência visual
+
+- Componentes seguem o Design System.
+- Espaçamentos, tipografia e cores permanecem consistentes.
+
+### Experiência do usuário
+
+- Estados de loading, erro e vazio continuam funcionando.
+- Feedback visual permanece consistente.
+
+### Regressão
+
+- Funcionalidades relacionadas continuam operando normalmente.
+- Não foram identificados efeitos colaterais causados pela mudança.
+
+### Estabilidade
+
+- Não foram identificados erros de execução.
+
+- A alteração não provocou regressões funcionais.
+
+- Fluxos relacionados continuam operando corretamente.
+
+- Não há falhas perceptíveis de integração entre funcionalidades.
+
+---
+
+## 📋 Responsabilidades do Tech Leader
+
+Durante a revisão do Pull Request, cabe ao Tech Leader:
+
+- revisar a arquitetura da solução;
+- garantir conformidade com os padrões do projeto;
+- validar a qualidade do código;
+- solicitar alterações quando necessário;
+- aprovar ou reprovar o Pull Request;
+- realizar os testes integrados após o merge para `dev`;
+- mover o card no Jira conforme o resultado da validação.
+
+---
+
+## 🗂️ Jira — Fluxo de Trabalho
+
+O Noozi utiliza o **Jira (Company-Managed, Scrum)** para rastreamento de tarefas, sprints e backlog. Cada card do Jira representa um item de trabalho e percorre um fluxo de colunas bem definido até ser concluído.
+
+
+### Quadro da Sprint
+
+```
+To Do (Sprint Backlog)
+        ↓
+Doing (In Progress)
+        ↓
+In Review / Pull Request
+        ↓
+Staging (QA / Testing)
+        ↓
+PO & TL Validation
+        ↓
+Release Candidate
+        ↓
+User Testing (Production)
+        ↓
+       Done
+```
+
+### Descrição de cada coluna
+
+<!-- <details>
+  <summary style="background-color: white; color: blue"><b>ℹ️ Clique para expandir a descrição de cada coluna do JIRA e entender nosso WORKFLOW </b></summary>
+  <br /> -->
+
+#### 1. To Do (Sprint Backlog)
+Cards priorizados e prontos para desenvolvimento na **sprint atual**.
+
+- Ninguém mexe nessa coluna durante a sprint sem alinhamento com o TL e o PO
+- A ordem dos cards reflete a prioridade definida pelo PO e TL
+
+<br>
+
+#### 2. Doing (In Progress)
+
+**O que fazer ao entrar nessa coluna:**
+
+1. Ler completamente a descrição do card, critérios de aceitação e comentários.
+2. Criar uma branch seguindo o padrão definido em [Branches](#-branches).
+3. Desenvolver seguindo os padrões estabelecidos neste [CONTRIBUTING](CONTRIBUTING.md):
+   - arquitetura de componentes;
+   - padronização de código;
+   - identidade visual;
+   - acessibilidade;
+   - Conventional Commits e Git Flow.
+4. Realizar testes locais antes de abrir o Pull Request (`npm run dev`, `npm run lint`, `npm run build` e validação manual do fluxo alterado).
+5. Informar ao PO/TL para atualizar a documentação quando a alteração impactar README, componentes, configuração ou fluxo do projeto.
+
+<br>
+
+#### 3. In Review / Pull Request
+Task finalizada pelo desenvolvedor. 
+Pull Request aberto de `feature/*` para `dev`.
+
+**Quem move:** o próprio desenvolvedor, ao abrir o PR.
+
+**O que fazer ao entrar nessa coluna:**
+1. Verifique o checklist do PR antes de abrir (veja a seção [Checklist antes de abrir o PR](#-checklist-antes-de-abrir-o-pr))
+2. Abra o PR apontando para a branch `dev`
+3. Preencha o template de PR com contexto suficiente para revisão
+4. Solicite revisão ao Tech Leader
+
+**Resultado da revisão:**
+
+| Decisão | Próxima coluna | Quem move |
+|---|---|---|
+| ✅ Aprovado | `Staging (QA / Testing)` | Tech Leader |
+| ❌ Reprovado | `Doing (In Progress)` | Tech Leader |
+
+> ℹ️ Ao reprovar, o Tech Leader informará o motivo nos comentários do PR e/ou do Jira antes de mover o card.
+
+<br>
+
+#### 4. Staging (QA / Testing)
+
+O card foi integrado à branch `dev` (via Merge) e aguarda validação funcional (testes integrados com as demais features).
+
+**Quem move:** Tech Leader, após aprovação do Pull Request.
+
+**O que é validado nesta etapa:** Consulte a seção [Critérios de Validação (QA)](#-critérios-de-validação-qa).
+
+**Resultado dos testes:**
+
+| Decisão | Próxima coluna | Quem move |
+|---|---|---|
+| ✅ Aprovado | `PO & TL Validation` | Tech Leader |
+| ❌ Reprovado | `Doing (In Progress)` | Tech Leader |
+
+> ⚠️ Caso seja identificado algum problema durante a validação, o motivo deverá ser registrado no card antes do retorno do mesmo para `Doing`.
+
+<br>
+
+#### 5. PO & TL Validation
+Aprovação final do card. O PO valida o requisito de negócio. O TL valida a qualidade técnica.
+
+**Quem move:** Tech Leader ou Product Owner, com aprovação de ambos.
+
+**O que é validado aqui:**
+
+| Responsável | Valida |
+|---|---|
+| Product Owner | O card atende ao requisito de negócio? O comportamento está correto para o usuário? |
+| Tech Leader | A qualidade técnica está adequada? Há impacto em outras partes do sistema? |
+
+**Resultado da validação:**
+
+| Decisão | Próxima coluna | Quem move |
+|---|---|---|
+| ✅ Aprovado por ambos | `Release Candidate` | Tech Leader ou PO |
+| ❌ Reprovado | `Doing (In Progress)` | Tech Leader ou PO |
+
+> ℹ️ O card só avança se **ambos** aprovarem. Uma aprovação isolada não é suficiente.
+
+<br>
+
+#### 6. Release Candidate
+Cards aprovados individualmente que aguardam o pacote de release para ir à produção.
+
+**Quem move:** Tech Leader, após aprovação em `PO & TL Validation`.
+
+**O que acontece nessa coluna:**
+
+Os cards ficam acumulados aqui na branch `dev` até que o Tech Leader decida que há conteúdo suficiente para lançar uma nova versão. Quando isso acontece o TL deve:
+
+**1. Garantir que a `dev` está atualizada e estável:**
+**2. Testar o pacote completo** — todos os cards desta release juntos, no ambiente da `dev`.
+**3. Atualizar o CHANGELOG:**
+**4. Criar a tag de versão:**
+**5. Merge da `dev` na `main`:**
+**6. Mover todos os cards desta release de `Release Candidate` para `User Testing (Production)`.**
+
+<br>
+
+#### 7. User Testing (Production)
+Cards que já estão na `main` e em produção. Usuários reais utilizando a feature.
+
+**Quem move:** Tech Leader, após o merge na `main`.
+
+**O que acontece aqui:**
+- Coleta de feedback de usuários reais
+- Observação de comportamento em produção
+- Monitoramento de erros ou comportamentos inesperados
+
+**Resultado:**
+
+| Feedback | Ação |
+|---|---|
+| ✅ Positivo | Avança para `Done` |
+| ❌ Negativo | **Cria um novo card** Bug ou Story — o card original **não retorna** |
+
+> ⚠️ O card original nunca é reaberto após chegar em produção. Qualquer problema identificado aqui vira um novo item rastreável no backlog, com sua própria prioridade, estimativa e contexto.
+
+<br>
+
+#### 8. Done
+Feature concluída: desenvolvida, revisada, testada na `dev`, aprovada pelo PO e TL, lançada em produção e validada por usuários reais.
+
+**Quem move:** Tech Leader ou PO, após validação positiva em `User Testing (Production)`.
+
+> ⚠️ Cards em `Done` são permanentes. Não são reabertos, movidos ou alterados.
+
+---
+
+### Regras de retorno entre colunas
+
+| Card está em | Retorna para | Quem decide |
+|---|---|---|
+| `In Review / Pull Request` | `Doing (In Progress)` | Tech Leader — PR reprovado |
+| `Staging (QA / Testing)` | `Doing (In Progress)` | Tech Leader — bug ou falha nos testes |
+| `PO & TL Validation` | `Doing (In Progress)` | Tech Leader ou PO — reprovado |
+| `Release Candidate` | `Doing (In Progress)` | Tech Leader — bug crítico encontrado no pacote |
+| `User Testing (Production)` | ❌ Não retorna | Abre novo card Bug/Story |
+| `Done` | ❌ Não retorna | Abre novo card Bug/Story |
+
+---
+
+### Quem move cada card
+
+| De | Para | Quem move |
+|---|---|---|
+| `To Do` | `Doing` | Desenvolvedor |
+| `Doing` | `In Review / Pull Request` | Desenvolvedor |
+| `In Review / Pull Request` | `Staging (QA / Testing)` | Tech Leader |
+| `In Review / Pull Request` | `Doing` | Tech Leader |
+| `Staging (QA / Testing)` | `PO & TL Validation` | Tech Leader |
+| `Staging (QA / Testing)` | `Doing` | Tech Leader |
+| `PO & TL Validation` | `Release Candidate` | Tech Leader ou PO (ambos aprovaram) |
+| `PO & TL Validation` | `Doing` | Tech Leader ou PO |
+| `Release Candidate` | `User Testing (Production)` | Tech Leader (após merge na main) |
+| `User Testing (Production)` | `Done` | Tech Leader ou PO |
+
+---
+
+### Hotfix — correção urgente em produção
+
+Quando um bug crítico é encontrado em produção e não pode esperar o próximo ciclo de release:
+
+No Jira, o card de hotfix entra diretamente na raia `Emergency (Highest)` e percorre o fluxo normalmente, com prioridade máxima.
+
+---
+
+### Resumo do fluxo de branches
+
+| Branch | Criada a partir de | Merge para | Quem gerencia |
+|---|---|---|---|
+| `feature/*` | `dev` | `dev` | Desenvolvedor |
+| `dev` | — | `main` | Tech Leader |
+| `main` | — | — | Tech Leader |
+| `hotfix/*` | `main` | `main` + `dev` | Tech Leader |
+
+
+<!-- </details> -->
 
 ---
 
