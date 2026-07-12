@@ -437,7 +437,7 @@ O Noozi utiliza o **Jira (Company-Managed, Scrum)** para rastreamento de tarefas
 ### Quadro da Sprint
 
 ```
-To Do (Sprint Backlog)
+To Do
         ↓
 Doing (In Progress)
         ↓
@@ -460,7 +460,7 @@ User Testing (Production)
   <summary style="background-color: white; color: blue"><b>ℹ️ Clique para expandir a descrição de cada coluna do JIRA e entender nosso WORKFLOW </b></summary>
   <br /> -->
 
-#### 1. To Do (Sprint Backlog)
+#### 1. To Do
 Cards priorizados e prontos para desenvolvimento na **sprint atual**.
 
 - Ninguém mexe nessa coluna durante a sprint sem alinhamento com o TL e o PO
