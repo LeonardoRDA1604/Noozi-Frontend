@@ -5,6 +5,7 @@ import type { Product } from "@/types/Product.types";
 import { PRODUCT_STATUS_CONFIG } from "@/constants/productStatusConfig";
 import { formatCurrency } from "../currency/formatCurrency";
 import { formatISODate } from "../date/formatISODate";
+import { Tooltip } from "@/components/ToolTip/ToolTip";
 
 export function productCardColumns(item: Product) {
     const status = item.is_active ? "active" : "inactive";
@@ -65,21 +66,26 @@ export function productCardColumns(item: Product) {
 
         {/* mobile — só ícone */}
         <div className="flex flex-row gap-1">
-          <ActionButton
-            variant="edit"
-            label="Editar produto"
-            icon={Pencil}
-            hideLabelVisual={true}
-            //onSuccess={() => {}}
-          />
-          <ActionButton
-            variant="delete"
-            label="Apagar produto"
-            icon={Trash2}
-            productId={item.id_product}
-            hideLabelVisual={true}
-            //onSuccess={() => {}}
-          />
+          <Tooltip text="Editar produto" position="left">
+            <ActionButton
+              variant="edit"
+              label="Editar produto"
+              icon={Pencil}
+              hideLabelVisual={true}
+              //onSuccess={() => {}}
+            />
+          </Tooltip>
+
+          <Tooltip text="Apagar produto" position="left">
+            <ActionButton
+              variant="delete"
+              label="Apagar produto"
+              icon={Trash2}
+              productId={item.id_product}
+              hideLabelVisual={true}
+              //onSuccess={() => {}}
+            />
+          </Tooltip>
         </div>
 
       </div>
