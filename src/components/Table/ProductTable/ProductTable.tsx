@@ -140,7 +140,8 @@ function CardItem({ item, onSelect }: { item: Product; onSelect: () => void }) {
             ${getBreakpoints(col.priority)}
             items-center justify-center
             px-3 py-3 md:px-4
-            min-w-0 overflow-hidden
+            min-w-0
+            ${col.label === "Ação" ? "overflow-visible" : "overflow-hidden"}
             ${index < arr.length - 1 ? "border-r border-noozi-border" : ""}
           `}
         >
