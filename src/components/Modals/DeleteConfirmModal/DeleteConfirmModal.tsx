@@ -28,14 +28,18 @@ export function DeleteConfirmModal({
     >
       <div className="flex flex-col gap-4">
 
-        <div className="w-14 h-14 rounded-full bg-red-200 flex items-center justify-center">
+        <div className="w-14 h-14 rounded-full bg-status-danger/10 flex items-center justify-center mx-auto">
           <Trash2 className="w-7 h-7 text-status-danger" />
         </div>
 
+        <div className="text-base font-semibold text-center">
+          <span>Tem certeza que deseja excluir?</span>
+        </div>
+
         <p className="text-sm text-noozi-text leading-relaxed">
-          Tem certeza que deseja apagar{" "}
-          <span className="font-semibold">{productName}</span>?
-          Esta ação não pode ser desfeita.
+          O produto
+          <span className="font-semibold"> {productName} </span>
+          será deleta permanentemente! Esta ação não pode ser desfeita.
         </p>
 
         <div className="flex gap-2">
