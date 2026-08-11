@@ -27,6 +27,11 @@ export function DeleteConfirmModal({
       size="sm"
     >
       <div className="flex flex-col gap-4">
+
+        <div className="w-14 h-14 rounded-full bg-red-200 flex items-center justify-center">
+          <Trash2 className="w-7 h-7 text-status-danger" />
+        </div>
+
         <p className="text-sm text-noozi-text leading-relaxed">
           Tem certeza que deseja apagar{" "}
           <span className="font-semibold">{productName}</span>?
