@@ -39,7 +39,7 @@ export function DeleteConfirmModal({
         <p className="text-sm text-noozi-text leading-relaxed">
           O produto
           <span className="font-semibold"> {productName} </span>
-          será deleta permanentemente! Esta ação não pode ser desfeita.
+          será deletado permanentemente! Esta ação não pode ser desfeita.
         </p>
 
         <div className="flex gap-2">
