@@ -21,43 +21,43 @@ export function productCardColumns(item: Product) {
 
      ID: (
       <span className={`font-medium ${fontBaseStyle}`}>
-        {item.id_product}
+        {!item.id_product ? "—" : item.id_product}
       </span>
     ),
 
     Nome: (
       <span className={`font-bold ${fontBaseStyle} truncate max-w-[30ch]`}>
-        {item.name}
+        {!item.name ? "—" : item.name}
       </span>
     ),
 
     Quantidade: (
       <span className={`font-medium ${fontBaseStyle}`}>
-        {item.stock_quantity} un.
+        {!item.stock_quantity ? "—" : item.stock_quantity} un.
       </span>
     ),
 
     Preço: (
       <span className={`font-medium ${fontBaseStyle} truncate max-w-[100ch]`}>
-        {formatCurrency(item.item_price)}
+        {!item.item_price ? "—" : formatCurrency(item.item_price)}
       </span>
     ),
 
     Categoria: (
       <span className={`font-medium ${fontBaseStyle}`}>
-        {item.category}
+        {!item.category ? "—" : item.category }
       </span>
     ),
 
     Validade: (
       <span className={`font-medium ${fontBaseStyle}`}>
-        {formatISODate(item.expiration_date)}
+        {!item.expiration_date ? "—" : formatISODate(item.expiration_date)}
       </span>
     ),
 
     Marca: (
       <span className={`font-medium ${fontBaseStyle}`}>
-        {item.brand}
+        {!item.brand ? "—" : item.brand}
       </span>
     ),
 
