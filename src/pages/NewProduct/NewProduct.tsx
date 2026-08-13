@@ -170,7 +170,7 @@ export default function NewProductForm() {
 
         <form className="space-y-6" onSubmit={handleSubmit}>
           {/* Seção: Informações Básicas */}
-          <div className="bg-white rounded-xl shadow-sm border border-noozi-gray-200 p-6 transition-all hover:shadow-md border-noozi-gray-300"> {/* form-section */}
+          <div className="bg-noozi-background rounded-xl shadow-sm border border-noozi-gray-200 p-6 transition-all hover:shadow-md border-noozi-gray-300"> {/* form-section */}
             <h2 className="text-lg font-semibold text-gray-800 mb-5 pb-3 border-b border-noozi-gray-200" >Informações Básicas</h2> {/* form-section-title */}
             <div className="grid gap-4 mx-auto max-w-7xl grid-cols-2 text-[13px] max-[385px]:grid-cols-1 max-[385px]:text-[11px] md:text-base lg:grid-cols-3 lg:text-lg"> {/* product-form-grid */}
               <TextInput
@@ -214,7 +214,7 @@ export default function NewProductForm() {
           </div>
 
           {/* Seção: Estoque e Precificação */}
-          <div className="bg-white rounded-xl shadow-sm border border-noozi-gray-200 p-6 transition-all hover:shadow-md border-noozi-gray-300">
+          <div className="bg-noozi-background rounded-xl shadow-sm border border-noozi-gray-200 p-6 transition-all hover:shadow-md border-noozi-gray-300">
             <h2 className="text-lg font-semibold text-gray-800 mb-5 pb-3 border-b border-noozi-gray-200">Estoque e Precificação</h2>
             <div className="grid gap-4 mx-auto max-w-7xl grid-cols-2 text-[13px] max-[385px]:grid-cols-1 max-[385px]:text-[11px] md:text-base lg:grid-cols-3 lg:text-lg">
               <NumberInput
@@ -250,7 +250,7 @@ export default function NewProductForm() {
           </div>
 
           {/* Seção: Alertas de Estoque */}
-          <div className="bg-white rounded-xl shadow-sm border border-noozi-gray-200 p-6 transition-all hover:shadow-md border-noozi-gray-300">
+          <div className="bg-noozi-background rounded-xl shadow-sm border border-noozi-gray-200 p-6 transition-all hover:shadow-md border-noozi-gray-300">
             <h2 className="text-lg font-semibold text-gray-800 mb-5 pb-3 border-b border-noozi-gray-200">Alertas de Estoque</h2>
             <div className="grid gap-4 mx-auto max-w-7xl grid-cols-2 text-[13px] max-[385px]:grid-cols-1 max-[385px]:text-[11px] md:text-base lg:grid-cols-3 lg:text-lg">
               <TextInput
@@ -275,7 +275,7 @@ export default function NewProductForm() {
           </div>
 
           {/* Seção: Rastreamento e Validade */}
-          <div className="bg-white rounded-xl shadow-sm border border-noozi-gray-200 p-6 transition-all hover:shadow-md border-noozi-gray-300">
+          <div className="bg-noozi-background rounded-xl shadow-sm border border-noozi-gray-200 p-6 transition-all hover:shadow-md border-noozi-gray-300">
             <h2 className="text-lg font-semibold text-gray-800 mb-5 pb-3 border-b border-noozi-gray-200">Rastreamento e Validade</h2>
             <div className="grid gap-4 mx-auto max-w-7xl grid-cols-2 text-[13px] max-[385px]:grid-cols-1 max-[385px]:text-[11px] md:text-base lg:grid-cols-3 lg:text-lg">
               <DateInput
@@ -313,7 +313,7 @@ export default function NewProductForm() {
           </div>
 
           {/* Seção: Configurações */}
-          <div className="bg-white rounded-xl shadow-sm border border-noozi-gray-200 p-6 transition-all hover:shadow-md border-noozi-gray-300">
+          <div className="bg-noozi-background rounded-xl shadow-sm border border-noozi-gray-200 p-6 transition-all hover:shadow-md border-noozi-gray-300">
             <h2 className="text-lg font-semibold text-gray-800 mb-5 pb-3 border-b border-noozi-gray-200">Configurações</h2>
             <div className="grid gap-4 mx-auto max-w-7xl grid-cols-2 text-[13px] max-[385px]:grid-cols-1 max-[385px]:text-[11px] md:text-base lg:grid-cols-3 lg:text-lg">
               <div className="grid col-span-1">
