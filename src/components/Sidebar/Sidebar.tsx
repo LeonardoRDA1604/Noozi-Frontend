@@ -128,7 +128,7 @@ export function Sidebar({ isOpen, onClose, isDark, onToggleDark }: SidebarProps)
                   {/* Label CLARO / ESCURO */}
                   <span
                     className={`
-                      absolute text-[9px] font-bold
+                      absolute text-[8px] font-bold
                       transition-all duration-200
                       ${isDark
                         ? "left-2 text-noozi-muted"
@@ -137,7 +137,7 @@ export function Sidebar({ isOpen, onClose, isDark, onToggleDark }: SidebarProps)
                     `}
                     aria-hidden="true"
                   >
-                    {isDark ? "ESCURO" : "CLARO"}
+                    {isDark ? "DARK" : "LIGHT"}
                   </span>
                 </button>
               </div>

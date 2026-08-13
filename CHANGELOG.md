@@ -51,6 +51,8 @@ Formato baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.0.0/), 
 - Rework visual e estrutural do Header
 - Rework visual e estrutural do Footer
 
+--- 
+
 </details>
 
 ---

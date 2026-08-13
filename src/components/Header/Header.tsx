@@ -1,6 +1,7 @@
 import { Menu, Bell } from "lucide-react";
 import { Link } from "react-router-dom";
-import nooziLogo from "@/assets/logos/noozi-logo-default.svg";
+import nooziLogoDefault from "@/assets/logos/noozi-logo-default.png";
+import nooziLogoDark from "@/assets/logos/noozi-logo-dark-mode.png";
 
 interface HeaderProps {
   onMenuOpen: () => void;
@@ -24,7 +25,11 @@ export function Header({ onMenuOpen }: HeaderProps) {
 
         {/* Logo */}
         <Link to="/" aria-hidden="true" tabIndex={-1} title="Ir para a página inicial" className="flex items-center justify-center">
-          <img src={nooziLogo} alt="Logo do Noozi" className="h-10 w-auto object-contain" />
+          {/* Light mode */}
+          <img src={nooziLogoDefault}   alt="Logo do Noozi"   className="h-10 w-auto object-contain dark:hidden" />
+
+          {/* Dark mode */}
+          <img src={nooziLogoDark}    alt="Logo do Noozi"   className="hidden h-10 w-auto object-contain dark:block" />
         </Link>
 
         {/* Actions */}

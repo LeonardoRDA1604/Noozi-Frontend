@@ -5,11 +5,11 @@ import type { Product } from "@/types/Product.types";
 import { PRODUCT_STATUS_CONFIG } from "@/constants/productStatusConfig";
 import { formatCurrency } from "../currency/formatCurrency";
 import { formatISODate } from "../date/formatISODate";
+import { Tooltip } from "@/components/ToolTip/ToolTip";
 
 export function productCardColumns(item: Product) {
     const status = item.is_active ? "active" : "inactive";
     const config = PRODUCT_STATUS_CONFIG[status];
-
     const fontBaseStyle = "w-full min-w-0 text-noozi-text text-center text-[12px] sm:text-[14px] md:text-[15px] break-words leading-tight";
     const value: Record<string, React.ReactNode> = {
 
@@ -21,43 +21,43 @@ export function productCardColumns(item: Product) {
 
      ID: (
       <span className={`font-medium ${fontBaseStyle}`}>
-        {item.id_product}
+        {!item.id_product ? "—" : item.id_product}
       </span>
     ),
 
     Nome: (
       <span className={`font-bold ${fontBaseStyle} truncate max-w-[30ch]`}>
-        {item.name}
+        {!item.name ? "—" : item.name}
       </span>
     ),
 
     Quantidade: (
       <span className={`font-medium ${fontBaseStyle}`}>
-        {item.stock_quantity} un.
+        {!item.stock_quantity ? "—" : item.stock_quantity} un.
       </span>
     ),
 
     Preço: (
       <span className={`font-medium ${fontBaseStyle} truncate max-w-[100ch]`}>
-        {formatCurrency(item.item_price)}
+        {!item.item_price ? "—" : formatCurrency(item.item_price)}
       </span>
     ),
 
     Categoria: (
       <span className={`font-medium ${fontBaseStyle}`}>
-        {item.category}
+        {!item.category ? "—" : item.category }
       </span>
     ),
 
     Validade: (
       <span className={`font-medium ${fontBaseStyle}`}>
-        {formatISODate(item.expiration_date)}
+        {!item.expiration_date ? "—" : formatISODate(item.expiration_date)}
       </span>
     ),
 
     Marca: (
       <span className={`font-medium ${fontBaseStyle}`}>
-        {item.brand}
+        {!item.brand ? "—" : item.brand}
       </span>
     ),
 
@@ -66,19 +66,26 @@ export function productCardColumns(item: Product) {
 
         {/* mobile — só ícone */}
         <div className="flex flex-row gap-1">
-          <ActionButton
-            variant="edit"
-            label=""
-            icon={Pencil}
-            //onSuccess={() => {}}
-          />
-          <ActionButton
-            variant="delete"
-            label=""
-            icon={Trash2}
-            productId={item.id_product}
-            //onSuccess={() => {}}
-          />
+          <Tooltip text="Editar produto" position="left">
+            <ActionButton
+              variant="edit"
+              label="Editar produto"
+              icon={Pencil}
+              hideLabelVisual={true}
+              //onSuccess={() => {}}
+            />
+          </Tooltip>
+
+          <Tooltip text="Apagar produto" position="left">
+            <ActionButton
+              variant="delete"
+              label="Apagar produto"
+              icon={Trash2}
+              productId={item.id_product}
+              hideLabelVisual={true}
+              //onSuccess={() => {}}
+            />
+          </Tooltip>
         </div>
 
       </div>
