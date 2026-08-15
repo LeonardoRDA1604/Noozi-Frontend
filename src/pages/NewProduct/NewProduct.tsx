@@ -65,7 +65,7 @@ export default function NewProductForm() {
 
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
-  
+  let today = new Date()
   // ─── Validação ─────────────────────────────────────────────────────────────
   const { errors, validate, clearError, clearAllErrors } =
     useFormValidation<NewProductForm>({
@@ -168,15 +168,11 @@ export default function NewProductForm() {
           </div>
         )}
 
-        {/* Nota de campos obrigatórios */}
-        <p className="text-xs text-noozi-gray-500 mb-6">
-          Campos marcados com <span className="text-status-danger font-medium">*</span> são obrigatórios.
-        </p>
         <form className="space-y-6" onSubmit={handleSubmit}>
           {/* Seção: Informações Básicas */}
-          <div className="form-section">
-            <h2 className="form-section-title">Informações Básicas</h2>
-            <div className="product-form-grid">
+          <div className="bg-noozi-background rounded-xl shadow-sm border border-noozi-gray-200 p-6 transition-all hover:shadow-md border-noozi-gray-300"> {/* form-section */}
+            <h2 className="text-lg font-semibold text-gray-800 mb-5 pb-3 border-b border-noozi-gray-200" >Informações Básicas</h2> {/* form-section-title */}
+            <div className="grid gap-4 mx-auto max-w-7xl grid-cols-2 text-[13px] max-[385px]:grid-cols-1 max-[385px]:text-[11px] md:text-base lg:grid-cols-3 lg:text-lg"> {/* product-form-grid */}
               <TextInput
                 label="Nome"
                 id="inputName"
@@ -185,8 +181,7 @@ export default function NewProductForm() {
                 maxLength={CHAR_LIMITS.NAME}
                 required="Obrigatório"
                 error={errors.name}
-                helpText="Nome completo do produto, como aparece no estoque."
-                placeholder="Ex: Impressora Térmica de Etiquetas 80mm"
+                helpText="Por favor, insira o nome do produto"
               />
 
               <TextArea
@@ -195,7 +190,6 @@ export default function NewProductForm() {
                 value={description}
                 onChange={setDescription}
                 maxLength={CHAR_LIMITS.DESCRIPTION}
-                placeholder="Ex: Impressão sem tinta, velocidade de 150mm/s, compatível com USB e Bluetooth"
               />
 
               <TextInput
@@ -213,24 +207,23 @@ export default function NewProductForm() {
                 value={category}
                 onChange={setCategory}
                 maxLength={CHAR_LIMITS.CATEGORY}
-                className="form-field-single"
+                className="grid col-span-1"
                 placeholder="Ex: Tecnologia"
               />
             </div>
           </div>
 
           {/* Seção: Estoque e Precificação */}
-          <div className="form-section">
-            <h2 className="form-section-title">Estoque e Precificação</h2>
-            <div className="product-form-grid">
+          <div className="bg-noozi-background rounded-xl shadow-sm border border-noozi-gray-200 p-6 transition-all hover:shadow-md border-noozi-gray-300">
+            <h2 className="text-lg font-semibold text-gray-800 mb-5 pb-3 border-b border-noozi-gray-200">Estoque e Precificação</h2>
+            <div className="grid gap-4 mx-auto max-w-7xl grid-cols-2 text-[13px] max-[385px]:grid-cols-1 max-[385px]:text-[11px] md:text-base lg:grid-cols-3 lg:text-lg">
               <NumberInput
                 label="Quantidade"
                 id="inputQuantity"
                 value={quantity}
                 onChange={(v) => { setQuantity(v); clearError("stock_quantity"); }}
                 min="0"
-                placeholder="Ex: 25"
-                tooltip="Quantidade atual em estoque. Use apenas números inteiros."
+                tooltip="Número de unidades disponíveis em estoque. Use apenas números inteiros."
                 required="Obrigatório"
                 error={errors.stock_quantity}
               />
@@ -241,35 +234,33 @@ export default function NewProductForm() {
                 onChange={setUnit}
                 maxLength={CHAR_LIMITS.UNIT}
                 placeholder="Ex: kg, un, L, pacote"
-                tooltip="Como o produto é contado ou pesado."
-                className="form-field-single"
+                className="grid col-span-1"
               />
               <PriceInput
                 label="Preço Unitário"
                 id="inputValue"
                 value={priceValue}
                 onChange={(v) => { setPriceValue(v); clearError("item_price"); }}
-                tooltip="Valor por unidade de produto vendido."
+                tooltip="Valor de venda por unidade."
                 required="Obrigatório"
                 error={errors.item_price}
-                helpText="Digite apenas números. A formatação é automática."
+                helpText="Digite apenas números – a formatação é automática."
               />
             </div>
           </div>
 
           {/* Seção: Alertas de Estoque */}
-          <div className="form-section">
-            <h2 className="form-section-title">Alertas de Estoque</h2>
-            <div className="product-form-grid">
+          <div className="bg-noozi-background rounded-xl shadow-sm border border-noozi-gray-200 p-6 transition-all hover:shadow-md border-noozi-gray-300">
+            <h2 className="text-lg font-semibold text-gray-800 mb-5 pb-3 border-b border-noozi-gray-200">Alertas de Estoque</h2>
+            <div className="grid gap-4 mx-auto max-w-7xl grid-cols-2 text-[13px] max-[385px]:grid-cols-1 max-[385px]:text-[11px] md:text-base lg:grid-cols-3 lg:text-lg">
               <TextInput
                 label="Quantidade de estoque baixo"
                 id="inputLStock"
                 value={lowLevel}
                 onChange={setLowLevel}
                 maxLength={CHAR_LIMITS.LOW_LEVEL}
-                className="form-field-single"
-                placeholder="Ex: 10"
-                tooltip="Abaixo deste número, você recebe um aviso de reposição."
+                className="grid col-span-1"
+                tooltip="Quantidade mínima que, ao ser atingida, dispara um aviso de reposição."
               />
               <TextInput
                 label="Quantidade de estoque alto"
@@ -277,23 +268,22 @@ export default function NewProductForm() {
                 value={highLevel}
                 onChange={setHighLevel}
                 maxLength={CHAR_LIMITS.HIGH_LEVEL}
-                className="form-field-single"
-                placeholder="Ex: 100"
-                tooltip="Acima deste número, você recebe um aviso de excesso."
+                className="grid col-span-1"
+                tooltip="Quantidade máxima que, ao ser ultrapassada, dispara um aviso de excesso."
               />
             </div>
           </div>
 
           {/* Seção: Rastreamento e Validade */}
-          <div className="form-section">
-            <h2 className="form-section-title">Rastreamento e Validade</h2>
-            <div className="product-form-grid">
+          <div className="bg-noozi-background rounded-xl shadow-sm border border-noozi-gray-200 p-6 transition-all hover:shadow-md border-noozi-gray-300">
+            <h2 className="text-lg font-semibold text-gray-800 mb-5 pb-3 border-b border-noozi-gray-200">Rastreamento e Validade</h2>
+            <div className="grid gap-4 mx-auto max-w-7xl grid-cols-2 text-[13px] max-[385px]:grid-cols-1 max-[385px]:text-[11px] md:text-base lg:grid-cols-3 lg:text-lg">
               <DateInput
                 label="Validade"
                 id="inputDate"
                 value={date}
                 onChange={setDate}
-                tooltip="Deixe em branco caso o produto não tenha validade."
+                tooltip="Obrigatório apenas para produtos perecíveis ou cosméticos."
                 error={errors.expiration_date}
                 helpText="Digite dia, mês e ano no formato DD/MM/AAAA. "
               />
@@ -303,7 +293,7 @@ export default function NewProductForm() {
                 value={batch}
                 onChange={setBatch}
                 maxLength={CHAR_LIMITS.BATCH}
-                className="form-field-single"
+                className="grid col-span-1"
                 tooltip="Código de identificação do lote de fabricação (se aplicável)."
                 placeholder="Ex: NZ202605"
               />
@@ -313,9 +303,9 @@ export default function NewProductForm() {
                 value={sku}
                 onChange={(v) => { setSku(v); clearError("sku"); }}
                 maxLength={CHAR_LIMITS.SKU}
-                className="form-field-single"
-                tooltip="Código interno único de identificação do produto. Crie ou use o código do fornecedor."
-                placeholder="Ex: ABC-DEF-123"
+                className="grid col-span-1"
+                tooltip="Código único de identificação do produto (Stock Keeping Unit)."
+                placeholder="Ex: ABC01"
                 required="Obrigatório"
                 error={errors.sku}
               />
@@ -323,10 +313,10 @@ export default function NewProductForm() {
           </div>
 
           {/* Seção: Configurações */}
-          <div className="form-section">
-            <h2 className="form-section-title">Configurações</h2>
-            <div className="product-form-grid">
-              <div className="form-field-single">
+          <div className="bg-noozi-background rounded-xl shadow-sm border border-noozi-gray-200 p-6 transition-all hover:shadow-md border-noozi-gray-300">
+            <h2 className="text-lg font-semibold text-gray-800 mb-5 pb-3 border-b border-noozi-gray-200">Configurações</h2>
+            <div className="grid gap-4 mx-auto max-w-7xl grid-cols-2 text-[13px] max-[385px]:grid-cols-1 max-[385px]:text-[11px] md:text-base lg:grid-cols-3 lg:text-lg">
+              <div className="grid col-span-1">
                 <ToggleSwitch
                   label="Status do Produto"
                   checked={status}
@@ -343,7 +333,7 @@ export default function NewProductForm() {
               <ActionButton
                 variant="submit"
                 icon={Send}
-                label="Cadastrar Produto"
+                label="CADASTRAR PRODUTO"
                 isLoading={isSubmitting}
                 disabled={isSubmitting}
               />

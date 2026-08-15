@@ -40,7 +40,7 @@ export function DateInput({ label, id, value, tooltip, required, helpText, onCha
 
   return (
     <div>
-      <div className='form-field-single'>
+      <div className='grid col-span-1'>
       <div className="flex gap-2 items-center mb-2">
       <label htmlFor={id} className="mb-[1.5px] font-medium">
         {label}

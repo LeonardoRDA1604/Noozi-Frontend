@@ -1,6 +1,5 @@
 import { useCharCounter } from "@/hooks/useCharCounter";
 import { Tooltip } from "@/components/ToolTip/ToolTip";
-
 import type { TextAreaProps } from "@/types/InputTypes/TextArea.types";
 
 export function TextArea({
@@ -17,7 +16,7 @@ export function TextArea({
   const { remaining, color, showCounter } = useCharCounter(value, maxLength);
 
   return (
-    <div className="form-field-full">
+    <div className="grid col-span-2 lg:col-span-4">
       <div className='flex items-center gap-2 mb-2'>
       <label htmlFor={id} className="mb-[1.5px] font-medium">
         {label}

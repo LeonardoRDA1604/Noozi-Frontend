@@ -1,6 +1,5 @@
 import type { NumberInputProps } from "@/types/InputTypes/NumberInput.types";
 import { Tooltip } from "@/components/ToolTip/ToolTip";
-
 export function NumberInput({
   label,
   id,
@@ -16,7 +15,7 @@ export function NumberInput({
   const hasRequired = Boolean(required);
 
   return (
-    <div className="form-field-single">
+    <div className="grid col-span-1">
       <div className='flex items-center gap-2 mb-2'>
         <label htmlFor={id} className="mb-[1.5px] font-medium">
           {label}

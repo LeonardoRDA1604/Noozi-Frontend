@@ -62,7 +62,7 @@ export function PriceInput({
   };
 
   return (
-    <div className="form-field-single">
+    <div className="grid col-span-1">
       <div className='flex items-center gap-2 mb-2'>
         <label htmlFor={id} className="mb-[1.5px] font-medium">
           {label}
