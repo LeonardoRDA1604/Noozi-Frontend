@@ -1,11 +1,11 @@
 import { ActivitySquare } from "lucide-react";
-
+import { BaseEmptyState } from "./BaseEmptyState";
 /**
  * Empty state para o painel de atividades recentes.
  */
 export function EmptyActivities() {
   return (
-    <div className="flex flex-col items-center gap-5 py-10 select-none">
+    <BaseEmptyState>
 
       {/* Ícone central + texto */}
       <div className="flex flex-col items-center gap-3 text-center">
@@ -23,6 +23,6 @@ export function EmptyActivities() {
         </div>
       </div>
 
-    </div>
+    </BaseEmptyState>
   );
 }
