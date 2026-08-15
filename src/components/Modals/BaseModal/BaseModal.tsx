@@ -31,6 +31,7 @@ export function BaseModal({ isOpen, onClose, title, size = "md", children }: Bas
       role="dialog"
       aria-labelledby="modal-title"
     >
+    {/* Conteúdo — stopPropagation evita fechar ao clicar dentro */}
       <div
         className={`
           w-full ${sizeMap[size]} flex flex-col max-h-[90vh]
@@ -40,6 +41,8 @@ export function BaseModal({ isOpen, onClose, title, size = "md", children }: Bas
         `}
         onClick={(e) => e.stopPropagation()}
       >
+        
+        {/* Cabeçalho fixo */}
         <div className="flex items-center justify-between px-5 py-4 shrink-0 border-b border-noozi-border rounded-t-2xl bg-noozi-surface/40">
           <h2 id="modal-title" className="text-base font-semibold text-noozi-text tracking-tight">
             {title}
@@ -49,7 +52,7 @@ export function BaseModal({ isOpen, onClose, title, size = "md", children }: Bas
             onClick={onClose}
             aria-label="Fechar modal"
             className="
-              flex items-center justify-center h-8 w-8 rounded-full
+              flex items-center justify-center h-8 w-8 rounded-lg
               text-noozi-muted hover:text-noozi-text
               hover:bg-noozi-border/60 active:scale-90
               transition-all duration-150
