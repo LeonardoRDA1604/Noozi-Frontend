@@ -53,6 +53,10 @@ export function MetricsModal({ type, onClose }: MetricsModalProps) {
     }
 
     load();
+
+    const modalUpdateInterval = setInterval(load, 20000); // Atualiza a cada 20s
+
+    return () => clearInterval(modalUpdateInterval); // 
   }, [type]);
 
   if (!type) return null;
