@@ -7,6 +7,7 @@ import { RecentActivities } from "@/components/Activities/RecentActivities/Recen
 import { SectionTitle } from "@/components/SectionTitle/SectionTitle";
 import { useProductMetrics } from "@/hooks/useProductMetrics";
 import type { ModalType } from "@/types/ModalType.types";
+import { LoadingStateBase } from "@/components/LoadingState/LoadingStateBase";
 
 export default function Home() {
   const [activeModal, setActiveModal] = useState<ModalType>(null); // null = nenhum modal aberto
@@ -22,6 +23,9 @@ export default function Home() {
 
   return (
     <div className="flex flex-col gap-6 p-4 md:p-6 max-w-screen-xl mx-auto">
+
+      {/* Estado de loading */}
+      <LoadingStateBase isLoading={isLoading} variant="fullscreen" label="Carregando página..." />
 
       {/* ── Linha superior no desktop: métricas + ações lado a lado ── */}
       <div className="flex flex-col lg:flex-row gap-6">
