@@ -22,9 +22,8 @@ export default function Products() {
       />
 
       {/* Estado de loading */}
-      {isLoading && (
-        <LoadingStateBase isLoading={isLoading} variant="fullscreen" label="Carregando página..." />
-      )}
+      <LoadingStateBase isLoading={isLoading} variant="fullscreen" label="Carregando página..." />
+      
 
       {/* Estado de erro */}
       {error && !isLoading && (
