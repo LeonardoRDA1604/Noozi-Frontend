@@ -5,6 +5,7 @@ import { useProductFilters } from "@/hooks/useProductFilters";
 import ProductTable from "@/components/Table/ProductTable/ProductTable";
 import FilterProductButton from "@/components/Buttons/FilterProductButton/FilterProductButton";
 import { SectionTitle } from "@/components/SectionTitle/SectionTitle";
+import { LoadingStateBase } from "@/components/LoadingState/LoadingStateBase";
 
 export default function Products() {
   const { products, isLoading, error, refetch } = useProducts();
@@ -22,9 +23,7 @@ export default function Products() {
 
       {/* Estado de loading */}
       {isLoading && (
-        <div className="flex items-center justify-center py-16" role="status" aria-live="polite">
-          <p className="text-sm text-noozi-muted">Carregando produtos...</p>
-        </div>
+        <LoadingStateBase isLoading={isLoading} variant="fullscreen" label="Carregando página..." />
       )}
 
       {/* Estado de erro */}
