@@ -73,6 +73,7 @@ export default function ProductTable({ filter, products, onProductChange }: Prod
           className="
             flex flex-col gap-3 mt-3
             overflow-y-auto
+            no-scrollbar
             max-h-[calc(100vh-280px)]
             pr-1
 
