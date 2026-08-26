@@ -6,7 +6,7 @@ import {
   type ProductFilters, type SortAlpha, type SortPrice,
   type SortStock, type SortExpiry, type SortStockLevel,
 } from "@/types/ProductFilters.types";
-import { PriceInput } from "@/components/Inputs/PriceInput";
+import { PriceInput } from "@/components/Inputs/PriceInput/PriceInput";
 import { ToggleSwitch } from "@/components/Inputs/ToggleSwitch";
 import { Tooltip } from "@/components/ToolTip/ToolTip";
 
