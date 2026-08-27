@@ -1,5 +1,5 @@
 import { useMemo, useState, useEffect, useRef } from "react";
-import type { filter } from "@/types/FilterSearchbar.types";
+import type { filterSearchBar } from "@/types/FilterSearchbar.types";
 import { structureSearch } from "@/constants/MiniSearch";
 import type { Product } from "@/types/Product.types";
 import { getBreakpoints } from "@/utils/responsive/getBreakpoints";
@@ -8,20 +8,20 @@ import { productCardColumns } from "@/utils/products/productCardColumns";
 import { ProductModal } from "@/components/Modals/ProductModal/ProductModal";
 import { EmptyProducts } from "@/components/EmptyStates/EmptyProducts";
 
-interface ProductCardListProps extends filter {
+interface ProductCardListProps extends filterSearchBar {
   onProductChange: () => void;
 }
 
-export default function ProductTable({ filter, products, onProductChange }: ProductCardListProps) {
+export default function ProductTable({ filterSearchBar, products, onProductChange }: ProductCardListProps) {
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
   const miniSearch  = useMemo(() => structureSearch, []);
-  const [filterDebounced, setFilterDebounced] = useState(filter);
+  const [filterDebounced, setFilterDebounced] = useState(filterSearchBar);
   const scrollRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const timer = setTimeout(() => setFilterDebounced(filter), 200);
+    const timer = setTimeout(() => setFilterDebounced(filterSearchBar), 200);
     return () => clearTimeout(timer);
-  }, [filter]);
+  }, [filterSearchBar]);
 
   const itemsFilter = useMemo(() => {
     if (!filterDebounced) return products;

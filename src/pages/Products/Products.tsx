@@ -54,7 +54,7 @@ export default function Products() {
           </p>
 
           {/* Tabela */}
-          <ProductTable products={filteredProducts} filter={currentText} onProductChange={refetch} />
+          <ProductTable products={filteredProducts} filterSearchBar={currentText} onProductChange={refetch} />
         </>
       )}
     </div>
