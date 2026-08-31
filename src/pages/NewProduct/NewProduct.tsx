@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { TextInput } from "@/components/Inputs/TextInput";
-import { TextArea } from "@/components/Inputs/TextArea";
 import { NumberInput } from "@/components/Inputs/NumberInput";
 import { PriceInput } from "@/components/Inputs/PriceInput";
 import { DateInput } from "@/components/Inputs/DateInput";
@@ -262,23 +261,19 @@ export default function NewProductForm() {
           <div className="form-section">
             <h2 className="form-section-title">Alertas de Estoque</h2>
             <div className="product-form-grid">
-              <TextInput
+              <NumberInput
                 label="Quantidade de estoque baixo"
                 id="inputLStock"
                 value={lowLevel}
                 onChange={setLowLevel}
-                maxLength={CHAR_LIMITS.LOW_LEVEL}
-                className="form-field-single"
                 placeholder="Ex: 10"
                 tooltip="Abaixo deste número, você recebe um aviso de reposição."
               />
-              <TextInput
+              <NumberInput
                 label="Quantidade de estoque alto"
                 id="inputHStock"
                 value={highLevel}
                 onChange={setHighLevel}
-                maxLength={CHAR_LIMITS.HIGH_LEVEL}
-                className="form-field-single"
                 placeholder="Ex: 100"
                 tooltip="Acima deste número, você recebe um aviso de excesso."
               />
