@@ -12,14 +12,14 @@ export function TextInput({
   placeholder,
   className = "form-field-full",
   tooltip,
-  required,
+  isRequired,
   error,
-  helpText
+  helpText,
+  isTextArea
 }: TextInputProps) {
   const { remaining, color, showCounter } = useCharCounter(value, maxLength);
 
-  const hasError = Boolean(error);
-  const hasRequired = Boolean(required);
+  const isEmpty = Boolean(error);
 
   return (
     <div className={className}>
@@ -28,15 +28,28 @@ export function TextInput({
           {label}
         </label>
         {tooltip && <Tooltip text={tooltip} />}
-        {hasRequired && (
+        {isRequired && (
         <span className='text-xs italic text-noozi-gray-400 font-normal'>
-          <span className='text-status-danger'>*</span> {required}
+          <span className='text-status-danger'>*</span>
         </span>)}
       </div>
       <div className="relative">
-        <input
+        {isTextArea && (
+          <textarea
+          className="w-full bg-noozi-input_field border border-solid border-noozi-gray-300 rounded-lg px-3 py-2 pr-16 h-24 resize-none"
+          id={id}
+          value={value}
+          onChange={(e) => onChange(e.target.value.slice(0, maxLength))}
+          maxLength={maxLength}
+          placeholder={placeholder}
+          rows={3}
+        />
+        
+        )}
+        {!isTextArea && (
+          <input
           className={`w-full bg-noozi-input_field border border-solid rounded-lg px-3 py-2 pr-16 transition-colors ${
-            hasError
+            isEmpty
               ? "border-red-500 focus:outline-none focus:ring-1 focus:ring-red-500"
               : "border-noozi-gray-300"
           }`}
@@ -47,7 +60,9 @@ export function TextInput({
           maxLength={maxLength}
           placeholder={placeholder}
         />
-        {showCounter && !hasError && (
+        )}
+        
+        {showCounter && !isEmpty && (
           <span
             className={`absolute right-3 top-1/2 -translate-y-1/2 text-sm pointer-events-none select-none ${color}`}
           >
@@ -55,10 +70,10 @@ export function TextInput({
           </span>
         )}
       </div>
-      {hasError && (
+      {isEmpty && (
         <p className="mt-1 text-xs text-red-500">{error}</p>
       )}
-      {!hasError && (<p className='mt-1 ml-1 text-xs text-noozi-gray-500'>{helpText}</p>)}
+      {!isEmpty && (<p className='mt-1 ml-1 text-xs text-noozi-gray-500'>{helpText}</p>)}
     </div>
   );
 }
