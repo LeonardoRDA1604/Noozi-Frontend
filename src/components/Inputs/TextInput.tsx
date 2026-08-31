@@ -30,7 +30,7 @@ export function TextInput({
         {tooltip && <Tooltip text={tooltip} />}
         {isRequired && (
         <span className='text-xs italic text-noozi-gray-400 font-normal'>
-          <span className='text-status-danger'>*</span>
+          <span className='text-status-danger'>*</span> Obrigatório
         </span>)}
       </div>
       <div className="relative">
