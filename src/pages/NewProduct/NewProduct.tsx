@@ -65,7 +65,7 @@ export default function NewProductForm() {
 
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
-  
+
   // ─── Validação ─────────────────────────────────────────────────────────────
   const { errors, validate, clearError, clearAllErrors } =
     useFormValidation<NewProductForm>({
@@ -183,19 +183,20 @@ export default function NewProductForm() {
                 value={name}
                 onChange={(v) => { setName(v); clearError("name"); }}
                 maxLength={CHAR_LIMITS.NAME}
-                required="Obrigatório"
+                isRequired={true}
                 error={errors.name}
                 helpText="Nome completo do produto, como aparece no estoque."
                 placeholder="Ex: Impressora Térmica de Etiquetas 80mm"
               />
 
-              <TextArea
+              <TextInput
                 label="Descrição"
                 id="inputDescription"
                 value={description}
                 onChange={setDescription}
                 maxLength={CHAR_LIMITS.DESCRIPTION}
                 placeholder="Ex: Impressão sem tinta, velocidade de 150mm/s, compatível com USB e Bluetooth"
+                isTextArea={true}
               />
 
               <TextInput
@@ -206,7 +207,7 @@ export default function NewProductForm() {
                 maxLength={CHAR_LIMITS.BRAND}
                 placeholder="Ex: Noozi"
               />
-              
+
               <TextInput
                 label="Categoria"
                 id="inputCategory"
@@ -316,7 +317,7 @@ export default function NewProductForm() {
                 className="form-field-single"
                 tooltip="Código interno único de identificação do produto. Crie ou use o código do fornecedor."
                 placeholder="Ex: ABC-DEF-123"
-                required="Obrigatório"
+                isRequired={true}
                 error={errors.sku}
               />
             </div>
