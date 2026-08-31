@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { TextInput } from "@/components/Inputs/TextInput";
-import { TextArea } from "@/components/Inputs/TextArea";
 import { NumberInput } from "@/components/Inputs/NumberInput";
 import { PriceInput } from "@/components/Inputs/PriceInput";
 import { DateInput } from "@/components/Inputs/DateInput";
@@ -65,7 +64,7 @@ export default function NewProductForm() {
 
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
-  
+
   // ─── Validação ─────────────────────────────────────────────────────────────
   const { errors, validate, clearError, clearAllErrors } =
     useFormValidation<NewProductForm>({
@@ -183,19 +182,20 @@ export default function NewProductForm() {
                 value={name}
                 onChange={(v) => { setName(v); clearError("name"); }}
                 maxLength={CHAR_LIMITS.NAME}
-                required="Obrigatório"
+                isRequired={true}
                 error={errors.name}
                 helpText="Nome completo do produto, como aparece no estoque."
                 placeholder="Ex: Impressora Térmica de Etiquetas 80mm"
               />
 
-              <TextArea
+              <TextInput
                 label="Descrição"
                 id="inputDescription"
                 value={description}
                 onChange={setDescription}
                 maxLength={CHAR_LIMITS.DESCRIPTION}
                 placeholder="Ex: Impressão sem tinta, velocidade de 150mm/s, compatível com USB e Bluetooth"
+                isTextArea={true}
               />
 
               <TextInput
@@ -206,7 +206,7 @@ export default function NewProductForm() {
                 maxLength={CHAR_LIMITS.BRAND}
                 placeholder="Ex: Noozi"
               />
-              
+
               <TextInput
                 label="Categoria"
                 id="inputCategory"
@@ -261,23 +261,19 @@ export default function NewProductForm() {
           <div className="form-section">
             <h2 className="form-section-title">Alertas de Estoque</h2>
             <div className="product-form-grid">
-              <TextInput
+              <NumberInput
                 label="Quantidade de estoque baixo"
                 id="inputLStock"
                 value={lowLevel}
                 onChange={setLowLevel}
-                maxLength={CHAR_LIMITS.LOW_LEVEL}
-                className="form-field-single"
                 placeholder="Ex: 10"
                 tooltip="Abaixo deste número, você recebe um aviso de reposição."
               />
-              <TextInput
+              <NumberInput
                 label="Quantidade de estoque alto"
                 id="inputHStock"
                 value={highLevel}
                 onChange={setHighLevel}
-                maxLength={CHAR_LIMITS.HIGH_LEVEL}
-                className="form-field-single"
                 placeholder="Ex: 100"
                 tooltip="Acima deste número, você recebe um aviso de excesso."
               />
@@ -316,7 +312,7 @@ export default function NewProductForm() {
                 className="form-field-single"
                 tooltip="Código interno único de identificação do produto. Crie ou use o código do fornecedor."
                 placeholder="Ex: ABC-DEF-123"
-                required="Obrigatório"
+                isRequired={true}
                 error={errors.sku}
               />
             </div>
