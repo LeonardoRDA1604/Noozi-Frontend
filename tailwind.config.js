@@ -100,5 +100,21 @@ export default {
       },
     },
   },
-  plugins: [require("tailwindcss-scrollbar")],
+  plugins: 
+    [require("tailwindcss-scrollbar"),
+
+      function({addUtilities}){
+        const newUtilities = {
+          ".no-scrollbar::-webkit-scollbar": {
+            display: "none",
+          },
+          ".no-scrollbar": {
+            "-ms-overflow-style": "none",
+            "scrollbar-width": "none",
+          },
+        };
+
+        addUtilities(newUtilities);
+      },
+    ],
 };

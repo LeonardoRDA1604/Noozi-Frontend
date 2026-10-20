@@ -5,7 +5,8 @@ import { useProductFilters } from "@/hooks/useProductFilters";
 import ProductTable from "@/components/Table/ProductTable/ProductTable";
 import FilterProductButton from "@/components/Buttons/FilterProductButton/FilterProductButton";
 import { SectionTitle } from "@/components/SectionTitle/SectionTitle";
-
+import { CirclePlus } from "lucide-react";
+import { ActionButton } from "@/components/Buttons/ActionButton/ActionButton";
 export default function Products() {
   const { products, isLoading, error, refetch } = useProducts();
   const { filters, setFilters, filteredProducts, hasActiveFilters } = useProductFilters(products);
@@ -15,10 +16,15 @@ export default function Products() {
     <div className="flex flex-col gap-4 p-4 md:p-6 max-w-screen-2xl mx-auto">
 
       {/* Cabeçalho da página */}
-      <SectionTitle
-        title="Produtos"
-        subtitle="Gerencie seu estoque, edite ou remova produtos cadastrados"
-      />
+      <div className="flex justify-between">
+        <SectionTitle
+          title="Produtos"
+          subtitle="Gerencie seu estoque, edite ou remova produtos cadastrados"
+        />
+        <div className="w-[300px]">
+          <ActionButton variant="primary"     label="Cadastrar Produto"           icon={CirclePlus}          href="/products/new" />
+        </div>
+      </div>
 
       {/* Estado de loading */}
       {isLoading && (
