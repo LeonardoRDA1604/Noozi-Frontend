@@ -2,7 +2,7 @@ import { useState } from "react";
 import { TextInput } from "@/components/Inputs/TextInput";
 import { TextArea } from "@/components/Inputs/TextArea";
 import { NumberInput } from "@/components/Inputs/NumberInput";
-import { PriceInput } from "@/components/Inputs/PriceInput";
+import { PriceInput } from "@/components/Inputs/PriceInput/PriceInput";
 import { DateInput } from "@/components/Inputs/DateInput";
 import { ToggleSwitch } from "@/components/Inputs/ToggleSwitch";
 import { Send } from "lucide-react";

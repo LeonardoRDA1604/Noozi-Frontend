@@ -10,6 +10,7 @@ import { formatCurrency } from "@/utils/currency/formatCurrency";
 import { formatISODate } from "@/utils/date/formatISODate";
 import { StatusBadge } from "@/components/Status/StatusBadge";
 import { PRODUCT_STATUS_CONFIG } from "@/constants/productStatusConfig";
+import { PriceInputMask } from "@/components/Inputs/PriceInput/PriceInputMask";
 
 interface ProductModalProps {
   product: Product;
@@ -45,7 +46,7 @@ export function ProductModal({ product, onClose, onDeleted, onUpdated }: Product
 
     // Campos editáveis inicializados com os valores do produto
   const [editData, setEditData] = useState<UpdateProductDTO>(getInitialEditData);
-
+  const STANDARD_MODALS_TAILWIND = "h-9 w-full rounded-lg border border-noozi-border bg-noozi-input_field px-3 text-sm text-noozi-text placeholder:text-noozi-muted focus:outline-none focus:ring-2 focus:ring-noozi-bright_blue/30 focus:border-noozi-bright_blue transition-all duration-150"
   function handleCancel() {
     setEditData(getInitialEditData());
     setIsEditing(false);
@@ -127,7 +128,7 @@ export function ProductModal({ product, onClose, onDeleted, onUpdated }: Product
             {/* Preço */}
             <ModalField label="Preço">
               {isEditing
-                ? <ModalInput type="number" value={String(editData.item_price ?? "")} onChange={(v) => setEditData({ ...editData, item_price: Number(v) })} />
+                ? <PriceInputMask className={STANDARD_MODALS_TAILWIND} value={Number(editData.item_price ?? "")} onChange={(v) => setEditData({ ...editData, item_price: Number(v) })} />
                 : <ModalValue>{formatCurrency(product.item_price)}</ModalValue>
               }
             </ModalField>
@@ -282,3 +283,4 @@ function ModalInput({ value, onChange, type = "text" }: {
     />
   );
 }
+
